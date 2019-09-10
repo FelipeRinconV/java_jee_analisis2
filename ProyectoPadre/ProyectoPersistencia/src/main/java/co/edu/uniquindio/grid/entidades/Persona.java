@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 /**
  * Entidad que representara la clase persona,esta clase sera el comun
  * denominador de los roles en el sistema unimark
- *
  */
 
 @Entity
@@ -29,19 +28,19 @@ public class Persona implements Serializable {
 	/**
 	 * Nombre completo de la persona
 	 */
-	@Column(length = 200)
+	@Column(length = 200,nullable = false)
 	private String nombreCompleto;
 
-	@Column(length = 200)
+	@Column(length = 200,nullable = false)
 	private String email;
 
-	@Column(length = 200)
+	@Column(length = 200,nullable = false)
 	private String numeroTelefono;
 
-	@Column(length = 200)
+	@Column(length = 200,nullable = false)
 	private String direccion;
 
-	@Column(length = 200)
+	@Column(length = 200,nullable = false)
 	private String contraseña;
 
 	private static final long serialVersionUID = 1L;

@@ -20,6 +20,7 @@ public class Favorito implements Serializable {
 	
 	@Id
 	private int idFavorito;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Favorito() {

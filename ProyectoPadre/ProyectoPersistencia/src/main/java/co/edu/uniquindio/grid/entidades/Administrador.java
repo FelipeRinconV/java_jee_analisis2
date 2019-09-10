@@ -10,6 +10,10 @@ import javax.persistence.*;
 @Entity
 public class Administrador extends Persona implements Serializable {
 	
+	
+	 
+	
+	
 	private static final long serialVersionUID = 1L;
 
 	public Administrador() {

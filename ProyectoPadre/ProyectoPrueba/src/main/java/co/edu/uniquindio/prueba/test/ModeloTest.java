@@ -1,6 +1,5 @@
 package co.edu.uniquindio.prueba.test;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -39,15 +38,5 @@ public class ModeloTest {
 
 		
 		
-		Usuario ven= new Usuario();
-		
-		ven.setCedula("221212");
-		
-		ven.setCodVendedor("este es el vendedor");
-		
-		entityManager.persist(ven);
-		
-	
-
 	}
 }

@@ -16,23 +16,26 @@ public class Usuario extends Persona implements Serializable {
 
 	
 	@OneToMany(mappedBy = "usuario")
+	private List<Calificacion> calificaciones;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Compra> compras;
+	
+	@OneToMany(mappedBy = "usuario")
 	private List<Favorito> favoritos;
 	
+	@OneToMany(mappedBy = "usuario")
+	private List<Comentario> comentario;
 	
-	private String codVendedor;
-
+	@Enumerated(EnumType.STRING)
+    private Rol rol;
+	
+	
 	private static final long serialVersionUID = 1L;
 
 	public Usuario() {
 		super();
 	}
 
-	public String getCodVendedor() {
-		return this.codVendedor;
-	}
-
-	public void setCodVendedor(String codVendedor) {
-		this.codVendedor = codVendedor;
-	}
-
+	
 }
