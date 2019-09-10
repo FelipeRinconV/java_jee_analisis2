@@ -11,7 +11,6 @@ import javax.persistence.*;
  *
  */
 @Entity
-
 public class Comentario implements Serializable {
 
 	   
