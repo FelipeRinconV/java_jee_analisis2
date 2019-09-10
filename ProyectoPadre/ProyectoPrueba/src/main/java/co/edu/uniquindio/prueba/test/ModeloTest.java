@@ -1,6 +1,5 @@
 package co.edu.uniquindio.prueba.test;
 
-import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import co.edu.uniquindio.grid.entidades.Persona;
-import co.edu.uniquindio.grid.entidades.Sexo;
+import co.edu.uniquindio.grid.entidades.Vendedor;
 
 @RunWith(Arquillian.class)
 public class ModeloTest {
@@ -38,6 +37,16 @@ public class ModeloTest {
 	@org.jboss.arquillian.transaction.api.annotation.Transactional(value = TransactionMode.COMMIT)
 	public void generarTest() {
 
+		
+		
+		Vendedor ven= new Vendedor();
+		
+		ven.setCedula("221212");
+		
+		ven.setCodVendedor("este es el vendedor");
+		
+		entityManager.persist(ven);
+		
 	
 
 	}

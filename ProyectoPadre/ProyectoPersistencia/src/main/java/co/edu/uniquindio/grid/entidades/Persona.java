@@ -8,30 +8,49 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Entidad  que representara la clase persona
+ * Entidad que representara la clase persona,esta clase sera el comun denominador de los roles en el sistema 
+ * unimark
  *
  */
+
+
+
 @Entity
+@Inheritance
 public class Persona implements Serializable {
 
+	/**
+	 * Cedula el cual se utilizara como id de la tabla persona
+	 */
 	@Id
 	private String Cedula;
-	
-	
-	@Column(nullable = false)
-	private int Edad;
-	
-	@Column(length = 35)
-	private String Nombre;
-	
-	
-	@Enumerated(EnumType.STRING)
-	private Sexo sexo;
-	
-	@ElementCollection 
-	private List<String> contactos;
-	
-	
+
+	/**
+	 * Nombre completo de la persona
+	 */
+	@Column(length = 200)
+	private String nombreCompleto;
+
+	@Column(length = 200)
+	private String email;
+
+	@Column(length = 200)
+	private String numeroTelefono;
+
+	@Column(length = 200)
+	private String direccion;
+
+	@Column(length = 200)
+	private String contraseña;
+
+
+
+	private static final long serialVersionUID = 1L;
+
+	//Contructor necesario para la entidad
+	public Persona() {
+		super();
+	}
 	
 	
 	@Override
@@ -41,6 +60,7 @@ public class Persona implements Serializable {
 		result = prime * result + ((Cedula == null) ? 0 : Cedula.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -57,45 +77,56 @@ public class Persona implements Serializable {
 			return false;
 		return true;
 	}
-
-	private static final long serialVersionUID = 1L;
-
-	public Persona() {
-		super();
-	}   
-	public String getCedula() {
-		return this.Cedula;
-	}
-
-	public void setCedula(String Cedula) {
-		this.Cedula = Cedula;
-	}   
-	public int getEdad() {
-		return this.Edad;
-	}
-
-	public void setEdad(int Edad) {
-		this.Edad = Edad;
-	}   
-	public String getNombre() {
-		return this.Nombre;
-	}
-
-	public void setNombre(String Nombre) {
-		this.Nombre = Nombre;
-	}
-	public Sexo getSexo() {
-		return sexo;
-	}
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
-	}
-	public List getContactos() {
-		return contactos;
-	}
-	public void setContactos(List contactos) {
-		this.contactos = contactos;
-	}
-   
 	
+	
+	//Inicio de get y set
+
+	public String getCedula() {
+		return Cedula;
+	}
+
+	public void setCedula(String cedula) {
+		Cedula = cedula;
+	}
+
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNumeroTelefono() {
+		return numeroTelefono;
+	}
+
+	public void setNumeroTelefono(String numeroTelefono) {
+		this.numeroTelefono = numeroTelefono;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
 }
