@@ -14,8 +14,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
-import co.edu.uniquindio.grid.entidades.Persona1;
+import co.edu.uniquindio.grid.entidades.Persona;
 import co.edu.uniquindio.grid.entidades.Sexo;
 
 @RunWith(Arquillian.class)
@@ -27,7 +26,7 @@ public class ModeloTest {
 	public static Archive<?> createTestArchive() {
 		return ShrinkWrap.create(WebArchive.class,
 
-				"prueba.war").addPackage(Persona1.class.getPackage()).addAsResource("persistenceForTest.xml",
+				"prueba.war").addPackage(Persona.class.getPackage()).addAsResource("persistenceForTest.xml",
 
 						"META-INF/persistence.xml")
 
@@ -39,17 +38,7 @@ public class ModeloTest {
 	@org.jboss.arquillian.transaction.api.annotation.Transactional(value = TransactionMode.COMMIT)
 	public void generarTest() {
 
-		Persona1 person = new Persona1();
-
-		person.setCedula("1003");
-		
-		person.setSexo(Sexo.FEMENIDO );
-		
-		person.setFecha(new Date());
-		
-		
-
-		entityManager.persist(person);
+	
 
 	}
 }
