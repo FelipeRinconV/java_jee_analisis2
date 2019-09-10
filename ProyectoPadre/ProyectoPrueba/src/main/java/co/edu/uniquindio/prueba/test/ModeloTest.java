@@ -14,8 +14,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.sun.xml.ws.api.tx.at.Transactional;
-import com.sun.xml.ws.tx.at.validation.TXAttributesValidator.TransactionAttributeType;
 
 import co.edu.uniquindio.grid.entidades.Persona1;
 import co.edu.uniquindio.grid.entidades.Sexo;
