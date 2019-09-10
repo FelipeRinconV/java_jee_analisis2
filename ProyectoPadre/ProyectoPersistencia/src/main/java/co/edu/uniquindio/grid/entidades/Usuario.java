@@ -14,6 +14,11 @@ import javax.persistence.*;
 @Entity
 public class Usuario extends Persona implements Serializable {
 
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Favorito> favoritos;
+	
+	
 	private String codVendedor;
 
 	private static final long serialVersionUID = 1L;

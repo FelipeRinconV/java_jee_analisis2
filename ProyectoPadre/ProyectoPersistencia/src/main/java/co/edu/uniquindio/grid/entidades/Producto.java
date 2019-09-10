@@ -2,6 +2,8 @@ package co.edu.uniquindio.grid.entidades;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -15,6 +17,9 @@ public class Producto implements Serializable {
      @ManyToOne
      private Persona persona;
 	
+    @OneToMany(mappedBy = "producto")
+ 	private List<Favorito> favoritos;
+     
 	
 	@Id
 	private String codProducto;
