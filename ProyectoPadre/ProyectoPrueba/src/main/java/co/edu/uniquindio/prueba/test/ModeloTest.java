@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import co.edu.uniquindio.grid.entidades.Persona;
-import co.edu.uniquindio.grid.entidades.Vendedor;
+import co.edu.uniquindio.grid.entidades.Usuario;
 
 @RunWith(Arquillian.class)
 public class ModeloTest {
@@ -39,7 +39,7 @@ public class ModeloTest {
 
 		
 		
-		Vendedor ven= new Vendedor();
+		Usuario ven= new Usuario();
 		
 		ven.setCedula("221212");
 		

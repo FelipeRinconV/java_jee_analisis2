@@ -8,16 +8,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Entidad que representara la clase persona,esta clase sera el comun denominador de los roles en el sistema 
- * unimark
+ * Entidad que representara la clase persona,esta clase sera el comun
+ * denominador de los roles en el sistema unimark
  *
  */
-
-
 
 @Entity
 @Inheritance
 public class Persona implements Serializable {
+
+	@OneToMany(mappedBy = "persona")
+	private List<Producto> productos;
 
 	/**
 	 * Cedula el cual se utilizara como id de la tabla persona
@@ -43,16 +44,13 @@ public class Persona implements Serializable {
 	@Column(length = 200)
 	private String contraseña;
 
-
-
 	private static final long serialVersionUID = 1L;
 
-	//Contructor necesario para la entidad
+	// Contructor necesario para la entidad
 	public Persona() {
 		super();
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,9 +75,8 @@ public class Persona implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	//Inicio de get y set
+
+	// Inicio de get y set
 
 	public String getCedula() {
 		return Cedula;

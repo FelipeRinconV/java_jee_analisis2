@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Producto implements Serializable {
 
      @ManyToOne
-     private Vendedor vendedor;
+     private Persona persona;
 	
 	
 	@Id

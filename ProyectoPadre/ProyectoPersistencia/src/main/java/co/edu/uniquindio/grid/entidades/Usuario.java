@@ -12,20 +12,16 @@ import javax.persistence.*;
  */
 
 @Entity
-public class Vendedor extends Persona implements Serializable {
+public class Usuario extends Persona implements Serializable {
 
-	@OneToMany(mappedBy = "vendedor")
-	private List<Producto> productos;
-	
-	
-	
 	private String codVendedor;
-	
+
 	private static final long serialVersionUID = 1L;
 
-	public Vendedor() {
+	public Usuario() {
 		super();
-	}   
+	}
+
 	public String getCodVendedor() {
 		return this.codVendedor;
 	}
@@ -33,5 +29,5 @@ public class Vendedor extends Persona implements Serializable {
 	public void setCodVendedor(String codVendedor) {
 		this.codVendedor = codVendedor;
 	}
-   
+
 }
