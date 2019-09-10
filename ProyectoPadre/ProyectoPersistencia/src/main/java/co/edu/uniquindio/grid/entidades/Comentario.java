@@ -6,6 +6,9 @@ import javax.persistence.*;
 /**
  * Entity implementation class for Entity: Comentario
  *
+ * Comentario de un producto debe tener el usuario y el producto asociado
+ * 
+ *
  */
 @Entity
 

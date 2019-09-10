@@ -6,6 +6,8 @@ import javax.persistence.*;
 /**
  * Entity implementation class for Entity: Compra
  *
+ * Entidad que representara la compra agregar la fecha valor de la compra
+ * el usuario y vendedor
  */
 @Entity
 

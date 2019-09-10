@@ -5,6 +5,9 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Calificacion
+ * 
+ * Calificacion del producto debe tneer el usuario y el producto 
+ * ademas de la calificacion (restringir mas la calificacion)
  *
  */
 @Entity
