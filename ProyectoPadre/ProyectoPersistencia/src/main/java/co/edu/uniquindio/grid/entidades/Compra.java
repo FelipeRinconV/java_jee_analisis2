@@ -20,6 +20,7 @@ public class Compra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCompra;
 
+	
 	@ManyToOne
 	private Usuario usuario;
 

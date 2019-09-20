@@ -20,7 +20,7 @@ public class Comentario implements Serializable {
 	private Producto producto;
 	
 	@Id
-	private int diComentario;
+	private int idComentario;
 	
 	@Column(length = 300,nullable = false)
 	private String comentario;
@@ -31,11 +31,11 @@ public class Comentario implements Serializable {
 		super();
 	}   
 	public int getDiComentario() {
-		return this.diComentario;
+		return this.idComentario;
 	}
 
 	public void setDiComentario(int diComentario) {
-		this.diComentario = diComentario;
+		this.idComentario = diComentario;
 	}
    
 }

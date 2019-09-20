@@ -15,7 +15,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Inheritance
 public class Persona implements Serializable {
-
+     
+	
 	@OneToMany(mappedBy = "persona")
 	private List<Producto> productos;
 

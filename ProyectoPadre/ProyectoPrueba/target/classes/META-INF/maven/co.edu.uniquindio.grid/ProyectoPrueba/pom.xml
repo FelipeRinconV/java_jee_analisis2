@@ -15,9 +15,10 @@
 			<dependency>
 				<groupId>org.jboss.arquillian</groupId>
 				<artifactId>arquillian-bom</artifactId>
-				<version>1.1.0.Final</version>
+				<version>1.2.1.Final</version>
 				<scope>import</scope>
 				<type>pom</type>
+				
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -90,7 +91,7 @@
 		<dependency>
 			<groupId>org.jboss.arquillian.extension</groupId>
 			<artifactId>arquillian-transaction-jta</artifactId>
-			<version>1.0.5</version>
+			<version>1.0.3.Final</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
