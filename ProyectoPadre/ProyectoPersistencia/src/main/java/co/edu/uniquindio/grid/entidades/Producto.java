@@ -13,6 +13,7 @@ import javax.persistence.*;
  */
 
 @Entity
+@Table(name = "Productos")
 public class Producto implements Serializable {
 
 	@Id
@@ -20,7 +21,7 @@ public class Producto implements Serializable {
 	@Column(name="ID_PRODUCTO")
 	private long idProducto;
 
-	@Column(nullable = false)
+	@Column(name = "URL_IMAGEN")
 	private String urlImagen;
 	
 	@Column(nullable = false)
@@ -38,9 +39,8 @@ public class Producto implements Serializable {
 	@Column(nullable = false)
 	private String nombre;
 
-
 	@Enumerated(EnumType.STRING)
-	private Tipo tipo;
+	private Categoria tipo;
 
 	@ManyToOne
 	private Persona persona;
@@ -49,8 +49,9 @@ public class Producto implements Serializable {
 	private List<Calificacion> calificaciones;
 
 	@OneToMany(mappedBy = "producto")
-	private List<Compra> compras;
+	private List<DetalleCompra> detallesCompra;
 
+	
 	
 	@OneToMany(mappedBy = "producto")
 	private List<Favorito> favoritos;
@@ -123,11 +124,11 @@ public class Producto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Tipo getTipo() {
+	public Categoria getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Tipo tipo) {
+	public void setTipo(Categoria tipo) {
 		this.tipo = tipo;
 	}
 
@@ -147,12 +148,12 @@ public class Producto implements Serializable {
 		this.calificaciones = calificaciones;
 	}
 
-	public List<Compra> getCompras() {
-		return compras;
+	public List<DetalleCompra> getCompras() {
+		return detallesCompra;
 	}
 
-	public void setCompras(List<Compra> compras) {
-		this.compras = compras;
+	public void setCompras(List<DetalleCompra> compras) {
+		this.detallesCompra = compras;
 	}
 
 	public List<Favorito> getFavoritos() {

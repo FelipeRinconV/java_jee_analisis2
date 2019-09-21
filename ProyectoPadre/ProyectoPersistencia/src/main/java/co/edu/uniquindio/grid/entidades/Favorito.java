@@ -8,7 +8,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@Table(name = "Favoritos")
 public class Favorito implements Serializable {
 
 	
@@ -19,6 +19,7 @@ public class Favorito implements Serializable {
 	private Producto producto;
 	
 	@Id
+	@Column(name = "ID_FAVORITO")
 	private int idFavorito;
 	
 	private static final long serialVersionUID = 1L;

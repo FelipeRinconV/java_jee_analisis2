@@ -5,7 +5,6 @@ import java.lang.String;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 /**
  * Entidad que representara la clase persona,esta clase sera el comun
@@ -14,6 +13,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance
+@Table(name = "Personas")
 public class Persona implements Serializable {
      
 	
@@ -29,13 +29,13 @@ public class Persona implements Serializable {
 	/**
 	 * Nombre completo de la persona
 	 */
-	@Column(length = 200,nullable = false)
+	@Column(length = 200,nullable = false, name = "NOMBRE_COMPLETO")
 	private String nombreCompleto;
 
 	@Column(length = 200,nullable = false)
 	private String email;
 
-	@Column(length = 200,nullable = false)
+	@Column(length = 200,nullable = false, name="NUMERO_TELEFONO")
 	private String numeroTelefono;
 
 	@Column(length = 200,nullable = false)

@@ -1,0 +1,37 @@
+{
+    "Productos" : [
+        {
+            "ID_PRODUCTO" : 1,
+            "DESCRIPCION" : "EL MEJOR LAPTO",
+            "DISPONIBILIDAD" : 0,
+            "FECHALIMITE" : "07/07/1999",
+            "NOMBRE" : "Laptop",
+            "PRECIO" : 300,
+            "PERSONA_CEDULA": 1,
+            "TIPO" : "TECNOLOGIA"
+            
+        },
+        {
+            "ID_PRODUCTO" : 2,
+            "DESCRIPCION" : "EL MEJOR CELULAR",
+            "DISPONIBILIDAD" : 0,
+            "FECHALIMITE" : "07/07/2020",
+            "NOMBRE" : "Celular Nokia",
+            "PRECIO" : 400,
+            "PERSONA_CEDULA": 2,
+            "TIPO" : "TECNOLOGIA"
+            
+        },
+        {
+            "ID_PRODUCTO" : 3,
+            "DESCRIPCION" : "EL MEJOR AUDIFONO",
+            "DISPONIBILIDAD" : 1,
+            "FECHALIMITE" : "07/07/2006",
+            "NOMBRE" : "Audifonos",
+            "PRECIO" : 500,
+            "PERSONA_CEDULA": 3,
+            "TIPO" : "TECNOLOGIA"
+            
+        }
+    ]
+}

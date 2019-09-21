@@ -1,0 +1,24 @@
+{
+   "Comentarios" : [
+      {
+          "ID_COMENTARIO" : 1,
+          "COMENTARIO" : "pesimo",
+          "PRODUCTO_ID_PRODUCTO" : 2,
+          "USUARIO_CEDULA" :2
+      },
+      {
+          "ID_COMENTARIO" : 2,
+          "COMENTARIO" : "malo",
+          "PRODUCTO_ID_PRODUCTO" : 1,
+          "USUARIO_CEDULA" :3
+      },
+      {
+          "ID_COMENTARIO" : 3,
+          "COMENTARIO" : "muy bueno",
+          "PRODUCTO_ID_PRODUCTO" : 3,
+          "USUARIO_CEDULA" :2
+      }
+     
+   ]
+
+}

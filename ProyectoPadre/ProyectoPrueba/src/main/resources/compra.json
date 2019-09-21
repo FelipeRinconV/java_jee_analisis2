@@ -1,0 +1,22 @@
+{
+  "Compras" : [
+     {
+       "ID_COMPRA" : 1,
+       "FECHACOMPRA" : "07/08/2003",   
+       "PRODUCTO_ID_PRODUCTO": 1,
+       "USUARIO_CEDULA" : 2 
+     },
+     {
+       "ID_COMPRA" : 2,
+       "FECHA_COMPRA" : "07/08/2007",
+       "PRODUCTO_ID_PRODUCTO" : 3,
+       "USUARIO_CEDULA" : 1 
+     },
+     {
+       "ID_COMPRA" : 3,
+       "FECHA_COMPRA" : "07/08/2012",
+       "PRODUCTO_ID_PRODUCTO" : 2,
+       "USUARIO_CEDULA" : 3 
+     }
+  ]
+}

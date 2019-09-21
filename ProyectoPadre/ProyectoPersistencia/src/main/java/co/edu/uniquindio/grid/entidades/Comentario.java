@@ -6,11 +6,9 @@ import javax.persistence.*;
 /**
  * Entity implementation class for Entity: Comentario
  *
- * Comentario de un producto debe tener el usuario y el producto asociado
- * 
- *
  */
 @Entity
+@Table(name = "Comentarios")
 public class Comentario implements Serializable {
 
 	@ManyToOne
@@ -20,6 +18,7 @@ public class Comentario implements Serializable {
 	private Producto producto;
 	
 	@Id
+	@Column(name = "ID_COMENTARIO")
 	private int idComentario;
 	
 	@Column(length = 300,nullable = false)

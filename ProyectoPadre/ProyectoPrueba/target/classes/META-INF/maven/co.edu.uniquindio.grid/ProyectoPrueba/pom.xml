@@ -18,13 +18,14 @@
 				<version>1.2.1.Final</version>
 				<scope>import</scope>
 				<type>pom</type>
-				
+
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 
 	<dependencies>
+
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
@@ -38,7 +39,6 @@
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
-
 			<version>8.0</version>
 			<scope>provided</scope>
 		</dependency>
@@ -51,7 +51,7 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>6.2</version>
+			<version>6.1</version>
 		</dependency>
 		<!-- Dependencias para las pruebas -->
 		<dependency>
@@ -74,9 +74,10 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.23</version>
+			<version>5.1.26</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- -->
 		<dependency>
 			<groupId>org.jboss.arquillian.protocol</groupId>
 			<artifactId>arquillian-protocol-servlet</artifactId>
@@ -94,6 +95,7 @@
 			<version>1.0.3.Final</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>co.edu.uniquindio.grid</groupId>
 			<artifactId>ProyectoPersistencia</artifactId>

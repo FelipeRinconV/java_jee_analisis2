@@ -1,0 +1,34 @@
+{
+	"Personas": [
+		{
+			"CEDULA": "500",
+			"DTYPE": "Administrador",
+			"CONTRASEÑA": "1234",
+			"DIRECCION": "Ma Quimbaya",
+			"EMAIL": "jc@gmail.com",
+			"NOMBRE_COMPLETO": "juca nieto",
+			"NUMERO_TELEFONO": "310283774",
+			"ROL": "[NULL]"
+		},
+		{
+			"CEDULA": "100",
+			"DTYPE": "Usuario",
+			"CONTRASEÑA": "1234",
+			"DIRECCION": "Ma casa 9 Barrio Villa liliana",
+			"EMAIL": "usuario1@gmail.com",
+			"NOMBRE_COMPLETO": "pacho dias",
+			"NUMERO_TELEFONO": "3013456789",
+			"ROL": "VENDEDOR"
+		},
+		{
+			"CEDULA": "200",
+			"DTYPE": "Usuario",
+			"CONTRASEÑA": "12345",
+			"DIRECCION": "Ma casa 9 Barrio Montevideo",
+			"EMAIL": "usuario2@gmail.com",
+			"NOMBRE_COMPLETO": "camila dias",
+			"NUMERO_TELEFONO": "3013221212",
+			"ROL": "VENDEDOR"
+		}
+	]
+}
