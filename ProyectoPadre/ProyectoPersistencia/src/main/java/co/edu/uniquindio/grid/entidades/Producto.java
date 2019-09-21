@@ -19,7 +19,7 @@ public class Producto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID_PRODUCTO")
-	private long idProducto;
+	private int idProducto;
 
 	@Column(name = "URL_IMAGEN")
 	private String urlImagen;
@@ -51,8 +51,6 @@ public class Producto implements Serializable {
 	@OneToMany(mappedBy = "producto")
 	private List<DetalleCompra> detallesCompra;
 
-	
-	
 	@OneToMany(mappedBy = "producto")
 	private List<Favorito> favoritos;
 
@@ -65,11 +63,11 @@ public class Producto implements Serializable {
 		super();
 	}
 
-	public long getIdProducto() {
+	public int getIdProducto() {
 		return idProducto;
 	}
 
-	public void setIdProducto(long idProducto) {
+	public void setIdProducto(int idProducto) {
 		this.idProducto = idProducto;
 	}
 
@@ -148,14 +146,6 @@ public class Producto implements Serializable {
 		this.calificaciones = calificaciones;
 	}
 
-	public List<DetalleCompra> getCompras() {
-		return detallesCompra;
-	}
-
-	public void setCompras(List<DetalleCompra> compras) {
-		this.detallesCompra = compras;
-	}
-
 	public List<Favorito> getFavoritos() {
 		return favoritos;
 	}
@@ -175,6 +165,17 @@ public class Producto implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public List<DetalleCompra> getDetallesCompra() {
+		return detallesCompra;
+	}
+
+	public void setDetallesCompra(List<DetalleCompra> detallesCompra) {
+		this.detallesCompra = detallesCompra;
+	}
+
+
+	
 
 
 
