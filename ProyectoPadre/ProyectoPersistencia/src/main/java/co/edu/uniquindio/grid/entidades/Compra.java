@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.security.enterprise.identitystore.IdentityStore.ValidationType;
 
 /**
  * Entity implementation class for Entity: Compra
@@ -20,6 +21,11 @@ public class Compra implements Serializable {
 	@Column(name = "ID_COMPRA")
 	private int idCompra;
 
+	@Enumerated()
+	@Column(name = "TIPO_PAGO")
+	private TipoPago tipoPago;
+	
+	
 	@ManyToOne
 	private Usuario usuario;
 

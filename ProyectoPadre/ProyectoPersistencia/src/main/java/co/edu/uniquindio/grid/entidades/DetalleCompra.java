@@ -18,17 +18,18 @@ public class DetalleCompra implements Serializable {
 	private Compra compra;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_DETALLE")
-	private long idDetalle;
+	private int idDetalle;
 
 	@Column(name = "VALOR_COMPRA")
-	private double valorCompra;
+	private int valorCompra;
 
 	@Column(name = "CANTIDAD_PRODUCTO")
 	private int cantidadProducto;
 
 	@Column(name = "PRECIO_VENTA_PRODUCTO")
-	private double precioVenta;
+	private int precioVenta;
 
 	private static final long serialVersionUID = 1L;
 
@@ -36,11 +37,11 @@ public class DetalleCompra implements Serializable {
 		super();
 	}
 
-	public long getId_detalle() {
+	public int getId_detalle() {
 		return this.idDetalle;
 	}
 
-	public void setId_detalle(long id_detalle) {
+	public void setId_detalle(int id_detalle) {
 		this.idDetalle = id_detalle;
 	}
 
@@ -52,11 +53,11 @@ public class DetalleCompra implements Serializable {
 		this.cantidadProducto = cantidadProducto;
 	}
 
-	public double getPrecioVenta() {
+	public int getPrecioVenta() {
 		return this.precioVenta;
 	}
 
-	public void setPrecioVenta(double precioVenta) {
+	public void setPrecioVenta(int precioVenta) {
 		this.precioVenta = precioVenta;
 	}
 
@@ -68,11 +69,11 @@ public class DetalleCompra implements Serializable {
 		this.compra = compra;
 	}
 
-	public long getIdDetalle() {
+	public int getIdDetalle() {
 		return idDetalle;
 	}
 
-	public void setIdDetalle(long idDetalle) {
+	public void setIdDetalle(int idDetalle) {
 		this.idDetalle = idDetalle;
 	}
 
@@ -84,11 +85,11 @@ public class DetalleCompra implements Serializable {
 		this.producto = producto;
 	}
 
-	public double getValorCompra() {
+	public int getValorCompra() {
 		return valorCompra;
 	}
 
-	public void setValorCompra(double valorCompra) {
+	public void setValorCompra(int valorCompra) {
 		this.valorCompra = valorCompra;
 	}
 
