@@ -204,12 +204,96 @@ public class ModeloTest {
 
 	}
 
-	// INICIO DE PRUEBAS DE PRODUCTOS
+	/**
+	 * Permite probar la actualizacion de un producto en este caso se probo
+	 * cambiando la url
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "producto.json" })
 	public void actuaizarProducto() {
 
+		Persona empleado = entityManager.find(Persona.class, "500");
+
+		Assert.assertNotNull(empleado);
+
+		Producto producto = new Producto();
+
+		producto.setNombre("Mac ffff");
+
+		producto.setIdProducto(10);
+
+		producto.setUrlImagen("IMffAGEN");
+
+		producto.setDisponibilidad(true);
+
+		producto.setTipo(Categoria.DEPORTE);
+
+		producto.setPersona(empleado);
+
+		producto.setPrecio(33);
+
+		producto.setDescripcion("mejor mac del mercado");
+
+		entityManager.persist(producto);
+
+		Producto pCambio = entityManager.find(Producto.class, 10);
+
+		Assert.assertEquals("IMffAGEN", pCambio.getUrlImagen());
+
+		pCambio.setUrlImagen("nueva_url");
+
+		entityManager.merge(pCambio);
+
+		Assert.assertEquals("nueva_url", pCambio.getUrlImagen());
+
 	}
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void eliminarProducto() {
+
+		Persona empleado = entityManager.find(Persona.class, "500");
+
+		Assert.assertNotNull(empleado);
+
+		Producto producto = new Producto();
+
+		producto.setNombre("Mac xxx");
+
+		producto.setIdProducto(22);
+
+		producto.setUrlImagen("imagen");
+
+		producto.setDisponibilidad(true);
+
+		producto.setTipo(Categoria.DEPORTE);
+
+		producto.setPersona(empleado);
+
+		producto.setPrecio(33);
+
+		producto.setDescripcion("disfrutale");
+
+		entityManager.persist(producto);
+
+		Producto pCambio = entityManager.find(Producto.class, 22);
+
+		Assert.assertNotNull(pCambio);
+
+		entityManager.remove(pCambio);
+		pCambio = entityManager.find(Producto.class, 22);
+		Assert.assertNull(pCambio);
+
+	}
+	
+	//--------------FIN DE METODOS DE PRODUCTOS
+	
+	
+	
+	//--------------INICIO DE METODOS DE COMPRA
+	
+	
 
 }
