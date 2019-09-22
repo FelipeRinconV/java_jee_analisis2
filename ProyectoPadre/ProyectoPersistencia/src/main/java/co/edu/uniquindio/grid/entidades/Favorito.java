@@ -34,5 +34,17 @@ public class Favorito implements Serializable {
 	public void setIdFavorito(int idFavorito) {
 		this.idFavorito = idFavorito;
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public Producto getProducto() {
+		return producto;
+	}
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
    
 }

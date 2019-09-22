@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Producto
- * Entidad que representa a un producto
+ *
  */
 
 @Entity
@@ -17,26 +17,21 @@ import javax.persistence.*;
 public class Producto implements Serializable {
 
 	@Id
+	@Column(name = "ID_PRODUCTO")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID_PRODUCTO")
 	private int idProducto;
 
 	@Column(name = "URL_IMAGEN")
 	private String urlImagen;
-	
-	@Column(nullable = false)
+
 	private String descripcion;
-	
-	@Column(nullable = false)
-	private double precio;
-	
-	@Column(nullable = false)
+
+	private int precio;
+
 	private boolean disponibilidad;
-	
-	@Temporal(TemporalType.DATE)
+
 	private Date fechaLimite;
-	
-	@Column(nullable = false)
+
 	private String nombre;
 
 	@Enumerated(EnumType.STRING)
@@ -71,16 +66,13 @@ public class Producto implements Serializable {
 		this.idProducto = idProducto;
 	}
 
-
 	public String getUrlImagen() {
 		return urlImagen;
 	}
 
-
 	public void setUrlImagen(String urlImagen) {
 		this.urlImagen = urlImagen;
 	}
-
 
 	public String getDescripcion() {
 		return descripcion;
@@ -94,7 +86,7 @@ public class Producto implements Serializable {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
 
@@ -106,13 +98,6 @@ public class Producto implements Serializable {
 		this.disponibilidad = disponibilidad;
 	}
 
-	public Date getFechaLimite() {
-		return fechaLimite;
-	}
-
-	public void setFechaLimite(Date fechaLimite) {
-		this.fechaLimite = fechaLimite;
-	}
 
 	public String getNombre() {
 		return nombre;
@@ -174,9 +159,35 @@ public class Producto implements Serializable {
 		this.detallesCompra = detallesCompra;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idProducto;
+		return result;
+	}
 
+	@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Producto other = (Producto) obj;
+			if (idProducto != other.idProducto)
+				return false;
+			return true;
+		}
+
+	public Date getFechaLimite() {
+		return fechaLimite;
+	}
+
+	public void setFechaLimite(Date fechaLimite) {
+		this.fechaLimite = fechaLimite;
+	}
 	
-
-
-
+	
 }

@@ -17,8 +17,8 @@ import javax.persistence.*;
 public class Persona implements Serializable {
      
 	
-	@OneToMany(mappedBy = "persona")
-	private List<Producto> productos;
+//	@OneToMany(mappedBy = "persona")
+//	private List<Producto> productos;
 
 	/**
 	 * Cedula el cual se utilizara como id de la tabla persona

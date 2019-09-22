@@ -20,17 +20,16 @@ public class DetalleCompra implements Serializable {
 	@Id
 	@Column(name = "ID_DETALLE")
 	private long idDetalle;
-	
+
 	@Column(name = "VALOR_COMPRA")
 	private double valorCompra;
-	
-	
+
 	@Column(name = "CANTIDAD_PRODUCTO")
 	private int cantidadProducto;
-	
+
 	@Column(name = "PRECIO_VENTA_PRODUCTO")
 	private double precioVenta;
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public DetalleCompra() {
@@ -61,14 +60,6 @@ public class DetalleCompra implements Serializable {
 		this.precioVenta = precioVenta;
 	}
 
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
-
 	public Compra getCompra() {
 		return compra;
 	}
@@ -83,6 +74,22 @@ public class DetalleCompra implements Serializable {
 
 	public void setIdDetalle(long idDetalle) {
 		this.idDetalle = idDetalle;
+	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+	public double getValorCompra() {
+		return valorCompra;
+	}
+
+	public void setValorCompra(double valorCompra) {
+		this.valorCompra = valorCompra;
 	}
 
 	@Override

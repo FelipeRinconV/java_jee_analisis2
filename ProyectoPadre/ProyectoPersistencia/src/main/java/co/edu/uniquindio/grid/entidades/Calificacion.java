@@ -46,13 +46,7 @@ public class Calificacion implements Serializable {
 		this.idCalificacion = idCalificacion;
 	}
 
-	public Producto getProducto() {
-		return producto;
-	}
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -69,5 +63,15 @@ public class Calificacion implements Serializable {
 	public void setCalificacion(int calificacion) {
 		this.calificacion = calificacion;
 	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+	
+	
 
 }

@@ -3,13 +3,10 @@ package co.edu.uniquindio.prueba.test;
 import co.edu.uniquindio.grid.entidades.*;
 
 import java.util.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -20,10 +17,11 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 
 @RunWith(Arquillian.class)
 public class ModeloTest {
@@ -51,10 +49,7 @@ public class ModeloTest {
 	// INICIO DE PRUEBAS DE LA ENTIDAD ADMNISTRADOR
 
 	@Test
-	@Transactional(value = TransactionMode.COMMIT)
-	/**
-	 * Metodo para probar la insercion de los administradores
-	 */
+	@Transactional(value = TransactionMode.ROLLBACK)
 	public void agregarAdministradorTest() {
 
 		Administrador admin = new Administrador();
@@ -71,7 +66,7 @@ public class ModeloTest {
 
 		admin.setEmail("admin@gmail");
 
-		Administrador admin2 = entityManager.find(Administrador.class, "100");
+		Administrador admin2 = entityManager.find(Administrador.class, admin.getCedula());
 
 		Assert.assertNull(admin2);
 
@@ -176,55 +171,45 @@ public class ModeloTest {
 	// INICIO DE PRUEBAS DE PRODUCTOS
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({"persona.json"})
+	@UsingDataSet({ "persona.json" })
 	public void insertarProductoTest() {
 
-		Producto nuevoP = new Producto();
+		Persona empleado = entityManager.find(Persona.class, "500");
 
-		
-		
-		
-		nuevoP.setFechaLimite(new Date());
-		
-		List<Calificacion> calificaciones = new ArrayList<Calificacion>();
-		nuevoP.setCalificaciones(calificaciones);
+		Assert.assertNotNull(empleado);
 
-		
-		List<Comentario> comentarios = new ArrayList<Comentario>();
-		nuevoP.setComentarios(comentarios);
+		Producto producto = new Producto();
 
-		nuevoP.setDescripcion("Nuevo producto de mac");
+		producto.setNombre("Mac ffff");
 
-		List<DetalleCompra> detallesCompra = new ArrayList<DetalleCompra>();
-	
-		nuevoP.setDetallesCompra(detallesCompra);
-		
-		nuevoP.setDisponibilidad(false);
+		producto.setIdProducto(80);
 
-		List<Favorito> favoritos = new ArrayList<Favorito>();
-		nuevoP.setFavoritos(favoritos);
+		producto.setUrlImagen("IMffAGEN");
 
-		nuevoP.setNombre("Mac 12");
+		producto.setDisponibilidad(true);
 
-		Administrador admin2 = entityManager.find(Administrador.class, "500");
-		
-		nuevoP.setPersona(admin2);
+		producto.setTipo(Categoria.DEPORTE);
 
-		nuevoP.setPrecio(200);
+		producto.setPersona(empleado);
 
-		nuevoP.setTipo(Categoria.TECNOLOGIA);
+		producto.setPrecio(33);
 
-		nuevoP.setUrlImagen("imagen");
+		producto.setDescripcion("mejor mac del mercado");
 
-		Producto p1 = entityManager.find(Producto.class,nuevoP.getIdProducto() );
+		entityManager.persist(producto);
 
-		Assert.assertNull(p1);
+		Producto p = entityManager.find(Producto.class, 80);
 
-		entityManager.persist(nuevoP);
+		Assert.assertNotNull(p);
 
-		p1 = entityManager.find(Producto.class,nuevoP.getIdProducto() );
-	     
-		Assert.assertNotNull(p1);
+	}
+
+	// INICIO DE PRUEBAS DE PRODUCTOS
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void actuaizarProducto() {
+
 	}
 
 }
