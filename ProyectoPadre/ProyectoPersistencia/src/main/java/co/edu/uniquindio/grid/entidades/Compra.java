@@ -21,7 +21,7 @@ public class Compra implements Serializable {
 	@Column(name = "ID_COMPRA")
 	private int idCompra;
 
-	@Enumerated()
+	@Enumerated(EnumType.STRING)
 	@Column(name = "TIPO_PAGO")
 	private TipoPago tipoPago;
 	
@@ -73,6 +73,14 @@ public class Compra implements Serializable {
 
 	public void setFechaCompra(Date fechaCompra) {
 		this.fechaCompra = fechaCompra;
+	}
+
+	public TipoPago getTipoPago() {
+		return tipoPago;
+	}
+
+	public void setTipoPago(TipoPago tipoPago) {
+		this.tipoPago = tipoPago;
 	}
 
 

@@ -1,24 +1,27 @@
 {
-	"DetallesCompras": [
-		{
-			"ID_DETALLE":​21​,
-			"CANTIDAD_PRODUCTO"​:3,
-			"PRECIO_VENTA_PRODUCTO"​:​"pperez@mail.com"​,
-			"VALOR_COMPRA"​:​"12345",
-			"COMPRA_ID_COMPRA":"",
-			"PRODUCTO_ID_PRODUCTO":""
+	"DetallesCompras": [{
+			"ID_DETALLE": 1,
+			"CANTIDAD_PRODUCTO": 2,
+			"PRECIO_VENTA_PRODUCTO": 1300,
+			"VALOR_COMPRA": 2600,
+			"COMPRA_ID_COMPRA": 1,
+			"PRODUCTO_ID_PRODUCTO": 1
 		},
 		{
-			"cedula"​:​"223456789"​,
-			"nombre"​:​"Maria Martinez"​,
-			"email"​:​"mmartinez@mail.com"​,
-			"clave"​:​"12345"
+			"ID_DETALLE": 2,
+			"CANTIDAD_PRODUCTO": 2,
+			"PRECIO_VENTA_PRODUCTO": 600,
+			"VALOR_COMPRA": 1200,
+			"COMPRA_ID_COMPRA": 2,
+			"PRODUCTO_ID_PRODUCTO": 2
 		},
 		{
-			"cedula"​:​"323456789"​,
-			"nombre"​:​"Hernan Hernandez"​,
-			"email"​:​"hhernandez@mail.com"​,
-			"clave"​:​"12345"
+			"ID_DETALLE": 3,
+			"CANTIDAD_PRODUCTO": 5,
+			"PRECIO_VENTA_PRODUCTO": 2000,
+			"VALOR_COMPRA": 10000,
+			"COMPRA_ID_COMPRA": 3,
+			"PRODUCTO_ID_PRODUCTO": 3
 		}
 	]
 }

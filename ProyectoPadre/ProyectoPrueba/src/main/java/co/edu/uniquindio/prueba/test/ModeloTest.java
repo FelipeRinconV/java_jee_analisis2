@@ -287,13 +287,36 @@ public class ModeloTest {
 		Assert.assertNull(pCambio);
 
 	}
+
+	// --------------FIN DE METODOS DE PRODUCTOS
+
+	// --------------INICIO DE METODOS DE COMPRA
 	
-	//--------------FIN DE METODOS DE PRODUCTOS
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json","p" })
+	public void insertarCompraTest() {
+
+		Usuario empleado = entityManager.find(Usuario.class, "100");
+
+		Assert.assertNotNull(empleado);
+
+		Compra compra = new Compra();
+
+		compra.setIdCompra(10);
+	    
+		compra.setFechaCompra(new Date());
+		
+		compra.setUsuario(empleado);
+		
+		compra.setTipoPago(TipoPago.EFECTIVO);
 	
-	
-	
-	//--------------INICIO DE METODOS DE COMPRA
-	
-	
+		entityManager.persist(compra);
+
+		Compra p = entityManager.find(Compra.class, 10);
+
+		Assert.assertNotNull(p);
+
+	}
 
 }
