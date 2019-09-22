@@ -5,6 +5,7 @@ import java.lang.String;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.Timeout;
 import javax.persistence.*;
 
 /**
@@ -30,6 +31,7 @@ public class Producto implements Serializable {
 
 	private boolean disponibilidad;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaLimite;
 
 	private String nombre;
