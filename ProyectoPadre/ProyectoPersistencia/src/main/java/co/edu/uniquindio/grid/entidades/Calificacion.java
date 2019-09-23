@@ -11,7 +11,6 @@ import javax.validation.constraints.Min;
  *
  */
 @Entity
-@Table(name = "Calificaciones")
 public class Calificacion implements Serializable {
 
 	@ManyToOne
@@ -20,18 +19,11 @@ public class Calificacion implements Serializable {
 	@ManyToOne
 	private Usuario usuario;
 
-	//La calificacion va ser de 1 a 10 validar ESTE CAMPO
-	@Min(1)
-	@Max(10)
-	@Column(name = "CALIFICACION")
 	private int calificacion;
 
 	@Id
-	@Column(name = "ID_CALIFICACION")
 	private int idCalificacion;
 
-	
-	
 	private static final long serialVersionUID = 1L;
 
 	public Calificacion() {
@@ -45,8 +37,6 @@ public class Calificacion implements Serializable {
 	public void setIdCalificacion(int idCalificacion) {
 		this.idCalificacion = idCalificacion;
 	}
-
-
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -71,7 +61,5 @@ public class Calificacion implements Serializable {
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
-	
-	
 
 }

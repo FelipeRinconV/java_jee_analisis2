@@ -13,16 +13,13 @@ import javax.security.enterprise.identitystore.IdentityStore.ValidationType;
  */
 
 @Entity
-@Table(name = "Compras")
 public class Compra implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_COMPRA")
 	private int idCompra;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "TIPO_PAGO")
 	private TipoPago tipoPago;
 	
 	
@@ -33,7 +30,6 @@ public class Compra implements Serializable {
 	private List<DetalleCompra> detallesCompra;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "FECHA_COMPRA")
 	private Date fechaCompra;
 
 

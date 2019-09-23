@@ -13,35 +13,31 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance
-@Table(name = "Personas")
 public class Persona implements Serializable {
-     
-	
-//	@OneToMany(mappedBy = "persona")
-//	private List<Producto> productos;
 
-	/**
-	 * Cedula el cual se utilizara como id de la tabla persona
-	 */
+	@OneToMany(mappedBy = "persona")
+	private List<Producto> productos;
+
+
+	
 	@Id
 	private String Cedula;
 
-	/**
-	 * Nombre completo de la persona
-	 */
-	@Column(length = 200,nullable = false, name = "NOMBRE_COMPLETO")
+
+	
+	@Column(length = 335)
 	private String nombreCompleto;
 
-	@Column(length = 200,nullable = false)
+	@Column(length = 100)
 	private String email;
 
-	@Column(length = 200,nullable = false, name="NUMERO_TELEFONO")
+	@Column(length = 20)
 	private String numeroTelefono;
 
-	@Column(length = 200,nullable = false)
+	@Column(length = 250)
 	private String direccion;
 
-	@Column(length = 200,nullable = false)
+	@Column(length = 100)
 	private String contraseña;
 
 	private static final long serialVersionUID = 1L;

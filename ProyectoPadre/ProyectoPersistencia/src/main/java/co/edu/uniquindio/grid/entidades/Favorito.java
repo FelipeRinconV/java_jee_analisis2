@@ -8,7 +8,6 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name = "Favoritos")
 public class Favorito implements Serializable {
 
 	

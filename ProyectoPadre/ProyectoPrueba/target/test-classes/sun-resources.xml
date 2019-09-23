@@ -2,16 +2,16 @@
 <!DOCTYPE resources PUBLIC "-//Sun Microsystems, Inc.//DTD Application Server 9.0 Resource
 Definitions //EN" "http://www.sun.com/software/appserver/dtds/sun-resources_1_3.dtd">
 <resources>
-	<jdbc-connection-pool name="analisis_proyecto"
+	<jdbc-connection-pool name="prueba_pool"
 		datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"
 		res-type="javax.sql.DataSource">
 		<property name="user" value="root" />
 		<property name="password" value="root" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/unimarket" />
+			value="jdbc:mysql://localhost:3306/analisis2" />
 
 	</jdbc-connection-pool>
-	<jdbc-resource enabled="true" jndi-name="jdbc/proyecto_analisis"
-		object-type="user" pool-name="analisis_proyecto" />
+	<jdbc-resource enabled="true" jndi-name="jdbc/prueba"
+		object-type="user" pool-name="prueba_pool" />
 
 </resources>

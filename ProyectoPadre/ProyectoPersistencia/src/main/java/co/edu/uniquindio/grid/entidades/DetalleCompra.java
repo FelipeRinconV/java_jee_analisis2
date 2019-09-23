@@ -8,7 +8,6 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name = "DetallesCompras")
 public class DetalleCompra implements Serializable {
 
 	@ManyToOne
@@ -17,19 +16,15 @@ public class DetalleCompra implements Serializable {
 	@ManyToOne
 	private Compra compra;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_DETALLE")
-	private int idDetalle;
-
-	@Column(name = "VALOR_COMPRA")
-	private int valorCompra;
-
-	@Column(name = "CANTIDAD_PRODUCTO")
 	private int cantidadProducto;
 
-	@Column(name = "PRECIO_VENTA_PRODUCTO")
 	private int precioVenta;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idDetalle;
+
+	private int valorCompra;
 
 	private static final long serialVersionUID = 1L;
 

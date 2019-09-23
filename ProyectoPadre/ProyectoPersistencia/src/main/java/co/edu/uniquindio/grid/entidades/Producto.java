@@ -14,16 +14,14 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "Productos")
 public class Producto implements Serializable {
 
 	@Id
-	@Column(name = "ID_PRODUCTO")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idProducto;
 
-	@Column(name = "URL_IMAGEN")
-	private String urlImagen;
+	
+	private String imagen;
 
 	private String descripcion;
 
@@ -37,7 +35,7 @@ public class Producto implements Serializable {
 	private String nombre;
 
 	@Enumerated(EnumType.STRING)
-	private Categoria tipo;
+	private Tipo tipo;
 
 	@ManyToOne
 	private Persona persona;
@@ -69,11 +67,11 @@ public class Producto implements Serializable {
 	}
 
 	public String getUrlImagen() {
-		return urlImagen;
+		return imagen;
 	}
 
 	public void setUrlImagen(String urlImagen) {
-		this.urlImagen = urlImagen;
+		this.imagen = urlImagen;
 	}
 
 	public String getDescripcion() {
@@ -109,11 +107,11 @@ public class Producto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Categoria getTipo() {
+	public Tipo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Categoria tipo) {
+	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
 

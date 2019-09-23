@@ -188,7 +188,7 @@ public class ModeloTest {
 
 		producto.setDisponibilidad(true);
 
-		producto.setTipo(Categoria.DEPORTE);
+		producto.setTipo(Tipo.DEPORTE);
 
 		producto.setPersona(empleado);
 
@@ -227,7 +227,7 @@ public class ModeloTest {
 
 		producto.setDisponibilidad(true);
 
-		producto.setTipo(Categoria.DEPORTE);
+		producto.setTipo(Tipo.DEPORTE);
 
 		producto.setPersona(empleado);
 
@@ -268,7 +268,7 @@ public class ModeloTest {
 
 		producto.setDisponibilidad(true);
 
-		producto.setTipo(Categoria.DEPORTE);
+		producto.setTipo(Tipo.DEPORTE);
 
 		producto.setPersona(empleado);
 

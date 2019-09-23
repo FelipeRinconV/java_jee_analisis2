@@ -6,32 +6,30 @@ import java.util.List;
 
 import javax.persistence.*;
 
+
 /**
- * Entity implementation class for Entity: Vendedor
+ * Entidad que representa un usuario que pude ser un vendedor o un comprador
  *
  */
 
 @Entity
-@Table(name = "Usuarios")
 public class Usuario extends Persona implements Serializable {
 
-	
+	@Enumerated(EnumType.STRING)
+	private Rol rol;
+
 	@OneToMany(mappedBy = "usuario")
 	private List<Calificacion> calificaciones;
-	
+
 	@OneToMany(mappedBy = "usuario")
 	private List<Compra> compras;
-	
+
 	@OneToMany(mappedBy = "usuario")
 	private List<Favorito> favoritos;
-	
+
 	@OneToMany(mappedBy = "usuario")
 	private List<Comentario> comentario;
-	
-	@Enumerated(EnumType.STRING)
-    private Rol rol;
-	
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public Usuario() {
@@ -82,5 +80,4 @@ public class Usuario extends Persona implements Serializable {
 		return serialVersionUID;
 	}
 
-	
 }

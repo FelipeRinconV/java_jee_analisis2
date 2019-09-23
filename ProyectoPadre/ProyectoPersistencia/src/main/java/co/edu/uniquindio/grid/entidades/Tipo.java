@@ -2,11 +2,12 @@ package co.edu.uniquindio.grid.entidades;
 
 /**
  * Enumeracion de categorias en la que se pueden clasificar los productos
- * @author felipe
+ * 
+ * @author
  *
  */
-public enum Categoria {
+public enum Tipo {
 
-	TECNOLOGIA, DEPORTE, MODA, LIBROS, JOYAS
+	JOYAS, TECNOLOGIA, DEPORTE, MODA, LIBROS,
 
 }

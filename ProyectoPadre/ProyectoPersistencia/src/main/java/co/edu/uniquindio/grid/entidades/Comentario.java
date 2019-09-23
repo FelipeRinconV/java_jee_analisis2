@@ -8,7 +8,6 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name = "Comentarios")
 public class Comentario implements Serializable {
 
 	@ManyToOne
@@ -18,7 +17,6 @@ public class Comentario implements Serializable {
 	private Producto producto;
 	
 	@Id
-	@Column(name = "ID_COMENTARIO")
 	private int idComentario;
 	
 	@Column(length = 300,nullable = false)
