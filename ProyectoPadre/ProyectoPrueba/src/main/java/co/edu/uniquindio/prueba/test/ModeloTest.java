@@ -46,8 +46,9 @@ public class ModeloTest {
 
 	}
 
-	// INICIO DE PRUEBAS DE LA ENTIDAD ADMNISTRADOR
-
+	/**
+	 * Metodo que permite probar la insercion de administradores
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void agregarAdministradorTest() {
@@ -85,31 +86,31 @@ public class ModeloTest {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void actualizarAdministradorTest() {
 
-		Administrador admin = new Administrador();
+		Administrador administrador = new Administrador();
 
-		admin.setCedula("100");
+		administrador.setCedula("100");
 
-		admin.setNombreCompleto("Jhon gnumeroTelefonoutierrez");
+		administrador.setNombreCompleto("Luz andrea pelaes");
 
-		admin.setNumeroTelefono("21399");
+		administrador.setNumeroTelefono("0000000");
 
-		admin.setContraseña("contra");
+		administrador.setContraseña("12");
 
-		admin.setDireccion("Quimbaya");
+		administrador.setDireccion("Aremnia");
 
-		admin.setEmail("admin@gmail");
+		administrador.setEmail("ad@gmail.com");
 
-		entityManager.persist(admin);
+		entityManager.persist(administrador);
 
 		Administrador admin2 = entityManager.find(Administrador.class, "100");
 
-		admin2.setNombreCompleto("Nuevo");
+		admin2.setNombreCompleto("andres");
 
 		entityManager.merge(admin2);
 
 		Administrador admin3 = entityManager.find(Administrador.class, "100");
 
-		Assert.assertEquals("Nuevo", admin3.getNombreCompleto());
+		Assert.assertEquals("andres", admin3.getNombreCompleto());
 
 	}
 
@@ -122,23 +123,27 @@ public class ModeloTest {
 
 		Administrador admin = new Administrador();
 
-		admin.setCedula("100");
+		admin.setContraseña("contrasenia");
 
-		admin.setNombreCompleto("Jhon gnumeroTelefonoutierrez");
-
-		admin.setNumeroTelefono("21399");
-
-		admin.setContraseña("contra");
-
-		admin.setDireccion("Quimbaya");
+		admin.setDireccion("Armenia");
 
 		admin.setEmail("admin@gmail");
 
+		admin.setCedula("1200");
+
+		admin.setNombreCompleto("Alejandra peleaz");
+
+		admin.setNumeroTelefono("21399");
+
 		entityManager.persist(admin);
+		
+		Administrador admin2 = entityManager.find(Administrador.class, "1200");
+
+		Assert.assertNotNull(admin2);
 
 		entityManager.remove(admin);
 
-		Administrador admin2 = entityManager.find(Administrador.class, "100");
+		admin2 = entityManager.find(Administrador.class, "1200");
 
 		Assert.assertNull(admin2);
 
@@ -151,172 +156,8 @@ public class ModeloTest {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json" })
 	public void buscarAdministrador() {
-		Administrador empleado = entityManager.find(Administrador.class, "500");
-		Assert.assertEquals("jc@gmail.com", empleado.getEmail());
-	}
-
-	/**
-	 * Permite probar el listar todas las personas tanto a usuarios como
-	 * administradores
-	 */
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
-	public void listarPersonasTest() {
-		Query query = entityManager.createQuery("select p from Persona p");
-		int tamanio = query.getResultList().size();
-		Assert.assertEquals(tamanio, 3);
-	}
-
-	// INICIO DE PRUEBAS DE PRODUCTOS
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
-	public void insertarProductoTest() {
-
-		Persona empleado = entityManager.find(Persona.class, "500");
-
-		Assert.assertNotNull(empleado);
-
-		Producto producto = new Producto();
-
-		producto.setNombre("Mac ffff");
-
-		producto.setIdProducto(80);
-
-		producto.setUrlImagen("IMffAGEN");
-
-		producto.setDisponibilidad(true);
-
-		producto.setTipo(Tipo.DEPORTE);
-
-		producto.setPersona(empleado);
-
-		producto.setPrecio(33);
-
-		producto.setDescripcion("mejor mac del mercado");
-
-		entityManager.persist(producto);
-
-		Producto p = entityManager.find(Producto.class, 80);
-
-		Assert.assertNotNull(p);
-
-	}
-
-	/**
-	 * Permite probar la actualizacion de un producto en este caso se probo
-	 * cambiando la url
-	 */
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json", "producto.json" })
-	public void actuaizarProducto() {
-
-		Persona empleado = entityManager.find(Persona.class, "500");
-
-		Assert.assertNotNull(empleado);
-
-		Producto producto = new Producto();
-
-		producto.setNombre("Mac ffff");
-
-		producto.setIdProducto(10);
-
-		producto.setUrlImagen("IMffAGEN");
-
-		producto.setDisponibilidad(true);
-
-		producto.setTipo(Tipo.DEPORTE);
-
-		producto.setPersona(empleado);
-
-		producto.setPrecio(33);
-
-		producto.setDescripcion("mejor mac del mercado");
-
-		entityManager.persist(producto);
-
-		Producto pCambio = entityManager.find(Producto.class, 10);
-
-		Assert.assertEquals("IMffAGEN", pCambio.getUrlImagen());
-
-		pCambio.setUrlImagen("nueva_url");
-
-		entityManager.merge(pCambio);
-
-		Assert.assertEquals("nueva_url", pCambio.getUrlImagen());
-
-	}
-
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
-	public void eliminarProducto() {
-
-		Persona empleado = entityManager.find(Persona.class, "500");
-
-		Assert.assertNotNull(empleado);
-
-		Producto producto = new Producto();
-
-		producto.setNombre("Mac xxx");
-
-		producto.setIdProducto(22);
-
-		producto.setUrlImagen("imagen");
-
-		producto.setDisponibilidad(true);
-
-		producto.setTipo(Tipo.DEPORTE);
-
-		producto.setPersona(empleado);
-
-		producto.setPrecio(33);
-
-		producto.setDescripcion("disfrutale");
-
-		entityManager.persist(producto);
-
-		Producto pCambio = entityManager.find(Producto.class, 22);
-
-		Assert.assertNotNull(pCambio);
-
-		entityManager.remove(pCambio);
-		pCambio = entityManager.find(Producto.class, 22);
-		Assert.assertNull(pCambio);
-
-	}
-
-	// --------------FIN DE METODOS DE PRODUCTOS
-
-	// --------------INICIO DE METODOS DE COMPRA
-	
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json","p" })
-	public void insertarCompraTest() {
-
-		Usuario empleado = entityManager.find(Usuario.class, "100");
-
-		Assert.assertNotNull(empleado);
-
-		Compra compra = new Compra();
-
-		compra.setIdCompra(10);
-	    
-		compra.setFechaCompra(new Date());
-		
-		compra.setUsuario(empleado);
-		
-		compra.setTipoPago(TipoPago.EFECTIVO);
-	
-		entityManager.persist(compra);
-
-		Compra p = entityManager.find(Compra.class, 10);
-
-		Assert.assertNotNull(p);
-
+		Administrador empleado = entityManager.find(Administrador.class, "2");
+		Assert.assertEquals("al@gmail.com", empleado.getEmail());
 	}
 
 }

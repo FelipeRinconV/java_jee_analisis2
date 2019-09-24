@@ -1,33 +1,33 @@
 {
-	"Personas": [
+	"PERSONA": [
 		{
-			"CEDULA": "500",
+			"CEDULA": "1",
+			"DTYPE": "Usuario",
+			"CONTRASEÑA": "2222",
+			"DIRECCION": "COLOMBIA BOGOTA",
+			"EMAIL": "user@gmail.com",
+			"NOMBRECOMPLETO": "andres cardenas ",
+			"NUMEROTELEFONO": "312384844",
+			"ROL": "COMPRADOR"
+		},
+		{
+			"CEDULA": "2",
 			"DTYPE": "Administrador",
-			"CONTRASEÑA": "1234",
-			"DIRECCION": "Ma Quimbaya",
-			"EMAIL": "jc@gmail.com",
-			"NOMBRE_COMPLETO": "juca nieto",
-			"NUMERO_TELEFONO": "310283774",
+			"CONTRASEÑA": "0000",
+			"DIRECCION": "Armenia",
+			"EMAIL": "al@gmail.com",
+			"NOMBRECOMPLETO": "luisa perez",
+			"NUMEROTELEFONO": "3344344",
 			"ROL": "[NULL]"
 		},
 		{
-			"CEDULA": "100",
+			"CEDULA": "3",
 			"DTYPE": "Usuario",
-			"CONTRASEÑA": "1234",
-			"DIRECCION": "Ma casa 9 Barrio Villa liliana",
-			"EMAIL": "usuario1@gmail.com",
-			"NOMBRE_COMPLETO": "pacho dias",
-			"NUMERO_TELEFONO": "3013456789",
-			"ROL": "VENDEDOR"
-		},
-		{
-			"CEDULA": "200",
-			"DTYPE": "Usuario",
-			"CONTRASEÑA": "12345",
-			"DIRECCION": "Ma casa 9 Barrio Montevideo",
-			"EMAIL": "usuario2@gmail.com",
-			"NOMBRE_COMPLETO": "camila dias",
-			"NUMERO_TELEFONO": "3013221212",
+			"CONTRASEÑA": "1111",
+			"DIRECCION": "Ma casa 23 ",
+			"EMAIL": "usrr@gmail.com",
+			"NOMBRECOMPLETO": "camila dias",
+			"NUMEROTELEFONO": "1213233",
 			"ROL": "VENDEDOR"
 		}
 	]
