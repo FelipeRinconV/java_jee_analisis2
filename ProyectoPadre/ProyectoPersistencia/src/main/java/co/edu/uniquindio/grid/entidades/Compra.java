@@ -21,8 +21,8 @@ public class Compra implements Serializable {
 	@Column(name = "ID_COMPRA")
 	private int idCompra;
 
-	@Enumerated(EnumType.STRING)
 	@Column(name = "TIPO_PAGO")
+	@Enumerated(EnumType.STRING)
 	private TipoPago tipoPago;
 	
 	
@@ -82,6 +82,30 @@ public class Compra implements Serializable {
 	public void setTipoPago(TipoPago tipoPago) {
 		this.tipoPago = tipoPago;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idCompra;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Compra other = (Compra) obj;
+		if (idCompra != other.idCompra)
+			return false;
+		return true;
+	}
+	
+	
 
 
 }

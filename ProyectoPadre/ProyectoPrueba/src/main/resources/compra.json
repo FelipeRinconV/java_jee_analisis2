@@ -2,23 +2,20 @@
 	"Compras": [
 		{
 			"ID_COMPRA": 1,
-			"FECHACOMPRA": "2019-03-01",
+			"FECHA_COMPRA": "2019-03-01",
 			"TIPO_PAGO": "EFECTIVO",
-			"PRODUCTO_ID_PRODUCTO": 1,
 			"USUARIO_CEDULA": 2
 		},
 		{
 			"ID_COMPRA": 2,
 			"FECHA_COMPRA": "2019-03-22",
 			"TIPO_PAGO": "TARJETA",
-			"PRODUCTO_ID_PRODUCTO": 3,
 			"USUARIO_CEDULA": 1
 		},
 		{
 			"ID_COMPRA": 3,
 			"FECHA_COMPRA": "2019-02-28",
 			"TIPO_PAGO": "EFECTIVO",
-			"PRODUCTO_ID_PRODUCTO": 2,
 			"USUARIO_CEDULA": 3
 		}
 	]

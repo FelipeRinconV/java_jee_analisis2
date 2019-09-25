@@ -630,10 +630,123 @@ public class ModeloTest {
 		Comentario comentario = entityManager.find(Comentario.class, 2);
 		Assert.assertEquals("malo", comentario.getComentario());
 	}
-	
-	//INCIO DE METODO DETALLES COMPRAS
-	
-	
-	
+
+//INCIO DE METODO DETALLES COMPRAS
+
+	/**
+	 * Metodo insertar detalle compra
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "compra.json", "producto.json" })
+	public void insertarDetalleCompraTest() {
+		Compra compra = entityManager.find(Compra.class, 1);
+		Producto producto = entityManager.find(Producto.class, 1);
+
+		Assert.assertNotNull(compra);
+		Assert.assertNotNull(producto);
+
+		DetalleCompra detalle = new DetalleCompra();
+
+		detalle.setIdDetalle(5);
+		detalle.setCantidadProducto(2);
+		detalle.setCompra(compra);
+		detalle.setProducto(producto);
+		detalle.setPrecioVenta(200);
+		detalle.setValorCompra(200);
+
+		entityManager.persist(detalle);
+
+		DetalleCompra d = entityManager.find(DetalleCompra.class, 5);
+
+		Assert.assertNotNull(d);
+
+	}
+
+	/**
+	 * Permite probar la actualizacion de un comentario cambiando la url
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "compra.json", "detalles.json", "producto.json" })
+	public void actuaizarDetalleCompra() {
+
+		Compra compra = entityManager.find(Compra.class, 2);
+		Producto producto = entityManager.find(Producto.class, 3);
+
+		Assert.assertNotNull(compra);
+		Assert.assertNotNull(producto);
+
+		DetalleCompra detalle = new DetalleCompra();
+
+		detalle.setIdDetalle(10);
+		detalle.setCompra(compra);
+		detalle.setProducto(producto);
+		detalle.setCantidadProducto(100);
+		detalle.setPrecioVenta(200);
+		entityManager.persist(detalle);
+
+		DetalleCompra detalle2 = entityManager.find(DetalleCompra.class, 10);
+
+		Assert.assertEquals(100, detalle2.getCantidadProducto());
+
+		detalle2.setCantidadProducto(300);
+
+		entityManager.merge(detalle2);
+
+		Assert.assertEquals(300, detalle2.getCantidadProducto());
+
+	}
+
+	/**
+	 * Metodo que permite eliminar un detalle de compra
+	 */
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "compra.json", "detalles.json", "producto.json" })
+	public void eliminarDetalleCompra() {
+
+		Compra compra = entityManager.find(Compra.class, 2);
+		Producto producto = entityManager.find(Producto.class, 3);
+
+		Assert.assertNotNull(compra);
+		Assert.assertNotNull(producto);
+
+		DetalleCompra detalle = new DetalleCompra();
+
+		detalle.setIdDetalle(10);
+		detalle.setCompra(compra);
+		detalle.setProducto(producto);
+		detalle.setCantidadProducto(100);
+		detalle.setPrecioVenta(200);
+
+		entityManager.persist(detalle);
+
+		DetalleCompra detalle2 = entityManager.find(DetalleCompra.class, 10);
+
+		Assert.assertNotNull(detalle2);
+
+		entityManager.remove(detalle2);
+
+		detalle2 = entityManager.find(DetalleCompra.class, 10);
+
+		Assert.assertNull(detalle2);
+
+	}
+
+	/**
+	 * Metodo que busca el detalle de una compra por el id
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "compra.json", "detalles.json", "producto.json" })
+	public void buscarDetalleCompraTest() {
+
+		DetalleCompra detalle2 = entityManager.find(DetalleCompra.class, 1);
+
+		Assert.assertNotNull(detalle2);
+
+	}
 
 }

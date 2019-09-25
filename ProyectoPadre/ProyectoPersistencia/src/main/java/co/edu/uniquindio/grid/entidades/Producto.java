@@ -59,6 +59,9 @@ public class Producto implements Serializable {
 	public Producto() {
 		super();
 	}
+	
+	
+	
 
 	public int getIdProducto() {
 		return idProducto;
