@@ -288,6 +288,17 @@ public class ModeloTest {
 
 	}
 
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "producto.json" })
+	public void buscarProducto() {
+
+		Producto pro = entityManager.find(Producto.class, 1);
+
+		Assert.assertNotNull(pro);
+
+	}
+
 	// --------------FIN DE METODOS DE PRODUCTOS
 
 	// --------------INICIO DE METODOS DE COMPRA
@@ -344,13 +355,13 @@ public class ModeloTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json"})
+	@UsingDataSet({ "persona.json" })
 	public void actualizarUsuarioTest() {
 
 		Usuario user2 = entityManager.find(Usuario.class, "100");
 
 		Assert.assertNotNull(user2);
-		
+
 		user2.setNombreCompleto("Nuevo");
 
 		entityManager.merge(user2);
@@ -584,5 +595,45 @@ public class ModeloTest {
 
 	}
 	// -----------FIN METODOS DE COMENTARIO
+
+	/**
+	 * Permite probar la busqueda de un usuario por su cedula
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void buscarUsuario() {
+		Usuario empleado = entityManager.find(Usuario.class, "100");
+		Assert.assertEquals("usuario1@gmail.com", empleado.getEmail());
+	}
+///////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Permite probar la busqueda de una calificacion por su id
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "calificacion.json" })
+	public void buscarCalificacion() {
+		Calificacion calificacion = entityManager.find(Calificacion.class, 1);
+		Assert.assertEquals(1, calificacion.getCalificacion());
+	}
+
+//////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Permite probar la busqueda de una calificacion por su id
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "comentario.json" })
+	public void buscarComentario() {
+		Comentario comentario = entityManager.find(Comentario.class, 2);
+		Assert.assertEquals("malo", comentario.getComentario());
+	}
+	
+	//INCIO DE METODO DETALLES COMPRAS
+	
+	
+	
 
 }
