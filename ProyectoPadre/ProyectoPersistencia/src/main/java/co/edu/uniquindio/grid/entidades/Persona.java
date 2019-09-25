@@ -18,13 +18,9 @@ public class Persona implements Serializable {
 	@OneToMany(mappedBy = "persona")
 	private List<Producto> productos;
 
-
-	
 	@Id
 	private String Cedula;
 
-
-	
 	@Column(length = 335)
 	private String nombreCompleto;
 
