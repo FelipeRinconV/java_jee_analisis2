@@ -53,30 +53,41 @@ public class ModeloTest {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void agregarAdministradorTest() {
 
-		Administrador admin = new Administrador();
+		Administrador nuevo = new Administrador();
 
-		admin.setCedula("100");
+		nuevo.setCedula("30");
 
-		admin.setNombreCompleto("Jhon gnumeroTelefonoutierrez");
+		nuevo.setNumeroTelefono("21399");
 
-		admin.setNumeroTelefono("21399");
+		nuevo.setContraseña("contra");
 
-		admin.setContraseña("contra");
+		nuevo.setNombreCompleto("Andres");
 
-		admin.setDireccion("Quimbaya");
+		nuevo.setDireccion("Bogota");
 
-		admin.setEmail("admin@gmail");
+		nuevo.setEmail("andres@gmail");
 
-		Administrador admin2 = entityManager.find(Administrador.class, admin.getCedula());
+		Administrador admin = entityManager.find(Administrador.class, "30");
 
-		Assert.assertNull(admin2);
+		Assert.assertNull(admin);
 
-		entityManager.persist(admin);
+		entityManager.persist(nuevo);
 
-		admin2 = entityManager.find(Administrador.class, "100");
+		admin = entityManager.find(Administrador.class, "30");
 
-		Assert.assertNotNull(admin2);
+		Assert.assertNotNull(admin);
 
+	}
+
+	/**
+	 * devuelve un administrador dada su cedula
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void buscarAdministrador() {
+		Administrador empleado = entityManager.find(Administrador.class, "2");
+		Assert.assertEquals("al@gmail.com", empleado.getEmail());
 	}
 
 	/**
@@ -88,7 +99,7 @@ public class ModeloTest {
 
 		Administrador administrador = new Administrador();
 
-		administrador.setCedula("100");
+		administrador.setCedula("200");
 
 		administrador.setNombreCompleto("Luz andrea pelaes");
 
@@ -102,62 +113,271 @@ public class ModeloTest {
 
 		entityManager.persist(administrador);
 
-		Administrador admin2 = entityManager.find(Administrador.class, "100");
+		Administrador admin = entityManager.find(Administrador.class, "200");
 
-		admin2.setNombreCompleto("andres");
+		admin.setNombreCompleto("andres");
 
-		entityManager.merge(admin2);
+		entityManager.merge(admin);
 
-		Administrador admin3 = entityManager.find(Administrador.class, "100");
+		Administrador admin3 = entityManager.find(Administrador.class, "200");
 
 		Assert.assertEquals("andres", admin3.getNombreCompleto());
 
 	}
 
 	/**
-	 * Test para eliminar una usuario
+	 * metodo que permite probar la eliminacion de un usuario
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void eliminarAdministradorTest() {
 
-		Administrador admin = new Administrador();
+		Administrador nuevo = new Administrador();
 
-		admin.setContraseña("contrasenia");
+		nuevo.setContraseña("contrasenia");
 
-		admin.setDireccion("Armenia");
+		nuevo.setDireccion("Armenia");
 
-		admin.setEmail("admin@gmail");
+		nuevo.setEmail("admin@gmail");
 
-		admin.setCedula("1200");
+		nuevo.setCedula("1200");
 
-		admin.setNombreCompleto("Alejandra peleaz");
+		nuevo.setNombreCompleto("Alejandra peleaz");
 
-		admin.setNumeroTelefono("21399");
+		nuevo.setNumeroTelefono("21399");
 
-		entityManager.persist(admin);
-		
-		Administrador admin2 = entityManager.find(Administrador.class, "1200");
+		entityManager.persist(nuevo);
 
-		Assert.assertNotNull(admin2);
+		Administrador admin = entityManager.find(Administrador.class, "1200");
 
-		entityManager.remove(admin);
+		Assert.assertNotNull(admin);
 
-		admin2 = entityManager.find(Administrador.class, "1200");
+		entityManager.remove(nuevo);
 
-		Assert.assertNull(admin2);
+		admin = entityManager.find(Administrador.class, "1200");
+
+		Assert.assertNull(admin);
 
 	}
 
 	/**
-	 * Permite probar la busqueda de una persona por su cedula
+	 * Metodo para probar la insercion de un usuario
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	public void insertarUsuarioTest() {
+		Usuario nuevo = new Usuario();
+
+		nuevo.setNombreCompleto("aberto noriega");
+		nuevo.setNumeroTelefono("1121212");
+
+		nuevo.setCedula("800");
+		nuevo.setContraseña("44444");
+
+		nuevo.setDireccion("hjas");
+		nuevo.setEmail("jose@gmail.com");
+
+		Usuario user = entityManager.find(Usuario.class, nuevo.getCedula());
+
+		Assert.assertNull(user);
+
+		entityManager.persist(nuevo);
+
+	}
+
+	/**
+	 * Test para actualizar un usuario
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json" })
-	public void buscarAdministrador() {
-		Administrador empleado = entityManager.find(Administrador.class, "2");
-		Assert.assertEquals("al@gmail.com", empleado.getEmail());
+	public void actualizarUsuarioTest() {
+
+		Usuario recuperado = entityManager.find(Usuario.class, "1");
+
+		Assert.assertNotNull(recuperado);
+
+		recuperado.setNombreCompleto("recuperado");
+
+		entityManager.merge(recuperado);
+
+		Usuario user = entityManager.find(Usuario.class, "1");
+
+		Assert.assertEquals("recuperado", user.getNombreCompleto());
+
 	}
+
+	/**
+	 * Test para eliminar un usuario
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	public void eliminarUsuarioTest() {
+
+		Usuario nuevo = new Usuario();
+
+		nuevo.setCedula("800");
+		nuevo.setContraseña("contra");
+
+		nuevo.setDireccion("Quimbaya");
+
+		nuevo.setEmail("admin@gmail");
+		nuevo.setNombreCompleto("Jhon gnumeroTelefonoutierrez");
+
+		nuevo.setNumeroTelefono("21399");
+		entityManager.persist(nuevo);
+
+		entityManager.remove(nuevo);
+
+		Usuario user = entityManager.find(Usuario.class, "800");
+
+		Assert.assertNull(user);
+
+	}
+
+	/**
+	 * Busqueda de usuario por cedula
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void buscarUsuario() {
+		Usuario empleado = entityManager.find(Usuario.class, "1");
+		Assert.assertEquals("user@gmail.com", empleado.getEmail());
+	}
+
+	// INICIO DE PRUEBAS DE PRODUCTOS
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void insertarProductoTest() {
+
+		Persona persona = entityManager.find(Persona.class, "1");
+
+		Assert.assertNotNull(persona);
+
+		Producto producto = new Producto();
+
+		producto.setTipo(Tipo.DEPORTE);
+
+		producto.setPersona(persona);
+
+		producto.setPrecio(33);
+
+		producto.setNombre("Nuevo");
+
+		producto.setIdProducto(80);
+
+		producto.setUrlImagen("imagen");
+
+		producto.setDisponibilidad(true);
+
+		producto.setDescripcion("mejor mac del mercado");
+
+		entityManager.persist(producto);
+
+		Producto p = entityManager.find(Producto.class, 80);
+
+		Assert.assertNotNull(p);
+
+	}
+
+	/**
+	 * Permite probar la actualizacion de un producto en este caso se probo
+	 * cambiando la url
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void actuaizarProducto() {
+
+		Persona empleado = entityManager.find(Persona.class, "500");
+
+		Assert.assertNotNull(empleado);
+
+		Producto producto = new Producto();
+
+		producto.setNombre("Mac ffff");
+
+		producto.setIdProducto(10);
+
+		producto.setUrlImagen("IMffAGEN");
+
+		producto.setDisponibilidad(true);
+
+		producto.setTipo(Tipo.DEPORTE);
+
+		producto.setPersona(empleado);
+
+		producto.setPrecio(33);
+
+		producto.setDescripcion("mejor mac del mercado");
+
+		entityManager.persist(producto);
+
+		Producto pCambio = entityManager.find(Producto.class, 10);
+
+		Assert.assertEquals("IMffAGEN", pCambio.getUrlImagen());
+
+		pCambio.setUrlImagen("nueva_url");
+
+		entityManager.merge(pCambio);
+
+		Assert.assertEquals("nueva_url", pCambio.getUrlImagen());
+
+	}
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void eliminarProducto() {
+
+		Persona empleado = entityManager.find(Persona.class, "500");
+
+		Assert.assertNotNull(empleado);
+
+		Producto producto = new Producto();
+
+		producto.setNombre("Mac xxx");
+
+		producto.setIdProducto(22);
+
+		producto.setUrlImagen("imagen");
+
+		producto.setDisponibilidad(true);
+
+		producto.setTipo(Tipo.DEPORTE);
+
+		producto.setPersona(empleado);
+
+		producto.setPrecio(33);
+
+		producto.setDescripcion("disfrutale");
+
+		entityManager.persist(producto);
+
+		Producto pCambio = entityManager.find(Producto.class, 22);
+
+		Assert.assertNotNull(pCambio);
+
+		entityManager.remove(pCambio);
+		pCambio = entityManager.find(Producto.class, 22);
+		Assert.assertNull(pCambio);
+
+	}
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "producto.json" })
+	public void buscarProducto() {
+
+		Producto pro = entityManager.find(Producto.class, 1);
+
+		Assert.assertNotNull(pro);
+
+	}
+
+	// --------------FIN DE METODOS DE PRODUCTOS
 
 }

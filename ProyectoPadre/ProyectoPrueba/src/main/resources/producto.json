@@ -1,37 +1,34 @@
 {
-    "Productos" : [
-        {
-            "ID_PRODUCTO" : 1,
-            "DESCRIPCION" : "EL MEJOR LAPTO",
-            "DISPONIBILIDAD" : 0,
-            "FECHALIMITE" :  "2019-03-28",
-            "NOMBRE" : "Laptop",
-            "PRECIO" : 300,
-            "PERSONA_CEDULA": 1,
-            "TIPO" : "TECNOLOGIA"
-            
-        },
-        {
-            "ID_PRODUCTO" : 2,
-            "DESCRIPCION" : "EL MEJOR CELULAR",
-            "DISPONIBILIDAD" : 0,
-            "FECHALIMITE" :  "2015-02-28",
-            "NOMBRE" : "Celular Nokia",
-            "PRECIO" : 400,
-            "PERSONA_CEDULA": 2,
-            "TIPO" : "TECNOLOGIA"
-            
-        },
-        {
-            "ID_PRODUCTO" : 3,
-            "DESCRIPCION" : "EL MEJOR AUDIFONO",
-            "DISPONIBILIDAD" : 1,
-            "FECHALIMITE" :  "2013-02-28",
-            "NOMBRE" : "Audifonos",
-            "PRECIO" : 500,
-            "PERSONA_CEDULA": 3,
-            "TIPO" : "TECNOLOGIA"
-            
-        }
-    ]
+	"Productos": [
+		{
+			"IDPRODUCTO": 1,
+			"PERSONA_CEDULA": 1,
+			"DESCRIPCION": "CELULAR HUAWEI",
+			"DISPONIBILIDAD": 1,
+			"FECHALIMITE": "2201-02-04",
+			"NOMBRE": "Celular 2",
+			"PRECIO": 300,
+			"TIPO": "TECNOLOGIA"
+		},
+		{
+			"IDPRODUCTO": 2,
+			"FECHALIMITE": "2109-11-22",
+			"DESCRIPCION": "COMPRALO",
+			"DISPONIBILIDAD": 1,
+			"NOMBRE": "TABLE 2",
+			"PRECIO": 20000,
+			"PERSONA_CEDULA": 2,
+			"TIPO": "TECNOLOGIA"
+		},
+		{
+			"IDPRODUCTO": 3,
+			"DESCRIPCION": "MAC 2",
+			"DISPONIBILIDAD": 1,
+			"FECHALIMITE": "2019-12-26",
+			"NOMBRE": "Computador 2",
+			"PRECIO": 450000,
+			"PERSONA_CEDULA": 3,
+			"TIPO": "TECNOLOGIA"
+		}
+	]
 }
