@@ -1,10 +1,10 @@
 {
-	"Productos": [
+	"PRODUCTO": [
 		{
 			"IDPRODUCTO": 1,
-			"PERSONA_CEDULA": 1,
+			"PERSONA_CEDULA": "2",
 			"DESCRIPCION": "CELULAR HUAWEI",
-			"DISPONIBILIDAD": 1,
+			"DISPONIBILIDAD": 0,
 			"FECHALIMITE": "2201-02-04",
 			"NOMBRE": "Celular 2",
 			"PRECIO": 300,
@@ -17,7 +17,7 @@
 			"DISPONIBILIDAD": 1,
 			"NOMBRE": "TABLE 2",
 			"PRECIO": 20000,
-			"PERSONA_CEDULA": 2,
+			"PERSONA_CEDULA": "1",
 			"TIPO": "TECNOLOGIA"
 		},
 		{
@@ -27,7 +27,7 @@
 			"FECHALIMITE": "2019-12-26",
 			"NOMBRE": "Computador 2",
 			"PRECIO": 450000,
-			"PERSONA_CEDULA": 3,
+			"PERSONA_CEDULA": "3",
 			"TIPO": "TECNOLOGIA"
 		}
 	]

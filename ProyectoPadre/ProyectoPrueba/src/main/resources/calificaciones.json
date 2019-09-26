@@ -1,22 +1,22 @@
 {
-   "CALIFICACION" : [
-      {
-        "IDCALIFICACION" : 10,
-        "PRODUCTOIDPRODUCTO" : 2,
-        "USUARIOCEDULA" : 3,   
-        "CALIFICACION": 10  
-      },
-      {
-        "IDCALIFICACION" : 20,
-        "USUARIOCEDULA" : 2,
-        "PRODUCTOIDPRODUCTO" : 3,
-        "CALIFICACION": 9  
-      },
-      {
-        "IDCALIFICACION" : 30,
-        "PRODUCTOIDPRODUCTO" : 1,
-        "USUARIOCEDULA" : 1,
-        "CALIFICACION": 7   
-      }
-  ]
+	"CALIFICACION": [
+		{
+			"IDCALIFICACION": 10,
+			"PRODUCTOIDPRODUCTO": 2,
+			"USUARIOCEDULA": "1",
+			"CALIFICACION": 10
+		},
+		{
+			"IDCALIFICACION": 20,
+			"USUARIOCEDULA":"2",
+			"PRODUCTOIDPRODUCTO":3,
+			"CALIFICACION": 9
+		},
+		{
+			"IDCALIFICACION": 30,
+			"PRODUCTOIDPRODUCTO": 1,
+			"USUARIOCEDULA": "3",
+			"CALIFICACION": 7
+		}
+	]
 }
