@@ -2,7 +2,9 @@ package co.edu.uniquindio.prueba.test;
 
 import co.edu.uniquindio.grid.entidades.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -45,12 +47,10 @@ public class ModeloTest {
 	public void generarTest() {
 
 	}
-	
-	
-	 // METODOS AGREGAR ENTIDADES
+
+	// METODOS AGREGAR ENTIDADES
 	// ****************************
-   
-	
+
 	// AGREGAR ADMINISTRADOR
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
@@ -81,7 +81,7 @@ public class ModeloTest {
 		Assert.assertNotNull(admin2);
 
 	}
-	
+
 	// AGREGAR PRODUCTO
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
@@ -117,9 +117,9 @@ public class ModeloTest {
 		Assert.assertNotNull(p);
 
 	}
-    
-	//AGREGAR COMPRA
-	
+
+	// AGREGAR COMPRA
+
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json" })
@@ -148,7 +148,7 @@ public class ModeloTest {
 	}
 
 	// AGREGAR USUARIO
-	
+
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void insertarUsuarioTest() {
@@ -167,8 +167,8 @@ public class ModeloTest {
 
 	}
 
-	//AGREGAR CALIFICACION
-	
+	// AGREGAR CALIFICACION
+
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "producto.json" })
@@ -193,9 +193,9 @@ public class ModeloTest {
 		Assert.assertNotNull(c);
 
 	}
-	
-	// AGREGAR COMENTARIO 
-	
+
+	// AGREGAR COMENTARIO
+
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "producto.json" })
@@ -220,9 +220,9 @@ public class ModeloTest {
 		Assert.assertNotNull(c);
 
 	}
-	
+
 	// AGREGAR DETALLE COMPRA
-	
+
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "compra.json", "producto.json" })
@@ -249,15 +249,15 @@ public class ModeloTest {
 		Assert.assertNotNull(d);
 
 	}
-	
-	//AGREGAR FAVORITO
-	
+
+	// AGREGAR FAVORITO
+
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "producto.json" })
 	public void agregarFavoritoTest() {
 
-		Usuario empleado = entityManager.find(Usuario.class, "1");
+		Usuario empleado = entityManager.find(Usuario.class, "100");
 
 		Favorito favorito = new Favorito();
 		Producto product = entityManager.find(Producto.class, 1);
@@ -274,11 +274,10 @@ public class ModeloTest {
 		Assert.assertNotNull(busFavorito);
 
 	}
-	
-	
-	 // METODOS ELIMINAR ENTIDADES
+
+	// METODOS ELIMINAR ENTIDADES
 	// ****************************
-	
+
 	/**
 	 * Test para eliminar una administrador
 	 */
@@ -309,11 +308,11 @@ public class ModeloTest {
 		Assert.assertNull(admin2);
 
 	}
-	
+
 	/**
 	 * metodo para eliminar producto
 	 */
-	
+
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json" })
@@ -352,7 +351,7 @@ public class ModeloTest {
 		Assert.assertNull(pCambio);
 
 	}
-	
+
 	/**
 	 * Test para eliminar una usuario
 	 */
@@ -383,7 +382,7 @@ public class ModeloTest {
 		Assert.assertNull(user2);
 
 	}
-	
+
 	/**
 	 * Metodo que permiter eliminar una calificacion
 	 */
@@ -448,7 +447,7 @@ public class ModeloTest {
 		Assert.assertNull(pComentario);
 
 	}
-	
+
 	/**
 	 * Metodo que permite eliminar un detalle de compra
 	 */
@@ -485,7 +484,7 @@ public class ModeloTest {
 		Assert.assertNull(detalle2);
 
 	}
-	
+
 	/**
 	 * metodo eliminar favorito
 	 */
@@ -494,7 +493,7 @@ public class ModeloTest {
 	@UsingDataSet({ "persona.json", "producto.json" })
 	public void eliminarFavoritoTest() {
 
-		Usuario empleado = entityManager.find(Usuario.class, "1");
+		Usuario empleado = entityManager.find(Usuario.class, "100");
 
 		Favorito favorito = new Favorito();
 		Producto product = entityManager.find(Producto.class, 1);
@@ -517,9 +516,36 @@ public class ModeloTest {
 		Assert.assertNull(busFavorito);
 	}
 
-	 // METODOS ACTUALIZAR ENTIDADES
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void eliminarCompra() {
+
+		Compra nuevaCompra = new Compra();
+		Usuario empleado = entityManager.find(Usuario.class, "100");
+
+		List<DetalleCompra> detalles = new ArrayList<DetalleCompra>();
+		nuevaCompra.setDetallesCompra(detalles);
+		nuevaCompra.setFechaCompra(new Date());
+		nuevaCompra.setIdCompra(50);
+		nuevaCompra.setTipoPago(TipoPago.EFECTIVO);
+		nuevaCompra.setUsuario(empleado);
+
+		entityManager.persist(nuevaCompra);
+
+		Assert.assertNotNull(nuevaCompra);
+
+		entityManager.remove(nuevaCompra);
+
+		Compra compra = entityManager.find(Compra.class, 50);
+
+		Assert.assertNull(compra);
+
+	}
+
+	// METODOS ACTUALIZAR ENTIDADES
 	// ****************************
-	
+
 	/**
 	 * Test para actualizar un administrador
 	 */
@@ -554,7 +580,7 @@ public class ModeloTest {
 		Assert.assertEquals("Nuevo", admin3.getNombreCompleto());
 
 	}
-	
+
 	/**
 	 * Permite probar la actualizacion de un producto en este caso se probo
 	 * cambiando la url
@@ -621,7 +647,7 @@ public class ModeloTest {
 		Assert.assertEquals("Nuevo", user3.getNombreCompleto());
 
 	}
-	
+
 	/**
 	 * Permite probar la actualizacion de una calificacion cambiando la url
 	 */
@@ -693,7 +719,26 @@ public class ModeloTest {
 		Assert.assertEquals("malo", comentario2.getComentario());
 
 	}
-	
+
+	/**
+	 * Metodo actualizar compra
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "compra.json" })
+	public void actualizarCompra() {
+
+		Compra compra = entityManager.find(Compra.class, 1);
+
+		compra.setTipoPago(TipoPago.TARJETA);
+
+		entityManager.merge(compra);
+		compra = entityManager.find(Compra.class, 1);
+
+		Assert.assertEquals(TipoPago.TARJETA, compra.getTipoPago());
+
+	}
+
 	/**
 	 * Permite probar la actualizacion de un detalle compra cambiando la url
 	 */
@@ -750,10 +795,10 @@ public class ModeloTest {
 		Assert.assertEquals(empleado, busFavorito.getUsuario());
 
 	}
-	
-	 // METODOS BUSCAR ENTIDADES
+
+	// METODOS BUSCAR ENTIDADES
 	// ****************************
-	
+
 	/**
 	 * Permite probar la busqueda de una persona por su cedula
 	 */
@@ -764,7 +809,7 @@ public class ModeloTest {
 		Administrador empleado = entityManager.find(Administrador.class, "500");
 		Assert.assertEquals("jc@gmail.com", empleado.getEmail());
 	}
-	
+
 	/**
 	 * Permite probar el listar todas las personas tanto a usuarios como
 	 * administradores
@@ -777,11 +822,11 @@ public class ModeloTest {
 		int tamanio = query.getResultList().size();
 		Assert.assertEquals(tamanio, 3);
 	}
-	
+
 	/**
 	 * permite buscar un producto
 	 */
-	
+
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "producto.json" })
@@ -792,7 +837,7 @@ public class ModeloTest {
 		Assert.assertNotNull(pro);
 
 	}
-	
+
 	/**
 	 * Permite probar la busqueda de un usuario por su cedula
 	 */
@@ -803,7 +848,7 @@ public class ModeloTest {
 		Usuario empleado = entityManager.find(Usuario.class, "100");
 		Assert.assertEquals("usuario1@gmail.com", empleado.getEmail());
 	}
-	
+
 	/**
 	 * Permite probar la busqueda de una calificacion por su id
 	 */
@@ -825,7 +870,7 @@ public class ModeloTest {
 		Comentario comentario = entityManager.find(Comentario.class, 2);
 		Assert.assertEquals("malo", comentario.getComentario());
 	}
-	
+
 	/**
 	 * Metodo que busca el detalle de una compra por el id
 	 */
@@ -839,9 +884,9 @@ public class ModeloTest {
 		Assert.assertNotNull(detalle2);
 
 	}
-	
+
 	/**
-	 * Metodo que busca un favorito 
+	 * Metodo que busca un favorito
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
@@ -853,6 +898,7 @@ public class ModeloTest {
 		Assert.assertNotNull(detalle2);
 
 	}
+
 	/**
 	 * Metodo que busca una compra de un producto
 	 */
@@ -866,10 +912,5 @@ public class ModeloTest {
 		Assert.assertNotNull(compra);
 
 	}
-
-
-	
-	
-	
 
 }
