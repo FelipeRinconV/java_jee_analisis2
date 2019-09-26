@@ -749,4 +749,75 @@ public class ModeloTest {
 
 	}
 
+	// ------------- INICION DE METODOS DE FAVORITOS
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void agregarFavoritoTest() {
+
+		Usuario empleado = entityManager.find(Usuario.class, "1");
+
+		Favorito favorito = new Favorito();
+		Producto product = entityManager.find(Producto.class, 1);
+
+		favorito.setProducto(product);
+		favorito.setUsuario(empleado);
+
+		favorito.setIdFavorito(5);
+
+		entityManager.persist(favorito);
+
+		Favorito busFavorito = entityManager.find(Favorito.class, 5);
+
+		Assert.assertNotNull(busFavorito);
+
+	}
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void eliminarFavoritoTest() {
+
+		Usuario empleado = entityManager.find(Usuario.class, "1");
+
+		Favorito favorito = new Favorito();
+		Producto product = entityManager.find(Producto.class, 1);
+
+		favorito.setProducto(product);
+		favorito.setUsuario(empleado);
+
+		favorito.setIdFavorito(5);
+
+		entityManager.persist(favorito);
+
+		Favorito busFavorito = entityManager.find(Favorito.class, 5);
+
+		Assert.assertNotNull(busFavorito);
+
+		entityManager.remove(favorito);
+
+		busFavorito = entityManager.find(Favorito.class, 5);
+
+		Assert.assertNull(busFavorito);
+	}
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json", "favorito.json" })
+	public void actualizarFavoritoTest() {
+
+		Favorito busFavorito = entityManager.find(Favorito.class, 1);
+		Usuario empleado = entityManager.find(Usuario.class, "100");
+
+		Assert.assertNotNull(empleado);
+		Assert.assertNotNull(busFavorito);
+
+		busFavorito.setUsuario(empleado);
+
+		busFavorito = entityManager.find(Favorito.class, 1);
+
+		Assert.assertEquals(empleado, busFavorito.getUsuario());
+
+	}
+
 }

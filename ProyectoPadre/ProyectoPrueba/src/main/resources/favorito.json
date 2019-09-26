@@ -3,17 +3,17 @@
         {
           "ID_FAVORITO" : 1,
           "PRODUCTO_ID_PRODUCTO" : 2,
-          "USUARIO_CEDULA" : 3
+          "USUARIO_CEDULA" : "100"
         },
          {
           "ID_FAVORITO" : 2,
           "PRODUCTO_ID_PRODUCTO" : 3,
-          "USUARIO_CEDULA" : 1
+          "USUARIO_CEDULA" : "200"
         },
          {
           "ID_FAVORITO" : 3,
           "PRODUCTO_ID_PRODUCTO" : 1,
-          "USUARIO_CEDULA" : 2
+          "USUARIO_CEDULA" : "100"
         }
    
     ]
