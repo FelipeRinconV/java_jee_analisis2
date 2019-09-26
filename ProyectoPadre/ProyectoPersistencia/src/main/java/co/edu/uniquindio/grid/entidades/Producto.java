@@ -5,17 +5,19 @@ import java.lang.String;
 import java.util.Date;
 import java.util.List;
 
-
 import javax.persistence.*;
 
 /**
- * Entity implementation class for Entity: Producto
- * ENTIDAD QUE REPRESENTA LSO PRODUCTOS QUE SE VENDERAN EN LA TIENDA UNIMARKET
+ * Entity implementation class for Entity: Producto ENTIDAD QUE REPRESENTA LSO
+ * PRODUCTOS QUE SE VENDERAN EN LA TIENDA UNIMARKET
  */
 
 @Entity
 @Table(name = "Productos")
 public class Producto implements Serializable {
+
+	@ManyToOne
+	private Usuario usuario;
 
 	@Id
 	@Column(name = "ID_PRODUCTO")
@@ -23,12 +25,13 @@ public class Producto implements Serializable {
 	private int idProducto;
 
 	/**
-	 * Este String tendra las url de las imagenes separadas por comas para posteriormente recuperarlas en una lista
+	 * Este String tendra las url de las imagenes separadas por comas para
+	 * posteriormente recuperarlas en una lista
 	 */
 	@Column(name = "URL_IMAGEN")
 	private String urlImagen;
 
-	@Column(nullable = false,length = 330)
+	@Column(nullable = false, length = 330)
 	private String descripcion;
 
 	@Column(nullable = false)
@@ -49,9 +52,6 @@ public class Producto implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Categoria tipo;
 
-	@ManyToOne
-	private Persona persona;
-
 	@OneToMany(mappedBy = "producto")
 	private List<Calificacion> calificaciones;
 
@@ -69,9 +69,6 @@ public class Producto implements Serializable {
 	public Producto() {
 		super();
 	}
-	
-	
-	
 
 	public int getIdProducto() {
 		return idProducto;
@@ -113,7 +110,6 @@ public class Producto implements Serializable {
 		this.disponibilidad = disponibilidad;
 	}
 
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -130,12 +126,12 @@ public class Producto implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public Persona getPersona() {
-		return persona;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public List<Calificacion> getCalificaciones() {
@@ -183,18 +179,18 @@ public class Producto implements Serializable {
 	}
 
 	@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Producto other = (Producto) obj;
-			if (idProducto != other.idProducto)
-				return false;
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		}
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Producto other = (Producto) obj;
+		if (idProducto != other.idProducto)
+			return false;
+		return true;
+	}
 
 	public Date getFechaLimite() {
 		return fechaLimite;
@@ -203,6 +199,5 @@ public class Producto implements Serializable {
 	public void setFechaLimite(Date fechaLimite) {
 		this.fechaLimite = fechaLimite;
 	}
-	
-	
+
 }

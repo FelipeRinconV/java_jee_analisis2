@@ -2,46 +2,42 @@ package co.edu.uniquindio.grid.entidades;
 
 import java.io.Serializable;
 import java.lang.String;
-
+import java.util.List;
 
 import javax.persistence.*;
 
 /**
- * Entidad que representara la clase persona,esta clase es el comun
- * denominador entre administradores y usuarios en el sistema unimark
+ * Entidad que representara la clase persona,esta clase es el comun denominador
+ * entre administradores y usuarios en el sistema unimark
  */
 
 @Entity
 @Inheritance
 @Table(name = "Personas")
 public class Persona implements Serializable {
-     
-	
-//	@OneToMany(mappedBy = "persona")
-//	private List<Producto> productos;
 
 	/**
 	 * Cedula el cual se utilizara como id de la tabla persona
 	 */
 	@Id
-	private String Cedula;
+	private String cedula;
 
 	/**
 	 * Nombre completo de la persona
 	 */
-	@Column(length = 300,nullable = false, name = "NOMBRE_COMPLETO")
+	@Column(length = 300, nullable = false, name = "NOMBRE_COMPLETO")
 	private String nombreCompleto;
 
-	@Column(length = 200,nullable = false)
+	@Column(length = 200, nullable = false)
 	private String email;
 
-	@Column(length = 50,nullable = false, name="NUMERO_TELEFONO")
+	@Column(length = 50, nullable = false, name = "NUMERO_TELEFONO")
 	private String numeroTelefono;
 
-	@Column(length = 200,nullable = false)
+	@Column(length = 200, nullable = false)
 	private String direccion;
 
-	@Column(length = 250,nullable = false)
+	@Column(length = 250, nullable = false)
 	private String contraseña;
 
 	private static final long serialVersionUID = 1L;
@@ -55,7 +51,7 @@ public class Persona implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Cedula == null) ? 0 : Cedula.hashCode());
+		result = prime * result + ((cedula == null) ? 0 : cedula.hashCode());
 		return result;
 	}
 
@@ -68,10 +64,10 @@ public class Persona implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Persona other = (Persona) obj;
-		if (Cedula == null) {
-			if (other.Cedula != null)
+		if (cedula == null) {
+			if (other.cedula != null)
 				return false;
-		} else if (!Cedula.equals(other.Cedula))
+		} else if (!cedula.equals(other.cedula))
 			return false;
 		return true;
 	}
@@ -79,11 +75,11 @@ public class Persona implements Serializable {
 	// Inicio de get y set
 
 	public String getCedula() {
-		return Cedula;
+		return cedula;
 	}
 
 	public void setCedula(String cedula) {
-		Cedula = cedula;
+		cedula = cedula;
 	}
 
 	public String getNombreCompleto() {

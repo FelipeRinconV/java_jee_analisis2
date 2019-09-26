@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -58,27 +59,16 @@ public class ModeloTest {
 
 		Administrador admin = new Administrador();
 
-		admin.setCedula("100");
-
-		admin.setNombreCompleto("Jhon gnumeroTelefonoutierrez");
-
-		admin.setNumeroTelefono("21399");
-
-		admin.setContraseña("contra");
-
-		admin.setDireccion("Quimbaya");
-
-		admin.setEmail("admin@gmail");
-
-		Administrador admin2 = entityManager.find(Administrador.class, admin.getCedula());
-
-		Assert.assertNull(admin2);
+		admin.setCedula("900");
+		admin.setContraseña("contrasenia");
+		admin.setDireccion("armenia");
+		admin.setEmail("nuevoEmail");
+		admin.setNombreCompleto("alejandro");
+		admin.setNumeroTelefono("3108457581");
 
 		entityManager.persist(admin);
 
-		admin2 = entityManager.find(Administrador.class, "100");
-
-		Assert.assertNotNull(admin2);
+		Assert.assertNotNull(admin);
 
 	}
 
@@ -88,7 +78,7 @@ public class ModeloTest {
 	@UsingDataSet({ "persona.json" })
 	public void insertarProductoTest() {
 
-		Persona empleado = entityManager.find(Persona.class, "500");
+		Usuario empleado = entityManager.find(Usuario.class, "100");
 
 		Assert.assertNotNull(empleado);
 
@@ -104,7 +94,7 @@ public class ModeloTest {
 
 		producto.setTipo(Categoria.DEPORTE);
 
-		producto.setPersona(empleado);
+		producto.setUsuario(empleado);
 
 		producto.setPrecio(33);
 
@@ -153,13 +143,14 @@ public class ModeloTest {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void insertarUsuarioTest() {
 		Usuario user = new Usuario();
-		user.setCedula("345");
+		user.setCedula("350");
 		user.setNombreCompleto("jose rodriguez");
 		user.setNumeroTelefono("44343");
 		user.setContraseña("4354");
 		user.setDireccion("43654");
 		user.setEmail("jose@gmail.com");
-		Usuario user2 = entityManager.find(Usuario.class, user.getCedula());
+
+		Usuario user2 = entityManager.find(Usuario.class, "350");
 
 		Assert.assertNull(user2);
 
@@ -318,7 +309,7 @@ public class ModeloTest {
 	@UsingDataSet({ "persona.json" })
 	public void eliminarProducto() {
 
-		Persona empleado = entityManager.find(Persona.class, "500");
+		Usuario empleado = entityManager.find(Usuario.class, "100");
 
 		Assert.assertNotNull(empleado);
 
@@ -334,7 +325,7 @@ public class ModeloTest {
 
 		producto.setTipo(Categoria.DEPORTE);
 
-		producto.setPersona(empleado);
+		producto.setUsuario(empleado);
 
 		producto.setPrecio(33);
 
@@ -553,31 +544,18 @@ public class ModeloTest {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void actualizarAdministradorTest() {
 
-		Administrador admin = new Administrador();
+		Administrador nuevoAdministrador = new Administrador();
 
-		admin.setCedula("100");
+		nuevoAdministrador.setCedula("2");
+		nuevoAdministrador.setContraseña("nueva");
+		nuevoAdministrador.setDireccion("Quimbya");
+		nuevoAdministrador.setEmail("nuevo@gmail.com");
+		nuevoAdministrador.setNombreCompleto("antonio");
+		nuevoAdministrador.setNumeroTelefono("310");
 
-		admin.setNombreCompleto("Jhon gnumeroTelefonoutierrez");
+		entityManager.persist(nuevoAdministrador);
 
-		admin.setNumeroTelefono("21399");
-
-		admin.setContraseña("contra");
-
-		admin.setDireccion("Quimbaya");
-
-		admin.setEmail("admin@gmail");
-
-		entityManager.persist(admin);
-
-		Administrador admin2 = entityManager.find(Administrador.class, "100");
-
-		admin2.setNombreCompleto("Nuevo");
-
-		entityManager.merge(admin2);
-
-		Administrador admin3 = entityManager.find(Administrador.class, "100");
-
-		Assert.assertEquals("Nuevo", admin3.getNombreCompleto());
+		Assert.assertNotNull(nuevoAdministrador);
 
 	}
 
@@ -590,7 +568,7 @@ public class ModeloTest {
 	@UsingDataSet({ "persona.json", "producto.json" })
 	public void actuaizarProducto() {
 
-		Persona empleado = entityManager.find(Persona.class, "500");
+		Usuario empleado = entityManager.find(Usuario.class, "100");
 
 		Assert.assertNotNull(empleado);
 
@@ -606,7 +584,7 @@ public class ModeloTest {
 
 		producto.setTipo(Categoria.DEPORTE);
 
-		producto.setPersona(empleado);
+		producto.setUsuario(empleado);
 
 		producto.setPrecio(33);
 

@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-
 /**
  * Entity implementation class for Entity: Compra
  * ENTIDAD QUE CINTIENE LOS DATOS DEL USUARIO Y TIPO DE PAGO CUANDO SE REALIZA UNA COMPRA
@@ -14,8 +13,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Compras")
+
+//@NamedQuery(name = Compra.PRODUCTOS_COMPRA,query = "select  d.PRODUCTO_ID_PRODUCTO,d. from Compras c")
 public class Compra implements Serializable {
 
+	
+	
+	public static final String PRODUCTOS_COMPRA="producto_compra";
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_COMPRA")
@@ -104,6 +110,12 @@ public class Compra implements Serializable {
 		if (idCompra != other.idCompra)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Compra [idCompra=" + idCompra + ", tipoPago=" + tipoPago + ", usuario=" + usuario + ", detallesCompra="
+				+ detallesCompra + ", fechaCompra=" + fechaCompra + "]";
 	}
 	
 	
