@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Favorito
- *
+ * ENTIDAD PARA GUARDAR LOS PRODUCTOS FAVORITOS DE LOS USUARIOS
  */
 @Entity
 @Table(name = "Favoritos")
@@ -19,6 +19,7 @@ public class Favorito implements Serializable {
 	private Producto producto;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_FAVORITO")
 	private int idFavorito;
 	

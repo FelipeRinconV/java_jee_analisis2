@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: DetalleCompra
- *
+ * ENTIDAD  PARA NORMALIZAR LA RELACION PRODUCTO-COMPRA
  */
 @Entity
 @Table(name = "DetallesCompras")
@@ -22,13 +22,19 @@ public class DetalleCompra implements Serializable {
 	@Column(name = "ID_DETALLE")
 	private int idDetalle;
 
+	/**
+	 * Valor total de la compra 
+	 */
 	@Column(name = "VALOR_COMPRA")
 	private int valorCompra;
 
-	@Column(name = "CANTIDAD_PRODUCTO")
+	@Column(name = "CANTIDAD_PRODUCTO",nullable = false)
 	private int cantidadProducto;
 
-	@Column(name = "PRECIO_VENTA_PRODUCTO")
+	/**
+	 * Precio de venta del producto en el momento de la venta
+	 */
+	@Column(name = "PRECIO_VENTA_PRODUCTO",nullable = false)
 	private int precioVenta;
 
 	private static final long serialVersionUID = 1L;

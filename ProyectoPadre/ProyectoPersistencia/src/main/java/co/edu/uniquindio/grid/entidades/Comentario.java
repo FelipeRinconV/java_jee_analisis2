@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Comentario
+ * ENTIDAD QUE REPRESENTA EL COMENTARIO QUE HACE UN USUARIO DE UN PRODUCTO
  *
  */
 @Entity
@@ -18,6 +19,7 @@ public class Comentario implements Serializable {
 	private Producto producto;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_COMENTARIO")
 	private int idComentario;
 	

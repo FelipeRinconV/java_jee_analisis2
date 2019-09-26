@@ -5,11 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.security.enterprise.identitystore.IdentityStore.ValidationType;
+
 
 /**
  * Entity implementation class for Entity: Compra
- *
+ * ENTIDAD QUE CINTIENE LOS DATOS DEL USUARIO Y TIPO DE PAGO CUANDO SE REALIZA UNA COMPRA
  */
 
 @Entity
@@ -29,11 +29,12 @@ public class Compra implements Serializable {
 	@ManyToOne
 	private Usuario usuario;
 
+	
 	@OneToMany(mappedBy = "compra")
 	private List<DetalleCompra> detallesCompra;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "FECHA_COMPRA")
+	@Column(name = "FECHA_COMPRA",nullable = false)
 	private Date fechaCompra;
 
 

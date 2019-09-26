@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Administrador
- * Entidad que se encargara de representar los administradores de la pagina
+ * ENTIDAD QUE REPRESENTA A LOS ADMISTRADORES DE LA PAGINA SE UTILIZARO PORSTERIORME PARA LA SEGURIDAD 
  */
 @Entity
 public class Administrador extends Persona implements Serializable {

@@ -17,9 +17,9 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.After;
+
 import org.junit.Assert;
-import org.junit.Before;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -818,6 +818,15 @@ public class ModeloTest {
 
 		Assert.assertEquals(empleado, busFavorito.getUsuario());
 
+	}
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json", "favorito.json" })
+	public void buscarFavorito() {
+		Favorito busFavorito = entityManager.find(Favorito.class, 1);
+
+		Assert.assertNotNull(busFavorito);
 	}
 
 }

@@ -7,7 +7,7 @@ import javax.validation.constraints.Min;
 
 /**
  * Entity implementation class for Entity: Calificacion
- * 
+ * ENTIDAD QUE REPRESENTA LAS CALIFICACIONES QUE LE AH DADO UN PRODUCTO AL USUARIO
  *
  */
 @Entity
@@ -20,13 +20,14 @@ public class Calificacion implements Serializable {
 	@ManyToOne
 	private Usuario usuario;
 
-	//La calificacion va ser de 1 a 10 validar ESTE CAMPO
+	//La calificacion va ser de 1 a 10 validar ESTE CAMPO EN EL DAO
 	@Min(1)
 	@Max(10)
-	@Column(name = "CALIFICACION")
+	@Column(name = "CALIFICACION",nullable = false)
 	private int calificacion;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_CALIFICACION")
 	private int idCalificacion;
 

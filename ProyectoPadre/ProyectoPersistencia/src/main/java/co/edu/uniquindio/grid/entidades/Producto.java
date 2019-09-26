@@ -5,12 +5,12 @@ import java.lang.String;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.Timeout;
+
 import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Producto
- *
+ * ENTIDAD QUE REPRESENTA LSO PRODUCTOS QUE SE VENDERAN EN LA TIENDA UNIMARKET
  */
 
 @Entity
@@ -22,18 +22,28 @@ public class Producto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idProducto;
 
+	/**
+	 * Este String tendra las url de las imagenes separadas por comas para posteriormente recuperarlas en una lista
+	 */
 	@Column(name = "URL_IMAGEN")
 	private String urlImagen;
 
+	@Column(nullable = false,length = 330)
 	private String descripcion;
 
+	@Column(nullable = false)
 	private int precio;
 
+	@Column(nullable = false)
 	private boolean disponibilidad;
 
+	/**
+	 * Fecha limite de disponibilidad
+	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaLimite;
 
+	@Column(nullable = false)
 	private String nombre;
 
 	@Enumerated(EnumType.STRING)
