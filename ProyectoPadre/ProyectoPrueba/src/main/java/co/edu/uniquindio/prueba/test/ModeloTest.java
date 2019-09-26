@@ -254,7 +254,7 @@ public class ModeloTest {
 	public void insertarProductoTest() {
 
 		Usuario empleado = entityManager.find(Usuario.class, "1");
-		
+
 		Assert.assertNotNull(empleado);
 
 		Producto producto = new Producto();
@@ -293,11 +293,10 @@ public class ModeloTest {
 	public void actuaizarProducto() {
 
 		Usuario empleado = entityManager.find(Usuario.class, "1");
-		
+
 		Assert.assertNotNull(empleado);
 
 		Producto product = new Producto();
-
 
 		product.setTipo(Tipo.JOYAS);
 
@@ -340,7 +339,6 @@ public class ModeloTest {
 
 		Producto product = new Producto();
 
-
 		product.setTipo(Tipo.JOYAS);
 
 		product.setPersona(empleado);
@@ -356,18 +354,17 @@ public class ModeloTest {
 		product.setDisponibilidad(true);
 
 		product.setDescripcion("LA JOYA MAS BONITA");
-		
-		
+
 		entityManager.persist(product);
 
-		Producto cambioProducto = entityManager.find(Producto.class, 50);
+		Producto cambioProducto = entityManager.find(Producto.class, 80);
 
 		Assert.assertNotNull(cambioProducto);
 
 		entityManager.remove(cambioProducto);
-		
-		cambioProducto = entityManager.find(Producto.class, 50);
-		
+
+		cambioProducto = entityManager.find(Producto.class, 80);
+
 		Assert.assertNull(cambioProducto);
 
 	}
@@ -384,119 +381,417 @@ public class ModeloTest {
 	}
 
 	// --------------FIN DE METODOS DE PRODUCTOS revisado hasta aca
-	
-	
-//	// ----------------INICIO METODO DE CALIFICACION
-//		@Test
-//		@Transactional(value = TransactionMode.ROLLBACK)
-//		@UsingDataSet({ "persona.json", "producto.json" })
-//		public void insertarCalificacionTest() {
-//			Usuario emplea = entityManager.find(Usuario.class, "1");
-//			Producto pro = entityManager.find(Producto.class, 2);
-//
-//			Assert.assertNotNull(emplea);
-//			Assert.assertNotNull(pro);
-//
-//			Calificacion calificacion = new Calificacion();
-//
-//			calificacion.setIdCalificacion(50);
-//			calificacion.setCalificacion(20);
-//			calificacion.setProducto(pro);
-//			calificacion.setUsuario(emplea);
-//
-//			entityManager.persist(calificacion);
-//
-//			Calificacion calificacion2 = entityManager.find(Calificacion.class, 23);
-//
-//			Assert.assertNotNull(calificacion2);
-//
-//		}
-//
-//		/**
-//		 * Permite probar la actualizacion de una calificacion cambiando la url
-//		 */
-//		@Test
-//		@Transactional(value = TransactionMode.ROLLBACK)
-//		@UsingDataSet({ "persona.json", "comentario.json", "producto.json" })
-//		public void actuaizarCalificacion() {
-//
-//			Usuario usuario = entityManager.find(Usuario.class, "100");
-//			Producto producto = entityManager.find(Producto.class, 3);
-//
-//			Assert.assertNotNull(usuario);
-//			Assert.assertNotNull(producto);
-//
-//			Calificacion calificacion = new Calificacion();
-//
-//			calificacion.setIdCalificacion(3);
-//
-//			calificacion.setCalificacion(3);
-//
-//			calificacion.setUsuario(usuario);
-//
-//			calificacion.setProducto(producto);
-//
-//			entityManager.persist(calificacion);
-//
-//			Calificacion calificacion2 = entityManager.find(Calificacion.class, 3);
-//
-//			Assert.assertEquals(3, calificacion2.getCalificacion());
-//
-//			calificacion2.setCalificacion(4);
-//
-//			entityManager.merge(calificacion2);
-//
-//			Assert.assertEquals(4, calificacion2.getCalificacion());
-//
-//		}
-//
-//		/**
-//		 * Metodo que permiter eliminar una calificacion
-//		 */
-//		@Test
-//		@Transactional(value = TransactionMode.ROLLBACK)
-//		@UsingDataSet({ "persona.json", "producto.json" })
-//		public void eliminarCalificacion() {
-//
-//			Usuario usuario = entityManager.find(Usuario.class, "100");
-//			Producto producto = entityManager.find(Producto.class, 3);
-//
-//			Assert.assertNotNull(usuario);
-//			Assert.assertNotNull(producto);
-//
-//			Calificacion calificacion = new Calificacion();
-//
-//			calificacion.setCalificacion(2);
-//			calificacion.setIdCalificacion(6);
-//			calificacion.setProducto(producto);
-//			calificacion.setUsuario(usuario);
-//
-//			entityManager.persist(calificacion);
-//
-//			Calificacion pCalificacion = entityManager.find(Calificacion.class, 6);
-//
-//			Assert.assertNotNull(pCalificacion);
-//
-//			entityManager.remove(pCalificacion);
-//			pCalificacion = entityManager.find(Calificacion.class, 6);
-//			Assert.assertNull(pCalificacion);
-//
-//		}
-//		
-//		/**
-//		 * Permite probar la busqueda de una calificacion por su id
-//		 */
-//		@Test
-//		@Transactional(value = TransactionMode.ROLLBACK)
-//		@UsingDataSet({ "calificaciones.json" })
-//		public void buscarCalificacion() {
-//			Calificacion calificacion = entityManager.find(Calificacion.class, 10);
-//			Assert.assertEquals(10, calificacion.getCalificacion());
-//		}
 
-		// ----------FIN METODOS DE CALIFICACION
+	// ----------------INICIO METODO DE CALIFICACION
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void insertarCalificacionTest() {
+		Usuario emplea = entityManager.find(Usuario.class, "1");
+		Producto pro = entityManager.find(Producto.class, 2);
+
+		Assert.assertNotNull(emplea);
+		Assert.assertNotNull(pro);
+
+		Calificacion calificacion = new Calificacion();
+
+		calificacion.setProducto(pro);
+		calificacion.setUsuario(emplea);
+		calificacion.setIdCalificacion(50);
+		calificacion.setCalificacion(20);
+
+		entityManager.persist(calificacion);
+
+		Calificacion calificacion2 = entityManager.find(Calificacion.class, 50);
+
+		Assert.assertNotNull(calificacion2);
+
+	}
+
+	/**
+	 * Permite probar la actualizacion de una calificacion cambiando la url
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "comentario.json", "producto.json" })
+	public void actuaizarCalificacion() {
+
+		Producto product = entityManager.find(Producto.class, 3);
+		Usuario user = entityManager.find(Usuario.class, "1");
+
+		Assert.assertNotNull(user);
+		Assert.assertNotNull(product);
+
+		Calificacion calificacion = new Calificacion();
+
+		calificacion.setUsuario(user);
+
+		calificacion.setProducto(product);
+
+		calificacion.setIdCalificacion(23);
+
+		calificacion.setCalificacion(10);
+
+		entityManager.persist(calificacion);
+
+		Calificacion calificacionCambio = entityManager.find(Calificacion.class, 23);
+
+		Assert.assertNotNull(calificacionCambio);
+
+		calificacionCambio.setCalificacion(6);
+
+		entityManager.merge(calificacionCambio);
+
+		Assert.assertEquals(6, calificacionCambio.getCalificacion());
+
+	}
+
+	/**
+	 * Metodo que permiter eliminar una calificacion
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void eliminarCalificacion() {
+
+		Usuario usuario = entityManager.find(Usuario.class, "1");
+		Producto producto = entityManager.find(Producto.class, 3);
+
+		Assert.assertNotNull(usuario);
+		Assert.assertNotNull(producto);
+
+		Calificacion calificacion = new Calificacion();
+
+		calificacion.setCalificacion(9);
+		calificacion.setIdCalificacion(9);
+		calificacion.setProducto(producto);
+		calificacion.setUsuario(usuario);
+
+		entityManager.persist(calificacion);
+
+		Calificacion cal2 = entityManager.find(Calificacion.class, 9);
+
+		Assert.assertNotNull(cal2);
+
+		entityManager.remove(cal2);
+
+		cal2 = entityManager.find(Calificacion.class, 9);
+		Assert.assertNull(cal2);
+
+	}
+
+	/**
+	 * Permite probar la busqueda de una calificacion por su id
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "calificaciones.json" })
+	public void buscarCalificacion() {
+		Calificacion calificacion = entityManager.find(Calificacion.class, 20);
+		Assert.assertEquals(9, calificacion.getCalificacion());
+	}
+
+	// ----------FIN METODOS DE CALIFICACION REVISADO
+
+	// ----------INICIO METODOS DE COMENTARIO
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void agregarComentarioTest() {
+		Usuario usuario = entityManager.find(Usuario.class, "1");
+		Producto producto = entityManager.find(Producto.class, 1);
+
+		Assert.assertNotNull(usuario);
+		Assert.assertNotNull(producto);
+
+		Comentario comentario = new Comentario();
+		comentario.setUsuario(usuario);
+		comentario.setProducto(producto);
+		comentario.setIdComentario(8);
+		comentario.setComentario("DEMASIADO MALO");
+
+		entityManager.persist(comentario);
+
+		Comentario comentario2 = entityManager.find(Comentario.class, 8);
+
+		Assert.assertNotNull(comentario2);
+
+	}
+
+	/**
+	 * Permite probar la actualizacion de un comentario cambiando la url
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "comentario.json", "producto.json" })
+	public void actuaizarComentario() {
+
+		Usuario usuario = entityManager.find(Usuario.class, "1");
+		Producto producto = entityManager.find(Producto.class, 2);
+
+		Assert.assertNotNull(usuario);
+		Assert.assertNotNull(producto);
+
+		Comentario comentario = new Comentario();
+
+		comentario.setUsuario(usuario);
+		comentario.setProducto(producto);
+		comentario.setIdComentario(20);
+		comentario.setComentario("MUY MALO");
+
+		entityManager.persist(comentario);
+
+		Comentario comentario2 = entityManager.find(Comentario.class, 20);
+
+		Assert.assertEquals("MUY MALO", comentario2.getComentario());
+
+		comentario2.setComentario("malo");
+
+		entityManager.merge(comentario2);
+
+		Assert.assertEquals("malo", comentario2.getComentario());
+
+	}
+
+	/**
+	 * Metodo que permiter eliminar una comentario
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void eliminarComentario() {
+
+		Usuario usuario = entityManager.find(Usuario.class, "1");
+		Producto producto = entityManager.find(Producto.class, 1);
+
+		Assert.assertNotNull(usuario);
+		Assert.assertNotNull(producto);
+
+		Comentario comentario = new Comentario();
+
+		comentario.setIdComentario(20);
+		comentario.setComentario("Muy MALO");
+		comentario.setUsuario(usuario);
+		comentario.setProducto(producto);
+		entityManager.persist(comentario);
+
+		Comentario pComentario = entityManager.find(Comentario.class, 20);
+		Assert.assertNotNull(pComentario);
+
+		entityManager.remove(pComentario);
+		pComentario = entityManager.find(Comentario.class, 20);
+		Assert.assertNull(pComentario);
+
+	}
+
+	/**
+	 * Permite probar la busqueda de una calificacion por su id
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "comentario.json" })
+	public void buscarComentario() {
+		Comentario comentario = entityManager.find(Comentario.class, 2);
+		Assert.assertEquals("NO ME GUSTO MUCHO", comentario.getComentario());
+	}
+	// -----------FIN METODOS DE COMENTARIO REVISADO
+
+	// INCIO DE METODO DETALLES COMPRAS
+
+	/**
+	 * Metodo insertar detalle compra
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "compra.json", "producto.json" })
+	public void insertarDetalleCompraTest() {
+		Compra comp = entityManager.find(Compra.class, 1);
+		Producto product = entityManager.find(Producto.class, 1);
+
+		Assert.assertNotNull(comp);
+		Assert.assertNotNull(product);
+
+		DetalleCompra detalle = new DetalleCompra();
+		detalle.setCompra(comp);
+		detalle.setProducto(product);
+		detalle.setIdDetalle(23);
+
+		detalle.setCantidadProducto(2344);
+		detalle.setPrecioVenta(32323);
+
+		entityManager.persist(detalle);
+
+		DetalleCompra detalles2 = entityManager.find(DetalleCompra.class, 23);
+
+		Assert.assertNotNull(detalles2);
+
+	}
+
+	/**
+	 * Permite probar la actualizacion de un comentario cambiando la url
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "compra.json", "detalles.json", "producto.json" })
+	public void actuaizarDetalleCompra() {
+
+		Compra comp = entityManager.find(Compra.class, 1);
+		Producto product = entityManager.find(Producto.class, 1);
+
+		Assert.assertNotNull(comp);
+		Assert.assertNotNull(product);
+
+		DetalleCompra detalle = new DetalleCompra();
+		detalle.setCompra(comp);
+		detalle.setProducto(product);
+		detalle.setIdDetalle(23);
+
+		detalle.setCantidadProducto(2344);
+		detalle.setPrecioVenta(32323);
+
+		entityManager.persist(detalle);
+
+		DetalleCompra detalle2 = entityManager.find(DetalleCompra.class, 23);
+
+		Assert.assertEquals(2344, detalle2.getCantidadProducto());
+
+		detalle2.setCantidadProducto(300);
+
+		entityManager.merge(detalle2);
+
+		Assert.assertEquals(300, detalle2.getCantidadProducto());
+
+	}
+
+	/**
+	 * Metodo que permite eliminar un detalle de compra
+	 */
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "compra.json", "detalles.json", "producto.json" })
+	public void eliminarDetalleCompra() {
+
+		Compra comp = entityManager.find(Compra.class, 1);
+		Producto product = entityManager.find(Producto.class, 1);
+
+		Assert.assertNotNull(comp);
+		Assert.assertNotNull(product);
+
+		DetalleCompra detalle = new DetalleCompra();
+		detalle.setCompra(comp);
+		detalle.setProducto(product);
+		detalle.setIdDetalle(23);
+
+		detalle.setCantidadProducto(2344);
+		detalle.setPrecioVenta(32323);
+
+		entityManager.persist(detalle);
+
+		DetalleCompra detalleEliminar = entityManager.find(DetalleCompra.class, 23);
+
+		Assert.assertNotNull(detalleEliminar);
+
+		entityManager.remove(detalleEliminar);
+
+		detalleEliminar = entityManager.find(DetalleCompra.class, 23);
+
+		Assert.assertNull(detalleEliminar);
+
+	}
+
+	/**
+	 * Metodo que busca el detalle de una compra por el id
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "compra.json", "detalles.json", "producto.json" })
+	public void buscarDetalleCompraTest() {
+
+		DetalleCompra detalle = entityManager.find(DetalleCompra.class, 1);
+
+		Assert.assertNotNull(detalle);
+
+	}
+
+	// ------------- INICION DE METODOS DE FAVORITOS
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void agregarFavoritoTest() {
+
+		Usuario empleado = entityManager.find(Usuario.class, "1");
+
+		Favorito favorito = new Favorito();
+		Producto product = entityManager.find(Producto.class, 1);
+
+		favorito.setProducto(product);
+		favorito.setUsuario(empleado);
+
+		favorito.setIdFavorito(5);
+
+		entityManager.persist(favorito);
+
+		Favorito busFavorito = entityManager.find(Favorito.class, 5);
+
+		Assert.assertNotNull(busFavorito);
+
+	}
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void eliminarFavoritoTest() {
+
+		Usuario empleado = entityManager.find(Usuario.class, "1");
+
+		Favorito favorito = new Favorito();
+		Producto product = entityManager.find(Producto.class, 1);
+
+		favorito.setProducto(product);
+		favorito.setUsuario(empleado);
+
+		favorito.setIdFavorito(5);
+
+		entityManager.persist(favorito);
+
+		Favorito busFavorito = entityManager.find(Favorito.class, 5);
+
+		Assert.assertNotNull(busFavorito);
+
+		entityManager.remove(favorito);
+
+		busFavorito = entityManager.find(Favorito.class, 5);
+
+		Assert.assertNull(busFavorito);
+	}
 	
-	
-	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json","favorito.json" })
+	public void actualizarFavoritoTest() {
+		
+		Favorito busFavorito = entityManager.find(Favorito.class, 1);
+		Usuario empleado = entityManager.find(Usuario.class, "1");
+		
+		
+		Assert.assertNotNull(empleado);
+		Assert.assertNotNull(busFavorito);
+		
+		busFavorito.setUsuario(empleado);
+
+		busFavorito = entityManager.find(Favorito.class, 1);
+		
+		Assert.assertEquals(empleado, busFavorito.getUsuario());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
 
 }

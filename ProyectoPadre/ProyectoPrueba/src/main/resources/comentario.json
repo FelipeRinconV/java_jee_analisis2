@@ -1,21 +1,21 @@
 {
    "COMENTARIO" : [
       {
-          "ID_COMENTARIO" : 1,
+          "IDCOMENTARIO" : 1,
           "COMENTARIO" : "EXCELENTE PRODUCTO",
-          "PRODUCTO_ID_PRODUCTO" : 2,
+          "PRODUCTO_IDPRODUCTO" : 2,
           "USUARIO_CEDULA" :2
       },
       {
-          "ID_COMENTARIO" : 2,
+          "IDCOMENTARIO" : 2,
           "COMENTARIO" : "NO ME GUSTO MUCHO",
-          "PRODUCTO_ID_PRODUCTO" : 1,
+          "PRODUCTO_IDPRODUCTO" : 1,
           "USUARIO_CEDULA" :3
       },
       {
-          "ID_COMENTARIO" : 3,
+          "IDCOMENTARIO" : 3,
           "COMENTARIO" : "PUEDE MEJORAR",
-          "PRODUCTO_ID_PRODUCTO" : 3,
+          "PRODUCTO_IDPRODUCTO" : 3,
           "USUARIO_CEDULA" :2
       }
      
