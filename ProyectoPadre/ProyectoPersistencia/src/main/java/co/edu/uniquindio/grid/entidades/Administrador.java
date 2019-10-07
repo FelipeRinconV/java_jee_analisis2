@@ -15,5 +15,8 @@ public class Administrador extends Persona implements Serializable {
 	public Administrador() {
 		super();
 	}
+	
+	
+	
    
 }

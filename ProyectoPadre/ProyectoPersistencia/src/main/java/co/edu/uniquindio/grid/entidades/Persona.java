@@ -14,6 +14,10 @@ import javax.persistence.*;
 @Entity
 @Inheritance
 @Table(name = "Personas")
+@NamedQueries({
+@NamedQuery(name = Persona.LISTAR_PERSONAS,query = "select p from Persona p"),
+@NamedQuery(name = Persona.BUSCAR_POR_EMAIL,query = "select p from Persona p where p.email=:email")
+})
 public class Persona implements Serializable {
 
 	/**
@@ -21,6 +25,11 @@ public class Persona implements Serializable {
 	 */
 	@Id
 	private String cedula;
+	
+	
+	public static final String LISTAR_PERSONAS="listar_personas";
+
+	public static final String BUSCAR_POR_EMAIL="buscar_por_email";
 
 	/**
 	 * Nombre completo de la persona

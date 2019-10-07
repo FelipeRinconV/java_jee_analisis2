@@ -44,7 +44,7 @@ public class ModeloTest {
 	}
 
 	@Test
-	@org.jboss.arquillian.transaction.api.annotation.Transactional(value = TransactionMode.COMMIT)
+	@Transactional(value = TransactionMode.ROLLBACK)
 	public void generarTest() {
 
 	}

@@ -14,10 +14,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Productos")
+@NamedQueries({
+@NamedQuery(name =Producto.CALIFICACIONES_POR_ID,query = "select p from Producto pr, IN (pr.calificaciones) p where pr.idProducto=:id")
+	})
 public class Producto implements Serializable {
 
 	@ManyToOne
 	private Usuario usuario;
+
+	public static final String CALIFICACIONES_POR_ID = "calificaciones_por_id";
 
 	@Id
 	@Column(name = "ID_PRODUCTO")

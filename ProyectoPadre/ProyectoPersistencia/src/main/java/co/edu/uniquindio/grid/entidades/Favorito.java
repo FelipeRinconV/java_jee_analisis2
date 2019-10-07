@@ -47,5 +47,28 @@ public class Favorito implements Serializable {
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idFavorito;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Favorito other = (Favorito) obj;
+		if (idFavorito != other.idFavorito)
+			return false;
+		return true;
+	}
+	
+	
+	
    
 }

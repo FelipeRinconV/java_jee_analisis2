@@ -62,5 +62,28 @@ public class Comentario implements Serializable {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idComentario;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Comentario other = (Comentario) obj;
+		if (idComentario != other.idComentario)
+			return false;
+		return true;
+	}
+	
+	
+	
    
 }

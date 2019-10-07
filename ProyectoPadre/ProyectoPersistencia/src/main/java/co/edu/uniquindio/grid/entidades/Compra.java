@@ -14,12 +14,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Compras")
 
-//@NamedQuery(name = Compra.PRODUCTOS_COMPRA,query = "select  d.PRODUCTO_ID_PRODUCTO,d. from Compras c")
+@NamedQueries({
+@NamedQuery(name=Compra.PRODUCTOS_COMPRA_POR_ID,query = "select detalles.producto from Compra co INNER JOIN co.detallesCompra detalles  where detalles.compra.idCompra=:id")
+
+	
+})
 public class Compra implements Serializable {
 
 	
 	
-	public static final String PRODUCTOS_COMPRA="producto_compra";
+	public static final String PRODUCTOS_COMPRA_POR_ID="producto_compra";
 	
 	
 	@Id
