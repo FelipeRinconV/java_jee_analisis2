@@ -15,12 +15,14 @@ import javax.persistence.*;
 @Table(name = "Compras")
 
 @NamedQueries({
-@NamedQuery(name=Compra.PRODUCTOS_COMPRA_POR_ID,query = "select detalles.producto from Compra co INNER JOIN co.detallesCompra detalles  where detalles.compra.idCompra=:id")
-
+@NamedQuery(name=Compra.PRODUCTOS_COMPRA_POR_ID,query = "select detalles.producto from Compra co INNER JOIN co.detallesCompra detalles  where detalles.compra.idCompra=:id"),
+@NamedQuery(name = Compra.TOTAl_COMPRAS_UNICAS,query = "select count(c) from Compra c group by c.idCompra")
 	
 })
 public class Compra implements Serializable {
 
+	
+	public static final String TOTAl_COMPRAS_UNICAS="compras_unicas";
 	
 	
 	public static final String PRODUCTOS_COMPRA_POR_ID="producto_compra";

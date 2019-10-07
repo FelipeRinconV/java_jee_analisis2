@@ -92,7 +92,7 @@ public class ConsultasTest {
 	 * id
 	 */
 	@Test
-	@UsingDataSet({ "persona.json", "calificacion.json", "producto.json","compra.json","comentario.json"})
+	@UsingDataSet({ "persona.json", "calificacion.json", "producto.json", "compra.json", "comentario.json" })
 	public void darCalificacionesProductoPorId() {
 
 		TypedQuery<Calificacion> query = entityManager.createNamedQuery(Producto.CALIFICACIONES_POR_ID,
@@ -109,6 +109,18 @@ public class ConsultasTest {
 //		}
 
 		Assert.assertEquals(1, calificaciones.size());
+
+	}
+
+	/**
+	 * Prueba la consulta de que permita determinar el número de compras (únicas)
+	 * que se han realizado.
+	 */
+	@Test
+	@UsingDataSet({ "persona.json", "calificacion.json", "producto.json", "compra.json", "comentario.json" })
+	public void darNumeroDeConsultas() {
+
+		TypedQuery<Integer> query = entityManager.createNamedQuery(Compra.TOTAl_COMPRAS_UNICAS, Integer.class);
 
 	}
 

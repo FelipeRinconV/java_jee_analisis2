@@ -26,6 +26,7 @@ public class Persona implements Serializable {
 	@Id
 	private String cedula;
 	
+
 	
 	public static final String LISTAR_PERSONAS="listar_personas";
 
