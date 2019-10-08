@@ -13,9 +13,6 @@
 	<description>Proyecto para desplegar el aplicativo en el servidor de aplicaciones</description>
 
 
-
-
-
 	<dependencies>
 		<dependency>
 			<groupId>co.edu.uniquindio.grid</groupId>
