@@ -15,7 +15,7 @@
       {
           "ID_COMENTARIO" : 3,
           "COMENTARIO" : "muy bueno",
-          "PRODUCTO_ID_PRODUCTO" : 3,
+          "PRODUCTO_ID_PRODUCTO" : 2,
           "USUARIO_CEDULA" :"100"
       }
      
