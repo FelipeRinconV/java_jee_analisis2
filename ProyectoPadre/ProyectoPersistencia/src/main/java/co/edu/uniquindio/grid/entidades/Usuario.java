@@ -14,33 +14,30 @@ import javax.persistence.*;
 @Table(name = "Usuarios")
 @NamedQueries({
 
-@NamedQuery(name = Usuario.COMPRAS_USUARIO, query = "select u,p from Usuario u inner join u.productos p"),
-@NamedQuery(name=Usuario.USUARIOS_CON_GMAIL,query = "select u from Usuario u where u.email like '%gmail%'"),
-@NamedQuery(name=Usuario.USUARIO_NUMERO_REGISTROS,query = "select new co.edu.uniquindio.grid.dto.UsuarioRegistrosDTO(p.usuario.nombreCompleto,p.usuario.email,count(p.idProducto)) from Usuario user inner join user.productos p group by p.usuario"),
-
+		@NamedQuery(name = Usuario.COMPRAS_USUARIO, query = "select u,p from Usuario u inner join u.productos p"),
+		@NamedQuery(name = Usuario.USUARIOS_CON_GMAIL, query = "select u from Usuario u where u.email like '%gmail%'"),
+		@NamedQuery(name = Usuario.USUARIO_NUMERO_REGISTROS, query = "select new co.edu.uniquindio.grid.dto.UsuarioRegistrosDTO(p.usuario.nombreCompleto,p.usuario.email,count(p.idProducto)) from Usuario user inner join user.productos p group by p.usuario"),
+      
 })
 
 public class Usuario extends Persona implements Serializable {
-	
-	
-	public static final String USUARIO_NUMERO_REGISTROS="numero_de_registro_por_usuario";
-	
 
-	
+	public static final String USUARIO_NUMERO_REGISTROS = "numero_de_registro_por_usuario";
+
+
+
 	/**
 	 * Permite listar los usuarios que tienen correo con gmail
 	 */
-	public static final String USUARIOS_CON_GMAIL="usuarios_con_gmail";
-	
+	public static final String USUARIOS_CON_GMAIL = "usuarios_con_gmail";
+
 	/**
 	 * Permite listar las compras que han realizado los usarios
 	 */
 	public static final String COMPRAS_USUARIO = "compras_usuarios";
-	
-	
-	
+
 	public static final String PRODUCTOS_ASOCIADOS = "productos_asociados";
-		
+
 	@OneToMany(mappedBy = "usuario")
 	private List<Producto> productos;
 
@@ -53,9 +50,6 @@ public class Usuario extends Persona implements Serializable {
 	@OneToMany(mappedBy = "usuario")
 	private List<Favorito> favoritos;
 
-	
-	
-	
 	@OneToMany(mappedBy = "usuario")
 	private List<Comentario> comentario;
 
@@ -117,9 +111,5 @@ public class Usuario extends Persona implements Serializable {
 		return "Usuario [productos=" + productos + ", calificaciones=" + calificaciones + ", compras=" + compras
 				+ ", favoritos=" + favoritos + ", comentario=" + comentario + ", rol=" + rol + "]";
 	}
-	
-	
-	
-	
 
 }
