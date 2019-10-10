@@ -126,7 +126,7 @@ public class ModeloTest {
 		compra.setFechaCompra(new Date());
 
 		compra.setUsuario(empleado);
-				
+
 		compra.setTipoPago(TipoPago.EFECTIVO);
 
 		entityManager.persist(compra);
@@ -890,5 +890,6 @@ public class ModeloTest {
 		Assert.assertNotNull(compra);
 
 	}
+
 
 }

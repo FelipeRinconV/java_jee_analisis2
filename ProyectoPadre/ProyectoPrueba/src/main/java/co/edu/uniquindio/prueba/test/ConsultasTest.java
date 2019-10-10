@@ -1,15 +1,19 @@
 package co.edu.uniquindio.prueba.test;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.persistence.UsingDataSet;
+import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
+import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -21,6 +25,7 @@ import org.junit.runner.RunWith;
 import co.edu.uniquindio.grid.dto.UsuarioGastosComprasDTO;
 import co.edu.uniquindio.grid.dto.UsuarioRegistrosDTO;
 import co.edu.uniquindio.grid.entidades.*;
+import co.uniquindio.grid.dto.utils.Utilidades;
 
 @RunWith(Arquillian.class)
 public class ConsultasTest {
@@ -288,9 +293,13 @@ public class ConsultasTest {
 
 		TypedQuery<Compra> query = entityManager.createNamedQuery(Compra.COMPRA_FECHAS_METODO_PAGO, Compra.class);
 
-		query.setParameter("inicial", new Date());
+		Timestamp fecha1 = Utilidades.DateToTimestamp(new Date("2019-00-28"));
 
-		query.setParameter("final", new Date());
+		Timestamp fecha2 = Utilidades.DateToTimestamp(new Date("2019-11-28"));
+
+		query.setParameter("inicial", fecha1, TemporalType.TIMESTAMP);
+
+		query.setParameter("final", fecha2, TemporalType.TIMESTAMP);
 
 		query.setParameter("tipo", TipoPago.EFECTIVO);
 
@@ -300,6 +309,45 @@ public class ConsultasTest {
 
 			System.out.println(us.toString());
 		}
+
+	}
+
+	/**
+	 * Metodo que busca que permite probar una compra de un producto
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "compra.json", "detalles.json", "producto.json" })
+	public void darProductoMasCostosoPorTipoTest() {
+
+		TypedQuery<Producto> query = entityManager.createNamedQuery(Producto.PRODUCTO_MAS_COSTOSOS_POR_TIPO,
+				Producto.class);
+
+		query.setMaxResults(1);
+
+		query.setParameter("tipo", Categoria.TECNOLOGIA);
+
+		Producto pro = query.getSingleResult();
+
+		Assert.assertEquals(pro.getIdProducto(), 2);
+
+	}
+
+	/**
+	 * prueba del query que da los detalles y las compras de una persona dada su cedula
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "compra.json", "detalles.json", "producto.json" })
+	public void darCompraAndDetallesCompra() {
+
+		TypedQuery<Object> query = entityManager.createNamedQuery(Compra.COMPRAS_DETALLES_POR_PERSONA, Object.class);
+
+		query.setParameter("cedula", "200");
+
+		List<Object> compraydetalles = query.getResultList();
+
+		Assert.assertNotNull(compraydetalles);
 
 	}
 

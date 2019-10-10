@@ -19,7 +19,7 @@ import javax.persistence.*;
 		@NamedQuery(name = Compra.TOTAl_COMPRAS_UNICAS, query = "select count(c) from Compra c"),
 		@NamedQuery(name = Compra.TOTAL_GASTO_EN_COMPRAS_POR_USUARIO, query = "select new co.edu.uniquindio.grid.dto.UsuarioGastosComprasDTO(c.usuario.nombreCompleto,sum(dc.precioVenta * dc.cantidadProducto)) From Compra c INNER JOIN c.detallesCompra dc where c.usuario.cedula=:id"),
 		@NamedQuery(name = Compra.COMPRA_FECHAS_METODO_PAGO, query = "SELECT c FROM Compra c WHERE c.fechaCompra BETWEEN :inicial AND :final AND c.tipoPago=:tipo"),
-       // @NamedQuery(name = Compra.COMPRAS_DETALLES_POR_PERSONA,query = "SELECT c.idCompra,dc.de   FROM  Compra c INNER JOIN c.detallesCompra dc where c.usuario.cedula=:cedula")
+        @NamedQuery(name = Compra.COMPRAS_DETALLES_POR_PERSONA,query = "SELECT dc,c  FROM  Compra c INNER JOIN c.detallesCompra dc where c.usuario.cedula=:cedula")
 		
 })
 public class Compra implements Serializable {
