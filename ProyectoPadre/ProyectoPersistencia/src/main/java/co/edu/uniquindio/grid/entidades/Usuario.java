@@ -17,13 +17,21 @@ import javax.persistence.*;
 		@NamedQuery(name = Usuario.COMPRAS_USUARIO, query = "select u,p from Usuario u inner join u.productos p"),
 		@NamedQuery(name = Usuario.USUARIOS_CON_GMAIL, query = "select u from Usuario u where u.email like '%gmail%'"),
 		@NamedQuery(name = Usuario.USUARIO_NUMERO_REGISTROS, query = "select new co.edu.uniquindio.grid.dto.UsuarioRegistrosDTO(p.usuario.nombreCompleto,p.usuario.email,count(p.idProducto)) from Usuario user inner join user.productos p group by p.usuario"),
-      
+        @NamedQuery(name = Usuario.LISTAR_USUARIOS,query = "select u from Usuario u")
 })
 
 public class Usuario extends Persona implements Serializable {
 
+	/**
+	 * Devuelve  el numero de registro de un usuario
+	 */
 	public static final String USUARIO_NUMERO_REGISTROS = "numero_de_registro_por_usuario";
 
+	/**
+	 * Permite listar a los usuarios compradores y vendedores
+	 */
+	
+	public static final String LISTAR_USUARIOS= "listar_usuarios";
 
 
 	/**

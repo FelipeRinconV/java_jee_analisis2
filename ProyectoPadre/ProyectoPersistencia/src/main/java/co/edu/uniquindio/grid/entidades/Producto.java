@@ -32,13 +32,13 @@ public class Producto implements Serializable {
 	private Usuario usuario;
 
 	/**
-	 * Lista los productos disponibles
+	 * Lista los productos DISPONIBLES segun fecha y cantidad
 	 */
 
 	public static final String PRODUCTOS_DISPONIBLES = "listar_productos_disponibles";
 
 	/*
-	 * consulta que permita determinar cuál es el tipo de producto que tiene más
+	 * consulta que permita determinar cuál es el TIPO de producto que tiene más
 	 * registros.
 	 */
 	public static final String TIPO_PRODUCTO_MAS_REGISTROS = "producto_mas_registros";
@@ -61,10 +61,19 @@ public class Producto implements Serializable {
 	public static final String PRODUCTO_MAS_COSTOSOS_POR_TIPO = "producto_mas_costoso_por_tipos";
 
 
+	/**
+	 * Devuelve la CANTIDAD de productos por determinado tipo
+	 */
 	public static final String CANTIDAD_PRODUCTOS_POR_TIPO = "cantidad_producto_por_tipo";
 
+	/**
+	 * Da las CALIFICACIONES de un producto dado su id
+	 */
 	public static final String CALIFICACIONES_POR_ID = "calificaciones_por_id";
 
+	/**
+	 * Devuleve una LISTA DE PRODUCTOS los cuales no tienen comentarios
+	 */
 	public static final String PRODUCTOS_SIN_COMENTARIOS = "productos_sin_comentario";
 
 	@Id
