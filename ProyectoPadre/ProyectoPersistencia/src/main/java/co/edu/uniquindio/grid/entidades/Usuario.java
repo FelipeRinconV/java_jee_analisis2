@@ -44,6 +44,9 @@ public class Usuario extends Persona implements Serializable {
 	 */
 	public static final String COMPRAS_USUARIO = "compras_usuarios";
 
+	/**
+	 * Devuelve los productos asociados dado el id de un usuario
+	 */
 	public static final String PRODUCTOS_ASOCIADOS = "productos_asociados";
 
 	@OneToMany(mappedBy = "usuario")
@@ -70,6 +73,7 @@ public class Usuario extends Persona implements Serializable {
 		super();
 	}
 
+	//SET Y GET
 	public List<Calificacion> getCalificaciones() {
 		return calificaciones;
 	}

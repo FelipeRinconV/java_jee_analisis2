@@ -88,7 +88,9 @@ public class ModeloTest {
 
 		producto.setIdProducto(80);
 
-		producto.setUrlImagen("IMffAGEN");
+		List<String> imagenes=new ArrayList<String>();
+		producto.setUrlImagenes(imagenes);
+
 
 		producto.setDisponibilidad(true);
 
@@ -319,7 +321,8 @@ public class ModeloTest {
 
 		producto.setIdProducto(22);
 
-		producto.setUrlImagen("imagen");
+		List<String> imagenes=new ArrayList<String>();
+		producto.setUrlImagenes(imagenes);
 
 		producto.setDisponibilidad(true);
 
@@ -578,7 +581,8 @@ public class ModeloTest {
 
 		producto.setIdProducto(10);
 
-		producto.setUrlImagen("IMffAGEN");
+		List<String> imagenes=new ArrayList<String>();
+		producto.setUrlImagenes(imagenes);
 
 		producto.setDisponibilidad(true);
 
@@ -594,13 +598,13 @@ public class ModeloTest {
 
 		Producto pCambio = entityManager.find(Producto.class, 10);
 
-		Assert.assertEquals("IMffAGEN", pCambio.getUrlImagen());
+		Assert.assertEquals("mejor mac del mercado", pCambio.getDescripcion());
 
-		pCambio.setUrlImagen("nueva_url");
-
+		pCambio.setDescripcion("NUEVA");
+		
 		entityManager.merge(pCambio);
 
-		Assert.assertEquals("nueva_url", pCambio.getUrlImagen());
+		Assert.assertEquals("NUEVA", pCambio.getDescripcion());
 
 	}
 
@@ -627,7 +631,7 @@ public class ModeloTest {
 	}
 
 	/**
-	 * Permite probar la actualizacion de una calificacion cambiando la url
+	 * Permite probar la actualizacion de una calificacion cambiando la DESCRIPCION
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
