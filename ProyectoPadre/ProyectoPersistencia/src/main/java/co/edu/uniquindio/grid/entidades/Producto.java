@@ -21,14 +21,21 @@ import javax.persistence.*;
 		@NamedQuery(name = Producto.TIPO_PRODUCTO_MAS_REGISTROS, query = "select  max(p.tipo) from Producto p "),
 		@NamedQuery(name = Producto.PECIO_PRODUCTO_MAS_CARO, query = "select p.nombre,max(p.precio) from Producto p "),
 		@NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSO, query = "select p From Producto p order by p.precio desc"),
-        @NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSOS_POR_TIPO,query = "select P  from Producto p  where p.tipo=:tipo  order by p.precio desc")
-		
-		
+
+        @NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSOS_POR_TIPO,query = "select P  from Producto p  where p.tipo=:tipo  order by p.precio desc"),
+		@NamedQuery(name = Producto.PRODUCTOS_DISPONIBLES, query = "select p From Producto p where p.disponibilidad=TRUE and p.fechaLimite <= :fechaActual")
+
 })
 public class Producto implements Serializable {
 
 	@ManyToOne
 	private Usuario usuario;
+
+	/**
+	 * Lista los productos disponibles
+	 */
+
+	public static final String PRODUCTOS_DISPONIBLES = "listar_productos_disponibles";
 
 	/*
 	 * consulta que permita determinar cuál es el tipo de producto que tiene más
@@ -50,8 +57,9 @@ public class Producto implements Serializable {
 	 * Cree una consulta que devuelve el producto más costoso por cada tipo de
 	 * producto.
 	 */
-	
+
 	public static final String PRODUCTO_MAS_COSTOSOS_POR_TIPO = "producto_mas_costoso_por_tipos";
+
 
 	public static final String CANTIDAD_PRODUCTOS_POR_TIPO = "cantidad_producto_por_tipo";
 

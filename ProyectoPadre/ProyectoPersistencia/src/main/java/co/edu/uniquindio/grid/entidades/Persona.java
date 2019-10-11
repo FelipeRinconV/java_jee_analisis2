@@ -90,7 +90,7 @@ public class Persona implements Serializable {
 	}
 
 	public void setCedula(String cedula) {
-		cedula = cedula;
+		this.cedula = cedula;
 	}
 
 	public String getNombreCompleto() {
