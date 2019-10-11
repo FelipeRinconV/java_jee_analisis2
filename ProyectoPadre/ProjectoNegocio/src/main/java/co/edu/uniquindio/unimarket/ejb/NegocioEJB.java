@@ -103,29 +103,27 @@ public class NegocioEJB implements NegocioEJBRemote {
 
 	/**
 	 * Metodo para registrar el usuario
-	 * @throws ElementoRepetidoException 
+	 * 
+	 * @throws ElementoRepetidoException
 	 */
 	public Usuario registrarUsuario(Usuario cl) throws ElementoRepetidoException {
 		// throws CedulaRepetidoException, EmailRepetidoException {
 
 
-		System.out.println(cl.toString());
-		
 		// Buscamos si la cedula no esta repetida
 		if (entytiManager.find(Usuario.class, cl.getCedula()) != null) {
 
-			 throw new ElementoRepetidoException("Ya existe un usuario  con esta cedula");
+			throw new ElementoRepetidoException("Ya existe un usuario  con esta cedula");
 		}
 
 		// Buscamos por el emails true si es validado
-		if (buscarUsuarioPorEmail(cl.getEmail())!=null) {
+		if (buscarUsuarioPorEmail(cl.getEmail()) != null) {
 
-			 throw new ElementoRepetidoException("Ya existe un usuario registrado con este	email");
+			throw new ElementoRepetidoException("Ya existe un usuario registrado con este	email");
 
 		}
 
 		try {
-			
 
 			entytiManager.persist(cl);
 
@@ -137,8 +135,6 @@ public class NegocioEJB implements NegocioEJBRemote {
 		}
 
 	}
-
-
 
 	/**
 	 * permite buscar una personas usando su email
@@ -158,7 +154,6 @@ public class NegocioEJB implements NegocioEJBRemote {
 		}
 
 	}
-
 
 	@Override
 	public Producto editarProducto(Producto p) {
