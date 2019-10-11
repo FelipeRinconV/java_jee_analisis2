@@ -21,16 +21,22 @@ import javax.persistence.*;
 		@NamedQuery(name = Producto.TIPO_PRODUCTO_MAS_REGISTROS, query = "select  max(p.tipo) from Producto p "),
 		@NamedQuery(name = Producto.PECIO_PRODUCTO_MAS_CARO, query = "select p.nombre,max(p.precio) from Producto p "),
 		@NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSO, query = "select p From Producto p order by p.precio desc"),
-
 		@NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSOS_POR_TIPO, query = "select P  from Producto p  where p.tipo=:tipo  order by p.precio desc"),
-		@NamedQuery(name = Producto.PRODUCTOS_DISPONIBLES, query = "select p From Producto p where p.disponibilidad=TRUE and p.fechaLimite <= :fechaActual")
-
+		@NamedQuery(name = Producto.PRODUCTOS_DISPONIBLES, query = "select p From Producto p where p.disponibilidad=TRUE and p.fechaLimite <= :fechaActual"),
+        @NamedQuery(name = Producto.PRODUCTO_POR_ID,query = "select p from Producto p where p.idProducto=:id")
+		  
 })
 public class Producto implements Serializable {
 
 	@ManyToOne
 	private Usuario usuario;
 
+	/**
+	 * Devuelve un producto en especifico dado su id
+	 */
+	
+	public static final String PRODUCTO_POR_ID="producto_por_id";
+	
 	/**
 	 * Lista los productos DISPONIBLES segun fecha y cantidad
 	 */

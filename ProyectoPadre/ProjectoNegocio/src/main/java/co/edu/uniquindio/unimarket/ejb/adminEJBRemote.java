@@ -8,7 +8,7 @@ import co.edu.uniquindio.grid.entidades.*;
 import co.edu.uniquindio.unimarket.excepciones.*;
 
 @Remote
-public interface NegocioEJBRemote {
+public interface adminEJBRemote {
 
 	Persona autenticarUsuario(String email, String contraseña);
 
@@ -21,5 +21,8 @@ public interface NegocioEJBRemote {
 	Usuario registrarUsuario(Usuario cl) throws ElementoRepetidoException;
 
 	Producto editarProducto(Producto p);
+	
+	List<Usuario> listarUsuarios() throws NoExisteElementosException;
 
+	Producto buscarProducto(int id) throws NoExisteElementosException;
 }

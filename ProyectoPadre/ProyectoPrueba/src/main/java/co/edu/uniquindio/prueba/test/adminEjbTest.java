@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.persistence.EntityManager;
 
 import org.glassfish.internal.api.Public;
@@ -115,7 +116,6 @@ public class adminEjbTest {
 	 * 
 	 * @throws NoExisteElementosException
 	 */
-	@Ignore
 	@Test(expected = NoExisteElementosException.class)
 	@Transactional(value = TransactionMode.ROLLBACK)
 	public void listarUsuariosTestException() throws NoExisteElementosException {
@@ -132,8 +132,22 @@ public class adminEjbTest {
 		}
 
 	}
-	
-	
-	
+
+	@Test()
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json" })
+	public void buscarProductoPorIdTets() throws NoExisteElementosException {
+
+		try {
+			Producto p = adminEJB.buscarProducto(1);
+
+			Assert.assertNotNull(p);
+		} catch (NoExisteElementosException e) {
+
+			throw new NoExisteElementosException(e.getMessage());
+
+		}
+
+	}
 
 }

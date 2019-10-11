@@ -22,7 +22,7 @@ import co.edu.uniquindio.unimarket.excepciones.*;
  */
 @Stateless
 @LocalBean
-public class AdminEJB implements NegocioEJBRemote {
+public class AdminEJB implements adminEJBRemote {
 
 	@PersistenceContext
 	private EntityManager entytiManager;
@@ -109,6 +109,25 @@ public class AdminEJB implements NegocioEJBRemote {
 		}
 
 		return listaUsuarios;
+
+	}
+
+	/**
+	 * Metodo que devuelve un producto dado su id
+	 */
+	public Producto buscarProducto(int id) throws NoExisteElementosException {
+
+		TypedQuery<Producto> q = entytiManager.createNamedQuery(Producto.PRODUCTO_POR_ID, Producto.class);
+
+		q.setParameter("id", id);
+		List<Producto> pEncontrado = q.getResultList();
+
+		if (pEncontrado == null) {
+
+			throw new NoExisteElementosException("No existe el producto con el ID indicado");
+		}
+
+		return pEncontrado.get(0);
 
 	}
 
