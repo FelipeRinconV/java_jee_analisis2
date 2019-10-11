@@ -42,6 +42,11 @@ public class EjbTEst {
 
 	}
 
+	
+	/**
+	 * Metodo que permite probar el registro de un usuario
+	 * @throws ElementoRepetidoException
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json" })
