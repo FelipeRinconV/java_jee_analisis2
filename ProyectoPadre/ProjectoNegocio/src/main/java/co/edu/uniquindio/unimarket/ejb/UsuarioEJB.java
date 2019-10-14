@@ -49,6 +49,7 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 
 	/**
 	 *Metodo que le permite al usuario listar los productos EN GENERAL por una categoria en especifico
+	 *@return LISTA de PRODUCTOS
 	 */
 	@Override
 	public List<Producto> listarProductosPorCategoria(String categoria) {
@@ -56,66 +57,105 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		return null;
 	}
 
+	/**
+	 * Metodo que le permite al usuario realizar el comentario de un producto
+	 * PREGUNTAR COMO REALIZARLO
+	 */
 	@Override
 	public void ComentarProducto(String comentario, Producto p) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Metodo que le permite al usuario agregar un producto a sus favoritos
+	 */
 	@Override
 	public void agregarFavorito(Producto p) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Metodo que le permite al usuario eliminar un producto de su lista de favoritos
+	 */
 	@Override
 	public void eliminarFavorito(Producto p) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * le permite al usuario agregar el producto al carrito 
+	 * PREGUNTAR AL PROFESOR COMO REALIZARLO 
+	 */
 	@Override
 	public void añadirProductoCarrito(Producto p) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Metodo que le permite al usuario comprar un producto
+	 */
 	@Override
 	public void comprarProducto(Producto p) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Metodo que le permite al usuario calificar un producto de 1-5 extrellas
+	 * PREGUNTAR AL USUARIO COMO VALIDAR ESTA PUNTUACION
+	 */
 	@Override
 	public void calificarProducto(Producto p, int calificacion) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Metodo que le permite al usuario listar los productos por criterios especificos 
+	 * PREGUNTAR AL PROFESOR COMO REALIZARLO SOBRE LOS CRITERIOS EN LAS CONSULTAS
+	 */
 	@Override
 	public List<Producto> listarProductosPorCriterios(String criterios) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
+	/**
+	 * Metodo que le permite al usuario listar las compras QUE AH REALIZADO
+	 */
 	@Override
 	public List<Compra> listarCompras() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Metodo que le permite al usuario LISTAR LOS PRODUCTO QUE HAYA REGISTRADO
+	 */
 	@Override
 	public List<Producto> listarSusProductos() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Metodo que le permite al usaurio eliminar un producto que haya registrado previamente 
+	 * PREGUNTAR AL PROFESOR COMO VALIDAR QUE EL PRODUCTO PERTENECE AL USUARIO
+	 */
 	@Override
 	public void eliminarProducto(Producto p) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * ELimina varios productos de los que el usuario tenga registrados
+	 */
 	@Override
 	public void eliminarListaProducto(List<Producto> productos) {
 		// TODO Auto-generated method stub
