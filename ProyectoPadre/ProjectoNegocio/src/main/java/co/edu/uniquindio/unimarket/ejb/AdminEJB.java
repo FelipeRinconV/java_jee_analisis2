@@ -1,19 +1,26 @@
 package co.edu.uniquindio.unimarket.ejb;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import co.edu.uniquindio.grid.entidades.Administrador;
+import co.edu.uniquindio.grid.entidades.Calificacion;
 import co.edu.uniquindio.grid.entidades.Comentario;
+import co.edu.uniquindio.grid.entidades.Compra;
+import co.edu.uniquindio.grid.entidades.Favorito;
 import co.edu.uniquindio.grid.entidades.Persona;
 
 import co.edu.uniquindio.grid.entidades.Producto;
+import co.edu.uniquindio.grid.entidades.Rol;
 import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.excepciones.*;
 
@@ -39,22 +46,25 @@ public class AdminEJB implements adminEJBRemote {
 	 * Metodo que eprmite autenticar un usuario
 	 */
 	@Override
-	public Persona autenticarUsuario(String email, String contraseña) {
+	public Persona autenticarUsuario(String email, String contraseña) throws NoExisteElementosException {
 
-		TypedQuery<Persona> q = entytiManager.createNamedQuery(Persona.BUSCAR_PERSONA, Persona.class);
+		TypedQuery<Persona> q = entytiManager.createNamedQuery(Persona.BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA,
+				Persona.class);
 
 		q.setParameter("email", email);
 
 		q.setParameter("contra", contraseña);
 
-		Persona persona = q.getSingleResult();
+		List<Persona> lista = q.getResultList();
 
-		if (persona == null) {
-			return null;
-		} else {
+		if (lista.isEmpty()) {
 
-			return persona;
+			throw new NoExisteElementosException("No hay administradores registrados con estas credenciales");
+
 		}
+
+		Persona persona = lista.get(0);
+		return persona;
 
 	}
 

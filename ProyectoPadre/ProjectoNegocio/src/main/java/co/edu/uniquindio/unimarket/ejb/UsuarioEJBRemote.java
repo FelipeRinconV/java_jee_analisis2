@@ -6,17 +6,18 @@ import javax.ejb.Remote;
 
 import co.edu.uniquindio.grid.entidades.*;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
+import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 
 @Remote
 public interface UsuarioEJBRemote {
 
 	void registrarProducto(Producto p) throws ElementoRepetidoException;
 
-	List<Producto> listarProductosPorCategoria(String categoria);
+	List<Producto> listarProductosPorCategoria(String categoria) throws NoExisteElementosException;
 
-	void ComentarProducto(String comentario, Producto p);
+	void ComentarProducto(String comentario, Producto producto,Usuario usuario) throws ElementoRepetidoException;
 
-	void agregarFavorito(Producto p);
+	void agregarFavorito(Producto p,Usuario us);
 
 	void eliminarFavorito(Producto p);
 

@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "Personas")
 @NamedQueries({ @NamedQuery(name = Persona.LISTAR_PERSONAS, query = "select p from Persona p"),
 		@NamedQuery(name = Persona.BUSCAR_POR_EMAIL, query = "select p from Persona p where p.email=:email"),
-		@NamedQuery(name = Persona.BUSCAR_PERSONA, query = "SELECT u  FROM  Usuario u WHERE u.email=:email AND u.contraseña=:contra ")
+		@NamedQuery(name = Persona.BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA, query = "SELECT u  FROM  Persona u WHERE u.email=:email AND u.contraseña=:contra ")
 
 })
 public class Persona implements Serializable {
@@ -27,7 +27,8 @@ public class Persona implements Serializable {
 	@Id
 	private String cedula;
 
-	public static final String BUSCAR_PERSONA = "buscar_usuario";
+	//Query probado
+	public static final String BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA = "buscar_usuario";
 
 	public static final String LISTAR_PERSONAS = "listar_personas";
 
@@ -131,6 +132,12 @@ public class Persona implements Serializable {
 
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [cedula=" + cedula + ", nombreCompleto=" + nombreCompleto + ", email=" + email + ", contraseña="
+				+ contraseña + "]";
 	}
 
 }

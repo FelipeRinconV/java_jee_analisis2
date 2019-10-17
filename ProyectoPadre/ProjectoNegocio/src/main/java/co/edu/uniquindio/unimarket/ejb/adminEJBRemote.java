@@ -10,7 +10,9 @@ import co.edu.uniquindio.unimarket.excepciones.*;
 @Remote
 public interface adminEJBRemote {
 
-	Persona autenticarUsuario(String email, String contraseña);
+	final String JNDI = "java:global/ProjectoEAR/ProjectoNegocio/AdminEJB!co.edu.uniquindio.unimarket.ejb.adminEJBRemote";
+
+	Persona autenticarUsuario(String email, String contraseña) throws NoExisteElementosException;
 
 	List<Producto> listarProductosDisponibles();
 
@@ -21,7 +23,7 @@ public interface adminEJBRemote {
 	Usuario registrarUsuario(Usuario cl) throws ElementoRepetidoException;
 
 	Producto editarProducto(Producto p);
-	
+
 	List<Usuario> listarUsuarios() throws NoExisteElementosException;
 
 	Producto buscarProducto(int id) throws NoExisteElementosException;

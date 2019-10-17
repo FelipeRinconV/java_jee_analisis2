@@ -6,10 +6,17 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
+import org.w3c.dom.ls.LSInput;
+
+import co.edu.uniquindio.grid.entidades.Comentario;
 import co.edu.uniquindio.grid.entidades.Compra;
+import co.edu.uniquindio.grid.entidades.Favorito;
 import co.edu.uniquindio.grid.entidades.Producto;
+import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
+import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 
 /**
  * Session Bean implementation class UsuarioEJB
@@ -29,9 +36,8 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	}
 
 	/**
-	 * Metodo que le permite a la persona registrar un producto
-	 * preguntar como hace para guardar la relacion con persona
-	 * ya que el producto necesita una persona
+	 * Metodo que le permite a la persona registrar un producto preguntar como hace
+	 * para guardar la relacion con persona ya que el producto necesita una persona
 	 */
 	@Override
 	public void registrarProducto(Producto p) throws ElementoRepetidoException {
@@ -48,13 +54,25 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	}
 
 	/**
-	 *Metodo que le permite al usuario listar los productos EN GENERAL por una categoria en especifico
-	 *@return LISTA de PRODUCTOS
+	 * Metodo que le permite al usuario listar los productos EN GENERAL por una
+	 * categoria en especifico
+	 * 
+	 * @return LISTA de PRODUCTOS
 	 */
 	@Override
-	public List<Producto> listarProductosPorCategoria(String categoria) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Producto> listarProductosPorCategoria(String categoria) throws NoExisteElementosException {
+
+		TypedQuery<Producto> query = entytiManager.createNamedQuery(Producto.CANTIDAD_PRODUCTOS_POR_TIPO,
+				Producto.class);
+
+		List<Producto> listaProductos = query.getResultList();
+
+		if (listaProductos.isEmpty()) {
+
+			throw new NoExisteElementosException("No hay productos en la categoria seleccionada");
+		}
+
+		return listaProductos;
 	}
 
 	/**
@@ -62,8 +80,30 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	 * PREGUNTAR COMO REALIZARLO
 	 */
 	@Override
-	public void ComentarProducto(String comentario, Producto p) {
+	public void ComentarProducto(String comentario, Producto producto, Usuario usuario)
+			throws ElementoRepetidoException {
 		// TODO Auto-generated method stub
+
+		TypedQuery<Comentario> query = entytiManager
+				.createNamedQuery(Comentario.BUSCAR_COMENTARIO_POR_USUARIO_Y_PRODUCTO, Comentario.class);
+
+		query.setParameter("usuario", usuario);
+
+		query.setParameter("producto", producto);
+
+		Comentario comentarioPrueba = query.getResultList().get(0);
+
+		if (comentarioPrueba != null) {
+
+			throw new ElementoRepetidoException("EL usuario ya realizo un comentario del producto seleccionado");
+
+		}
+
+		Comentario nuevoComentario = new Comentario();
+
+		nuevoComentario.setComentario(comentario);
+		nuevoComentario.setProducto(producto);
+		nuevoComentario.setProducto(producto);
 
 	}
 
@@ -71,13 +111,19 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	 * Metodo que le permite al usuario agregar un producto a sus favoritos
 	 */
 	@Override
-	public void agregarFavorito(Producto p) {
-		// TODO Auto-generated method stub
+	public void agregarFavorito(Producto p, Usuario us) {
+
+		Favorito favorito = new Favorito();
+
+		favorito.setProducto(p);
+
+		favorito.setUsuario(us);
 
 	}
 
 	/**
-	 * Metodo que le permite al usuario eliminar un producto de su lista de favoritos
+	 * Metodo que le permite al usuario eliminar un producto de su lista de
+	 * favoritos
 	 */
 	@Override
 	public void eliminarFavorito(Producto p) {
@@ -86,8 +132,8 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	}
 
 	/**
-	 * le permite al usuario agregar el producto al carrito 
-	 * PREGUNTAR AL PROFESOR COMO REALIZARLO 
+	 * le permite al usuario agregar el producto al carrito PREGUNTAR AL PROFESOR
+	 * COMO REALIZARLO
 	 */
 	@Override
 	public void añadirProductoCarrito(Producto p) {
@@ -115,8 +161,9 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	}
 
 	/**
-	 * Metodo que le permite al usuario listar los productos por criterios especificos 
-	 * PREGUNTAR AL PROFESOR COMO REALIZARLO SOBRE LOS CRITERIOS EN LAS CONSULTAS
+	 * Metodo que le permite al usuario listar los productos por criterios
+	 * especificos PREGUNTAR AL PROFESOR COMO REALIZARLO SOBRE LOS CRITERIOS EN LAS
+	 * CONSULTAS
 	 */
 	@Override
 	public List<Producto> listarProductosPorCriterios(String criterios) {
@@ -124,7 +171,6 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 		return null;
 	}
 
-	
 	/**
 	 * Metodo que le permite al usuario listar las compras QUE AH REALIZADO
 	 */
@@ -144,8 +190,9 @@ public class UsuarioEJB implements UsuarioEJBRemote {
 	}
 
 	/**
-	 * Metodo que le permite al usaurio eliminar un producto que haya registrado previamente 
-	 * PREGUNTAR AL PROFESOR COMO VALIDAR QUE EL PRODUCTO PERTENECE AL USUARIO
+	 * Metodo que le permite al usaurio eliminar un producto que haya registrado
+	 * previamente PREGUNTAR AL PROFESOR COMO VALIDAR QUE EL PRODUCTO PERTENECE AL
+	 * USUARIO
 	 */
 	@Override
 	public void eliminarProducto(Producto p) {

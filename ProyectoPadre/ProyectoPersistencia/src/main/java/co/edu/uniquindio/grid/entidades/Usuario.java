@@ -120,8 +120,7 @@ public class Usuario extends Persona implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [cedula=" + getCedula() + ", calificaciones=" + calificaciones + ", compras=" + compras
-				+ ", favoritos=" + favoritos + ", comentario=" + comentario + ", rol=" + rol + "]";
+		return "Usuario [cedula=" + getCedula() +"nomnbre: " +getNombreCompleto() + ", rol=" + rol + "]";
 	}
 
 }

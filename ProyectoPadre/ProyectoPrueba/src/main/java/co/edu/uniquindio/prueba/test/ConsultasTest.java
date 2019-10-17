@@ -68,11 +68,15 @@ public class ConsultasTest {
 	@UsingDataSet({ "persona.json" })
 	public void listarPersonas() {
 
-		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.LISTAR_PERSONAS, Persona.class);
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA, Persona.class);
 
+		query.setParameter("contra", "1234");
+		
+		query.setParameter("email", "usuario1@gmail.com");
+		
 		List<Persona> personas = query.getResultList();
 
-		Assert.assertEquals(3, personas.size());
+		Assert.assertEquals(1, personas.size());
 
 	}
 

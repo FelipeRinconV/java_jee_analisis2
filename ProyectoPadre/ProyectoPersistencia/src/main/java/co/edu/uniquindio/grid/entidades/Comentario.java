@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Comentarios")
 @NamedQueries({
-		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS_PRODUCTO, query = "select c from Comentario c where c.producto.idProducto=:id")
-
+		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS_PRODUCTO, query = "select c from Comentario c where c.producto.idProducto=:id"),
+        @NamedQuery(name =Comentario.BUSCAR_COMENTARIO_POR_USUARIO_Y_PRODUCTO ,query="select c from Comentario c where c.producto=:producto AND c.usuario=:usuario")
 })
 public class Comentario implements Serializable {
 
@@ -21,6 +21,8 @@ public class Comentario implements Serializable {
 	 */
 	public static final String LISTAR_COMENTARIOS_PRODUCTO = "listar_comentarios_de_un_producto";
 
+	public static final String BUSCAR_COMENTARIO_POR_USUARIO_Y_PRODUCTO="buscar_comentario_por_usuario_y_prodcuto";
+	
 	@ManyToOne
 	private Usuario usuario;
 
