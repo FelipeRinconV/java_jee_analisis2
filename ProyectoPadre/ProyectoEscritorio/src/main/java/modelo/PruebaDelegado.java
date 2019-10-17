@@ -12,6 +12,8 @@ import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.ejb.adminEJBRemote;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
 import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class PruebaDelegado implements adminEJBRemote {
 
@@ -90,5 +92,16 @@ public class PruebaDelegado implements adminEJBRemote {
 	public String toString() {
 		return adminEJB.toString();
 	}
+	
+	
+	public ObservableList<UsuarioObservable> listarEmpleadosObservables() throws NoExisteElementosException {
+		List<Usuario> usuarios = listarUsuarios();
+		ObservableList<UsuarioObservable> empleadosObservables = FXCollections.observableArrayList();
+		for (Persona persona : usuarios) {
+			empleadosObservables.add(new UsuarioObservable(persona));
+		}
+		return empleadosObservables;
+	}
+
 
 }
