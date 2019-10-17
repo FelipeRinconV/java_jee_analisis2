@@ -68,15 +68,31 @@ public class ConsultasTest {
 	@UsingDataSet({ "persona.json" })
 	public void listarPersonas() {
 
-		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA, Persona.class);
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA,
+				Persona.class);
 
 		query.setParameter("contra", "1234");
-		
+
 		query.setParameter("email", "usuario1@gmail.com");
-		
+
 		List<Persona> personas = query.getResultList();
 
 		Assert.assertEquals(1, personas.size());
+
+	}
+
+	/**
+	 * Prueba de listar todas las personsa que esten registradas en la base de datos
+	 */
+	@Test
+	@UsingDataSet({ "persona.json" })
+	public void contarAdministradores() {
+
+		TypedQuery<Long> query = entityManager.createNamedQuery(Administrador.CONTAR_ADMINISTRADORES, Long.class);
+
+		Long numeroadmin = query.getSingleResult();
+
+		Assert.assertEquals(new Double(numeroadmin), new Double(1));
 
 	}
 
@@ -338,7 +354,8 @@ public class ConsultasTest {
 	}
 
 	/**
-	 * prueba del query que da los detalles y las compras de una persona dada su cedula
+	 * prueba del query que da los detalles y las compras de una persona dada su
+	 * cedula
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
