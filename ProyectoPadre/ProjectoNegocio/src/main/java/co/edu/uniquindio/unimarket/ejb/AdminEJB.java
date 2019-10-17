@@ -107,16 +107,12 @@ public class AdminEJB implements adminEJBRemote {
 	 * 
 	 * @return lista de los usuarios registrados
 	 */
-	public List<Usuario> listarUsuarios() throws NoExisteElementosException {
+	public List<Usuario> listarUsuarios()  {
 
 		TypedQuery<Usuario> query = entytiManager.createNamedQuery(Usuario.LISTAR_USUARIOS, Usuario.class);
 
 		List<Usuario> listaUsuarios = query.getResultList();
 
-		if (listaUsuarios.isEmpty()) {
-
-			throw new NoExisteElementosException("No hay usuarios registrados");
-		}
 
 		return listaUsuarios;
 

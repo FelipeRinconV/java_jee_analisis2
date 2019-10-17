@@ -6,6 +6,7 @@ import com.sun.enterprise.module.bootstrap.Main;
 
 import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 import controlador.UsuarioController;
+import controlador.iniciarSesion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -49,10 +50,10 @@ public class ManejadorEscenarios {
 	 * recibe el escenario principal de la aplicacion
 	 * 
 	 * @param escenario inicial
-	 * @throws NoExisteElementosException 
+	 * @throws NoExisteElementosException
 	 */
 
-	public ManejadorEscenarios(Stage escenario) throws NoExisteElementosException {
+	public ManejadorEscenarios(Stage escenario) {
 
 		this.escenario = escenario;
 
@@ -65,7 +66,7 @@ public class ManejadorEscenarios {
 
 			// se carga la vista
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("./vista/inicio.fxml"));
+			loader.setLocation(getClass().getResource("/inicio.fxml"));
 
 			borderPanel = (BorderPane) loader.load();
 
@@ -75,7 +76,7 @@ public class ManejadorEscenarios {
 			escenario.show();
 
 			System.out.println("antes de cargar la scena");
-			
+
 			cargarEscenaListaUsuarios();
 
 		} catch (IOException e) {
@@ -86,18 +87,18 @@ public class ManejadorEscenarios {
 
 	/**
 	 * carga una escena en el centro del escenario
-	 * 
+	 * VENTANA QUE SE ESTA CARGANDO CUANDO SE INICIA EL LA APLICACION 
 	 * @throws NoExisteElementosException
 	 */
-	public void cargarEscenaListaUsuarios() throws NoExisteElementosException {
+	public void cargarEscenaListaUsuarios() {
 
 		try {
 
 			usuariosObservables = administradorDelegado.listarEmpleadosObservables();
 
 			FXMLLoader loader2 = new FXMLLoader();
-			//PONER LA RUTA DE LA VISTA
-			loader2.setLocation(Main.class.getResource("vista/ventanaIniciarSesion.fxml"));
+			// PONER LA RUTA DE LA VISTA
+			loader2.setLocation(getClass().getResource("/listarUsuarios.fxml"));
 			AnchorPane panelAncho = (AnchorPane) loader2.load();
 			borderPanel.setCenter(panelAncho);
 

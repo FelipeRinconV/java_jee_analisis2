@@ -95,41 +95,11 @@ public class adminEjbTest {
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json" })
-	public void listarUsuariosTest() throws NoExisteElementosException {
+	public void listarUsuariosTest() {
 
 		List<Usuario> usuarios;
-		try {
-			usuarios = adminEJB.listarUsuarios();
-			Assert.assertEquals(2, usuarios.size());
-		} catch (NoExisteElementosException e) {
-			// TODO Auto-generated catch block
-
-			throw new NoExisteElementosException(e.getMessage());
-		}
-
-	}
-
-	/**
-	 * Metodo que permite probar la excepcion de buscquedas que arrojan resultados
-	 * vacios ene este caso no se carga el json esperando esperando que nos de la
-	 * excepcion
-	 * 
-	 * @throws NoExisteElementosException
-	 */
-	@Test(expected = NoExisteElementosException.class)
-	@Transactional(value = TransactionMode.ROLLBACK)
-	public void listarUsuariosTestException() throws NoExisteElementosException {
-
-		List<Usuario> usuarios;
-		try {
-
-			usuarios = adminEJB.listarUsuarios();
-			Assert.assertEquals(2, usuarios.size());
-		} catch (NoExisteElementosException e) {
-			// TODO Auto-generated catch block
-
-			throw new NoExisteElementosException(e.getMessage());
-		}
+		usuarios = adminEJB.listarUsuarios();
+		Assert.assertEquals(2, usuarios.size());
 
 	}
 

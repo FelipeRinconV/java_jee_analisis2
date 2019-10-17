@@ -61,7 +61,7 @@ public class PruebaDelegado implements adminEJBRemote {
 		return adminEJB.hashCode();
 	}
 
-	public List<Usuario> listarUsuarios() throws NoExisteElementosException {
+	public List<Usuario> listarUsuarios() {
 		return adminEJB.listarUsuarios();
 	}
 
@@ -94,7 +94,7 @@ public class PruebaDelegado implements adminEJBRemote {
 	}
 	
 	
-	public ObservableList<UsuarioObservable> listarEmpleadosObservables() throws NoExisteElementosException {
+	public ObservableList<UsuarioObservable> listarEmpleadosObservables()  {
 		List<Usuario> usuarios = listarUsuarios();
 		ObservableList<UsuarioObservable> empleadosObservables = FXCollections.observableArrayList();
 		for (Persona persona : usuarios) {

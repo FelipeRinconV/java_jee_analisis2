@@ -24,7 +24,7 @@ public interface adminEJBRemote {
 
 	Producto editarProducto(Producto p);
 
-	List<Usuario> listarUsuarios() throws NoExisteElementosException;
+	List<Usuario> listarUsuarios();
 
 	Producto buscarProducto(int id) throws NoExisteElementosException;
 }
