@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
+import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -24,7 +25,7 @@ import co.edu.uniquindio.grid.entidades.Usuario;
 /**
  * Session Bean implementation class SetupEJB
  */
-@Stateless
+@Singleton
 @LocalBean
 @Startup
 public class SetupEJB {
@@ -41,6 +42,7 @@ public class SetupEJB {
 
 		if (numeroAdmins == 0) {
 
+			System.out.println("Entra al setup");
 			// Agregamos un nuevo administrador por defecto
 
 			Administrador admin = new Administrador();
@@ -125,6 +127,9 @@ public class SetupEJB {
 			entityManager.persist(producto2);
 			
 			
+		}else {
+			
+			System.out.println("NO ENTRA AL SETUP");
 		}
 
 	}

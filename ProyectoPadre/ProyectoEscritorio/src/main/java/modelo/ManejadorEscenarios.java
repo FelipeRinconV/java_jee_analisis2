@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.sun.enterprise.module.bootstrap.Main;
 
+import co.edu.uniquindio.grid.entidades.Persona;
 import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 import controlador.UsuarioController;
 import controlador.iniciarSesion;
@@ -77,7 +78,7 @@ public class ManejadorEscenarios {
 
 			System.out.println("antes de cargar la scena");
 
-			cargarEscenaListaUsuarios();
+			cargarSceneaInicial();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -86,23 +87,21 @@ public class ManejadorEscenarios {
 	}
 
 	/**
-	 * carga una escena en el centro del escenario
-	 * VENTANA QUE SE ESTA CARGANDO CUANDO SE INICIA EL LA APLICACION 
-	 * @throws NoExisteElementosException
+	 * carga una escena en el centro del escenario VENTANA QUE SE ESTA CARGANDO
+	 * CUANDO SE INICIA EL LA APLICACION
+	 * 
 	 */
-	public void cargarEscenaListaUsuarios() {
+	public void cargarSceneaInicial() {
 
 		try {
 
-			usuariosObservables = administradorDelegado.listarEmpleadosObservables();
-
 			FXMLLoader loader2 = new FXMLLoader();
 			// PONER LA RUTA DE LA VISTA
-			loader2.setLocation(getClass().getResource("/listarUsuarios.fxml"));
+			loader2.setLocation(getClass().getResource("/ventanaIniciarSesion.fxml"));
 			AnchorPane panelAncho = (AnchorPane) loader2.load();
 			borderPanel.setCenter(panelAncho);
 
-			UsuarioController controlador = loader2.getController();
+			iniciarSesion controlador = loader2.getController();
 			controlador.setEscenarioInicial(this);
 
 		} catch (IOException e) {
@@ -141,6 +140,19 @@ public class ManejadorEscenarios {
 
 	public void setAdministradorDelegado(PruebaDelegado administradorDelegado) {
 		this.administradorDelegado = administradorDelegado;
+	}
+
+	public Persona autenticarUsuario(String correo, String clave) {
+
+		try {
+			Persona person = administradorDelegado.autenticarUsuario(correo, clave);
+			return person;
+		} catch (NoExisteElementosException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 }
