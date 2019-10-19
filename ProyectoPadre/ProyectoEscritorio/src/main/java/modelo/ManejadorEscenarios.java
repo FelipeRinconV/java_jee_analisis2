@@ -194,15 +194,10 @@ public class ManejadorEscenarios {
 
 	public Persona autenticarUsuario(String correo, String clave) {
 
-		try {
+	        //verificamos si el usuario se encuentra en la base de datos
 			Persona person = administradorDelegado.autenticarUsuario(correo, clave);
 			return person;
-		} catch (NoExisteElementosException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return null;
+		
 	}
 	
 	

@@ -49,8 +49,8 @@ public class PruebaDelegado implements adminEJBRemote {
 
 	}
 
-	public Persona autenticarUsuario(String email, String contraseña) throws NoExisteElementosException {
-		return adminEJB.autenticarUsuario(email, contraseña);
+	public Persona autenticarUsuario(String email, String contrasenia)  {
+		return adminEJB.autenticarUsuario(email, contrasenia);
 	}
 
 	public Usuario registrarUsuario(Usuario cl) throws ElementoRepetidoException {

@@ -19,7 +19,7 @@ public class UsuarioObservable {
 
 	private StringProperty direccion;
 
-
+    
 	private Rol rol;
 
 	public UsuarioObservable(Usuario usuario) {

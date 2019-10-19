@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "Personas")
 @NamedQueries({ @NamedQuery(name = Persona.LISTAR_PERSONAS, query = "select p from Persona p"),
 		@NamedQuery(name = Persona.BUSCAR_POR_EMAIL, query = "select p from Persona p where p.email=:email"),
-		@NamedQuery(name = Persona.BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA, query = "SELECT u  FROM  Persona u WHERE u.email=:email AND u.contraseña=:contra ")
+		@NamedQuery(name = Persona.BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA, query = "SELECT u  FROM  Persona u WHERE u.email=:email AND u.contrasenia=:contra")
 
 })
 public class Persona implements Serializable {
@@ -27,7 +27,7 @@ public class Persona implements Serializable {
 	@Id
 	private String cedula;
 
-	//Query probado
+	// Query probado
 	public static final String BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA = "buscar_usuario";
 
 	public static final String LISTAR_PERSONAS = "listar_personas";
@@ -49,8 +49,8 @@ public class Persona implements Serializable {
 	@Column(length = 200, nullable = false)
 	private String direccion;
 
-	@Column(length = 250, nullable = false)
-	private String contraseña;
+	@Column(length = 250, nullable = false,name ="CONTRASENIA")
+	private String contrasenia;
 
 	private static final long serialVersionUID = 123;
 
@@ -127,17 +127,17 @@ public class Persona implements Serializable {
 	}
 
 	public String getContraseña() {
-		return contraseña;
+		return contrasenia;
 	}
 
 	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+		this.contrasenia = contraseña;
 	}
 
 	@Override
 	public String toString() {
 		return "Persona [cedula=" + cedula + ", nombreCompleto=" + nombreCompleto + ", email=" + email + ", contraseña="
-				+ contraseña + "]";
+				+ contrasenia + "]";
 	}
 
 }

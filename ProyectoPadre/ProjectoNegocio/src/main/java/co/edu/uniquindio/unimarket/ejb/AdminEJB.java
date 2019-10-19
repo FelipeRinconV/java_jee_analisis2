@@ -36,21 +36,19 @@ public class AdminEJB implements adminEJBRemote {
 	 * Metodo que eprmite autenticar un usuario
 	 */
 	@Override
-	public Persona autenticarUsuario(String email, String contraseña) {
+	public Persona autenticarUsuario(String email, String contrasenia) {
 
 		TypedQuery<Persona> q = entytiManager.createNamedQuery(Persona.BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA,
 				Persona.class);
 
 		q.setParameter("email", email);
 
-		q.setParameter("contra", contraseña);
+		q.setParameter("contra", contrasenia);
 
 		List<Persona> lista = q.getResultList();
 
 		if (lista.isEmpty()) {
-
 			return null;
-
 		}
 
 		Persona persona = lista.get(0);

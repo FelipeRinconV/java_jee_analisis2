@@ -12,7 +12,7 @@ public interface adminEJBRemote {
 
 	final String JNDI = "java:global/ProjectoEAR/ProjectoNegocio/AdminEJB!co.edu.uniquindio.unimarket.ejb.adminEJBRemote";
 
-	Persona autenticarUsuario(String email, String contraseña) throws NoExisteElementosException;
+	Persona autenticarUsuario(String email, String contrasenia) ;
 
 	List<Producto> listarProductosDisponibles();
 

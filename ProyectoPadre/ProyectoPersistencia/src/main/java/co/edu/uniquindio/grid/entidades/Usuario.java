@@ -10,8 +10,6 @@ import javax.persistence.*;
  *
  */
 
-@Entity
-@Table(name = "Usuarios")
 @NamedQueries({
 
 		@NamedQuery(name = Usuario.COMPRAS_USUARIO, query = "select u,p from Usuario u inner join u.productos p"),
@@ -20,6 +18,8 @@ import javax.persistence.*;
         @NamedQuery(name = Usuario.LISTAR_USUARIOS,query = "select u from Usuario u")
 })
 
+@Entity
+@Table(name = "Usuarios")
 public class Usuario extends Persona implements Serializable {
 
 	/**
