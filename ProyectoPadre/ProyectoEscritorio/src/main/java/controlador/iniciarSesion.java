@@ -52,12 +52,13 @@ public class iniciarSesion implements Initializable {
 
 			if (admin != null) {
 
-				/*
-				 * Abrir ventana principal
-				 */
-				
+				manejadorPrincipal.cargarEscenarioOpciones();
+
 				System.out.println("ENTRA A LA VENTANA");
 
+			} else {
+
+				System.out.println("Credenciales invalidas");
 			}
 
 		}

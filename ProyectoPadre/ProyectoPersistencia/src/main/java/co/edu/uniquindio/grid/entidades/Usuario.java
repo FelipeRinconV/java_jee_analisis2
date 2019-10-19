@@ -23,6 +23,11 @@ import javax.persistence.*;
 public class Usuario extends Persona implements Serializable {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 12344;
+
+	/**
 	 * Devuelve  el numero de registro de un usuario
 	 */
 	public static final String USUARIO_NUMERO_REGISTROS = "numero_de_registro_por_usuario";
@@ -67,7 +72,6 @@ public class Usuario extends Persona implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
 
-	private static final long serialVersionUID = 1L;
 
 	public Usuario() {
 		super();

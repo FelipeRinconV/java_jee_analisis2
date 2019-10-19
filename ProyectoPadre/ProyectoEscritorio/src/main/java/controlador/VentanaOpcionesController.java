@@ -4,6 +4,7 @@ package controlador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 import modelo.ManejadorEscenarios;
 
 public class VentanaOpcionesController {
@@ -17,8 +18,12 @@ public class VentanaOpcionesController {
     @FXML
     private Button btnAgregarUsuario;
 
+    /**
+     * REpresenta el escenario donde se agrega la vista
+     */
+    private Stage escenarioOpciones;
     
-    private ManejadorEscenarios escenarioInicial;
+    private ManejadorEscenarios manejador;
     
     
     @FXML
@@ -37,11 +42,24 @@ public class VentanaOpcionesController {
     }
 
 	public ManejadorEscenarios getEscenarioInicial() {
-		return escenarioInicial;
+		return manejador;
 	}
 
-	public void setEscenarioInicial(ManejadorEscenarios escenarioInicial) {
-		this.escenarioInicial = escenarioInicial;
+
+	public Stage getEscenarioOpciones() {
+		return escenarioOpciones;
+	}
+
+	public void setEscenarioOpciones(Stage escenarioOpciones) {
+		this.escenarioOpciones = escenarioOpciones;
+	}
+
+	public ManejadorEscenarios getManejador() {
+		return manejador;
+	}
+
+	public void setManejador(ManejadorEscenarios manejador) {
+		this.manejador = manejador;
 	}
     
     

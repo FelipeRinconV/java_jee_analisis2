@@ -40,6 +40,7 @@ public class SetupEJB {
 
 		Long numeroAdmins = query.getSingleResult();
 
+		System.out.println(numeroAdmins);
 		if (numeroAdmins == 0) {
 
 			System.out.println("Entra al setup");

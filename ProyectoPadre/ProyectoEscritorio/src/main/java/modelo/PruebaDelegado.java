@@ -94,11 +94,15 @@ public class PruebaDelegado implements adminEJBRemote {
 	}
 	
 	
-	public ObservableList<UsuarioObservable> listarEmpleadosObservables()  {
+	/**
+	 * Metodo para devolver la lista de usuarios en una lista de usuarios observables
+	 * @return
+	 */
+	public ObservableList<UsuarioObservable> listarUsuariosObservables()  {
 		List<Usuario> usuarios = listarUsuarios();
 		ObservableList<UsuarioObservable> empleadosObservables = FXCollections.observableArrayList();
-		for (Persona persona : usuarios) {
-			empleadosObservables.add(new UsuarioObservable(persona));
+		for (Usuario user : usuarios) {
+			empleadosObservables.add(new UsuarioObservable(user));
 		}
 		return empleadosObservables;
 	}

@@ -94,12 +94,17 @@ public class adminEjbTest {
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
 	public void listarUsuariosTest() {
 
 		List<Usuario> usuarios;
 		usuarios = adminEJB.listarUsuarios();
 		Assert.assertEquals(2, usuarios.size());
+		
+		
+		for(Usuario user:usuarios) {
+			
+			System.out.println(user.toString());
+		}
 
 	}
 

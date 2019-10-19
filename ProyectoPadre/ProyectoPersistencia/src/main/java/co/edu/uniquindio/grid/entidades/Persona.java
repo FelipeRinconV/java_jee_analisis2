@@ -52,7 +52,7 @@ public class Persona implements Serializable {
 	@Column(length = 250, nullable = false)
 	private String contraseña;
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 123;
 
 	// Contructor necesario para la entidad
 	public Persona() {

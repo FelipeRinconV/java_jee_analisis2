@@ -825,7 +825,6 @@ public class ModeloTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
 	public void buscarUsuario() {
 		Usuario empleado = entityManager.find(Usuario.class, "100");
 		Assert.assertEquals("usuario1@gmail.com", empleado.getEmail());
