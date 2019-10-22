@@ -9,6 +9,7 @@ import co.edu.uniquindio.unimarket.excepciones.*;
 
 @Remote
 public interface adminEJBRemote {
+	
 
 	final String JNDI = "java:global/ProjectoEAR/ProjectoNegocio/AdminEJB!co.edu.uniquindio.unimarket.ejb.adminEJBRemote";
 

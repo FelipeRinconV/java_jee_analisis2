@@ -1,52 +1,41 @@
 package controlador;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 
-import co.edu.uniquindio.grid.entidades.Administrador;
 import co.edu.uniquindio.grid.entidades.Persona;
-import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import modelo.ManejadorEscenarios;
-import modelo.PruebaDelegado;
+import UtilidadesAlert.Utilidades;
 
-public class iniciarSesion implements Initializable {
+public class iniciarSesion {
 
 	private ManejadorEscenarios manejadorPrincipal;
 
-	String clave;
-	String correo;
+	private String clave;
+	private String correo;
 
 	@FXML
-	private TextField email;
+	private JFXButton btnIniciar;
 
 	@FXML
-	private Button btnIngresar;
+	private JFXTextField txtContrasenia;
 
 	@FXML
-	private TextField contrasenia;
+	private JFXTextField txtCorreo;
 
 	@FXML
-	private Button btnREcuperarContraseña;
+	private JFXButton btnRecuperar;
 
 	@FXML
-	void recuperarContrasenia(ActionEvent event) {
+	void iniciarSesion(ActionEvent event) {
+		clave = txtContrasenia.getText();
 
-	}
+		correo = txtCorreo.getText();
 
-	@FXML
-	void validarDatos(ActionEvent event) {
-
-		String clave = contrasenia.getText();
-
-		String correo = email.getText();
-
-		if (clave != null && correo != null) {
+		
+		if (clave.length() > 3&& correo.length()>5) {
 
 			Persona admin = manejadorPrincipal.autenticarUsuario(correo, clave);
 
@@ -54,26 +43,27 @@ public class iniciarSesion implements Initializable {
 
 				manejadorPrincipal.cargarEscenarioOpciones();
 
-				System.out.println("ENTRA A LA VENTANA");
-
 			} else {
 
-				System.out.println("Credenciales invalidas");
+				Utilidades.mostrarMensaje("Credenciales invalidades","No se ha encontrado un administrados con las credenciales");
+				
 			}
 
+		}else {
+			
+			Utilidades.mostrarMensaje("Datos  invalidades","Por favor ingrese datos validos");
+
+			
+			
+			
 		}
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
-//		String clave = txtClave.getText();
-//
-//		String correo = email.getText();
+	@FXML
+	void recuperarContrasenia(ActionEvent event) {
 
 	}
-
+	
 	public ManejadorEscenarios getManejadorPrincipal() {
 		return manejadorPrincipal;
 	}
@@ -81,5 +71,13 @@ public class iniciarSesion implements Initializable {
 	public void setEscenarioInicial(ManejadorEscenarios manejadorPrincipal) {
 		this.manejadorPrincipal = manejadorPrincipal;
 	}
+    @FXML
+    void initialize() {
+        assert btnIniciar != null : "fx:id=\"btnIniciar\" was not injected: check your FXML file 'ventanaIniciarSesion.fxml'.";
+        assert txtContrasenia != null : "fx:id=\"txtContrasenia\" was not injected: check your FXML file 'ventanaIniciarSesion.fxml'.";
+        assert txtCorreo != null : "fx:id=\"txtCorreo\" was not injected: check your FXML file 'ventanaIniciarSesion.fxml'.";
+        assert btnRecuperar != null : "fx:id=\"btnRecuperar\" was not injected: check your FXML file 'ventanaIniciarSesion.fxml'.";
+
+    }
 
 }

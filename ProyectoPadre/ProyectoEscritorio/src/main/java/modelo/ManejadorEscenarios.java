@@ -79,7 +79,6 @@ public class ManejadorEscenarios {
 			escenario.setResizable(false);
 			escenario.show();
 
-			System.out.println("antes de cargar la scena");
 
 			cargarSceneaInicial();
 

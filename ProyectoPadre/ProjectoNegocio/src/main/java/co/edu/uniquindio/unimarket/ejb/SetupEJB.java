@@ -40,10 +40,8 @@ public class SetupEJB {
 
 		Long numeroAdmins = query.getSingleResult();
 
-		System.out.println(numeroAdmins);
 		if (numeroAdmins == 0) {
 
-			System.out.println("Entra al setup");
 			// Agregamos un nuevo administrador por defecto
 
 			Administrador admin = new Administrador();
@@ -96,41 +94,35 @@ public class SetupEJB {
 			usuario2.setCedula("101213");
 			usuario2.setRol(Rol.COMPRADOR);
 			usuario2.setEmail("andrea@gmail.com");
-			
+
 			entityManager.persist(usuario2);
-			
-			
-			//Registro de productos para pruebas
-			
+
+			// Registro de productos para pruebas
 
 			Producto producto = new Producto();
 			producto.setNombre("Mac air");
-			List<String> imagenes=new ArrayList<String>();
+			List<String> imagenes = new ArrayList<String>();
 			producto.setUrlImagenes(imagenes);
 			producto.setDisponibilidad(true);
 			producto.setTipo(Categoria.DEPORTE);
 			producto.setUsuario(usuario1);
 			producto.setPrecio(33);
 			producto.setDescripcion("mejor mac del mercado");
- 
+
 			entityManager.persist(producto);
 
 			Producto producto2 = new Producto();
 			producto2.setNombre("Diamante 1");
-			List<String> imagenes2=new ArrayList<String>();
+			List<String> imagenes2 = new ArrayList<String>();
 			producto2.setUrlImagenes(imagenes2);
 			producto2.setDisponibilidad(true);
 			producto2.setTipo(Categoria.JOYAS);
 			producto2.setUsuario(usuario1);
 			producto2.setPrecio(33);
 			producto2.setDescripcion("Piedra unica en el pais");
-			
+
 			entityManager.persist(producto2);
-			
-			
-		}else {
-			
-			System.out.println("NO ENTRA AL SETUP");
+
 		}
 
 	}
