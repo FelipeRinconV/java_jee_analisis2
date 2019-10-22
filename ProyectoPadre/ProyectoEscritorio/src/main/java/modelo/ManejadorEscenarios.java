@@ -7,6 +7,7 @@ import com.sun.enterprise.module.bootstrap.Main;
 import co.edu.uniquindio.grid.entidades.Persona;
 import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 import controlador.ListaUsuariosController;
+import controlador.OpcionesAdministradorController;
 import controlador.UsuarioController;
 import controlador.VentanaOpcionesController;
 import controlador.iniciarSesion;
@@ -30,12 +31,25 @@ public class ManejadorEscenarios {
 	 * Contenedor principal de la gui
 	 */
 	private Stage escenario;
+	
+	/**
+	 * Contenedor para la ventana principal del usuario
+	 */
+	
+	private Stage escenarioAdmin;
 
 	/**
 	 * Tipo de panel incial
 	 */
 
 	private BorderPane borderPanel;
+	
+	
+
+	/**
+	 * Tipo de panel de la ventana principal del administrador
+	 */
+	private BorderPane borderPanelAdmin;
 
 	/**
 	 * Para almacenar los usuarios sobservables
@@ -79,7 +93,6 @@ public class ManejadorEscenarios {
 			escenario.setResizable(false);
 			escenario.show();
 
-
 			cargarSceneaInicial();
 
 		} catch (IOException e) {
@@ -115,42 +128,69 @@ public class ManejadorEscenarios {
 		// TODO Auto-generated method stub
 
 		try {
-
-			System.out.println("se van a cargar los usuarios");
-			// Sacamos los usuarios observables
-			usuariosObservables = administradorDelegado.listarUsuariosObservables();
-
+			
 			escenario.close();
-			// Cargamos la ventana
+			
+		    escenarioAdmin = new Stage();
+			// se inicializa el escenario
+		    escenarioAdmin.setTitle("Unimarket/ventana opciones");
+
+			// se carga la vista
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/prueba.fxml"));
-			BorderPane ventana;
-			ventana = (BorderPane) loader.load();
+			borderPanelAdmin = (BorderPane) loader.load();
 
-			// Cargamos la escena central
-			FXMLLoader loader2 = new FXMLLoader();
-			loader2.setLocation(getClass().getResource("/listarUsuarios.fxml"));
-			AnchorPane escenaCentral = (AnchorPane) loader2.load();
-			ventana.setCenter(escenaCentral);
+			borderPanel.setMinSize(735, 445);
+			// se carga la escena
+			Scene scene = new Scene(borderPanelAdmin);
+			escenarioAdmin.setScene(scene);
+			escenarioAdmin.show();
 			
-			// se crea el escenario
-			Stage escenarioOpciones = new Stage();
-			escenarioOpciones.setTitle("Opciones");
-			escenarioOpciones.setFullScreen(true);
+			//Se carga el controlador
+			OpcionesAdministradorController controladorAdministrador =loader.getController();
+			controladorAdministrador.setManejador(this);
 
-			// creamos la scena
-			Scene escena = new Scene(ventana);
-			escenarioOpciones.setScene(escena);
+			//cargarSceneaInicial();
 
-			// se carga el controlador
-			ListaUsuariosController listarUsuariosController = loader2.getController();
+			
 
-			// se le pasa el escenario y los datos de los usuariosObservables
-			listarUsuariosController.setEscenarioListaUsuarios(escenarioOpciones);
-			listarUsuariosController.setManejador(this);
-
-			// se muestra el escenario
-			escenarioOpciones.showAndWait();
+//			// Sacamos los usuarios observables
+//			usuariosObservables = administradorDelegado.listarUsuariosObservables();
+//
+//			escenario.close();
+//			// Cargamos la ventana
+//			FXMLLoader loader = new FXMLLoader();
+//			loader.setLocation(getClass().getResource("/prueba.fxml"));
+//			borderPanelAdmin = (BorderPane) loader.load();
+//
+//			// Cargamos la escena central por defecto
+//			FXMLLoader loader2 = new FXMLLoader();
+//			loader2.setLocation(getClass().getResource("/listarUsuarios.fxml"));
+//			AnchorPane escenaCentral = (AnchorPane) loader2.load();
+//			borderPanelAdmin.setCenter(escenaCentral);
+//
+//			// se crea el escenario
+//			Stage escenarioOpciones = new Stage();
+//			escenarioOpciones.setTitle("Opciones");
+//			escenarioOpciones.setFullScreen(true);
+//
+//			// creamos la scena
+//			Scene escena = new Scene(borderPanelAdmin);
+//			escenarioOpciones.setScene(escena);
+//
+//			// se carga el controlador
+//			ListaUsuariosController listarUsuariosController = loader2.getController();
+//
+//			OpcionesAdministradorController controladorAdministrador =loader.getController();
+//			
+//			controladorAdministrador.setManejador(this);
+//			
+//			// se le pasa el escenario y los datos de los usuariosObservables
+//			listarUsuariosController.setEscenarioListaUsuarios(escenarioOpciones);
+//			listarUsuariosController.setManejador(this);
+//
+//			// se muestra el escenario
+//			escenarioOpciones.showAndWait();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -193,12 +233,18 @@ public class ManejadorEscenarios {
 
 	public Persona autenticarUsuario(String correo, String clave) {
 
-	        //verificamos si el usuario se encuentra en la base de datos
-			Persona person = administradorDelegado.autenticarUsuario(correo, clave);
-			return person;
-		
+		// verificamos si el usuario se encuentra en la base de datos
+		Persona person = administradorDelegado.autenticarUsuario(correo, clave);
+		return person;
+
 	}
-	
-	
+
+	public BorderPane getBorderPanelAdmin() {
+		return borderPanelAdmin;
+	}
+
+	public void setBorderPanelAdmin(BorderPane borderPanelAdmin) {
+		this.borderPanelAdmin = borderPanelAdmin;
+	}
 
 }
