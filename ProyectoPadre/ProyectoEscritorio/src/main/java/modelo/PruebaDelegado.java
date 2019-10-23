@@ -124,4 +124,10 @@ public class PruebaDelegado implements adminEJBRemote {
 		return adminEJB.eliminarPersona(cedula);
 	}
 
+	@Override
+	public boolean validarCorreo(String correo) {
+		// TODO Auto-generated method stub
+		return adminEJB.validarCorreo(correo);
+	}
+
 }

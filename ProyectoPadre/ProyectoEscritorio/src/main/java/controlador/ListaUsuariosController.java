@@ -90,7 +90,7 @@ public class ListaUsuariosController {
 
 							if (manejador.eliminarUsuario(cedula) != null) {
 
-								manejador.actualizarUsuariosObservables();
+								manejador.eliminarDeListaObservable(data);
 
 								Utilidades.mostrarMensaje("Operacion", "Eliminacion exitosa");
 								tablaUsuarios.refresh();

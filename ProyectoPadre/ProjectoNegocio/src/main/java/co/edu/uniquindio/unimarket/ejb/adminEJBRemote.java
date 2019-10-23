@@ -33,4 +33,5 @@ public interface adminEJBRemote {
 
 	Producto buscarProducto(int id) throws NoExisteElementosException;
 
+	boolean validarCorreo(String correo);
 }

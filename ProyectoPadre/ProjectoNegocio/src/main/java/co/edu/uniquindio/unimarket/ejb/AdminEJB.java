@@ -2,6 +2,8 @@ package co.edu.uniquindio.unimarket.ejb;
 
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -231,6 +233,23 @@ public class AdminEJB implements adminEJBRemote {
 			throw new NoExisteElementosException("No existe una persona con la cedula indicada");
 		}
 
+	}
+
+	/**
+	 *Metodo que permite validar correos gmail
+	 */
+	@Override
+	public boolean validarCorreo(String correo) {
+	      
+        boolean valido = false;
+       
+        Pattern patronEmail = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)(\\.[A-Za-z]{2,})$");
+   
+        Matcher mEmail = patronEmail.matcher(correo.toLowerCase());
+        if (mEmail.matches()){
+           valido = true; 
+        }
+        return valido;
 	}
 
 }

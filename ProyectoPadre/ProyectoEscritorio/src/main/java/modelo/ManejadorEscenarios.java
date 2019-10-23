@@ -351,10 +351,24 @@ public class ManejadorEscenarios {
 
 	}
 
-	public void actualizarUsuariosObservables() {
+	/**
+	 * Metodo que remueve un usuario observable, se utiliza cuando es eliminado un usuario de la base de datos 
+	 * @param user
+	 */
+	public void eliminarDeListaObservable(UsuarioObservable user) {
 
-		usuariosObservables = administradorDelegado.listarUsuariosObservables();
+		usuariosObservables.remove(user);
 
+	}
+	
+	/**
+	 * Validacion de los correos
+	 * @param correo
+	 * @return
+	 */
+	public boolean validarCorreo(String correo) {
+		
+		return administradorDelegado.validarCorreo(correo);
 	}
 
 }

@@ -61,34 +61,49 @@ public class EdicionUsuarioController {
 
 		Usuario nuevoUsuario = new Usuario();
 
-		nuevoUsuario.setDireccion(txtDireccion.getText());
-		nuevoUsuario.setNombreCompleto(txtNombreCompleto.getText());
-		nuevoUsuario.setNumeroTelefono(txtTelefono.getText());
-		nuevoUsuario.setEmail(txtEmail.getText());
-		nuevoUsuario.setCedula(txtCedula.getText());
-		nuevoUsuario.setContrasenia(txtContrasenia.getText());
+		if (txtDireccion.getText().length() > 0 && txtNombreCompleto.getText().length() > 0
+				&& txtTelefono.getText().length() > 0 && txtEmail.getText().length() > 0
+				&& txtCedula.getText().length() > 0 && txtContrasenia.getText().length() > 0) {
 
-		if (cbxComprador.isSelected()) {
+			if (manejador.validarCorreo(txtEmail.getText())) {
 
-			nuevoUsuario.setRol(Rol.COMPRADOR);
+				nuevoUsuario.setDireccion(txtDireccion.getText());
+				nuevoUsuario.setNombreCompleto(txtNombreCompleto.getText());
+				nuevoUsuario.setNumeroTelefono(txtTelefono.getText());
+				nuevoUsuario.setEmail(txtEmail.getText());
+				nuevoUsuario.setCedula(txtCedula.getText());
+				nuevoUsuario.setContrasenia(txtContrasenia.getText());
 
-		}
+				if (cbxComprador.isSelected()) {
 
-		if (cbxVendedor.isSelected()) {
+					nuevoUsuario.setRol(Rol.COMPRADOR);
 
-			nuevoUsuario.setRol(Rol.VENDEDOR);
-		}
+				}
 
-		if (manejador.registrarUsuario(nuevoUsuario)) {
+				if (cbxVendedor.isSelected()) {
 
-			manejador.agregarUsuarioObservable(nuevoUsuario);
-			Utilidades.mostrarMensaje("Registro", "Registro exitoso !");
-			escenarioEdicion.close();
+					nuevoUsuario.setRol(Rol.VENDEDOR);
+				}
 
+				if (manejador.registrarUsuario(nuevoUsuario)) {
+
+					manejador.agregarUsuarioObservable(nuevoUsuario);
+					Utilidades.mostrarMensaje("Registro", "Registro exitoso !");
+					escenarioEdicion.close();
+
+				} else {
+
+					Utilidades.mostrarMensaje("Registro", "Error en el registro");
+
+				}
+
+			} else {
+
+				Utilidades.mostrarMensaje("Correo invalido", "Por favor ingrese un correo valido");
+			}
 		} else {
 
-			Utilidades.mostrarMensaje("Registro", "Error en el registro");
-
+			Utilidades.mostrarMensaje("Datos", "Por favor ingrese todos los datos");
 		}
 
 	}
