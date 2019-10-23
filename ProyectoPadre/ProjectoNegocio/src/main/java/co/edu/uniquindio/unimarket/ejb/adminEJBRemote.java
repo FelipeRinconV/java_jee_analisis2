@@ -23,13 +23,14 @@ public interface adminEJBRemote {
 
 	Usuario registrarUsuario(Usuario cl) throws ElementoRepetidoException;
 	
-	Usuario darUsuarioPorCedula(String cedula);
+	Persona darPersonaPorCedula(String cedula);
 
-	void eliminarUsuario(Usuario usuario);
+	Persona eliminarPersona(String cedula) throws NoExisteElementosException;
 	
 	Producto editarProducto(Producto p);
 
 	List<Usuario> listarUsuarios();
 
 	Producto buscarProducto(int id) throws NoExisteElementosException;
+
 }

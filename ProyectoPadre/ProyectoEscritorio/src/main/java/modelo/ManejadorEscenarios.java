@@ -334,20 +334,27 @@ public class ManejadorEscenarios {
 
 	/**
 	 * Elimina un usuario dada su cedula
+	 * 
 	 * @param usuario
+	 * @return una persona si la operacion es exitosa null en caso contrario
 	 */
-	public void eliminarUsuario(String cedula) {
+	public Persona eliminarUsuario(String cedula) {
 
-		Usuario user=administradorDelegado.darUsuarioPorCedula(cedula);
-		
-		System.out.println(user.toString());
-		
-		administradorDelegado.eliminarUsuario(user);
-		
-		Utilidades.mostrarMensaje("Operacion", "Eliminacion exitosa");
+		try {
+			return administradorDelegado.eliminarPersona(cedula);
+
+		} catch (NoExisteElementosException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	public void actualizarUsuariosObservables() {
 
 		usuariosObservables = administradorDelegado.listarUsuariosObservables();
+
 	}
-	
 
 }

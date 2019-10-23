@@ -9,6 +9,7 @@ import co.edu.uniquindio.grid.entidades.Comentario;
 import co.edu.uniquindio.grid.entidades.Persona;
 import co.edu.uniquindio.grid.entidades.Producto;
 import co.edu.uniquindio.grid.entidades.Usuario;
+import co.edu.uniquindio.unimarket.ejb.AdminEJB;
 import co.edu.uniquindio.unimarket.ejb.adminEJBRemote;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
 import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
@@ -49,7 +50,7 @@ public class PruebaDelegado implements adminEJBRemote {
 
 	}
 
-	public Persona autenticarUsuario(String email, String contrasenia)  {
+	public Persona autenticarUsuario(String email, String contrasenia) {
 		return adminEJB.autenticarUsuario(email, contrasenia);
 	}
 
@@ -92,13 +93,14 @@ public class PruebaDelegado implements adminEJBRemote {
 	public String toString() {
 		return adminEJB.toString();
 	}
-	
-	
+
 	/**
-	 * Metodo para devolver la lista de usuarios en una lista de usuarios observables
+	 * Metodo para devolver la lista de usuarios en una lista de usuarios
+	 * observables
+	 * 
 	 * @return
 	 */
-	public ObservableList<UsuarioObservable> listarUsuariosObservables()  {
+	public ObservableList<UsuarioObservable> listarUsuariosObservables() {
 		List<Usuario> usuarios = listarUsuarios();
 		ObservableList<UsuarioObservable> empleadosObservables = FXCollections.observableArrayList();
 		for (Usuario user : usuarios) {
@@ -108,17 +110,18 @@ public class PruebaDelegado implements adminEJBRemote {
 	}
 
 	@Override
-	public Usuario darUsuarioPorCedula(String cedula) {
+	public Persona darPersonaPorCedula(String cedula) {
 		// TODO Auto-generated method stub
-		return adminEJB.darUsuarioPorCedula(cedula);
+		return adminEJB.darPersonaPorCedula(cedula);
 	}
 
+	/**
+	 * Metodo para eliminar una persona dada su cedula
+	 */
 	@Override
-	public void eliminarUsuario(Usuario usuario) {
-	
-		adminEJB.eliminarUsuario(usuario);
-		
-	}
+	public Persona eliminarPersona(String cedula) throws NoExisteElementosException {
 
+		return adminEJB.eliminarPersona(cedula);
+	}
 
 }

@@ -194,11 +194,11 @@ public class AdminEJB implements adminEJBRemote {
 	 * Metodo que da un usuario dada su cedula
 	 */
 	@Override
-	public Usuario darUsuarioPorCedula(String cedula) {
+	public Persona darPersonaPorCedula(String cedula) {
 
 		if (cedula.length() > 1) {
 
-			return entytiManager.find(Usuario.class, cedula);
+			return entytiManager.find(Persona.class, cedula);
 
 		}
 
@@ -209,9 +209,27 @@ public class AdminEJB implements adminEJBRemote {
 	 * Metodo para eliminar el usuario
 	 */
 	@Override
-	public void eliminarUsuario(Usuario usuario) {
+	public Persona eliminarPersona(String cedula) throws NoExisteElementosException {
 
-		entytiManager.remove(usuario);
+		Persona p = entytiManager.find(Persona.class, cedula);
+
+		if (p != null) {
+
+			try {
+				entytiManager.remove(p);
+
+				return p;
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				return null;
+			}
+
+		} else {
+
+			throw new NoExisteElementosException("No existe una persona con la cedula indicada");
+		}
 
 	}
 

@@ -45,10 +45,8 @@ public class ListaUsuariosController {
 	@FXML
 	private TableColumn<UsuarioObservable, String> columnaDireccion;
 
-    @FXML
-    private JFXButton btnNuevoUsuario;
-
-    
+	@FXML
+	private JFXButton btnNuevoUsuario;
 
 	/**
 	 * REpresenta el escenario donde se agrega la vista
@@ -57,49 +55,50 @@ public class ListaUsuariosController {
 
 	private ManejadorEscenarios manejador;
 
-	
 	@FXML
-    void agregarUsuario(ActionEvent event) {
-				
+	void agregarUsuario(ActionEvent event) {
+
 		manejador.cargarEscenaAgregarUsuario();
 		tablaUsuarios.refresh();
 
-    }
-	
-	
+	}
+
 	/**
 	 * Metodo para añadir el boton de editar
 	 */
 	private void addBotonEliminar() {
-	
-	//Columna para añadir el boton a la tabla
-	TableColumn<UsuarioObservable, Void> colBtn = new <UsuarioObservable, Void> TableColumn(" ");
 
-	Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>> cellFactory = new Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>>() {
-       @Override
-	  public TableCell<UsuarioObservable, Void> call(final TableColumn<UsuarioObservable, Void> param) {
-				
+		// Columna para añadir el boton a la tabla
+		TableColumn<UsuarioObservable, Void> colBtn = new <UsuarioObservable, Void>TableColumn(" ");
+
+		Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>> cellFactory = new Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>>() {
+			@Override
+			public TableCell<UsuarioObservable, Void> call(final TableColumn<UsuarioObservable, Void> param) {
+
 				final TableCell<UsuarioObservable, Void> cell = new TableCell<UsuarioObservable, Void>() {
 
-					
-					//Boton que se va añadir a la tabala
+					// Boton que se va añadir a la tabala
 					private final Button btn = new Button("Eliminar");
-					
-					
 
 					{
 						btn.setOnAction((ActionEvent event) -> {
-							
-							//Se obtiene los datos del indice seleccionado
+
+							// Se obtiene los datos del indice seleccionado
 							UsuarioObservable data = getTableView().getItems().get(getIndex());
-							
+
 							String cedula = data.getCedula().getValue();
 
-							manejador.eliminarUsuario(cedula);
-    
-							tablaUsuarios.refresh();
-							
-							
+							if (manejador.eliminarUsuario(cedula) != null) {
+
+								manejador.actualizarUsuariosObservables();
+
+								Utilidades.mostrarMensaje("Operacion", "Eliminacion exitosa");
+								tablaUsuarios.refresh();
+							}else {
+								
+								Utilidades.mostrarMensaje("Operacion", "La cedula no pertenece a una persona");
+							}
+
 						});
 					}
 
@@ -122,33 +121,31 @@ public class ListaUsuariosController {
 		tablaUsuarios.getColumns().add(colBtn);
 
 	}
-	
+
 	/**
-	 * Metodo para añadir el boton de editar
+	 * Metodo para añadir el boton de editar no se esta usando
 	 */
 	private void addBotonModificar() {
-	
-	//Columna para añadir el boton a la tabla
-	TableColumn<UsuarioObservable, Void> colBtn = new <UsuarioObservable, Void> TableColumn(" ");
 
-	Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>> cellFactory = new Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>>() {
-       @Override
-	  public TableCell<UsuarioObservable, Void> call(final TableColumn<UsuarioObservable, Void> param) {
-				
+		// Columna para añadir el boton a la tabla
+		TableColumn<UsuarioObservable, Void> colBtn = new <UsuarioObservable, Void>TableColumn(" ");
+
+		Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>> cellFactory = new Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>>() {
+			@Override
+			public TableCell<UsuarioObservable, Void> call(final TableColumn<UsuarioObservable, Void> param) {
+
 				final TableCell<UsuarioObservable, Void> cell = new TableCell<UsuarioObservable, Void>() {
 
-					
-					//Boton que se va añadir a la tabala
+					// Boton que se va añadir a la tabala
 					private final Button btn = new Button("Modificar");
-					
+
 					{
 						btn.setOnAction((ActionEvent event) -> {
-							
-							//Se obtiene los datos del indice seleccionado
+
+							// Se obtiene los datos del indice seleccionado
 							UsuarioObservable data = getTableView().getItems().get(getIndex());
-							
-							
-							Utilidades.mostrarMensaje("Sirvio","Accion de MODIFICAR");
+
+							Utilidades.mostrarMensaje("Sirvio", "Accion de MODIFICAR");
 						});
 					}
 
@@ -171,18 +168,16 @@ public class ListaUsuariosController {
 		tablaUsuarios.getColumns().add(colBtn);
 
 	}
-
 
 	@FXML
 	void initialize() {
 		columnaCorreo.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getEmail());
 		columnaNombre.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getNombreCompleto());
-        columnaDireccion.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getDireccion());
-        
-        
+		columnaDireccion.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getDireccion());
+
 		addBotonEliminar();
-		addBotonModificar();
-		
+	//	addBotonModificar();
+
 		// cuando se seleccione un usuario se ejecuta el metodo
 //		tablaUsuarios.getSelectionModel().selectedItemProperty()
 //				.addListener((observable, oldValue, newValue) -> mostrarDetalleUsuario(newValue));
