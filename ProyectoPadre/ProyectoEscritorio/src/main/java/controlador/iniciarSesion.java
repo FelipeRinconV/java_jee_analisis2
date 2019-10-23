@@ -41,7 +41,7 @@ public class iniciarSesion {
 
 			if (admin != null) {
 
-				manejadorPrincipal.cargarEscenarioOpciones();
+				manejadorPrincipal.cragarVentanaAdmin();
 
 			} else {
 

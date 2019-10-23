@@ -116,6 +116,7 @@ public class ManejadorEscenarios {
 			borderPanel.setCenter(panelAncho);
 
 			iniciarSesion controlador = loader2.getController();
+			
 			controlador.setEscenarioInicial(this);
 
 		} catch (IOException e) {
@@ -124,7 +125,7 @@ public class ManejadorEscenarios {
 
 	}
 
-	public void cargarEscenarioOpciones() {
+	public void cragarVentanaAdmin() {
 		// TODO Auto-generated method stub
 
 		try {
@@ -140,57 +141,18 @@ public class ManejadorEscenarios {
 			loader.setLocation(getClass().getResource("/prueba.fxml"));
 			borderPanelAdmin = (BorderPane) loader.load();
 
-			borderPanel.setMinSize(735, 445);
+			borderPanelAdmin.setMinSize(1000, 720);
 			// se carga la escena
 			Scene scene = new Scene(borderPanelAdmin);
 			escenarioAdmin.setScene(scene);
 			escenarioAdmin.show();
 			
-			//Se carga el controlador
+			//Se carga el controlador de la ventana administrador
 			OpcionesAdministradorController controladorAdministrador =loader.getController();
 			controladorAdministrador.setManejador(this);
-
-			//cargarSceneaInicial();
-
 			
-
-//			// Sacamos los usuarios observables
-//			usuariosObservables = administradorDelegado.listarUsuariosObservables();
-//
-//			escenario.close();
-//			// Cargamos la ventana
-//			FXMLLoader loader = new FXMLLoader();
-//			loader.setLocation(getClass().getResource("/prueba.fxml"));
-//			borderPanelAdmin = (BorderPane) loader.load();
-//
-//			// Cargamos la escena central por defecto
-//			FXMLLoader loader2 = new FXMLLoader();
-//			loader2.setLocation(getClass().getResource("/listarUsuarios.fxml"));
-//			AnchorPane escenaCentral = (AnchorPane) loader2.load();
-//			borderPanelAdmin.setCenter(escenaCentral);
-//
-//			// se crea el escenario
-//			Stage escenarioOpciones = new Stage();
-//			escenarioOpciones.setTitle("Opciones");
-//			escenarioOpciones.setFullScreen(true);
-//
-//			// creamos la scena
-//			Scene escena = new Scene(borderPanelAdmin);
-//			escenarioOpciones.setScene(escena);
-//
-//			// se carga el controlador
-//			ListaUsuariosController listarUsuariosController = loader2.getController();
-//
-//			OpcionesAdministradorController controladorAdministrador =loader.getController();
-//			
-//			controladorAdministrador.setManejador(this);
-//			
-//			// se le pasa el escenario y los datos de los usuariosObservables
-//			listarUsuariosController.setEscenarioListaUsuarios(escenarioOpciones);
-//			listarUsuariosController.setManejador(this);
-//
-//			// se muestra el escenario
-//			escenarioOpciones.showAndWait();
+			//Se carga la escena por defecto a la ventana de admin
+			cargarEscenarioUsuarios();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -199,6 +161,33 @@ public class ManejadorEscenarios {
 
 	}
 
+	
+	//Carga la escena de usuarios a la ventana del admin
+	public void cargarEscenarioUsuarios() {
+		
+		try {
+			
+			usuariosObservables=administradorDelegado.listarUsuariosObservables();
+			
+			FXMLLoader lodaer = new FXMLLoader();
+			// PONER LA RUTA DE LA VISTA
+			lodaer.setLocation(getClass().getResource("/listarUsuarios.fxml"));
+
+			AnchorPane panelAncho = (AnchorPane) lodaer.load();
+			borderPanelAdmin.setCenter(panelAncho);
+
+			//Se carga el controlador
+			ListaUsuariosController listarUsuariosControlador = lodaer.getController();
+		
+			//Se le pasa el manejador al controlador
+			listarUsuariosControlador.setManejador(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public Stage getEscenario() {
 		return escenario;
 	}
@@ -230,6 +219,9 @@ public class ManejadorEscenarios {
 	public void setAdministradorDelegado(PruebaDelegado administradorDelegado) {
 		this.administradorDelegado = administradorDelegado;
 	}
+	
+	
+	
 
 	public Persona autenticarUsuario(String correo, String clave) {
 
