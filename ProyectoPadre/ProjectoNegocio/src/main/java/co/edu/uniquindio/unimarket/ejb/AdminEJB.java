@@ -10,7 +10,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-
 import co.edu.uniquindio.grid.entidades.*;
 import co.edu.uniquindio.unimarket.excepciones.*;
 
@@ -188,6 +187,31 @@ public class AdminEJB implements adminEJBRemote {
 		}
 
 		entytiManager.persist(p);
+
+	}
+
+	/**
+	 * Metodo que da un usuario dada su cedula
+	 */
+	@Override
+	public Usuario darUsuarioPorCedula(String cedula) {
+
+		if (cedula.length() > 1) {
+
+			return entytiManager.find(Usuario.class, cedula);
+
+		}
+
+		return null;
+	}
+
+	/**
+	 * Metodo para eliminar el usuario
+	 */
+	@Override
+	public void eliminarUsuario(Usuario usuario) {
+
+		entytiManager.remove(usuario);
 
 	}
 

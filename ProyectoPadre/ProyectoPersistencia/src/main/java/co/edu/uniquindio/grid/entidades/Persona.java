@@ -130,7 +130,7 @@ public class Persona implements Serializable {
 		return contrasenia;
 	}
 
-	public void setContraseña(String contraseña) {
+	public void setContrasenia(String contraseña) {
 		this.contrasenia = contraseña;
 	}
 

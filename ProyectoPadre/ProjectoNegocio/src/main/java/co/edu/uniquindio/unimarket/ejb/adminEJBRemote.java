@@ -22,7 +22,11 @@ public interface adminEJBRemote {
 	void crearPrducto(Producto p) throws ElementoRepetidoException;
 
 	Usuario registrarUsuario(Usuario cl) throws ElementoRepetidoException;
+	
+	Usuario darUsuarioPorCedula(String cedula);
 
+	void eliminarUsuario(Usuario usuario);
+	
 	Producto editarProducto(Producto p);
 
 	List<Usuario> listarUsuarios();

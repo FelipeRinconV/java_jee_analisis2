@@ -60,7 +60,7 @@ public class ModeloTest {
 		Administrador admin = new Administrador();
 
 		admin.setCedula("900");
-		admin.setContraseña("contrasenia");
+		admin.setContrasenia("contrasenia");
 		admin.setDireccion("armenia");
 		admin.setEmail("nuevoEmail");
 		admin.setNombreCompleto("alejandro");
@@ -148,7 +148,7 @@ public class ModeloTest {
 		user.setCedula("350");
 		user.setNombreCompleto("jose rodriguez");
 		user.setNumeroTelefono("44343");
-		user.setContraseña("4354");
+		user.setContrasenia("4354");
 		user.setDireccion("43654");
 		user.setEmail("jose@gmail.com");
 
@@ -286,7 +286,7 @@ public class ModeloTest {
 
 		admin.setNumeroTelefono("21399");
 
-		admin.setContraseña("contra");
+		admin.setContrasenia("contra");
 
 		admin.setDireccion("Quimbaya");
 
@@ -361,7 +361,7 @@ public class ModeloTest {
 
 		user.setNumeroTelefono("21399");
 
-		user.setContraseña("contra");
+		user.setContrasenia("contra");
 
 		user.setDireccion("Quimbaya");
 
@@ -550,7 +550,7 @@ public class ModeloTest {
 		Administrador nuevoAdministrador = new Administrador();
 
 		nuevoAdministrador.setCedula("2");
-		nuevoAdministrador.setContraseña("nueva");
+		nuevoAdministrador.setContrasenia("nueva");
 		nuevoAdministrador.setDireccion("Quimbya");
 		nuevoAdministrador.setEmail("nuevo@gmail.com");
 		nuevoAdministrador.setNombreCompleto("antonio");

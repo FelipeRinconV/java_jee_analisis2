@@ -60,8 +60,9 @@ public class ListaUsuariosController {
 	
 	@FXML
     void agregarUsuario(ActionEvent event) {
-		
-		Utilidades.mostrarMensaje("Funcioa","Funciona el nuevo boton");
+				
+		manejador.cargarEscenaAgregarUsuario();
+		tablaUsuarios.refresh();
 
     }
 	
@@ -92,8 +93,13 @@ public class ListaUsuariosController {
 							//Se obtiene los datos del indice seleccionado
 							UsuarioObservable data = getTableView().getItems().get(getIndex());
 							
+							String cedula = data.getCedula().getValue();
+
+							manejador.eliminarUsuario(cedula);
+    
+							tablaUsuarios.refresh();
 							
-							Utilidades.mostrarMensaje("Sirvio","Accion de eliminar +data: " + data.getNombreCompleto());
+							
 						});
 					}
 
@@ -135,8 +141,6 @@ public class ListaUsuariosController {
 					//Boton que se va añadir a la tabala
 					private final Button btn = new Button("Modificar");
 					
-					
-
 					{
 						btn.setOnAction((ActionEvent event) -> {
 							
@@ -173,7 +177,9 @@ public class ListaUsuariosController {
 	void initialize() {
 		columnaCorreo.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getEmail());
 		columnaNombre.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getNombreCompleto());
-
+        columnaDireccion.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getDireccion());
+        
+        
 		addBotonEliminar();
 		addBotonModificar();
 		

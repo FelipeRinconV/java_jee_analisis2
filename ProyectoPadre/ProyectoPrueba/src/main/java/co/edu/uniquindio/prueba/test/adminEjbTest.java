@@ -68,7 +68,7 @@ public class adminEjbTest {
 		List<Compra> compras = new ArrayList<Compra>();
 		u.setCompras(compras);
 
-		u.setContraseña("contraseña");
+		u.setContrasenia("contraseña");
 
 		u.setDireccion("Quimbaya");
 

@@ -35,9 +35,9 @@
                <children>
                   <HBox alignment="CENTER" layoutX="309.0" layoutY="-6.0" prefHeight="94.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <JFXButton fx:id="btnNuevoUsuario" onAction="#agregarUsuario" style="-fx-background-color: #65b425;" text="Añadir usuario" textFill="WHITE">
+                        <JFXButton fx:id="btnNuevoUsuario" onAction="#agregarUsuario" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #00b400;" text="Añadir usuario" textFill="WHITE">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font>
                         </JFXButton>
                      </children>

@@ -47,7 +47,7 @@ public class SetupEJB {
 			Administrador admin = new Administrador();
 
 			admin.setCedula("1007376425");
-			admin.setContraseña("root");
+			admin.setContrasenia("root");
 			admin.setEmail("feliperv04@gmail.com");
 			admin.setDireccion("Quimbaya");
 			admin.setNumeroTelefono("1082737238");
@@ -68,7 +68,7 @@ public class SetupEJB {
 			usuario1.setComentario(comentarios);
 			List<Compra> compras = new ArrayList<Compra>();
 			usuario1.setCompras(compras);
-			usuario1.setContraseña("contraseña");
+			usuario1.setContrasenia("contraseña");
 			usuario1.setDireccion("Quimbaya");
 			usuario1.setNombreCompleto("Luis felipe rincon");
 			usuario1.setCedula("1040");
@@ -88,7 +88,7 @@ public class SetupEJB {
 			usuario2.setComentario(comentarios);
 			List<Compra> compras2 = new ArrayList<Compra>();
 			usuario2.setCompras(compras);
-			usuario2.setContraseña("contrasenia");
+			usuario2.setContrasenia("contrasenia");
 			usuario2.setDireccion("Quimbaya");
 			usuario2.setNombreCompleto("Andrea viviana");
 			usuario2.setCedula("101213");

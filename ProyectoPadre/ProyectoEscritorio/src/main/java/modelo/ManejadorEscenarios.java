@@ -1,11 +1,16 @@
 package modelo;
 
+import java.awt.Toolkit;
 import java.io.IOException;
 
 import com.sun.enterprise.module.bootstrap.Main;
 
+import UtilidadesAlert.Utilidades;
 import co.edu.uniquindio.grid.entidades.Persona;
+import co.edu.uniquindio.grid.entidades.Usuario;
+import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
 import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
+import controlador.EdicionUsuarioController;
 import controlador.ListaUsuariosController;
 import controlador.OpcionesAdministradorController;
 import controlador.UsuarioController;
@@ -27,15 +32,23 @@ import javafx.stage.Stage;
  */
 public class ManejadorEscenarios {
 
+	/*
+	 * Variable para guardar el ancho de pantalla donde se ejecute la aplicacion
+	 */
+	private int anchoPantalla;
+	/*
+	 * Variable para guardar el largo de la pantalla donde se ejecute la aplicacion
+	 */
+	private int largoPantalla;
 	/**
 	 * Contenedor principal de la gui
 	 */
 	private Stage escenario;
-	
+
 	/**
 	 * Contenedor para la ventana principal del usuario
 	 */
-	
+
 	private Stage escenarioAdmin;
 
 	/**
@@ -43,8 +56,6 @@ public class ManejadorEscenarios {
 	 */
 
 	private BorderPane borderPanel;
-	
-	
 
 	/**
 	 * Tipo de panel de la ventana principal del administrador
@@ -71,6 +82,14 @@ public class ManejadorEscenarios {
 	 */
 
 	public ManejadorEscenarios(Stage escenario) {
+
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+		// Se obtiene el ancho de la pantalla
+		anchoPantalla = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+
+		// Se obtiene el largo de la pantalla
+		largoPantalla = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 
 		this.escenario = escenario;
 
@@ -116,7 +135,7 @@ public class ManejadorEscenarios {
 			borderPanel.setCenter(panelAncho);
 
 			iniciarSesion controlador = loader2.getController();
-			
+
 			controlador.setEscenarioInicial(this);
 
 		} catch (IOException e) {
@@ -129,29 +148,30 @@ public class ManejadorEscenarios {
 		// TODO Auto-generated method stub
 
 		try {
-			
+
 			escenario.close();
-			
-		    escenarioAdmin = new Stage();
+
+			escenarioAdmin = new Stage();
 			// se inicializa el escenario
-		    escenarioAdmin.setTitle("Unimarket/ventana opciones");
+			escenarioAdmin.setTitle("Unimarket/ventana opciones");
 
 			// se carga la vista
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/prueba.fxml"));
 			borderPanelAdmin = (BorderPane) loader.load();
 
-			borderPanelAdmin.setMinSize(1000, 720);
+			// Se pone la ventana a pantalla completa
 			// se carga la escena
 			Scene scene = new Scene(borderPanelAdmin);
 			escenarioAdmin.setScene(scene);
+			escenarioAdmin.setFullScreen(true);
 			escenarioAdmin.show();
-			
-			//Se carga el controlador de la ventana administrador
-			OpcionesAdministradorController controladorAdministrador =loader.getController();
+
+			// Se carga el controlador de la ventana administrador
+			OpcionesAdministradorController controladorAdministrador = loader.getController();
 			controladorAdministrador.setManejador(this);
-			
-			//Se carga la escena por defecto a la ventana de admin
+
+			// Se carga la escena por defecto a la ventana de admin
 			cargarEscenarioUsuarios();
 
 		} catch (IOException e) {
@@ -161,14 +181,13 @@ public class ManejadorEscenarios {
 
 	}
 
-	
-	//Carga la escena de usuarios a la ventana del admin
+	// Carga la escena de usuarios a la ventana del admin
 	public void cargarEscenarioUsuarios() {
-		
+
 		try {
-			
-			usuariosObservables=administradorDelegado.listarUsuariosObservables();
-			
+
+			usuariosObservables = administradorDelegado.listarUsuariosObservables();
+
 			FXMLLoader lodaer = new FXMLLoader();
 			// PONER LA RUTA DE LA VISTA
 			lodaer.setLocation(getClass().getResource("/listarUsuarios.fxml"));
@@ -176,18 +195,53 @@ public class ManejadorEscenarios {
 			AnchorPane panelAncho = (AnchorPane) lodaer.load();
 			borderPanelAdmin.setCenter(panelAncho);
 
-			//Se carga el controlador
+			// Se carga el controlador
 			ListaUsuariosController listarUsuariosControlador = lodaer.getController();
-		
-			//Se le pasa el manejador al controlador
+
+			// Se le pasa el manejador al controlador
 			listarUsuariosControlador.setManejador(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
+	/**
+	 * Metodo que carga la escene de la creacion de nuevos usuarios
+	 */
+	public void cargarEscenaAgregarUsuario() {
+		// TODO Auto-generated method stub
+
+		try {
+
+			// Se carga la interfaz para la ventana
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/agregarUsuario.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			// Creamos el escenario para la escena
+			Stage escenarioAgregar = new Stage();
+			escenarioAgregar.setTitle("Crear usuario");
+
+			Scene escena = new Scene(page);
+			escenarioAgregar.setScene(escena);
+
+			EdicionUsuarioController usuarioControlador = loader.getController();
+			usuarioControlador.setManejador(this);
+			usuarioControlador.setEscenarioEdicion(escenarioAgregar);
+
+			// Se muestra el escenario de edicion del nuevo usuario
+			escenarioAgregar.showAndWait();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 	public Stage getEscenario() {
 		return escenario;
 	}
@@ -219,17 +273,6 @@ public class ManejadorEscenarios {
 	public void setAdministradorDelegado(PruebaDelegado administradorDelegado) {
 		this.administradorDelegado = administradorDelegado;
 	}
-	
-	
-	
-
-	public Persona autenticarUsuario(String correo, String clave) {
-
-		// verificamos si el usuario se encuentra en la base de datos
-		Persona person = administradorDelegado.autenticarUsuario(correo, clave);
-		return person;
-
-	}
 
 	public BorderPane getBorderPanelAdmin() {
 		return borderPanelAdmin;
@@ -238,5 +281,73 @@ public class ManejadorEscenarios {
 	public void setBorderPanelAdmin(BorderPane borderPanelAdmin) {
 		this.borderPanelAdmin = borderPanelAdmin;
 	}
+
+	/**
+	 * ---------------INICIO DE METODOS PARA CARGAR LA
+	 * LOGICA-------------------------- Metodo para auntenticar en la ventana
+	 * inicial
+	 * 
+	 * @param correo
+	 * @param clave
+	 * @return
+	 */
+	public Persona autenticarUsuario(String correo, String clave) {
+
+		// verificamos si el usuario se encuentra en la base de datos
+		Persona person = administradorDelegado.autenticarUsuario(correo, clave);
+		return person;
+
+	}
+
+	/**
+	 * Metodo para agregar un nuevo usuario
+	 * 
+	 * @param user
+	 * @return true si el usuario es ingresado con exito
+	 */
+	public boolean registrarUsuario(Usuario user) {
+		Usuario nuevo = null;
+		try {
+
+			nuevo = administradorDelegado.registrarUsuario(user);
+
+		} catch (ElementoRepetidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return nuevo != null;
+	}
+
+	/**
+	 * Agrega el nuevo usuario a la lista
+	 * 
+	 * @param user
+	 */
+	public void agregarUsuarioObservable(Usuario user) {
+
+		UsuarioObservable nuevoUser = new UsuarioObservable(user);
+
+		usuariosObservables.add(nuevoUser);
+
+	}
+
+	/**
+	 * Elimina un usuario dada su cedula
+	 * @param usuario
+	 */
+	public void eliminarUsuario(String cedula) {
+
+		Usuario user=administradorDelegado.darUsuarioPorCedula(cedula);
+		
+		System.out.println(user.toString());
+		
+		administradorDelegado.eliminarUsuario(user);
+		
+		Utilidades.mostrarMensaje("Operacion", "Eliminacion exitosa");
+
+		usuariosObservables = administradorDelegado.listarUsuariosObservables();
+	}
+	
 
 }

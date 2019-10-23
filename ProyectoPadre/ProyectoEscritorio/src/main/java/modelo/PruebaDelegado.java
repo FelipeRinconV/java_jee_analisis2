@@ -107,5 +107,18 @@ public class PruebaDelegado implements adminEJBRemote {
 		return empleadosObservables;
 	}
 
+	@Override
+	public Usuario darUsuarioPorCedula(String cedula) {
+		// TODO Auto-generated method stub
+		return adminEJB.darUsuarioPorCedula(cedula);
+	}
+
+	@Override
+	public void eliminarUsuario(Usuario usuario) {
+	
+		adminEJB.eliminarUsuario(usuario);
+		
+	}
+
 
 }
