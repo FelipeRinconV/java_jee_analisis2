@@ -69,6 +69,12 @@ public class ManejadorEscenarios {
 	private ObservableList<UsuarioObservable> usuariosObservables;
 
 	/**
+	 * Para almacenar los productos pbservables
+	 */
+	
+	private ObservableList<ProductoObservable>  productosObservables;
+	
+	/**
 	 * COnexion con la capa de negocio
 	 */
 
@@ -95,6 +101,7 @@ public class ManejadorEscenarios {
 
 		administradorDelegado = PruebaDelegado.pruebaDelegado;
 		usuariosObservables = FXCollections.observableArrayList();
+		productosObservables=FXCollections.observableArrayList();
 
 		try {
 			// se inicializa el escenario
@@ -241,6 +248,8 @@ public class ManejadorEscenarios {
 		}
 
 	}
+	
+	
 
 	public Stage getEscenario() {
 		return escenario;
@@ -371,4 +380,15 @@ public class ManejadorEscenarios {
 		return administradorDelegado.validarCorreo(correo);
 	}
 
+	public ObservableList<ProductoObservable> getProductosObservables() {
+		return productosObservables;
+	}
+
+	public void setProductosObservables(ObservableList<ProductoObservable> productosObservables) {
+		this.productosObservables = productosObservables;
+	}
+
+	
+	
+	
 }

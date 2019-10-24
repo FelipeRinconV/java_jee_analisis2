@@ -152,6 +152,7 @@ public class AdminEJB implements adminEJBRemote {
 
 	/**
 	 * Metodo que da los productos disponibles segun cantidad y fecha
+	 * @return devuelve  una lista con lso productos no vencidos y con cantidad mayor a 0
 	 */
 	@Override
 	public List<Producto> listarProductosDisponibles() {
@@ -243,10 +244,12 @@ public class AdminEJB implements adminEJBRemote {
 	      
         boolean valido = false;
        
-        Pattern patronEmail = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)(\\.[A-Za-z]{2,})$");
-   
-        Matcher mEmail = patronEmail.matcher(correo.toLowerCase());
-        if (mEmail.matches()){
+        // Patrón para validar el email
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");   
+        Matcher mEmail = pattern.matcher(correo.toLowerCase());
+        if (mEmail.find()==true){
            valido = true; 
         }
         return valido;

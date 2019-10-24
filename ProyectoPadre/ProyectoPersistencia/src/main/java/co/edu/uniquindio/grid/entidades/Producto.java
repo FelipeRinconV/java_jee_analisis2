@@ -155,7 +155,7 @@ public class Producto implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public double getPrecio() {
+	public int getPrecio() {
 		return precio;
 	}
 

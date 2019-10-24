@@ -98,7 +98,7 @@ public class PruebaDelegado implements adminEJBRemote {
 	 * Metodo para devolver la lista de usuarios en una lista de usuarios
 	 * observables
 	 * 
-	 * @return
+	 * @return lista de usuarios observables
 	 */
 	public ObservableList<UsuarioObservable> listarUsuariosObservables() {
 		List<Usuario> usuarios = listarUsuarios();
@@ -108,6 +108,21 @@ public class PruebaDelegado implements adminEJBRemote {
 		}
 		return empleadosObservables;
 	}
+	
+	/**
+	 * Metodo para llenar una lista observable de productos con la lista de productos que est aen la 
+	 * base de datos
+	 * @return
+	 */
+	public ObservableList<ProductoObservable> listarProductosObservables() {
+		List<Producto> productos = listarProductosDisponibles();
+		ObservableList<ProductoObservable> productosObservables = FXCollections.observableArrayList();
+		for (Producto pro : productos) {
+			productosObservables.add(new ProductoObservable(pro));
+		}
+		return productosObservables;
+	}
+	
 
 	@Override
 	public Persona darPersonaPorCedula(String cedula) {
