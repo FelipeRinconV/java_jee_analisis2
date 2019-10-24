@@ -284,7 +284,7 @@ public class AdminEJB implements adminEJBRemote {
 		TypedQuery<Persona> q = entytiManager.createNamedQuery(Persona.BUSCAR_POR_EMAIL, Persona.class);
 
 		q.setParameter("email", correo);
-		
+
 		Persona persona = q.getSingleResult();
 
 		if (persona != null) {
@@ -297,9 +297,11 @@ public class AdminEJB implements adminEJBRemote {
 
 			Properties props = new Properties();
 			props.put("mail.smtp.auth", "true");
+
 			props.put("mail.smtp.starttls.enable", "true");
 			props.put("mail.smtp.host", "smtp.gmail.com");
 			props.put("mail.smtp.port", "587");
+			props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
 			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
@@ -322,6 +324,7 @@ public class AdminEJB implements adminEJBRemote {
 				message.setText("Estimado usuario sus credenciales son las siguientes: " +
 
 						"Correo: " + persona.getEmail() + "| Contraseña: " + persona.getContraseña());
+
 				// Envia el mensaje
 				Transport.send(message);
 			} catch (Exception e) {
@@ -334,6 +337,50 @@ public class AdminEJB implements adminEJBRemote {
 			throw new NoExisteElementosException("El correo no pertenece a una persona registrada");
 		}
 
+	}
+
+	/**
+	 * Metodo para modificar un usuario
+	 */
+	@Override
+	public boolean modificarUsuario(Persona usuarioNuevo) throws NoExisteElementosException {
+
+		Persona user = entytiManager.find(Persona.class, usuarioNuevo.getCedula());
+
+		if (user != null) {
+
+			try {
+
+				user.setEmail(usuarioNuevo.getEmail());
+
+				user.setDireccion(usuarioNuevo.getDireccion());
+				
+				user.setNumeroTelefono(usuarioNuevo.getNumeroTelefono());
+
+				user.setNombreCompleto(usuarioNuevo.getNombreCompleto());
+
+				user.setDireccion(usuarioNuevo.getDireccion());
+
+				entytiManager.merge(user);
+
+				// Intento sin cedula
+				// user.setCedula(usuarioNuevo.getCedula());
+
+				return true;
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+			}
+
+		} else {
+
+			new NoExisteElementosException("No existe ningun usuario con la cedula indicada");
+
+		}
+
+		return false;
 	}
 
 }

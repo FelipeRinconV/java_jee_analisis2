@@ -10,9 +10,11 @@ import co.edu.uniquindio.grid.entidades.Persona;
 import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
 import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
+import controlador.DetallesController;
 import controlador.EdicionUsuarioController;
 import controlador.ListaProdcutosController;
 import controlador.ListaUsuariosController;
+import controlador.ModificacionUsuarioController;
 import controlador.OpcionesAdministradorController;
 import controlador.RecuperarCuentaController;
 import controlador.UsuarioController;
@@ -22,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -153,6 +156,9 @@ public class ManejadorEscenarios {
 
 	}
 
+	/**
+	 * Carga la escena pricipal a la ventana del admin
+	 */
 	public void cragarVentanaAdmin() {
 		// TODO Auto-generated method stub
 
@@ -281,11 +287,80 @@ public class ManejadorEscenarios {
 	}
 
 	/**
+	 * Metodo para modificar una persona le llega la persona que se desea modificar
+	 * 
+	 * @param cedula
+	 */
+	public void cargarScenaModificar(String cedula) {
+
+		Utilidades.mostrarMensaje("LLEGA A CARGAR ", "");
+		
+		Persona person = administradorDelegado.darPersonaPorCedula(cedula);
+
+		try {
+
+			// Se carga la interfaz para la ventana
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/modificacionUsuario.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			// Creamos el escenario para la escena
+			Stage escenarioAgregar = new Stage();
+			escenarioAgregar.setTitle("Modificar usuario");
+
+			Scene escena = new Scene(page);
+			escenarioAgregar.setScene(escena);
+
+			ModificacionUsuarioController modificacionController = loader.getController();
+
+			// Importante pasarle la persona al controlador antes de cambiarle el manejador
+			// de escenarios
+			modificacionController.setPersonaModificable(person);
+
+			modificacionController.setManejador(this);
+			modificacionController.setStage(escenarioAgregar);
+
+			// Se muestra el escenario de edicion del nuevo usuario
+			escenarioAgregar.showAndWait();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
 	 * Metodo para cargar la escena de detalles productos
 	 */
 	public void cargarEscenaDetallesProductos(ProductoObservable newValue) {
 
-		Utilidades.mostrarMensaje("SIRVIO", "cargar escena productos");
+		try {
+
+			// Se carga la interfaz para la ventana
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/detallesProducto.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			// Creamos el escenario para la escena
+			Stage escenarioAgregar = new Stage();
+			escenarioAgregar.setTitle("Detalles producto");
+
+			Scene escena = new Scene(page);
+			escenarioAgregar.setScene(escena);
+
+			DetallesController usuarioControlador = loader.getController();
+			usuarioControlador.setManejador(this);
+			usuarioControlador.setEstage(escenarioAgregar);
+
+			// Se muestra el escenario de edicion del nuevo usuario
+			escenarioAgregar.showAndWait();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -462,6 +537,26 @@ public class ManejadorEscenarios {
 
 		administradorDelegado.recuperarCuenta(correo);
 
+	}
+
+	/**
+	 * Modifica un usario
+	 * @param user
+	 * @return
+	 * @throws NoExisteElementosException
+	 */
+	public boolean modificarUsuario(Persona user) throws NoExisteElementosException {
+		return administradorDelegado.modificarUsuario(user);
+
+	}
+	
+	/**
+	 * 
+	 */
+	public void actualizarUsuariosObservables() {
+		
+		usuariosObservables=administradorDelegado.listarUsuariosObservables();
+		
 	}
 
 }

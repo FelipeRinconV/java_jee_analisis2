@@ -157,4 +157,9 @@ public class PruebaDelegado implements adminEJBRemote {
 	  adminEJB.recuperarCuenta(correo);
 	}
 
+	@Override
+	public boolean modificarUsuario(Persona usuarioNuevo) throws NoExisteElementosException {
+		return adminEJB.modificarUsuario(usuarioNuevo);
+	}
+
 }

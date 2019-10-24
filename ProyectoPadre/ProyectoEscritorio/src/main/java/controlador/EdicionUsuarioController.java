@@ -3,11 +3,14 @@ package controlador;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.transaction.Transactional.TxType;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 
 import UtilidadesAlert.Utilidades;
+import co.edu.uniquindio.grid.entidades.Persona;
 import co.edu.uniquindio.grid.entidades.Rol;
 import co.edu.uniquindio.grid.entidades.Usuario;
 import javafx.event.ActionEvent;
@@ -55,6 +58,7 @@ public class EdicionUsuarioController {
 
 	@FXML
 	private JFXCheckBox cbxVendedor;
+
 
 	@FXML
 	void agregarUsuario(ActionEvent event) {
@@ -127,6 +131,8 @@ public class EdicionUsuarioController {
 	@FXML
 	void initialize() {
 
+	
+
 		assert btnAgregar != null : "fx:id=\"btnAgregar\" was not injected: check your FXML file 'agregarUsuario.fxml'.";
 		assert txtNombreCompleto != null : "fx:id=\"txtNombreCompleto\" was not injected: check your FXML file 'agregarUsuario.fxml'.";
 		assert txtContrasenia != null : "fx:id=\"txtContrasenia\" was not injected: check your FXML file 'agregarUsuario.fxml'.";
@@ -138,7 +144,13 @@ public class EdicionUsuarioController {
 
 	}
 
+	/**
+	 * Se carga el manejador  y los datos de la persona cuando se va a modificar
+	 * @return
+	 */
 	public ManejadorEscenarios getManejador() {
+		
+	
 		return manejador;
 	}
 
@@ -233,5 +245,14 @@ public class EdicionUsuarioController {
 	public void setCbxVendedor(JFXCheckBox cbxVendedor) {
 		this.cbxVendedor = cbxVendedor;
 	}
+
+	public JFXTextField getTxtCedula() {
+		return txtCedula;
+	}
+
+	public void setTxtCedula(JFXTextField txtCedula) {
+		this.txtCedula = txtCedula;
+	}
+
 
 }

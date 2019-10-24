@@ -39,10 +39,14 @@ public class OpcionesAdministradorController {
 
 	}
 
+	/**
+	 * Metodo para cargar la escena de listar usuario a la ventana principal del admin
+	 * @param event
+	 */
 	@FXML
 	void abrirEscenaUsuarios(ActionEvent event) {
 
-		Utilidades.mostrarMensaje("SIRVIO !", "Se va abrir la scena de USUARIOS");
+		manejador.cargarEscenarioUsuarios();
 
 	}
 

@@ -94,8 +94,8 @@ public class ListaUsuariosController {
 
 								Utilidades.mostrarMensaje("Operacion", "Eliminacion exitosa");
 								tablaUsuarios.refresh();
-							}else {
-								
+							} else {
+
 								Utilidades.mostrarMensaje("Operacion", "La cedula no pertenece a una persona");
 							}
 
@@ -145,7 +145,11 @@ public class ListaUsuariosController {
 							// Se obtiene los datos del indice seleccionado
 							UsuarioObservable data = getTableView().getItems().get(getIndex());
 
-							Utilidades.mostrarMensaje("Sirvio", "Accion de MODIFICAR");
+							String cedula = data.getCedula().getValue();
+							manejador.cargarScenaModificar(cedula);
+							manejador.actualizarUsuariosObservables();
+							tablaUsuarios.setItems(manejador.getUsuariosObservables());
+
 						});
 					}
 
@@ -171,12 +175,13 @@ public class ListaUsuariosController {
 
 	@FXML
 	void initialize() {
+		
 		columnaCorreo.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getEmail());
 		columnaNombre.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getNombreCompleto());
 		columnaDireccion.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getDireccion());
 
 		addBotonEliminar();
-	//	addBotonModificar();
+		addBotonModificar();
 
 		// cuando se seleccione un usuario se ejecuta el metodo
 //		tablaUsuarios.getSelectionModel().selectedItemProperty()

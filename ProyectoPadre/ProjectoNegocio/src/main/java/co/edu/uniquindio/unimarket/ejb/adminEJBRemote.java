@@ -25,6 +25,8 @@ public interface adminEJBRemote {
 
 	Usuario registrarUsuario(Usuario cl) throws ElementoRepetidoException;
 	
+	boolean modificarUsuario(Persona usuarioNuevo) throws NoExisteElementosException;
+	
 	Persona darPersonaPorCedula(String cedula);
 
 	Persona eliminarPersona(String cedula) throws NoExisteElementosException;

@@ -6,21 +6,26 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.OpcionesAdministradorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.OpcionesAdministradorController">
    <left>
       <AnchorPane prefHeight="560.0" prefWidth="208.0" style="-fx-background-color: #303b4e;" BorderPane.alignment="CENTER">
          <children>
             <VBox layoutX="50.0" layoutY="124.0" prefHeight="560.0" prefWidth="263.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
+                  <Separator prefWidth="200.0" />
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="56.0" prefWidth="207.0" style="-fx-background-color: #303b4e;" text="Opciones" textFill="WHITE">
                      <font>
-                        <Font name="Gargi" size="26.0" />
+                        <Font name="Gargi" size="21.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="100.0" />
+                        <Insets bottom="80.0" top="20.0" />
                      </VBox.margin>
                   </Button>
                   <Separator prefWidth="200.0" />
@@ -42,4 +47,41 @@
          </children>
       </AnchorPane>
    </left>
+   <top>
+      <AnchorPane prefHeight="40.0" prefWidth="749.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane layoutX="245.0" layoutY="-25.0" prefHeight="65.0" prefWidth="749.0" style="-fx-background-color: #303b4e;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="294.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="148.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.0" minWidth="10.0" prefWidth="136.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="56.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="238.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Text fill="#e6eaee" strokeType="OUTSIDE" strokeWidth="0.0" text="UNIMARKET" GridPane.columnIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ICONO" />
+                     </children>
+                  </GridPane>
+                  <Text fill="#e6eaee" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario" GridPane.columnIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ICONO USUARIO" GridPane.columnIndex="2" />
+               </children>
+               <padding>
+                  <Insets left="20.0" right="5.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>
