@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -303,7 +304,7 @@ public class AdminEJB implements adminEJBRemote {
 			props.put("mail.smtp.port", "587");
 			props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
-			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			Session session = Session.getInstance(props, new Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
 					return new PasswordAuthentication(username, password);
 				}

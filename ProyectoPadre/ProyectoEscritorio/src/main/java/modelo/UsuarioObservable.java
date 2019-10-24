@@ -1,8 +1,5 @@
 package modelo;
 
-
-
-import co.edu.uniquindio.grid.entidades.Rol;
 import co.edu.uniquindio.grid.entidades.Usuario;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -19,16 +16,14 @@ public class UsuarioObservable {
 
 	private StringProperty direccion;
 
-    
-	private Rol rol;
-
 	public UsuarioObservable(Usuario usuario) {
 
-		
-		this.cedula=new SimpleStringProperty(usuario.getCedula());
-		this.email=new SimpleStringProperty(usuario.getEmail());
-		this.nombreCompleto=new SimpleStringProperty(usuario.getNombreCompleto());
-		
+		this.cedula = new SimpleStringProperty(usuario.getCedula());
+		this.email = new SimpleStringProperty(usuario.getEmail());
+		this.nombreCompleto = new SimpleStringProperty(usuario.getNombreCompleto());
+		this.direccion = new SimpleStringProperty(usuario.getCedula());
+		this.numeroTelefono = new SimpleStringProperty(usuario.getNumeroTelefono());
+
 	}
 
 	public StringProperty getCedula() {
@@ -69,14 +64,6 @@ public class UsuarioObservable {
 
 	public void setDireccion(StringProperty direccion) {
 		this.direccion = direccion;
-	}
-
-	public Rol getRol() {
-		return rol;
-	}
-
-	public void setRol(Rol rol) {
-		this.rol = rol;
 	}
 
 }

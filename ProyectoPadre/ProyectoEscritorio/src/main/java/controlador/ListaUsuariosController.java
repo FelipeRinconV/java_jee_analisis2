@@ -37,7 +37,7 @@ public class ListaUsuariosController {
 	private TableColumn<UsuarioObservable, String> columnaCorreo;
 
 	@FXML
-	private TableColumn<UsuarioObservable, String> columnaTipo;
+	private TableColumn<UsuarioObservable, String> columnaCedula;
 
 	@FXML
 	private TableColumn<UsuarioObservable, String> columnaEmail;
@@ -175,7 +175,8 @@ public class ListaUsuariosController {
 
 	@FXML
 	void initialize() {
-		
+
+		columnaCedula.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getCedula());
 		columnaCorreo.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getEmail());
 		columnaNombre.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getNombreCompleto());
 		columnaDireccion.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getDireccion());

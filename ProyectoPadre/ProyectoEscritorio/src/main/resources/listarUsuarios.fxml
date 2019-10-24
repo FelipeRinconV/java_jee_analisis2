@@ -19,7 +19,6 @@
                   <TableColumn fx:id="columnaCedula" prefWidth="75.0" text="Cedula" />
                 <TableColumn fx:id="columnaNombre" prefWidth="75.0" text="Nombre" />
                 <TableColumn fx:id="columnaCorreo" prefWidth="75.0" text="Correo" />
-                  <TableColumn fx:id="columnaTipo" prefWidth="75.0" text="Tipo" />
                   <TableColumn fx:id="columnaDireccion" prefWidth="75.0" text="Direccion" />
               </columns>
                <BorderPane.margin>

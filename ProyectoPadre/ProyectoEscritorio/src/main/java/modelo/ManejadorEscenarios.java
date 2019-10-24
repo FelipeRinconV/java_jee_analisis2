@@ -229,7 +229,6 @@ public class ManejadorEscenarios {
 
 			productosObservables = administradorDelegado.listarProductosObservables();
 
-			Utilidades.mostrarMensaje("cantidad de productos", ": " + productosObservables.size());
 
 			FXMLLoader lodaer = new FXMLLoader();
 			// PONER LA RUTA DE LA VISTA
