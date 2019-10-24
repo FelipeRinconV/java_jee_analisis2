@@ -2,11 +2,18 @@ package co.edu.uniquindio.unimarket.ejb;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -152,7 +159,9 @@ public class AdminEJB implements adminEJBRemote {
 
 	/**
 	 * Metodo que da los productos disponibles segun cantidad y fecha
-	 * @return devuelve  una lista con lso productos no vencidos y con cantidad mayor a 0
+	 * 
+	 * @return devuelve una lista con lso productos no vencidos y con cantidad mayor
+	 *         a 0
 	 */
 	@Override
 	public List<Producto> listarProductosDisponibles() {
@@ -237,22 +246,94 @@ public class AdminEJB implements adminEJBRemote {
 	}
 
 	/**
-	 *Metodo que permite validar correos gmail
+	 * Metodo que permite validar correos gmail
 	 */
 	@Override
 	public boolean validarCorreo(String correo) {
-	      
-        boolean valido = false;
-       
-        // Patrón para validar el email
-        Pattern pattern = Pattern
-                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");   
-        Matcher mEmail = pattern.matcher(correo.toLowerCase());
-        if (mEmail.find()==true){
-           valido = true; 
-        }
-        return valido;
+
+		boolean valido = false;
+
+		// Patrón para validar el email
+		Pattern pattern = Pattern.compile(
+				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Matcher mEmail = pattern.matcher(correo.toLowerCase());
+		if (mEmail.find() == true) {
+			valido = true;
+		}
+		return valido;
+	}
+
+	/**
+	 * Lista todos los productos sin importar su cantidad o fecha
+	 */
+	@Override
+	public List<Producto> listarTodosLosProductos() {
+
+		TypedQuery<Producto> query = entytiManager.createNamedQuery(Producto.LISTAR_TODOS_LOS_PRODUCTOS,
+				Producto.class);
+
+		return query.getResultList();
+	}
+
+	/**
+	 * Metodo que envia un correo apra la recuperacion de la cuenta de una persona
+	 */
+	@Override
+	public void recuperarCuenta(String correo) throws NoExisteElementosException {
+
+		TypedQuery<Persona> q = entytiManager.createNamedQuery(Persona.BUSCAR_POR_EMAIL, Persona.class);
+
+		q.setParameter("email", correo);
+		
+		Persona persona = q.getSingleResult();
+
+		if (persona != null) {
+
+			// Correo de donde sale el mensaje
+			final String username = "unimarketrecuperacion@gmail.com";
+
+			// Contraseña de donde sale el mensaje
+			final String password = "analisis2";
+
+			Properties props = new Properties();
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.port", "587");
+
+			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(username, password);
+				}
+			});
+
+			try {
+
+				// Define message
+				MimeMessage message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(username));
+				// Asunto del correo
+				message.setSubject("RECUPERACION DE CUENTA");
+
+				// Se agrega el destinatario
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(persona.getEmail()));
+
+				// Se agrega el mensaje del correo
+				message.setText("Estimado usuario sus credenciales son las siguientes: " +
+
+						"Correo: " + persona.getEmail() + "| Contraseña: " + persona.getContraseña());
+				// Envia el mensaje
+				Transport.send(message);
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+
+		} else {
+
+			throw new NoExisteElementosException("El correo no pertenece a una persona registrada");
+		}
+
 	}
 
 }

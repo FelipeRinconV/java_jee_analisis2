@@ -115,7 +115,7 @@ public class PruebaDelegado implements adminEJBRemote {
 	 * @return
 	 */
 	public ObservableList<ProductoObservable> listarProductosObservables() {
-		List<Producto> productos = listarProductosDisponibles();
+		List<Producto> productos = listarTodosLosProductos();
 		ObservableList<ProductoObservable> productosObservables = FXCollections.observableArrayList();
 		for (Producto pro : productos) {
 			productosObservables.add(new ProductoObservable(pro));
@@ -143,6 +143,18 @@ public class PruebaDelegado implements adminEJBRemote {
 	public boolean validarCorreo(String correo) {
 		// TODO Auto-generated method stub
 		return adminEJB.validarCorreo(correo);
+	}
+
+	@Override
+	public List<Producto> listarTodosLosProductos() {
+		// TODO Auto-generated method stub
+		return adminEJB.listarTodosLosProductos();
+	}
+
+	@Override
+	public void recuperarCuenta(String correo) throws NoExisteElementosException {
+		
+	  adminEJB.recuperarCuenta(correo);
 	}
 
 }

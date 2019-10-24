@@ -11,8 +11,10 @@ import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
 import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 import controlador.EdicionUsuarioController;
+import controlador.ListaProdcutosController;
 import controlador.ListaUsuariosController;
 import controlador.OpcionesAdministradorController;
+import controlador.RecuperarCuentaController;
 import controlador.UsuarioController;
 import controlador.VentanaOpcionesController;
 import controlador.iniciarSesion;
@@ -71,9 +73,9 @@ public class ManejadorEscenarios {
 	/**
 	 * Para almacenar los productos pbservables
 	 */
-	
-	private ObservableList<ProductoObservable>  productosObservables;
-	
+
+	private ObservableList<ProductoObservable> productosObservables;
+
 	/**
 	 * COnexion con la capa de negocio
 	 */
@@ -101,7 +103,7 @@ public class ManejadorEscenarios {
 
 		administradorDelegado = PruebaDelegado.pruebaDelegado;
 		usuariosObservables = FXCollections.observableArrayList();
-		productosObservables=FXCollections.observableArrayList();
+		productosObservables = FXCollections.observableArrayList();
 
 		try {
 			// se inicializa el escenario
@@ -178,7 +180,7 @@ public class ManejadorEscenarios {
 			OpcionesAdministradorController controladorAdministrador = loader.getController();
 			controladorAdministrador.setManejador(this);
 
-			// Se carga la escena por defecto a la ventana de admin
+			// Se carga la escena por defecto a la ventana de admin la de listar usuarios
 			cargarEscenarioUsuarios();
 
 		} catch (IOException e) {
@@ -207,6 +209,35 @@ public class ManejadorEscenarios {
 
 			// Se le pasa el manejador al controlador
 			listarUsuariosControlador.setManejador(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	// Carga la escena de usuarios a la ventana del admin
+	public void cargarEscenarioProductos() {
+
+		try {
+
+			productosObservables = administradorDelegado.listarProductosObservables();
+
+			Utilidades.mostrarMensaje("cantidad de productos", ": " + productosObservables.size());
+
+			FXMLLoader lodaer = new FXMLLoader();
+			// PONER LA RUTA DE LA VISTA
+			lodaer.setLocation(getClass().getResource("/listarProductos.fxml"));
+
+			// Se cambia el hijo a la ventana principal
+			AnchorPane panelAncho = (AnchorPane) lodaer.load();
+			borderPanelAdmin.setCenter(panelAncho);
+
+			// Se carga el controlador
+			ListaProdcutosController listarProductosController = lodaer.getController();
+
+			// Se le pasa el manejador al controlador
+			listarProductosController.setManejador(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -248,8 +279,44 @@ public class ManejadorEscenarios {
 		}
 
 	}
-	
-	
+
+	/**
+	 * Metodo para cargar la escena de detalles productos
+	 */
+	public void cargarEscenaDetallesProductos(ProductoObservable newValue) {
+
+		Utilidades.mostrarMensaje("SIRVIO", "cargar escena productos");
+
+	}
+
+	/**
+	 * Muestra la ventana de recuperar contrasenia
+	 * 
+	 * @throws IOException
+	 */
+	public void cargarEscenaRecuperacionDeCuenta() throws IOException {
+
+		// Se carga la interfaz para la ventana
+
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/recuperarCuenta.fxml"));
+		BorderPane page = (BorderPane) loader.load();
+
+		// Creamos el escenario para la escena
+		Stage escenarioRecuperarCuenta = new Stage();
+		escenarioRecuperarCuenta.setTitle("Unimarket/Recuperacion de cuenta");
+
+		Scene escena = new Scene(page);
+		escenarioRecuperarCuenta.setScene(escena);
+
+		RecuperarCuentaController recuperarCuentaController = loader.getController();
+		recuperarCuentaController.setManejador(this);
+		recuperarCuentaController.setEscenarioRecuperarCuenta(escenarioRecuperarCuenta);
+
+		// Se muestra el escenario de recuperacion de contrasenia
+		escenarioRecuperarCuenta.showAndWait();
+
+	}
 
 	public Stage getEscenario() {
 		return escenario;
@@ -361,7 +428,9 @@ public class ManejadorEscenarios {
 	}
 
 	/**
-	 * Metodo que remueve un usuario observable, se utiliza cuando es eliminado un usuario de la base de datos 
+	 * Metodo que remueve un usuario observable, se utiliza cuando es eliminado un
+	 * usuario de la base de datos
+	 * 
 	 * @param user
 	 */
 	public void eliminarDeListaObservable(UsuarioObservable user) {
@@ -369,14 +438,15 @@ public class ManejadorEscenarios {
 		usuariosObservables.remove(user);
 
 	}
-	
+
 	/**
 	 * Validacion de los correos
+	 * 
 	 * @param correo
 	 * @return
 	 */
 	public boolean validarCorreo(String correo) {
-		
+
 		return administradorDelegado.validarCorreo(correo);
 	}
 
@@ -388,7 +458,10 @@ public class ManejadorEscenarios {
 		this.productosObservables = productosObservables;
 	}
 
-	
-	
-	
+	public void recuperarCuenta(String correo) throws NoExisteElementosException {
+
+		administradorDelegado.recuperarCuenta(correo);
+
+	}
+
 }

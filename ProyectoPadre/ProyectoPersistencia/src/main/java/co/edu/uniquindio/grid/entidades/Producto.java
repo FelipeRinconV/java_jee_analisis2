@@ -23,7 +23,8 @@ import javax.persistence.*;
 		@NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSO, query = "select p From Producto p order by p.precio desc"),
 		@NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSOS_POR_TIPO, query = "select P  from Producto p  where p.tipo=:tipo  order by p.precio desc"),
 		@NamedQuery(name = Producto.PRODUCTOS_DISPONIBLES, query = "select p From Producto p where p.disponibilidad=TRUE and p.fechaLimite <= :fechaActual"),
-        @NamedQuery(name = Producto.PRODUCTO_POR_ID,query = "select p from Producto p where p.idProducto=:id")
+        @NamedQuery(name = Producto.PRODUCTO_POR_ID,query = "select p from Producto p where p.idProducto=:id"),
+        @NamedQuery(name = Producto.LISTAR_TODOS_LOS_PRODUCTOS,query = "select p from Producto p ")
 		  
 })
 public class Producto implements Serializable {
@@ -37,6 +38,7 @@ public class Producto implements Serializable {
 	
 	public static final String PRODUCTO_POR_ID="producto_por_id";
 	
+	public static final String LISTAR_TODOS_LOS_PRODUCTOS="listar_todos_los_productos";
 	/**
 	 * Lista los productos DISPONIBLES segun fecha y cantidad
 	 */

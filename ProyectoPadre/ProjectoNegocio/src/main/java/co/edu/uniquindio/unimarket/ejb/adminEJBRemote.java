@@ -17,6 +17,8 @@ public interface adminEJBRemote {
 
 	List<Producto> listarProductosDisponibles();
 
+	List<Producto> listarTodosLosProductos();
+	
 	List<Comentario> listarComentarios(int idProducto);
 
 	void crearPrducto(Producto p) throws ElementoRepetidoException;
@@ -34,4 +36,6 @@ public interface adminEJBRemote {
 	Producto buscarProducto(int id) throws NoExisteElementosException;
 
 	boolean validarCorreo(String correo);
+	
+	void recuperarCuenta(String correo) throws NoExisteElementosException;
 }
