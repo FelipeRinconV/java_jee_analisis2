@@ -72,7 +72,7 @@ public class SetupEJB {
 			usuario1.setDireccion("Quimbaya");
 			usuario1.setNombreCompleto("Luis felipe rincon");
 			usuario1.setCedula("1040");
-			usuario1.setRol(Rol.VENDEDOR);
+		//	usuario1.setRol(Rol.VENDEDOR);
 			usuario1.setEmail("erdiv@gmail.com");
 
 			entityManager.persist(usuario1);
@@ -92,7 +92,7 @@ public class SetupEJB {
 			usuario2.setDireccion("Quimbaya");
 			usuario2.setNombreCompleto("Andrea viviana");
 			usuario2.setCedula("101213");
-			usuario2.setRol(Rol.COMPRADOR);
+		//	usuario2.setRol(Rol.COMPRADOR);
 			usuario2.setEmail("andrea@gmail.com");
 
 			entityManager.persist(usuario2);

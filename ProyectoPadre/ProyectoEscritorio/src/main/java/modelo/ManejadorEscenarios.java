@@ -6,6 +6,7 @@ import java.io.IOException;
 import com.sun.enterprise.module.bootstrap.Main;
 
 import UtilidadesAlert.Utilidades;
+import co.edu.uniquindio.grid.entidades.Categoria;
 import co.edu.uniquindio.grid.entidades.Persona;
 import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
@@ -27,6 +28,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -175,6 +177,7 @@ public class ManejadorEscenarios {
 			loader.setLocation(getClass().getResource("/prueba.fxml"));
 			borderPanelAdmin = (BorderPane) loader.load();
 
+			borderPanelAdmin.setMinSize(1200, 650);
 			// Se pone la ventana a pantalla completa
 			// se carga la escena
 			Scene scene = new Scene(borderPanelAdmin);
@@ -228,7 +231,6 @@ public class ManejadorEscenarios {
 		try {
 
 			productosObservables = administradorDelegado.listarProductosObservables();
-
 
 			FXMLLoader lodaer = new FXMLLoader();
 			// PONER LA RUTA DE LA VISTA
@@ -292,8 +294,6 @@ public class ManejadorEscenarios {
 	 */
 	public void cargarScenaModificar(String cedula) {
 
-		Utilidades.mostrarMensaje("LLEGA A CARGAR ", "");
-		
 		Persona person = administradorDelegado.darPersonaPorCedula(cedula);
 
 		try {
@@ -332,7 +332,7 @@ public class ManejadorEscenarios {
 	/**
 	 * Metodo para cargar la escena de detalles productos
 	 */
-	public void cargarEscenaDetallesProductos(ProductoObservable newValue) {
+	public void cargarEscenaDetallesProductos(ProductoObservable productoObservable) {
 
 		try {
 
@@ -340,7 +340,7 @@ public class ManejadorEscenarios {
 
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/detallesProducto.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
+			GridPane page = (GridPane) loader.load();
 
 			// Creamos el escenario para la escena
 			Stage escenarioAgregar = new Stage();
@@ -350,8 +350,9 @@ public class ManejadorEscenarios {
 			escenarioAgregar.setScene(escena);
 
 			DetallesController usuarioControlador = loader.getController();
+			usuarioControlador.setProducto(productoObservable);
 			usuarioControlador.setManejador(this);
-			usuarioControlador.setEstage(escenarioAgregar);
+			usuarioControlador.setStage(escenarioAgregar);
 
 			// Se muestra el escenario de edicion del nuevo usuario
 			escenarioAgregar.showAndWait();
@@ -540,6 +541,7 @@ public class ManejadorEscenarios {
 
 	/**
 	 * Modifica un usario
+	 * 
 	 * @param user
 	 * @return
 	 * @throws NoExisteElementosException
@@ -548,14 +550,35 @@ public class ManejadorEscenarios {
 		return administradorDelegado.modificarUsuario(user);
 
 	}
-	
+
 	/**
 	 * 
 	 */
 	public void actualizarUsuariosObservables() {
-		
-		usuariosObservables=administradorDelegado.listarUsuariosObservables();
-		
+
+		usuariosObservables = administradorDelegado.listarUsuariosObservables();
+
+	}
+
+	/**
+	 * Metodo que actualiza los productos observables dada una categoria
+	 * 
+	 * @param categoria
+	 */
+	public void actualizarProductosObservablesPorCategoria(Categoria categoria) {
+
+		productosObservables = administradorDelegado.listarProductosObservablesPorCategoria(categoria);
+
+	}
+
+	/**
+	 * Actualiza los prodcutos pbservables con todos los que se encuentren en la
+	 * lista
+	 */
+	public void actualizarProductosObservables() {
+
+		productosObservables = administradorDelegado.listarProductosObservables();
+
 	}
 
 }

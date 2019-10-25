@@ -76,8 +76,6 @@ public class adminEjbTest {
 
 		u.setCedula("1040");
 
-		u.setRol(Rol.VENDEDOR);
-
 		u.setEmail("erdiv@gmail.com");
 
 		try {
@@ -99,10 +97,9 @@ public class adminEjbTest {
 		List<Usuario> usuarios;
 		usuarios = adminEJB.listarUsuarios();
 		Assert.assertEquals(2, usuarios.size());
-		
-		
-		for(Usuario user:usuarios) {
-			
+
+		for (Usuario user : usuarios) {
+
 			System.out.println(user.toString());
 		}
 

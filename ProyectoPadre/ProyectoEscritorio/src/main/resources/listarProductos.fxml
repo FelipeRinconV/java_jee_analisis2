@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -16,9 +18,9 @@
          <center>
             <TableView fx:id="tablaProductos" prefHeight="235.0" prefWidth="651.0" stylesheets="@table-view.css" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="clumnaCedula" prefWidth="75.0" text="Cedula" />
+                  <TableColumn fx:id="columnaId" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="clumnaCedula" prefWidth="75.0" text="Cedula vendedor" />
                 <TableColumn fx:id="columnaNombre" prefWidth="75.0" text="Nombre" />
-                  <TableColumn fx:id="columnaId" prefWidth="75.0" text="id" />
                   <TableColumn fx:id="columnaPrecio" prefWidth="75.0" text="Precio" />
                   <TableColumn fx:id="columnaCategoria" prefWidth="75.0" text="Categoria" />
               </columns>
@@ -35,7 +37,7 @@
                <children>
                   <HBox alignment="CENTER" layoutX="309.0" layoutY="-6.0" prefHeight="94.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <JFXButton fx:id="btnDetalles" disable="true" onAction="#verDetalleProducto" prefHeight="40.0" prefWidth="192.0" style="-fx-background-color: #00b400;" text="Detalle producto" textFill="WHITE">
+                        <JFXButton fx:id="btnDetalles" disable="true" onAction="#verDetalleProducto" prefHeight="40.0" prefWidth="192.0" style="-fx-background-color: #303b4e;" text="Ver detalles" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -46,19 +48,40 @@
             </AnchorPane>
          </bottom>
          <top>
-            <AnchorPane prefHeight="52.0" prefWidth="835.0" BorderPane.alignment="CENTER">
+            <VBox BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" layoutX="175.0" layoutY="-24.0" prefHeight="76.0" prefWidth="835.0" style="-fx-background-color: #e6e9ed;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane prefHeight="74.0" prefWidth="835.0">
                      <children>
-                        <Text fill="#303b4e" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de  productos" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="26.0" />
-                           </font>
-                        </Text>
+                        <HBox alignment="CENTER" layoutX="175.0" layoutY="-24.0" prefHeight="76.0" prefWidth="835.0" style="-fx-background-color: #e6e9ed;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Text fill="#303b4e" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de  productos" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="78.0" prefWidth="835.0" style="-fx-background-color: #f4f4f4;">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="230.0" layoutY="-11.0" prefHeight="89.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <JFXButton fx:id="btnFiltrar" onAction="#filtrarProductos" style="-fx-background-color: #303b4e;" text="Filtrar" textFill="#f4f4f4">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXComboBox fx:id="cbxCategoria" prefHeight="26.0" prefWidth="220.0" promptText="Categoria" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
                </children>
-            </AnchorPane>
+            </VBox>
          </top>
       </BorderPane>
    </children>

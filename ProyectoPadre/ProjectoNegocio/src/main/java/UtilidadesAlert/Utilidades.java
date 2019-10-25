@@ -24,7 +24,7 @@ public final class Utilidades {
 	 */
 	public static void mostrarMensaje(String titulo, String mensaje) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Balotera");
+		alert.setTitle("Mensaje");
 		alert.setHeaderText(titulo);
 		alert.setContentText(mensaje);
 		alert.showAndWait();

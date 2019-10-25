@@ -12,14 +12,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.RecuperarCuentaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.RecuperarCuentaController">
    <top>
       <AnchorPane prefHeight="80.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" layoutX="212.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #303b4e;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Recuperacion de cuenta">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Vamos a buscar tu cuenta">
                      <font>
                         <Font name="System Bold" size="23.0" />
                      </font>
@@ -47,27 +46,33 @@
    <center>
       <GridPane BorderPane.alignment="CENTER_LEFT">
         <columnConstraints>
-          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="251.0" minWidth="10.0" prefWidth="156.0" />
-            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="251.0" minWidth="10.0" prefWidth="21.0" />
             <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="256.0" minWidth="0.0" prefWidth="9.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="353.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text fill="#303b4e" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese su correo:" GridPane.rowIndex="1">
+            <JFXTextField fx:id="txtCorreo" promptText="Correo electronico" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enviaremos tus credenciales a tu correo electronico" wrappingWidth="393.7802734375" GridPane.columnIndex="1">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font size="17.0" />
                </font>
             </Text>
-            <JFXTextField fx:id="txtCorreo" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Text fill="#303b4e" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa tu direccion de correo electronico" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <BorderPane.margin>
             <Insets left="70.0" right="70.0" />
          </BorderPane.margin>
+         <opaqueInsets>
+            <Insets top="10.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
       </GridPane>
    </center>
 </BorderPane>

@@ -59,7 +59,6 @@ public class EdicionUsuarioController {
 	@FXML
 	private JFXCheckBox cbxVendedor;
 
-
 	@FXML
 	void agregarUsuario(ActionEvent event) {
 
@@ -77,17 +76,6 @@ public class EdicionUsuarioController {
 				nuevoUsuario.setEmail(txtEmail.getText());
 				nuevoUsuario.setCedula(txtCedula.getText());
 				nuevoUsuario.setContrasenia(txtContrasenia.getText());
-
-				if (cbxComprador.isSelected()) {
-
-					nuevoUsuario.setRol(Rol.COMPRADOR);
-
-				}
-
-				if (cbxVendedor.isSelected()) {
-
-					nuevoUsuario.setRol(Rol.VENDEDOR);
-				}
 
 				if (manejador.registrarUsuario(nuevoUsuario)) {
 
@@ -131,8 +119,6 @@ public class EdicionUsuarioController {
 	@FXML
 	void initialize() {
 
-	
-
 		assert btnAgregar != null : "fx:id=\"btnAgregar\" was not injected: check your FXML file 'agregarUsuario.fxml'.";
 		assert txtNombreCompleto != null : "fx:id=\"txtNombreCompleto\" was not injected: check your FXML file 'agregarUsuario.fxml'.";
 		assert txtContrasenia != null : "fx:id=\"txtContrasenia\" was not injected: check your FXML file 'agregarUsuario.fxml'.";
@@ -145,12 +131,12 @@ public class EdicionUsuarioController {
 	}
 
 	/**
-	 * Se carga el manejador  y los datos de la persona cuando se va a modificar
+	 * Se carga el manejador y los datos de la persona cuando se va a modificar
+	 * 
 	 * @return
 	 */
 	public ManejadorEscenarios getManejador() {
-		
-	
+
 		return manejador;
 	}
 
@@ -253,6 +239,5 @@ public class EdicionUsuarioController {
 	public void setTxtCedula(JFXTextField txtCedula) {
 		this.txtCedula = txtCedula;
 	}
-
 
 }

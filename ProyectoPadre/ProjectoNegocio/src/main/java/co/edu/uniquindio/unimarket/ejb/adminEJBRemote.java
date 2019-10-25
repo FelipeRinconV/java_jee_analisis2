@@ -34,10 +34,14 @@ public interface adminEJBRemote {
 	Producto editarProducto(Producto p);
 
 	List<Usuario> listarUsuarios();
+	
+	List<Producto> listarProductosPorCategoria(Categoria categoria) throws NoExisteElementosException;
 
 	Producto buscarProducto(int id) throws NoExisteElementosException;
 
 	boolean validarCorreo(String correo);
 	
 	void recuperarCuenta(String correo) throws NoExisteElementosException;
+	
+	Long darPuntuacionProducto(int idProducto) throws NoExisteElementosException;
 }

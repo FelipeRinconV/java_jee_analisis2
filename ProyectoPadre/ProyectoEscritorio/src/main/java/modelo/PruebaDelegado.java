@@ -5,6 +5,8 @@ import java.util.List;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import UtilidadesAlert.Utilidades;
+import co.edu.uniquindio.grid.entidades.Categoria;
 import co.edu.uniquindio.grid.entidades.Comentario;
 import co.edu.uniquindio.grid.entidades.Persona;
 import co.edu.uniquindio.grid.entidades.Producto;
@@ -123,6 +125,30 @@ public class PruebaDelegado implements adminEJBRemote {
 		return productosObservables;
 	}
 	
+	/**
+	 * Metodo para llenar una lista observable de productos con la lista de productos que est aen la 
+	 * base de datos
+	 * @return
+	 */
+	public ObservableList<ProductoObservable> listarProductosObservablesPorCategoria(Categoria categoria) {
+		
+		try {
+			List<Producto> productos;
+			productos = listarProductosPorCategoria(categoria);
+			ObservableList<ProductoObservable> productosObservables = FXCollections.observableArrayList();
+			for (Producto pro : productos) {
+				productosObservables.add(new ProductoObservable(pro));
+			}
+			return productosObservables;
+		} catch (NoExisteElementosException e) {
+			// TODO Auto-generated catch block
+		
+			 return null;
+		}
+		
+		
+	}
+	
 
 	@Override
 	public Persona darPersonaPorCedula(String cedula) {
@@ -160,6 +186,19 @@ public class PruebaDelegado implements adminEJBRemote {
 	@Override
 	public boolean modificarUsuario(Persona usuarioNuevo) throws NoExisteElementosException {
 		return adminEJB.modificarUsuario(usuarioNuevo);
+	}
+	
+	public List<Producto> listarProductosPorCategoria(Categoria categoria) throws NoExisteElementosException{
+		
+		return adminEJB.listarProductosPorCategoria(categoria);
+	}
+
+	/**
+	 * Da la media de puntuacion de los productos
+	 */
+	@Override
+	public Long darPuntuacionProducto(int idProducto) throws NoExisteElementosException {
+		return adminEJB.darPuntuacionProducto(idProducto);
 	}
 
 }

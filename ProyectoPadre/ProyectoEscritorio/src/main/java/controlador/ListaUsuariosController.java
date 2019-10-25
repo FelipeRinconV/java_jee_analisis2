@@ -69,7 +69,7 @@ public class ListaUsuariosController {
 	private void addBotonEliminar() {
 
 		// Columna para añadir el boton a la tabla
-		TableColumn<UsuarioObservable, Void> colBtn = new <UsuarioObservable, Void>TableColumn(" ");
+		TableColumn<UsuarioObservable, Void> colBtn = new <UsuarioObservable, Void>TableColumn("  Eliminar");
 
 		Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>> cellFactory = new Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>>() {
 			@Override
@@ -128,7 +128,7 @@ public class ListaUsuariosController {
 	private void addBotonModificar() {
 
 		// Columna para añadir el boton a la tabla
-		TableColumn<UsuarioObservable, Void> colBtn = new <UsuarioObservable, Void>TableColumn(" ");
+		TableColumn<UsuarioObservable, Void> colBtn = new <UsuarioObservable, Void>TableColumn("  Modificar");
 
 		Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>> cellFactory = new Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>>() {
 			@Override
@@ -145,8 +145,13 @@ public class ListaUsuariosController {
 							// Se obtiene los datos del indice seleccionado
 							UsuarioObservable data = getTableView().getItems().get(getIndex());
 
+							//Se obtiene la cedula del usuario
 							String cedula = data.getCedula().getValue();
+							
+							//Se carga la escena para modificar un usuario
 							manejador.cargarScenaModificar(cedula);
+							
+							//Se actualizan los usaurios de la tabla
 							manejador.actualizarUsuariosObservables();
 							tablaUsuarios.setItems(manejador.getUsuariosObservables());
 

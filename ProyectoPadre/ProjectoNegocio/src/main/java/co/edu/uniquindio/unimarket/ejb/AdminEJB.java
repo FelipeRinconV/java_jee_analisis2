@@ -19,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder.In;
 
 import co.edu.uniquindio.grid.entidades.*;
 import co.edu.uniquindio.unimarket.excepciones.*;
@@ -276,6 +277,25 @@ public class AdminEJB implements adminEJBRemote {
 		return query.getResultList();
 	}
 
+	public List<Producto> listarProductosPorCategoria(Categoria categoria) throws NoExisteElementosException {
+
+		TypedQuery<Producto> query = entytiManager.createNamedQuery(Producto.PRODUCTOS_POR_CATEGORIA, Producto.class);
+
+		query.setParameter("tipo", categoria);
+
+		List<Producto> pro = query.getResultList();
+
+		if (!pro.isEmpty()) {
+
+			return pro;
+
+		} else {
+
+			throw new NoExisteElementosException("No hay productos registrados en esta categria");
+		}
+
+	}
+
 	/**
 	 * Metodo que envia un correo apra la recuperacion de la cuenta de una persona
 	 */
@@ -355,7 +375,7 @@ public class AdminEJB implements adminEJBRemote {
 				user.setEmail(usuarioNuevo.getEmail());
 
 				user.setDireccion(usuarioNuevo.getDireccion());
-				
+
 				user.setNumeroTelefono(usuarioNuevo.getNumeroTelefono());
 
 				user.setNombreCompleto(usuarioNuevo.getNombreCompleto());
@@ -382,6 +402,30 @@ public class AdminEJB implements adminEJBRemote {
 		}
 
 		return false;
+	}
+
+	/**
+	 * 
+	 * @param idProducto
+	 * @return
+	 */
+	public Long darPuntuacionProducto(int idProducto) throws NoExisteElementosException {
+
+		Producto producto = entytiManager.find(Producto.class, idProducto);
+
+		if (producto != null) {
+
+			TypedQuery<Long> query = entytiManager.createNamedQuery(Calificacion.MEDIA_DE_CALIFICACION, Long.class);
+
+			Long puntuacion = query.getSingleResult();
+
+			return puntuacion;
+		} else {
+
+			throw new NoExisteElementosException("No hay productos registrados con este id");
+
+		}
+
 	}
 
 }

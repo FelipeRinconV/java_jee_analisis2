@@ -69,8 +69,7 @@ public class Usuario extends Persona implements Serializable {
 	@OneToMany(mappedBy = "usuario")
 	private List<Comentario> comentario;
 
-	@Enumerated(EnumType.STRING)
-	private Rol rol;
+
 
 
 	public Usuario() {
@@ -110,21 +109,13 @@ public class Usuario extends Persona implements Serializable {
 		this.comentario = comentario;
 	}
 
-	public Rol getRol() {
-		return rol;
-	}
-
-	public void setRol(Rol rol) {
-		this.rol = rol;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [cedula=" + getCedula() +" nombre: " +getNombreCompleto() + " rol=" + rol + "]";
+		return "Usuario [cedula=" + getCedula() +" nombre: " +getNombreCompleto()  + "]";
 	}
 
 }

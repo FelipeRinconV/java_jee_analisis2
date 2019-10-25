@@ -6,13 +6,18 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 /**
- * Entity implementation class for Entity: Calificacion
- * ENTIDAD QUE REPRESENTA LAS CALIFICACIONES QUE LE AH DADO UN PRODUCTO AL USUARIO
+ * Entity implementation class for Entity: Calificacion ENTIDAD QUE REPRESENTA
+ * LAS CALIFICACIONES QUE LE AH DADO UN PRODUCTO AL USUARIO
  *
  */
 @Entity
 @Table(name = "Calificaciones")
+@NamedQueries({
+
+		@NamedQuery(name = Calificacion.MEDIA_DE_CALIFICACION, query = "select avg(c.calificacion) from Calificacion c where c.producto.idProducto=:id") })
 public class Calificacion implements Serializable {
+
+	public static final String MEDIA_DE_CALIFICACION = "media_por_calificaciones_por_producto";
 
 	@ManyToOne
 	private Producto producto;
@@ -20,10 +25,10 @@ public class Calificacion implements Serializable {
 	@ManyToOne
 	private Usuario usuario;
 
-	//La calificacion va ser de 1 a 10 validar ESTE CAMPO EN EL DAO
+	// La calificacion va ser de 1 a 10 validar ESTE CAMPO EN EL DAO
 	@Min(1)
 	@Max(10)
-	@Column(name = "CALIFICACION",nullable = false)
+	@Column(name = "CALIFICACION", nullable = false)
 	private int calificacion;
 
 	@Id
@@ -31,8 +36,6 @@ public class Calificacion implements Serializable {
 	@Column(name = "ID_CALIFICACION")
 	private int idCalificacion;
 
-	
-	
 	private static final long serialVersionUID = 1L;
 
 	public Calificacion() {
@@ -46,8 +49,6 @@ public class Calificacion implements Serializable {
 	public void setIdCalificacion(int idCalificacion) {
 		this.idCalificacion = idCalificacion;
 	}
-
-
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -97,12 +98,8 @@ public class Calificacion implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Calificacion [producto=" + producto.getNombre() + ", usuario=" + usuario.getNombreCompleto() + ", calificacion=" + calificacion
-				+ ", idCalificacion=" + idCalificacion + "]";
+		return "Calificacion [producto=" + producto.getNombre() + ", usuario=" + usuario.getNombreCompleto()
+				+ ", calificacion=" + calificacion + ", idCalificacion=" + idCalificacion + "]";
 	}
-	
-	
-	
-	
 
 }

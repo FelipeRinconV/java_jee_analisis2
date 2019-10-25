@@ -24,7 +24,10 @@ import javax.persistence.*;
 		@NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSOS_POR_TIPO, query = "select P  from Producto p  where p.tipo=:tipo  order by p.precio desc"),
 		@NamedQuery(name = Producto.PRODUCTOS_DISPONIBLES, query = "select p From Producto p where p.disponibilidad=TRUE and p.fechaLimite <= :fechaActual"),
         @NamedQuery(name = Producto.PRODUCTO_POR_ID,query = "select p from Producto p where p.idProducto=:id"),
-        @NamedQuery(name = Producto.LISTAR_TODOS_LOS_PRODUCTOS,query = "select p from Producto p ")
+        @NamedQuery(name = Producto.LISTAR_TODOS_LOS_PRODUCTOS,query = "select p from Producto p "),
+        @NamedQuery(name = Producto.PRODUCTOS_POR_CATEGORIA,query = "select p From Producto p where p.tipo=:tipo"),
+		
+		                                                                                                                           
 		  
 })
 public class Producto implements Serializable {
@@ -35,6 +38,8 @@ public class Producto implements Serializable {
 	/**
 	 * Devuelve un producto en especifico dado su id
 	 */
+	
+
 	
 	public static final String PRODUCTO_POR_ID="producto_por_id";
 	
@@ -61,6 +66,8 @@ public class Producto implements Serializable {
 	 */
 	public static final String PRODUCTO_MAS_COSTOSO = "producto_mas_costoso";
 
+	
+	public static final String PRODUCTOS_POR_CATEGORIA = "productos_por_categoria";
 	/**
 	 * Cree una consulta que devuelve el producto más costoso por cada tipo de
 	 * producto.
@@ -115,6 +122,9 @@ public class Producto implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Categoria tipo;
 
+	/**
+	 * La media de las califiaciones es su puntuacion
+	 */
 	@OneToMany(mappedBy = "producto")
 	private List<Calificacion> calificaciones;
 
@@ -128,6 +138,8 @@ public class Producto implements Serializable {
 	private List<Comentario> comentarios;
 
 	private static final long serialVersionUID = 1L;
+
+
 
 	public Producto() {
 		super();
