@@ -428,4 +428,22 @@ public class AdminEJB implements adminEJBRemote {
 
 	}
 
+	@Override
+	public Producto darProductoPorId(int id) throws NoExisteElementosException {
+		
+		Producto p =entytiManager.find(Producto.class, id);
+		
+		if(p!=null) {
+			
+			return p;
+		}else {
+			
+			throw new NoExisteElementosException("El id no corresponde a un producto registrado");
+		}
+			
+			
+	}
+	
+	
+
 }

@@ -201,4 +201,10 @@ public class PruebaDelegado implements adminEJBRemote {
 		return adminEJB.darPuntuacionProducto(idProducto);
 	}
 
+	@Override
+	public Producto darProductoPorId(int id) throws NoExisteElementosException {
+		
+		return adminEJB.darProductoPorId(id);
+	}
+
 }

@@ -21,7 +21,7 @@ public class UsuarioObservable {
 		this.cedula = new SimpleStringProperty(usuario.getCedula());
 		this.email = new SimpleStringProperty(usuario.getEmail());
 		this.nombreCompleto = new SimpleStringProperty(usuario.getNombreCompleto());
-		this.direccion = new SimpleStringProperty(usuario.getCedula());
+		this.direccion = new SimpleStringProperty(usuario.getDireccion());
 		this.numeroTelefono = new SimpleStringProperty(usuario.getNumeroTelefono());
 
 	}

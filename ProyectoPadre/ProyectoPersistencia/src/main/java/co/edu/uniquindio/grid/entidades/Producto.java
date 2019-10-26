@@ -39,6 +39,7 @@ public class Producto implements Serializable {
 	 * Devuelve un producto en especifico dado su id
 	 */
 	
+	private int cantidadProducto;
 
 	
 	public static final String PRODUCTO_POR_ID="producto_por_id";
@@ -98,7 +99,8 @@ public class Producto implements Serializable {
 	/**
 	 * Lista de las url de las imagenes
 	 */
-    @ElementCollection
+	
+    @ElementCollection(fetch = FetchType.EAGER)
 	private List<String> urlImagenes;
 
 	@Column(nullable = false, length = 330)
@@ -281,5 +283,15 @@ public class Producto implements Serializable {
 				+ ", disponibilidad=" + disponibilidad + ", fechaLimite=" + fechaLimite + ", nombre=" + nombre
 				+ ", tipo=" + tipo;
 	}
+
+	public int getCantidadProducto() {
+		return cantidadProducto;
+	}
+
+	public void setCantidadProducto(int cantidadProducto) {
+		this.cantidadProducto = cantidadProducto;
+	}
+	
+	
 
 }

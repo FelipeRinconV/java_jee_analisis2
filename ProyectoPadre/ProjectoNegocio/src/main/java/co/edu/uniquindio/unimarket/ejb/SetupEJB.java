@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unimarket.ejb;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -72,7 +73,6 @@ public class SetupEJB {
 			usuario1.setDireccion("Quimbaya");
 			usuario1.setNombreCompleto("Luis felipe rincon");
 			usuario1.setCedula("1040");
-		//	usuario1.setRol(Rol.VENDEDOR);
 			usuario1.setEmail("erdiv@gmail.com");
 
 			entityManager.persist(usuario1);
@@ -92,7 +92,6 @@ public class SetupEJB {
 			usuario2.setDireccion("Quimbaya");
 			usuario2.setNombreCompleto("Andrea viviana");
 			usuario2.setCedula("101213");
-		//	usuario2.setRol(Rol.COMPRADOR);
 			usuario2.setEmail("andrea@gmail.com");
 
 			entityManager.persist(usuario2);
@@ -100,28 +99,41 @@ public class SetupEJB {
 			// Registro de productos para pruebas
 
 			Producto producto = new Producto();
-			producto.setNombre("Mac air");
+			producto.setNombre("Macbook Retina Touch Bar 15 Mod 2019");
 			List<String> imagenes = new ArrayList<String>();
+
+			String urlMac1 = "http://localhost:8080/mac1.jpg";
+			String urlMac2 = "http://localhost:8080/mac2.jpg";
+			String urlMac3 = "http://localhost:8080/mac3.jpg";
+			String urlMac4 = "http://localhost:8080/mac4.jpg";
+
+			imagenes.add(urlMac1);
+			imagenes.add(urlMac2);
+			imagenes.add(urlMac3);
+			imagenes.add(urlMac4);
+
 			producto.setUrlImagenes(imagenes);
 			producto.setDisponibilidad(true);
-			producto.setTipo(Categoria.DEPORTE);
+			producto.setFechaLimite(new Date());
+			producto.setTipo(Categoria.TECNOLOGIA);
+			producto.setCantidadProducto(5);
 			producto.setUsuario(usuario1);
-			producto.setPrecio(33);
-			producto.setDescripcion("mejor mac del mercado");
+			producto.setPrecio(5000000);
+			producto.setDescripcion("MacBook Pro retina touch bar 15,6 pulgadas Modelo 2019");
 
 			entityManager.persist(producto);
 
-			Producto producto2 = new Producto();
-			producto2.setNombre("Diamante 1");
-			List<String> imagenes2 = new ArrayList<String>();
-			producto2.setUrlImagenes(imagenes2);
-			producto2.setDisponibilidad(true);
-			producto2.setTipo(Categoria.JOYAS);
-			producto2.setUsuario(usuario1);
-			producto2.setPrecio(33);
-			producto2.setDescripcion("Piedra unica en el pais");
-
-			entityManager.persist(producto2);
+//			Producto producto2 = new Producto();
+//			producto2.setNombre("Diamante 1");
+//			List<String> imagenes2 = new ArrayList<String>();
+//			producto2.setUrlImagenes(imagenes2);
+//			producto2.setDisponibilidad(true);
+//			producto2.setTipo(Categoria.JOYAS);
+//			producto2.setUsuario(usuario1);
+//			producto2.setPrecio(33);
+//			producto2.setDescripcion("Piedra unica en el pais");
+//
+//			entityManager.persist(producto2);
 
 		}
 

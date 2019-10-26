@@ -8,6 +8,7 @@ import com.sun.enterprise.module.bootstrap.Main;
 import UtilidadesAlert.Utilidades;
 import co.edu.uniquindio.grid.entidades.Categoria;
 import co.edu.uniquindio.grid.entidades.Persona;
+import co.edu.uniquindio.grid.entidades.Producto;
 import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
 import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
@@ -177,7 +178,7 @@ public class ManejadorEscenarios {
 			loader.setLocation(getClass().getResource("/prueba.fxml"));
 			borderPanelAdmin = (BorderPane) loader.load();
 
-			borderPanelAdmin.setMinSize(1200, 650);
+			borderPanelAdmin.setMinSize(1100, 600);
 			// Se pone la ventana a pantalla completa
 			// se carga la escena
 			Scene scene = new Scene(borderPanelAdmin);
@@ -350,10 +351,11 @@ public class ManejadorEscenarios {
 			escenarioAgregar.setScene(escena);
 
 			DetallesController usuarioControlador = loader.getController();
-			usuarioControlador.setProducto(productoObservable);
 			usuarioControlador.setManejador(this);
+			usuarioControlador.setProducto(productoObservable);	
 			usuarioControlador.setStage(escenarioAgregar);
 
+			escenarioAgregar.setResizable(false);
 			// Se muestra el escenario de edicion del nuevo usuario
 			escenarioAgregar.showAndWait();
 
@@ -581,4 +583,24 @@ public class ManejadorEscenarios {
 
 	}
 
+	public Producto darProuctoPorId(int id) throws NoExisteElementosException {
+
+		return administradorDelegado.darProductoPorId(id);
+
+	}
+
+	/**
+	 * Da la puntuacion de un producto dado su id
+	 * 
+	 * @param idProducto
+	 * @return un int con la puntuacion del producto
+	 * @throws NoExisteElementosException
+	 */
+	public int darPuntuacionProducto(int idProducto) throws NoExisteElementosException {
+
+		int puntuacion = administradorDelegado.darPuntuacionProducto(idProducto).intValue();
+
+		return puntuacion;
+
+	}
 }
