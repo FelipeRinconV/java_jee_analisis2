@@ -54,12 +54,14 @@ public class Usuario extends Persona implements Serializable {
 	 */
 	public static final String PRODUCTOS_ASOCIADOS = "productos_asociados";
 
+	//SOLO ME CENTRO ACA
 	@OneToMany(mappedBy = "usuario")
 	private List<Producto> productos;
 
 	@OneToMany(mappedBy = "usuario")
 	private List<Calificacion> calificaciones;
 
+	//HASTA ACA PARA LA ENTREGA DE ESCRITORIO
 	@OneToMany(mappedBy = "usuario")
 	private List<Compra> compras;
 
@@ -118,4 +120,13 @@ public class Usuario extends Persona implements Serializable {
 		return "Usuario [cedula=" + getCedula() +" nombre: " +getNombreCompleto()  + "]";
 	}
 
+	public List<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
+	
 }

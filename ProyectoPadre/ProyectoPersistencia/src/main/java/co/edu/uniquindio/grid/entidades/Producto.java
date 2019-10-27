@@ -23,12 +23,10 @@ import javax.persistence.*;
 		@NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSO, query = "select p From Producto p order by p.precio desc"),
 		@NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSOS_POR_TIPO, query = "select P  from Producto p  where p.tipo=:tipo  order by p.precio desc"),
 		@NamedQuery(name = Producto.PRODUCTOS_DISPONIBLES, query = "select p From Producto p where p.disponibilidad=TRUE and p.fechaLimite <= :fechaActual"),
-        @NamedQuery(name = Producto.PRODUCTO_POR_ID,query = "select p from Producto p where p.idProducto=:id"),
-        @NamedQuery(name = Producto.LISTAR_TODOS_LOS_PRODUCTOS,query = "select p from Producto p "),
-        @NamedQuery(name = Producto.PRODUCTOS_POR_CATEGORIA,query = "select p From Producto p where p.tipo=:tipo"),
-		
-		                                                                                                                           
-		  
+		@NamedQuery(name = Producto.PRODUCTO_POR_ID, query = "select p from Producto p where p.idProducto=:id"),
+		@NamedQuery(name = Producto.LISTAR_TODOS_LOS_PRODUCTOS, query = "select p from Producto p "),
+		@NamedQuery(name = Producto.PRODUCTOS_POR_CATEGORIA, query = "select p From Producto p where p.tipo=:tipo"),
+
 })
 public class Producto implements Serializable {
 
@@ -38,13 +36,12 @@ public class Producto implements Serializable {
 	/**
 	 * Devuelve un producto en especifico dado su id
 	 */
-	
+
 	private int cantidadProducto;
 
-	
-	public static final String PRODUCTO_POR_ID="producto_por_id";
-	
-	public static final String LISTAR_TODOS_LOS_PRODUCTOS="listar_todos_los_productos";
+	public static final String PRODUCTO_POR_ID = "producto_por_id";
+
+	public static final String LISTAR_TODOS_LOS_PRODUCTOS = "listar_todos_los_productos";
 	/**
 	 * Lista los productos DISPONIBLES segun fecha y cantidad
 	 */
@@ -67,7 +64,6 @@ public class Producto implements Serializable {
 	 */
 	public static final String PRODUCTO_MAS_COSTOSO = "producto_mas_costoso";
 
-	
 	public static final String PRODUCTOS_POR_CATEGORIA = "productos_por_categoria";
 	/**
 	 * Cree una consulta que devuelve el producto más costoso por cada tipo de
@@ -99,8 +95,8 @@ public class Producto implements Serializable {
 	/**
 	 * Lista de las url de las imagenes
 	 */
-	
-    @ElementCollection(fetch = FetchType.EAGER)
+
+	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> urlImagenes;
 
 	@Column(nullable = false, length = 330)
@@ -140,8 +136,6 @@ public class Producto implements Serializable {
 	private List<Comentario> comentarios;
 
 	private static final long serialVersionUID = 1L;
-
-
 
 	public Producto() {
 		super();
@@ -291,7 +285,5 @@ public class Producto implements Serializable {
 	public void setCantidadProducto(int cantidadProducto) {
 		this.cantidadProducto = cantidadProducto;
 	}
-	
-	
 
 }

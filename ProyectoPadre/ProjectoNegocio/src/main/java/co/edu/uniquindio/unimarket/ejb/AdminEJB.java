@@ -444,6 +444,12 @@ public class AdminEJB implements adminEJBRemote {
 			
 	}
 	
+	public void elimnarAsociaciones(Usuario user) {
+		
+		
+		
+	}
+	
 	
 
 }
