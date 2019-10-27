@@ -58,7 +58,7 @@ public class Usuario extends Persona implements Serializable {
 	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
 	private List<Producto> productos;
 
-	@OneToMany(mappedBy = "usuario",orphanRemoval = true)
+	@OneToMany(mappedBy = "usuario",cascade=CascadeType.ALL)
 	private List<Calificacion> calificaciones;
 
 	//HASTA ACA PARA LA ENTREGA DE ESCRITORIO

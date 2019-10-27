@@ -8,6 +8,7 @@ import javax.naming.NamingException;
 import UtilidadesAlert.Utilidades;
 import co.edu.uniquindio.grid.entidades.Categoria;
 import co.edu.uniquindio.grid.entidades.Comentario;
+import co.edu.uniquindio.grid.entidades.Descuento;
 import co.edu.uniquindio.grid.entidades.Persona;
 import co.edu.uniquindio.grid.entidades.Producto;
 import co.edu.uniquindio.grid.entidades.Usuario;
@@ -125,6 +126,9 @@ public class PruebaDelegado implements adminEJBRemote {
 		return productosObservables;
 	}
 	
+
+	
+	
 	/**
 	 * Metodo para llenar una lista observable de productos con la lista de productos que est aen la 
 	 * base de datos
@@ -197,7 +201,7 @@ public class PruebaDelegado implements adminEJBRemote {
 	 * Da la media de puntuacion de los productos
 	 */
 	@Override
-	public Long darPuntuacionProducto(int idProducto) throws NoExisteElementosException {
+	public Double darPuntuacionProducto(int idProducto) throws NoExisteElementosException {
 		return adminEJB.darPuntuacionProducto(idProducto);
 	}
 
@@ -205,6 +209,42 @@ public class PruebaDelegado implements adminEJBRemote {
 	public Producto darProductoPorId(int id) throws NoExisteElementosException {
 		
 		return adminEJB.darProductoPorId(id);
+	}
+
+	@Override
+	public boolean agregarDescuento(Descuento descuento) throws ElementoRepetidoException {
+		// TODO Auto-generated method stub
+		return adminEJB.agregarDescuento(descuento);
+	}
+
+	@Override
+	public boolean eliminarDescuento(int idDescuento) {
+		// TODO Auto-generated method stub
+		return adminEJB.eliminarDescuento(idDescuento);
+	}
+
+	@Override
+	public boolean aplicarDescuento(Descuento descuento) throws NoExisteElementosException {
+		// TODO Auto-generated method stub
+		return adminEJB.aplicarDescuento(descuento);
+	}
+	/**
+	 * Metodo para llenar una lista observable de desceuntos con los descuentos de la base de datos
+	 * @return lista observable de descuentos 
+	 */
+	public ObservableList<DescuentoObsevable> listarDescuentosObservables() {
+		List<Descuento> descuentos = listarDescuento();
+		ObservableList<DescuentoObsevable> descuentosObservables = FXCollections.observableArrayList();
+		for (Descuento desc : descuentos) {
+			descuentosObservables.add(new DescuentoObsevable(desc));
+		}
+		return descuentosObservables;
+	}
+
+	@Override
+	public List<Descuento> listarDescuento() {
+		// TODO Auto-generated method stub
+		return adminEJB.listarDescuento();
 	}
 
 }

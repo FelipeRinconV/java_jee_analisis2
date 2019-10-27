@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
 import co.edu.uniquindio.grid.dto.UsuarioGastosComprasDTO;
 import co.edu.uniquindio.grid.dto.UsuarioRegistrosDTO;
 import co.edu.uniquindio.grid.entidades.*;
+import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 import co.uniquindio.grid.dto.utils.Utilidades;
 
 @RunWith(Arquillian.class)
@@ -369,6 +370,20 @@ public class ConsultasTest {
 		List<Object> compraydetalles = query.getResultList();
 
 		Assert.assertNotNull(compraydetalles);
+
+	}
+
+	@Test()
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "producto.json", "calificacion.json" })
+	public void darPuntuacionProductoTest() {
+
+		TypedQuery<Double> query = entityManager.createNamedQuery(Calificacion.MEDIA_DE_CALIFICACION, Double.class);
+
+		query.setParameter("id", 1);
+		Double puntuacion = query.getSingleResult();
+
+		Assert.assertEquals(new Double(3), puntuacion);
 
 	}
 

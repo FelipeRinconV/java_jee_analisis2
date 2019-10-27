@@ -1,17 +1,14 @@
 package UtilidadesAlert;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+import java.util.Optional;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 
 /**
- * Permite manejar las operaciones generales de la capa de presentacion
+ * Permite mostrar diferentes alertas para informacion y confirmacion de acciones
  * 
- * @author EinerZG
  * @version 1.0
  */
 public final class Utilidades {
@@ -31,23 +28,44 @@ public final class Utilidades {
 	}
 
 	/**
-	 * permite hacer un casting de localDate a Date
 	 * 
-	 * @param localDate que se quiere cambiar
-	 * @return una fecha en formato date
+	 * @param titulo de la ventana de la alerta
+	 * @param cabecera mensaje principal ed la alerta
+	 * @param mensaje mensaje al usuario
+	 * @return true si confirma falso en el caso contrario
 	 */
-	public static Date pasarADate(LocalDate localDate) {
-		return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+	public static boolean mostrarDialogo(String titulo,String cabecera, String mensaje) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle(titulo);
+		alert.setHeaderText(cabecera);
+		alert.setContentText(mensaje);
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+
 	}
 
-	/**
-	 * permite hacer un casting de date a localdate
-	 * 
-	 * @param date que se desea cambiar de formato
-	 * @return una fecha en formato local date
-	 */
-	public static LocalDate pasarALocalDate(Date date) {
-		return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+	public static boolean mostrarDialogo(String titulo, String mensaje) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle(titulo);
+		alert.setContentText(mensaje);
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+
 	}
+
 
 }

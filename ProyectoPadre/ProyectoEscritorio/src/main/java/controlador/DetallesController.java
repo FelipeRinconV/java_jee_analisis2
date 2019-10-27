@@ -196,14 +196,13 @@ public class DetallesController {
 			txtPrecio.setText("$ " + darTextoEnFormatoDePesos(String.valueOf(producto.getPrecio())));
 
 			txtNombre.setText(producto.getNombre());
-
-//		
-//		try {
-//			txtPuntuacion.setText("Puntuacion: " + manejador.darPuntuacionProducto(producto.getIdProducto()));
-//		} catch (NoExisteElementosException e) {
-//			// TODO Auto-generated catch block
-//			Utilidades.mostrarMensaje("ERROR", "No hay productos registrados con este id");
-//		}
+		
+		try {
+			txtPuntuacion.setText("Puntuacion: " + manejador.darPuntuacionProducto(producto.getIdProducto()));
+		} catch (NoExisteElementosException e) {
+			// TODO Auto-generated catch block
+			Utilidades.mostrarMensaje("ERROR", "No hay productos registrados con este id");
+		}
 
 			txtCantidad.setText("Cantidad disponible: " + producto.getCantidadProducto());
 

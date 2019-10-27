@@ -18,6 +18,11 @@ public class OpcionesAdministradorController {
 	@FXML
 	private ResourceBundle resources;
 
+
+    @FXML
+    private JFXButton btnPricnipal;
+
+	
 	@FXML
 	private URL location;
 
@@ -27,20 +32,27 @@ public class OpcionesAdministradorController {
 	@FXML
 	private Button productos;
 
-	
+	@FXML
+	void cargarPrincipal(ActionEvent event) {
+		
+		manejador.cargarHomeDescuetos();
+
+	}
+
 	/*
 	 * Metodo para cargar las escena de productos a la ventana principal del admin
 	 */
 	@FXML
 	void abrirEscenaProductos(ActionEvent event) {
 
-
 		manejador.cargarEscenarioProductos();
 
 	}
 
 	/**
-	 * Metodo para cargar la escena de listar usuario a la ventana principal del admin
+	 * Metodo para cargar la escena de listar usuario a la ventana principal del
+	 * admin
+	 * 
 	 * @param event
 	 */
 	@FXML

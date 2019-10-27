@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import org.glassfish.internal.api.Public;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -121,5 +122,8 @@ public class adminEjbTest {
 		}
 
 	}
+	
+
+
 
 }

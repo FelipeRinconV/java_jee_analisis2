@@ -45,5 +45,15 @@ public interface adminEJBRemote {
 	
 	void recuperarCuenta(String correo) throws NoExisteElementosException;
 	
-	Long darPuntuacionProducto(int idProducto) throws NoExisteElementosException;
+	Double darPuntuacionProducto(int idProducto) throws NoExisteElementosException;
+	
+	//INICIO DE METODOS DE FUNCIONALIDAD UNICA
+	
+	boolean agregarDescuento(Descuento descuento)throws ElementoRepetidoException;
+	
+	boolean  eliminarDescuento(int idDescuento);
+	
+	boolean aplicarDescuento(Descuento descuento) throws NoExisteElementosException;
+	
+	List <Descuento> listarDescuento();
 }

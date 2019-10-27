@@ -11,6 +11,7 @@ public class VentanaOpcionesController {
 
     @FXML
     private Button btnCrudUsuarios;
+    
 
     @FXML
     private Button btnCrudProductos;

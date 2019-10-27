@@ -1,0 +1,25 @@
+{
+	"Descuentos": [
+		{
+			"ID_DESCUENTO": 1,
+			"ACTIVO":1,
+			"CATEGORIA": "TECNOLOGIA",
+			"PORCENTAJE": 10,
+			"ADMINISTRADOR_CEDULA": "500"
+		},
+		{
+	     	"ID_DESCUENTO": 2,
+			"ACTIVO":1,
+			"CATEGORIA": "MODA",
+			"PORCENTAJE": 10,
+			"ADMINISTRADOR_CEDULA": "500"
+		},
+		{
+			"ID_DESCUENTO": 2,
+			"ACTIVO":0,
+			"CATEGORIA": "TECNOLOGIA",
+			"PORCENTAJE": 10,
+			"ADMINISTRADOR_CEDULA": "500"
+		}
+	]
+}

@@ -229,35 +229,34 @@ public class SetupEJB {
 			Calificacion calificacionA50 = new Calificacion();
 
 			// Se crean las calificaciones
-			calificacionMac.setCalificacion(5);
-			calificacionNike.setCalificacion(2);
-			calificacionMonitor.setCalificacion(4);
-			calificacionA50.setCalificacion(1);
+			calificacionA50.setCalificacion(2);
+			calificacionA50.setProducto(a50);
+			calificacionA50.setUsuario(UserAndrea);
+			calificacionesAndrea.add(calificacionA50);
+			UserAndrea.setCalificaciones(calificacionesAndrea);
+			a50.setCalificaciones(calificacionesAndrea);
+			
 
 			// Asociasiones de producto y usuarios en calificaciones de andra y mac
-			calificacionMac.setUsuario(UserAndrea);
-			calificacionMac.setProducto(mac);
-			calificacionesAndrea.add(calificacionMac);
-			UserAndrea.setCalificaciones(calificacionesAndrea);
-			mac.setCalificaciones(calificacionesAndrea);
+			calificacionNike.setCalificacion(3);
+			calificacionNike.setUsuario(UserDiana);
+			calificacionNike.setProducto(nike);
+			calificacionesDiana.add(calificacionNike);
+			UserDiana.setCalificaciones(calificacionesDiana);
+			nike.setCalificaciones(calificacionesAndrea);
 
 			// Asociasiones de producto y usuarios en calificaciones de felipe,a50 y nike
-			calificacionA50.setProducto(a50);
-			calificacionA50.setUsuario(Userfelipe);
-			calificacionNike.setProducto(nike);
-			calificacionNike.setUsuario(Userfelipe);
-			calificacionesFelipe.add(calificacionNike);
-			calificacionesFelipe.add(calificacionA50);
-			Userfelipe.setCalificaciones(calificacionesFelipe);
-			a50.setCalificaciones(calificacionesFelipe);
-			nike.setCalificaciones(calificacionesFelipe);
-
-			// Asociasiones de producto y usuarios en calificaciones de Diana y monitor
-			calificacionMonitor.setUsuario(UserDiana);
+			calificacionMac.setCalificacion(5);
+			calificacionMonitor.setCalificacion(2);
+			calificacionMac.setProducto(mac);
+			calificacionMac.setUsuario(Userfelipe);
 			calificacionMonitor.setProducto(monitor);
-			calificacionesDiana.add(calificacionMonitor);
-			UserDiana.setCalificaciones(calificacionesDiana);
-			monitor.setCalificaciones(calificacionesDiana);
+			calificacionMonitor.setUsuario(Userfelipe);
+			calificacionesFelipe.add(calificacionMac);
+			calificacionesFelipe.add(calificacionMonitor);
+			Userfelipe.setCalificaciones(calificacionesFelipe);
+			mac.setCalificaciones(calificacionesFelipe);
+			monitor.setCalificaciones(calificacionesFelipe);
 
 			// Persistimos las calificaciones
 			entityManager.persist(calificacionA50);

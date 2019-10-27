@@ -88,9 +88,8 @@ public class ModeloTest {
 
 		producto.setIdProducto(80);
 
-		List<String> imagenes=new ArrayList<String>();
+		List<String> imagenes = new ArrayList<String>();
 		producto.setUrlImagenes(imagenes);
-
 
 		producto.setDisponibilidad(true);
 
@@ -268,6 +267,28 @@ public class ModeloTest {
 
 	}
 
+	// Metodo de agregar un decuento
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void agregarDescuento() {
+
+		Administrador empleado = entityManager.find(Administrador.class, "500");
+
+		Descuento descuento = new Descuento();
+
+		descuento.setActivo(true);
+		descuento.setCategoria(Categoria.LIBROS);
+		descuento.setPorcentaje(20);
+		descuento.setAdministrador(empleado);
+		descuento.setId(1);
+
+		entityManager.persist(descuento);
+
+		Assert.assertNotNull(entityManager.find(Descuento.class, 1));
+
+	}
+
 	// METODOS ELIMINAR ENTIDADES
 	// ****************************
 
@@ -321,7 +342,7 @@ public class ModeloTest {
 
 		producto.setIdProducto(22);
 
-		List<String> imagenes=new ArrayList<String>();
+		List<String> imagenes = new ArrayList<String>();
 		producto.setUrlImagenes(imagenes);
 
 		producto.setDisponibilidad(true);
@@ -581,7 +602,7 @@ public class ModeloTest {
 
 		producto.setIdProducto(10);
 
-		List<String> imagenes=new ArrayList<String>();
+		List<String> imagenes = new ArrayList<String>();
 		producto.setUrlImagenes(imagenes);
 
 		producto.setDisponibilidad(true);
@@ -601,7 +622,7 @@ public class ModeloTest {
 		Assert.assertEquals("mejor mac del mercado", pCambio.getDescripcion());
 
 		pCambio.setDescripcion("NUEVA");
-		
+
 		entityManager.merge(pCambio);
 
 		Assert.assertEquals("NUEVA", pCambio.getDescripcion());
@@ -893,6 +914,5 @@ public class ModeloTest {
 		Assert.assertNotNull(compra);
 
 	}
-
 
 }

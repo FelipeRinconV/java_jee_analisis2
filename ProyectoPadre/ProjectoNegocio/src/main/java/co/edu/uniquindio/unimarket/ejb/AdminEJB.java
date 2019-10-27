@@ -409,15 +409,17 @@ public class AdminEJB implements adminEJBRemote {
 	 * @param idProducto
 	 * @return
 	 */
-	public Long darPuntuacionProducto(int idProducto) throws NoExisteElementosException {
+	public Double darPuntuacionProducto(int idProducto) throws NoExisteElementosException {
 
 		Producto producto = entytiManager.find(Producto.class, idProducto);
 
 		if (producto != null) {
 
-			TypedQuery<Long> query = entytiManager.createNamedQuery(Calificacion.MEDIA_DE_CALIFICACION, Long.class);
+			TypedQuery<Double> query = entytiManager.createNamedQuery(Calificacion.MEDIA_DE_CALIFICACION, Double.class);
 
-			Long puntuacion = query.getSingleResult();
+			query.setParameter("id", idProducto);
+
+			Double puntuacion = query.getSingleResult();
 
 			return puntuacion;
 		} else {
@@ -430,26 +432,101 @@ public class AdminEJB implements adminEJBRemote {
 
 	@Override
 	public Producto darProductoPorId(int id) throws NoExisteElementosException {
-		
-		Producto p =entytiManager.find(Producto.class, id);
-		
-		if(p!=null) {
-			
+
+		Producto p = entytiManager.find(Producto.class, id);
+
+		if (p != null) {
+
 			return p;
-		}else {
-			
+		} else {
+
 			throw new NoExisteElementosException("El id no corresponde a un producto registrado");
 		}
-			
-			
+
 	}
-	
+
 	public void elimnarAsociaciones(Usuario user) {
-		
-		
-		
+
 	}
-	
-	
+
+	// ------------ FUNCIONALIDAD UNICA
+	@Override
+	public boolean agregarDescuento(Descuento descuento) throws ElementoRepetidoException {
+
+		try {
+			entytiManager.persist(descuento);
+			return true;
+		} catch (Exception e) {
+			// TODO: dle exception
+			return false;
+		}
+
+	}
+
+	@Override
+	public boolean eliminarDescuento(int idDescuento) {
+
+		Descuento d = entytiManager.find(Descuento.class, idDescuento);
+
+		if (d != null) {
+
+			entytiManager.remove(d);
+			return true;
+
+		} else {
+
+			return false;
+
+		}
+
+	}
+
+	@Override
+	public boolean aplicarDescuento(Descuento descuento) throws NoExisteElementosException {
+
+		TypedQuery<Producto> query = entytiManager.createNamedQuery(Producto.PRODUCTOS_POR_CATEGORIA, Producto.class);
+
+		query.setParameter("tipo", descuento.getCategoria());
+
+		List<Producto> productos = query.getResultList();
+
+		if (productos.isEmpty()) {
+
+			throw new NoExisteElementosException("No hay productos por la categoria aplicada");
+
+		} else {
+
+			for (Producto p : productos) {
+
+				p = entytiManager.find(Producto.class, p.getIdProducto());
+
+				double procentaje = descuento.getPorcentaje() / 100;
+
+				// ACTUALIZAMOS LOS PRECIOS DE LOS PRODUCTOS DE LA CATEGORIA CORRESPONDIENTE
+				p.setPrecio(p.getPrecio() - (p.getPrecio() * (procentaje)));
+
+				entytiManager.merge(p);
+
+			}
+
+			return true;
+
+		}
+
+	}
+
+	/**
+	 *Metodo para devolver una lista con TODOS los descuentos que se encuentrene en la base de datos
+	 */
+	@Override
+	public List<Descuento> listarDescuento() {
+
+		TypedQuery<Descuento> query = entytiManager.createNamedQuery(Descuento.LISTAR_DESCUENTOS, Descuento.class);
+
+		List<Descuento> descuentos = query.getResultList();
+
+		return descuentos;
+
+	}
 
 }

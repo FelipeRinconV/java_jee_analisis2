@@ -103,7 +103,7 @@ public class Producto implements Serializable {
 	private String descripcion;
 
 	@Column(nullable = false)
-	private int precio;
+	private double precio;
 
 	@Column(nullable = false)
 	private boolean disponibilidad;
@@ -123,7 +123,7 @@ public class Producto implements Serializable {
 	/**
 	 * La media de las califiaciones es su puntuacion
 	 */
-	@OneToMany(mappedBy = "producto",orphanRemoval = true)
+	@OneToMany(mappedBy = "producto", orphanRemoval = true)
 	private List<Calificacion> calificaciones;
 
 	@OneToMany(mappedBy = "producto")
@@ -165,11 +165,11 @@ public class Producto implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public int getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(int precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 

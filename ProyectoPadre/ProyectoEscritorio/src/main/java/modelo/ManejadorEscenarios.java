@@ -12,6 +12,7 @@ import co.edu.uniquindio.grid.entidades.Producto;
 import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
 import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
+import controlador.DescuentosController;
 import controlador.DetallesController;
 import controlador.EdicionUsuarioController;
 import controlador.ListaProdcutosController;
@@ -83,6 +84,12 @@ public class ManejadorEscenarios {
 	private ObservableList<ProductoObservable> productosObservables;
 
 	/**
+	 * Para almacenar los descuentos observables
+	 */
+
+	private ObservableList<DescuentoObsevable> descuentosObservables;
+
+	/**
 	 * COnexion con la capa de negocio
 	 */
 
@@ -110,6 +117,7 @@ public class ManejadorEscenarios {
 		administradorDelegado = PruebaDelegado.pruebaDelegado;
 		usuariosObservables = FXCollections.observableArrayList();
 		productosObservables = FXCollections.observableArrayList();
+		descuentosObservables = FXCollections.observableArrayList();
 
 		try {
 			// se inicializa el escenario
@@ -191,7 +199,7 @@ public class ManejadorEscenarios {
 			controladorAdministrador.setManejador(this);
 
 			// Se carga la escena por defecto a la ventana de admin la de listar usuarios
-			cargarEscenarioUsuarios();
+			cargarHomeDescuetos();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -219,6 +227,32 @@ public class ManejadorEscenarios {
 
 			// Se le pasa el manejador al controlador
 			listarUsuariosControlador.setManejador(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	// Carga la escena de home y detalles a la ventana del admin
+	public void cargarHomeDescuetos() {
+
+		try {
+
+			descuentosObservables = administradorDelegado.listarDescuentosObservables();
+
+			FXMLLoader lodaer = new FXMLLoader();
+			// PONER LA RUTA DE LA VISTA
+			lodaer.setLocation(getClass().getResource("/home.fxml"));
+
+			BorderPane panelAncho = (BorderPane) lodaer.load();
+			borderPanelAdmin.setCenter(panelAncho);
+
+			// Se carga el controlador
+			DescuentosController detallesHomeController = lodaer.getController();
+
+			// Se le pasa el manejador al controlador
+			detallesHomeController.setManejador(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -352,7 +386,7 @@ public class ManejadorEscenarios {
 
 			DetallesController usuarioControlador = loader.getController();
 			usuarioControlador.setManejador(this);
-			usuarioControlador.setProducto(productoObservable);	
+			usuarioControlador.setProducto(productoObservable);
 			usuarioControlador.setStage(escenarioAgregar);
 
 			escenarioAgregar.setResizable(false);

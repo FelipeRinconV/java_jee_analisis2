@@ -1,29 +1,24 @@
 package controlador;
 
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
-
-import com.jfoenix.controls.JFXButton;
-import com.oracle.wls.shaded.org.apache.xalan.xsltc.compiler.util.Util;
 
 import UtilidadesAlert.Utilidades;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart.Data;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
+import modelo.DescuentoObsevable;
 import modelo.ManejadorEscenarios;
 import modelo.UsuarioObservable;
 
-public class ListaUsuariosController {
+public class DescuentosController {
+
+	private ManejadorEscenarios manejador;
 
 	@FXML
 	private ResourceBundle resources;
@@ -32,39 +27,60 @@ public class ListaUsuariosController {
 	private URL location;
 
 	@FXML
-	private TableView<UsuarioObservable> tablaUsuarios;
+	private TableView<DescuentoObsevable> tablaDescuenos;
 
 	@FXML
-	private TableColumn<UsuarioObservable, String> columnaNombre;
+	private TableColumn<DescuentoObsevable, String> columnaId;
 
 	@FXML
-	private TableColumn<UsuarioObservable, String> columnaCorreo;
+	private TableColumn<DescuentoObsevable, String> columnaActivo;
 
 	@FXML
-	private TableColumn<UsuarioObservable, String> columnaCedula;
+	private TableColumn<DescuentoObsevable, String> columnaCategoria;
 
 	@FXML
-	private TableColumn<UsuarioObservable, String> columnaEmail;
+	private TableColumn<DescuentoObsevable, String> columnaPorcentaje;
 
 	@FXML
-	private TableColumn<UsuarioObservable, String> columnaDireccion;
+	private TableColumn<DescuentoObsevable, String> columnaCedula;
 
 	@FXML
-	private JFXButton btnNuevoUsuario;
-
-	/**
-	 * REpresenta el escenario donde se agrega la vista
-	 */
-	private Stage escenarioListaUsuarios;
-
-	private ManejadorEscenarios manejador;
+	private Button btnAgregar;
 
 	@FXML
-	void agregarUsuario(ActionEvent event) {
+	private Text txtUsuarios;
 
-		manejador.cargarEscenaAgregarUsuario();
-		tablaUsuarios.refresh();
+	@FXML
+	private Text txtProductos;
 
+	@FXML
+	private Text txtCalificaciones;
+
+	@FXML
+	void agregarDescuencto(ActionEvent event) {
+
+	}
+
+	@FXML
+	void initialize() {
+		assert columnaId != null : "fx:id=\"columnaId\" was not injected: check your FXML file 'home.fxml'.";
+		assert columnaActivo != null : "fx:id=\"columnaActivo\" was not injected: check your FXML file 'home.fxml'.";
+		assert columnaCategoria != null : "fx:id=\"columnaCategoria\" was not injected: check your FXML file 'home.fxml'.";
+		assert columnaPorcentaje != null : "fx:id=\"columnaPorcentaje\" was not injected: check your FXML file 'home.fxml'.";
+		assert columnaCedula != null : "fx:id=\"columnaCedula\" was not injected: check your FXML file 'home.fxml'.";
+		assert btnAgregar != null : "fx:id=\"btnAgregar\" was not injected: check your FXML file 'home.fxml'.";
+		assert txtUsuarios != null : "fx:id=\"txtUsuarios\" was not injected: check your FXML file 'home.fxml'.";
+		assert txtProductos != null : "fx:id=\"txtProductos\" was not injected: check your FXML file 'home.fxml'.";
+		assert txtCalificaciones != null : "fx:id=\"txtCalificaciones\" was not injected: check your FXML file 'home.fxml'.";
+
+	}
+
+	public ManejadorEscenarios getManejador() {
+		return manejador;
+	}
+
+	public void setManejador(ManejadorEscenarios manejador) {
+		this.manejador = manejador;
 	}
 
 	/**
@@ -103,7 +119,7 @@ public class ListaUsuariosController {
 									manejador.eliminarDeListaObservable(data);
 
 									Utilidades.mostrarMensaje("Operacion", "Eliminacion exitosa");
-									tablaUsuarios.refresh();
+									tablaDescuenos.refresh();
 								} else {
 
 									Utilidades.mostrarMensaje("Operacion", "La cedula no pertenece a una persona");
@@ -130,7 +146,7 @@ public class ListaUsuariosController {
 
 		colBtn.setCellFactory(cellFactory);
 
-		tablaUsuarios.getColumns().add(colBtn);
+		// tablaDescuenos.getColumns().add(colBtn);
 
 	}
 
@@ -165,7 +181,7 @@ public class ListaUsuariosController {
 
 							// Se actualizan los usaurios de la tabla
 							manejador.actualizarUsuariosObservables();
-							tablaUsuarios.setItems(manejador.getUsuariosObservables());
+							// tablaDescuenos.setItems(manejador.getUsuariosObservables());
 
 						});
 					}
@@ -186,52 +202,7 @@ public class ListaUsuariosController {
 
 		colBtn.setCellFactory(cellFactory);
 
-		tablaUsuarios.getColumns().add(colBtn);
-
-	}
-
-	@FXML
-	void initialize() {
-
-		columnaCedula.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getCedula());
-		columnaCorreo.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getEmail());
-		columnaNombre.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getNombreCompleto());
-		columnaDireccion.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getDireccion());
-
-		addBotonEliminar();
-		addBotonModificar();
-
-		// cuando se seleccione un usuario se ejecuta el metodo
-//		tablaUsuarios.getSelectionModel().selectedItemProperty()
-//				.addListener((observable, oldValue, newValue) -> mostrarDetalleUsuario(newValue));
-
-	}
-
-	public TableView<UsuarioObservable> getTablaUsuarios() {
-		return tablaUsuarios;
-	}
-
-	public void setTablaUsuarios(TableView<UsuarioObservable> tablaUsuarios) {
-		this.tablaUsuarios = tablaUsuarios;
-	}
-
-	public ManejadorEscenarios getManejador() {
-		return manejador;
-	}
-
-	public void setManejador(ManejadorEscenarios manejador) {
-
-		this.manejador = manejador;
-
-		tablaUsuarios.setItems(manejador.getUsuariosObservables());
-	}
-
-	public Stage getEscenarioListaUsuarios() {
-		return escenarioListaUsuarios;
-	}
-
-	public void setEscenarioListaUsuarios(Stage escenarioListaUsuarios) {
-		this.escenarioListaUsuarios = escenarioListaUsuarios;
+		// tablaDescuenos.getColumns().add(colBtn);
 
 	}
 
