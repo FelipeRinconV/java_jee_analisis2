@@ -123,7 +123,7 @@ public class Producto implements Serializable {
 	/**
 	 * La media de las califiaciones es su puntuacion
 	 */
-	@OneToMany(mappedBy = "producto")
+	@OneToMany(mappedBy = "producto",orphanRemoval = true)
 	private List<Calificacion> calificaciones;
 
 	@OneToMany(mappedBy = "producto")

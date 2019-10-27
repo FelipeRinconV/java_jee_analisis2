@@ -55,10 +55,10 @@ public class Usuario extends Persona implements Serializable {
 	public static final String PRODUCTOS_ASOCIADOS = "productos_asociados";
 
 	//SOLO ME CENTRO ACA
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
 	private List<Producto> productos;
 
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario",orphanRemoval = true)
 	private List<Calificacion> calificaciones;
 
 	//HASTA ACA PARA LA ENTREGA DE ESCRITORIO
@@ -72,13 +72,10 @@ public class Usuario extends Persona implements Serializable {
 	private List<Comentario> comentario;
 
 
-
-
 	public Usuario() {
 		super();
 	}
 
-	//SET Y GET
 	public List<Calificacion> getCalificaciones() {
 		return calificaciones;
 	}
