@@ -64,19 +64,10 @@ public class ListaProdcutosController {
 	 * 
 	 * @param event
 	 */
-	
-	
 
-    @FXML
-    void cbxCategoriaBuscar(ActionEvent event) {
-
-    }
-	
-	
 	@FXML
-	void filtrarProductos(ActionEvent event) {
+	void cbxCategoriaBuscar(ActionEvent event) {
 
-		
 		int index = cbxCategoria.getSelectionModel().getSelectedIndex();
 
 		if (index >= 0) {
@@ -129,6 +120,11 @@ public class ListaProdcutosController {
 	}
 
 	@FXML
+	void filtrarProductos(ActionEvent event) {
+
+	}
+
+	@FXML
 	void verDetalleProducto(ActionEvent event) {
 
 		manejador.cargarEscenaDetallesProductos(producto);
@@ -168,12 +164,9 @@ public class ListaProdcutosController {
 	 */
 	private void activarDetallesProducto(ProductoObservable productoObservable) {
 
-		
 		btnDetalles.setDisable(false);
 
 		this.producto = productoObservable;
-		
-		
 
 	}
 
