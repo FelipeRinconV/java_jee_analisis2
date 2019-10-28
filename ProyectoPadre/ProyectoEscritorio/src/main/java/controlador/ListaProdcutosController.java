@@ -64,6 +64,15 @@ public class ListaProdcutosController {
 	 * 
 	 * @param event
 	 */
+	
+	
+
+    @FXML
+    void cbxCategoriaBuscar(ActionEvent event) {
+
+    }
+	
+	
 	@FXML
 	void filtrarProductos(ActionEvent event) {
 
