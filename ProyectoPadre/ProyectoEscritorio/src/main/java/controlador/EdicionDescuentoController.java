@@ -6,13 +6,13 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
 import UtilidadesAlert.Utilidades;
+import co.edu.uniquindio.grid.entidades.Administrador;
 import co.edu.uniquindio.grid.entidades.Categoria;
 import co.edu.uniquindio.grid.entidades.Descuento;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -86,13 +86,22 @@ public class EdicionDescuentoController {
 			}
 
 			try {
+
+				
+
+				// Agregamos el administrado que ingreso el descuento
+				Administrador adminActual = (Administrador) manejador.getAdmin();
+				desc.setAdministrador(adminActual);
+				manejador.agregarDescuentoObserbable(desc);
 				manejador.agregarDescuento(desc);
+
+				Utilidades.mostrarMensaje("exito", "El descuento ah sido agregado con exito");
+				stage.close();
+
 			} catch (ElementoRepetidoException e) {
 				// TODO Auto-generated catch block
 				Utilidades.mostrarMensaje("ELEMENTO REPETIDO", "");
 			}
-
-			Utilidades.mostrarMensaje("exito", "El descuento ah sido agregado con exito");
 
 		} else {
 

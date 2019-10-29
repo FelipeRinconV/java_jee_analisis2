@@ -66,8 +66,19 @@ public class DescuentosController {
 	@FXML
 	void initialize() {
 		
+		
+		
+
 		addBotonEliminar();
 		addBotonModificar();
+		
+		
+		columnaActivo.setCellValueFactory(descuento -> descuento.getValue().getActivo());
+		columnaCategoria.setCellValueFactory(descuento -> descuento.getValue().getCategoria());
+		columnaPorcentaje.setCellValueFactory(descuento -> descuento.getValue().getProcentaje());
+		columnaCedula.setCellValueFactory(descuento -> descuento.getValue().getCedula_administrador());
+	    columnaId.setCellValueFactory(descuento -> descuento.getValue().getIdDescuento());
+		
 		assert columnaId != null : "fx:id=\"columnaId\" was not injected: check your FXML file 'home.fxml'.";
 		assert columnaActivo != null : "fx:id=\"columnaActivo\" was not injected: check your FXML file 'home.fxml'.";
 		assert columnaCategoria != null : "fx:id=\"columnaCategoria\" was not injected: check your FXML file 'home.fxml'.";
@@ -85,6 +96,9 @@ public class DescuentosController {
 	}
 
 	public void setManejador(ManejadorEscenarios manejador) {
+
+		tablaDescuenos.setItems(manejador.getDescuentosObservables());
+
 		this.manejador = manejador;
 	}
 
@@ -151,7 +165,7 @@ public class DescuentosController {
 
 		colBtn.setCellFactory(cellFactory);
 
-		// tablaDescuenos.getColumns().add(colBtn);
+		tablaDescuenos.getColumns().add(colBtn);
 
 	}
 
@@ -207,7 +221,7 @@ public class DescuentosController {
 
 		colBtn.setCellFactory(cellFactory);
 
-		// tablaDescuenos.getColumns().add(colBtn);
+		tablaDescuenos.getColumns().add(colBtn);
 
 	}
 

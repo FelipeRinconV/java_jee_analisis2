@@ -44,13 +44,9 @@ import javafx.stage.Stage;
  */
 public class ManejadorEscenarios {
 
-	
-	
-	
-	//El administrados que se encuentra en sesion 
+	// El administrados que se encuentra en sesion
 	private Persona admin;
-	
-	
+
 	/*
 	 * Variable para guardar el ancho de pantalla donde se ejecute la aplicacion
 	 */
@@ -160,6 +156,9 @@ public class ManejadorEscenarios {
 	public void cargarSceneaInicial() {
 
 		try {
+
+			descuentosObservables = administradorDelegado.listarDescuentosObservables();
+
 			FXMLLoader loader2 = new FXMLLoader();
 			// PONER LA RUTA DE LA VISTA
 			loader2.setLocation(getClass().getResource("/ventanaIniciarSesion.fxml"));
@@ -474,8 +473,6 @@ public class ManejadorEscenarios {
 		escenarioRecuperarCuenta.showAndWait();
 
 	}
-	
-	
 
 	public Persona getAdmin() {
 		return admin;
@@ -576,6 +573,19 @@ public class ManejadorEscenarios {
 	}
 
 	/**
+	 * Agrega un descuento observable paraactualizar la tabla de descuentos
+	 * 
+	 * @param desc
+	 */
+	public void agregarDescuentoObserbable(Descuento desc) {
+
+		DescuentoObsevable nuevoDescuento = new DescuentoObsevable(desc);
+
+		descuentosObservables.add(nuevoDescuento);
+
+	}
+
+	/**
 	 * Elimina un usuario dada su cedula
 	 * 
 	 * @param usuario
@@ -603,6 +613,18 @@ public class ManejadorEscenarios {
 	public void eliminarDeListaObservable(UsuarioObservable user) {
 
 		usuariosObservables.remove(user);
+
+	}
+
+	/**
+	 * Metodo que remnueve de la lista de descuentos observable cuando se elimina de
+	 * la tabla
+	 * 
+	 * @param desc Descuento observable a eliminar
+	 */
+	public void eliminarDescuentoObservable(DescuentoObsevable desc) {
+
+		descuentosObservables.remove(desc);
 
 	}
 
@@ -649,6 +671,15 @@ public class ManejadorEscenarios {
 	public void actualizarUsuariosObservables() {
 
 		usuariosObservables = administradorDelegado.listarUsuariosObservables();
+
+	}
+
+	/**
+	 * Actualiza los descuentos observables
+	 */
+	public void actualizarDescuentosObservables() {
+
+		descuentosObservables = administradorDelegado.listarDescuentosObservables();
 
 	}
 
@@ -704,17 +735,19 @@ public class ManejadorEscenarios {
 	 */
 	public void agregarDescuento(Descuento descuento) throws ElementoRepetidoException {
 
-		
-		//Agregamos el administrado que ingreso el descuento 
-		Administrador adminActual=(Administrador) admin;
-		descuento.setAdministrador(adminActual);
-		
-		
-		//Registramos el descuento
+
+		// Registramos el descuento
 		administradorDelegado.agregarDescuento(descuento);
 
 	}
-	
+
+	public ObservableList<DescuentoObsevable> getDescuentosObservables() {
+		return descuentosObservables;
+	}
+
+	public void setDescuentosObservables(ObservableList<DescuentoObsevable> descuentosObservables) {
+		this.descuentosObservables = descuentosObservables;
+	}
 	
 	
 
