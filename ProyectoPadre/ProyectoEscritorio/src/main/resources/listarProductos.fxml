@@ -67,14 +67,14 @@
                      <children>
                         <HBox alignment="CENTER" layoutX="230.0" layoutY="-11.0" prefHeight="89.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <JFXButton fx:id="btnFiltrar" disable="true" onAction="#filtrarProductos" style="-fx-background-color: #303b4e;" text="Filtrar" textFill="#f4f4f4">
+                              <Text fill="#303b4e" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione la categoria:">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </JFXButton>
+                              </Text>
                               <JFXComboBox fx:id="cbxCategoria" onAction="#cbxCategoriaBuscar" prefHeight="26.0" prefWidth="220.0" promptText="Categoria" />
                            </children>
                         </HBox>

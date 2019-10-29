@@ -98,6 +98,9 @@ public class DescuentosController {
 
 		manejador.desactivarDescuento(descuentoSeleccionado);
 
+		Utilidades.mostrarMensaje("EXITO",
+				"El deecuento con el id: " + descuentoSeleccionado.getId() + "fue desactivado");
+
 	}
 
 	@FXML

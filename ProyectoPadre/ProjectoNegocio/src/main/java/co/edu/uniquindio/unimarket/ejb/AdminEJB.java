@@ -580,6 +580,7 @@ public class AdminEJB implements adminEJBRemote {
 		} else {
 
 			if (descuento.isActivo()) {
+
 				for (Producto p : productos) {
 
 					p = entytiManager.find(Producto.class, p.getIdProducto());
@@ -592,6 +593,12 @@ public class AdminEJB implements adminEJBRemote {
 					entytiManager.merge(p);
 
 				}
+
+				Descuento desc = entytiManager.find(Descuento.class, descuento.getId());
+
+				desc.setActivo(false);
+
+				entytiManager.merge(desc);
 			}
 
 			return true;

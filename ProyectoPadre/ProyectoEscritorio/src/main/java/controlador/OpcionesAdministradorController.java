@@ -46,11 +46,15 @@ public class OpcionesAdministradorController {
 	@FXML
 	void cerrarSesion(ActionEvent event) {
 
-		manejador.getEscenarioAdmin().close();
+		if (Utilidades.mostrarDialogo("CONFIRMACION", "Se cerrara la sesion actual", "")) {
 
-		Stage stage = new Stage();
+			manejador.getEscenarioAdmin().close();
 
-		new ManejadorEscenarios(stage);
+			Stage stage = new Stage();
+
+			new ManejadorEscenarios(stage);
+
+		}
 	}
 
 	@FXML
