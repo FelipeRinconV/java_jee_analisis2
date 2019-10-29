@@ -3,6 +3,7 @@ package modelo;
 import java.awt.Toolkit;
 import java.io.IOException;
 
+import com.oracle.wls.shaded.org.apache.bcel.generic.RETURN;
 import com.sun.enterprise.module.bootstrap.Main;
 
 import UtilidadesAlert.Utilidades;
@@ -47,14 +48,7 @@ public class ManejadorEscenarios {
 	// El administrados que se encuentra en sesion
 	private Persona admin;
 
-	/*
-	 * Variable para guardar el ancho de pantalla donde se ejecute la aplicacion
-	 */
-	private int anchoPantalla;
-	/*
-	 * Variable para guardar el largo de la pantalla donde se ejecute la aplicacion
-	 */
-	private int largoPantalla;
+
 	/**
 	 * Contenedor principal de la gui
 	 */
@@ -110,13 +104,7 @@ public class ManejadorEscenarios {
 
 	public ManejadorEscenarios(Stage escenario) {
 
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-		// Se obtiene el ancho de la pantalla
-		anchoPantalla = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-
-		// Se obtiene el largo de la pantalla
-		largoPantalla = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 
 		this.escenario = escenario;
 
@@ -490,6 +478,17 @@ public class ManejadorEscenarios {
 		this.escenario = escenario;
 	}
 
+	
+	
+	
+	public Stage getEscenarioAdmin() {
+		return escenarioAdmin;
+	}
+
+	public void setEscenarioAdmin(Stage escenarioAdmin) {
+		this.escenarioAdmin = escenarioAdmin;
+	}
+
 	public BorderPane getBorderPanel() {
 		return borderPanel;
 	}
@@ -735,9 +734,10 @@ public class ManejadorEscenarios {
 	 */
 	public void agregarDescuento(Descuento descuento) throws ElementoRepetidoException {
 
-
 		// Registramos el descuento
 		administradorDelegado.agregarDescuento(descuento);
+		
+		cargarHomeDescuetos();
 
 	}
 
@@ -748,7 +748,33 @@ public class ManejadorEscenarios {
 	public void setDescuentosObservables(ObservableList<DescuentoObsevable> descuentosObservables) {
 		this.descuentosObservables = descuentosObservables;
 	}
-	
-	
 
+	/**
+	 * Metodo para eliminar un descuento
+	 * 
+	 * @param desc
+	 */
+	public void eliminarDescuento(Descuento desc) {
+
+		administradorDelegado.eliminarDescuento(desc.getId());
+
+	}
+
+	/******
+	 * Aplica el descuento segun la categoria y porcentaje indicado
+	 * 
+	 * @param desc
+	 * @throws NoExisteElementosException
+	 * @devuelve true si el descuento pude ser aplicado con exito
+	 */
+	public boolean aplicarDescuento(Descuento desc) throws NoExisteElementosException {
+
+		return administradorDelegado.aplicarDescuento(desc);
+
+	}
+
+	public boolean desactivarDescuento(Descuento desc) {
+
+		return administradorDelegado.quitarDescuento(desc);
+	}
 }

@@ -256,4 +256,10 @@ public class PruebaDelegado implements adminEJBRemote {
 		
 	}
 
+	@Override
+	public boolean quitarDescuento(Descuento descuento) {
+		// TODO Auto-generated method stub
+		return adminEJB.quitarDescuento(descuento);
+	}
+
 }

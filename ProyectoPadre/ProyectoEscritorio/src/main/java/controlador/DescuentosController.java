@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import UtilidadesAlert.Utilidades;
+import co.edu.uniquindio.grid.entidades.Descuento;
+import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,6 +21,8 @@ import modelo.UsuarioObservable;
 public class DescuentosController {
 
 	private ManejadorEscenarios manejador;
+
+	private Descuento descuentoSeleccionado;
 
 	@FXML
 	private ResourceBundle resources;
@@ -57,6 +61,46 @@ public class DescuentosController {
 	private Text txtCalificaciones;
 
 	@FXML
+	private Button btnActivarDescuento;
+
+	@FXML
+	private Button btnDesactivarDescuento;
+
+	@FXML
+	void activarDescuento(ActionEvent event) {
+
+		try {
+
+			boolean cent = manejador.aplicarDescuento(descuentoSeleccionado);
+
+			if (cent) {
+				Utilidades.mostrarMensaje("exito",
+						"El descuento del: " + descuentoSeleccionado.getPorcentaje() + " %  aplicado con exito");
+
+			} else {
+
+				Utilidades.mostrarMensaje("precaucion",
+						"El descuento del: " + descuentoSeleccionado.getPorcentaje() + " % no se puede activar " + "\n"
+								+ "debido a que no hay productos en" + "\n la categoria del descuento");
+
+				descuentoSeleccionado.setActivo(false);
+
+			}
+		} catch (NoExisteElementosException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@FXML
+	void desactivarDescuento(ActionEvent event) {
+
+		manejador.desactivarDescuento(descuentoSeleccionado);
+
+	}
+
+	@FXML
 	void agregarDescuencto(ActionEvent event) {
 
 		manejador.cargarEscenaAgregarDeescuento();
@@ -65,20 +109,18 @@ public class DescuentosController {
 
 	@FXML
 	void initialize() {
-		
-		
-		
 
 		addBotonEliminar();
-		addBotonModificar();
-		
-		
+
+		btnActivarDescuento.setDisable(true);
+		btnDesactivarDescuento.setDisable(true);
+
 		columnaActivo.setCellValueFactory(descuento -> descuento.getValue().getActivo());
 		columnaCategoria.setCellValueFactory(descuento -> descuento.getValue().getCategoria());
 		columnaPorcentaje.setCellValueFactory(descuento -> descuento.getValue().getProcentaje());
 		columnaCedula.setCellValueFactory(descuento -> descuento.getValue().getCedula_administrador());
-	    columnaId.setCellValueFactory(descuento -> descuento.getValue().getIdDescuento());
-		
+		columnaId.setCellValueFactory(descuento -> descuento.getValue().getIdDescuento());
+
 		assert columnaId != null : "fx:id=\"columnaId\" was not injected: check your FXML file 'home.fxml'.";
 		assert columnaActivo != null : "fx:id=\"columnaActivo\" was not injected: check your FXML file 'home.fxml'.";
 		assert columnaCategoria != null : "fx:id=\"columnaCategoria\" was not injected: check your FXML file 'home.fxml'.";
@@ -88,6 +130,26 @@ public class DescuentosController {
 		assert txtUsuarios != null : "fx:id=\"txtUsuarios\" was not injected: check your FXML file 'home.fxml'.";
 		assert txtProductos != null : "fx:id=\"txtProductos\" was not injected: check your FXML file 'home.fxml'.";
 		assert txtCalificaciones != null : "fx:id=\"txtCalificaciones\" was not injected: check your FXML file 'home.fxml'.";
+
+		tablaDescuenos.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> activarBotones());
+
+	}
+
+	/**
+	 * Activamos los botones y seleccionamos el descuento asociado de la lista
+	 */
+	public void activarBotones() {
+
+		if (tablaDescuenos.getItems().size() > 0) {
+
+			Descuento seleccionado = tablaDescuenos.getSelectionModel().getSelectedItem().getDescuentoAsociado();
+
+			btnActivarDescuento.setDisable(false);
+			btnDesactivarDescuento.setDisable(false);
+
+			this.descuentoSeleccionado = seleccionado;
+		}
 
 	}
 
@@ -121,30 +183,33 @@ public class DescuentosController {
 
 					{
 						btn.setOnAction((ActionEvent event) -> {
-//
-//							// Se obtiene los datos del indice seleccionado
-//							UsuarioObservable data = getTableView().getItems().get(getIndex());
-//
-//							String cedula = data.getCedula().getValue();
-//
-//							boolean confirmacion = Utilidades.mostrarDialogo("Dialogo de confirmacion",
-//									"Eliminara al usuario con cedula: " + cedula,
-//									"Se Eliminaran todos los productos asociados" + "\n" + "a este usuario: ");
-//
-//							if (confirmacion) {
-//
-//								if (manejador.eliminarUsuario(cedula) != null) {
-//
-//									manejador.eliminarDeListaObservable(data);
-//
-//									Utilidades.mostrarMensaje("Operacion", "Eliminacion exitosa");
-//									tablaDescuenos.refresh();
-//								} else {
-//
-//									Utilidades.mostrarMensaje("Operacion", "La cedula no pertenece a una persona");
-//								}
-//
-//							}
+
+							// Se obtiene los datos del indice seleccionado
+							Descuento data = getTableView().getItems().get(getIndex()).getDescuentoAsociado();
+
+							boolean confirmacion = Utilidades.mostrarDialogo("Dialogo de confirmacion",
+									"Eliminara al descuento con el id: " + data.getId(), "");
+
+							if (confirmacion) {
+
+								// Se quita el descuento si fue apliacado
+								manejador.desactivarDescuento(data);
+
+								manejador.eliminarDescuento(data);
+
+								manejador.eliminarDescuentoObservable(getTableView().getItems().get(getIndex()));
+
+								Utilidades.mostrarMensaje("Operacion", "Eliminacion exitosa");
+								manejador.actualizarDescuentosObservables();
+								tablaDescuenos.setItems(manejador.getDescuentosObservables());
+								tablaDescuenos.refresh();
+
+								if (tablaDescuenos.getItems().size() == 0) {
+
+									desactivarBotones();
+								}
+
+							}
 						});
 
 					}
@@ -169,59 +234,18 @@ public class DescuentosController {
 
 	}
 
-	/**
-	 * Metodo para añadir el boton de editar no se esta usando
-	 */
-	private void addBotonModificar() {
+	public Descuento getDescuentoSeleccionado() {
+		return descuentoSeleccionado;
+	}
 
-		// Columna para añadir el boton a la tabla
-		TableColumn<DescuentoObsevable, Void> colBtn = new <DescuentoObsevable, Void>TableColumn("  Eliminar");
+	public void setDescuentoSeleccionado(Descuento descuentoSeleccionado) {
+		this.descuentoSeleccionado = descuentoSeleccionado;
+	}
 
-		Callback<TableColumn<DescuentoObsevable, Void>, TableCell<DescuentoObsevable, Void>> cellFactory = new Callback<TableColumn<DescuentoObsevable, Void>, TableCell<DescuentoObsevable, Void>>() {
-			@Override
-			public TableCell<DescuentoObsevable, Void> call(final TableColumn<DescuentoObsevable, Void> param) {
+	public void desactivarBotones() {
 
-				final TableCell<DescuentoObsevable, Void> cell = new TableCell<DescuentoObsevable, Void>() {
-
-					// Boton que se va añadir a la tabala
-					private final Button btn = new Button("Modificar");
-
-					{
-						btn.setOnAction((ActionEvent event) -> {
-//
-//							// Se obtiene los datos del indice seleccionado
-//							UsuarioObservable data = getTableView().getItems().get(getIndex());
-//
-//							// Se obtiene la cedula del usuario
-//							String cedula = data.getCedula().getValue();
-//
-//							// Se carga la escena para modificar un usuario
-//							manejador.cargarScenaModificar(cedula);
-//
-//							// Se actualizan los usaurios de la tabla
-//							manejador.actualizarUsuariosObservables();
-//							// tablaDescuenos.setItems(manejador.getUsuariosObservables());
-
-						});
-					}
-
-					@Override
-					public void updateItem(Void item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty) {
-							setGraphic(null);
-						} else {
-							setGraphic(btn);
-						}
-					}
-				};
-				return cell;
-			}
-		};
-
-		colBtn.setCellFactory(cellFactory);
-
-		tablaDescuenos.getColumns().add(colBtn);
+		btnActivarDescuento.setDisable(true);
+		btnDesactivarDescuento.setDisable(true);
 
 	}
 

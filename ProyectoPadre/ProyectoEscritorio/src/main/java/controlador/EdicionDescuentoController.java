@@ -10,6 +10,7 @@ import co.edu.uniquindio.grid.entidades.Administrador;
 import co.edu.uniquindio.grid.entidades.Categoria;
 import co.edu.uniquindio.grid.entidades.Descuento;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
+import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,18 +46,9 @@ public class EdicionDescuentoController {
 	@FXML
 	private JFXCheckBox cbxActivo;
 
-	@FXML
-	private JFXCheckBox cbxDesactivo;
-
 	// Selecciono el activado
 	@FXML
 	void activarDescuento(ActionEvent event) {
-
-	}
-
-	// Selecciono el desactivado
-	@FXML
-	void desactivarDescuento(ActionEvent event) {
 
 	}
 
@@ -77,25 +69,44 @@ public class EdicionDescuentoController {
 
 			if (cbxActivo.isSelected()) {
 
-				desc.setActivo(true);
+				try {
 
-			} else {
+					boolean cent = manejador.aplicarDescuento(desc);
 
-				desc.setActivo(false);
+					if (cent) {
+
+						desc.setActivo(true);
+
+						Utilidades.mostrarMensaje("exito",
+								"El descuento del: " + desc.getPorcentaje() + " % fue agregado y aplicado con exito");
+
+					} else {
+
+						Utilidades.mostrarMensaje("precaucion",
+								"El descuento del: " + desc.getPorcentaje()
+										+ " % fue agregado pero no se puede activar " + "\n"
+										+ "debido a que no hay productos en la categoria del descuento");
+
+						desc.setActivo(false);
+
+					}
+				} catch (NoExisteElementosException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 
 			try {
 
-				
-
 				// Agregamos el administrado que ingreso el descuento
 				Administrador adminActual = (Administrador) manejador.getAdmin();
 				desc.setAdministrador(adminActual);
-				manejador.agregarDescuentoObserbable(desc);
-				manejador.agregarDescuento(desc);
 
-				Utilidades.mostrarMensaje("exito", "El descuento ah sido agregado con exito");
+				manejador.agregarDescuento(desc);
+				
+				manejador.actualizarDescuentosObservables();
+
 				stage.close();
 
 			} catch (ElementoRepetidoException e) {

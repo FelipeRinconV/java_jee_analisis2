@@ -3,6 +3,7 @@ package controlador;
 import java.io.IOException;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import co.edu.uniquindio.grid.entidades.Persona;
@@ -26,7 +27,7 @@ public class iniciarSesion {
 	private JFXButton btnIniciar;
 
 	@FXML
-	private JFXTextField txtContrasenia;
+	private JFXPasswordField txtContrasenia;
 
 	@FXML
 	private JFXTextField txtCorreo;

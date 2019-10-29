@@ -57,4 +57,6 @@ public interface adminEJBRemote {
 	void eliminarCalificacionesAsociadas(String cedula);
 	
 	List<Descuento> listarDescuento();
+
+	boolean quitarDescuento(Descuento descuento);
 }

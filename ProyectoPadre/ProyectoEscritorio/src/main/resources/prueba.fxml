@@ -50,6 +50,14 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </Button>
+                  <JFXButton fx:id="btnInicio" onAction="#cerrarSesion" prefHeight="53.0" prefWidth="208.0" text="Salir" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="100.0" />
+                     </VBox.margin>
+                  </JFXButton>
                </children>
             </VBox>
          </children>
@@ -61,9 +69,8 @@
             <GridPane layoutX="245.0" layoutY="-25.0" prefHeight="65.0" prefWidth="749.0" style="-fx-background-color: #303b4e;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="294.0" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="148.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.0" minWidth="10.0" prefWidth="136.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="164.0" prefWidth="212.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="135.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -71,25 +78,22 @@
                <children>
                   <GridPane>
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="56.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="238.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Text fill="#e6eaee" strokeType="OUTSIDE" strokeWidth="0.0" text="UNIMARKET" GridPane.columnIndex="1">
+                        <Text fill="#e6eaee" strokeType="OUTSIDE" strokeWidth="0.0" text="UNIMARKET">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ICONO" />
                      </children>
                   </GridPane>
-                  <Text fill="#e6eaee" strokeType="OUTSIDE" strokeWidth="0.0" text="Luis felipe rincon" GridPane.columnIndex="3">
+                  <Text fx:id="txtUsuario" fill="#e6eaee" strokeType="OUTSIDE" strokeWidth="0.0" text="Luis felipe rincon" GridPane.columnIndex="2">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ICONO USUARIO" GridPane.columnIndex="2" />
                </children>
                <padding>
                   <Insets left="20.0" right="5.0" />

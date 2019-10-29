@@ -80,19 +80,17 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Text>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                      <children>
                         <JFXCheckBox fx:id="cbxActivo" onAction="#activarDescuento" text="Activo">
                            <HBox.margin>
-                              <Insets left="40.0" />
-                           </HBox.margin>
-                        </JFXCheckBox>
-                        <JFXCheckBox fx:id="cbxDesactivo" onAction="#desactivarDescuento" text="Desactivo">
-                           <HBox.margin>
-                              <Insets left="40.0" />
+                              <Insets />
                            </HBox.margin>
                         </JFXCheckBox>
                      </children>
+                     <GridPane.margin>
+                        <Insets left="100.0" />
+                     </GridPane.margin>
                   </HBox>
                </children>
                <BorderPane.margin>

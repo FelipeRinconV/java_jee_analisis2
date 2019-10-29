@@ -524,6 +524,9 @@ public class AdminEJB implements adminEJBRemote {
 
 	}
 
+	/**
+	 * Metodo que aplica el descuento a la categoria correspondiente
+	 */
 	@Override
 	public boolean aplicarDescuento(Descuento descuento) throws NoExisteElementosException {
 
@@ -535,7 +538,7 @@ public class AdminEJB implements adminEJBRemote {
 
 		if (productos.isEmpty()) {
 
-			throw new NoExisteElementosException("No hay productos por la categoria aplicada");
+			return false;
 
 		} else {
 
@@ -550,6 +553,45 @@ public class AdminEJB implements adminEJBRemote {
 
 				entytiManager.merge(p);
 
+			}
+
+			return true;
+
+		}
+
+	}
+
+	/**
+	 * Metodo que elimina el descuento que se habia aplicado a los productos
+	 */
+	@Override
+	public boolean quitarDescuento(Descuento descuento) {
+
+		TypedQuery<Producto> query = entytiManager.createNamedQuery(Producto.PRODUCTOS_POR_CATEGORIA, Producto.class);
+
+		query.setParameter("tipo", descuento.getCategoria());
+
+		List<Producto> productos = query.getResultList();
+
+		if (productos.isEmpty()) {
+
+			return false;
+
+		} else {
+
+			if (descuento.isActivo()) {
+				for (Producto p : productos) {
+
+					p = entytiManager.find(Producto.class, p.getIdProducto());
+
+					double procentaje = descuento.getPorcentaje() / 100;
+
+					// ACTUALIZAMOS LOS PRECIOS DE LOS PRODUCTOS DE LA CATEGORIA CORRESPONDIENTE
+					p.setPrecio(p.getPrecio() + (p.getPrecio() * (procentaje)));
+
+					entytiManager.merge(p);
+
+				}
 			}
 
 			return true;

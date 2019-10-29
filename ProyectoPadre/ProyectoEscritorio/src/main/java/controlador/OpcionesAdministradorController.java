@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import modelo.ManejadorEscenarios;
 
 public class OpcionesAdministradorController {
@@ -18,11 +20,9 @@ public class OpcionesAdministradorController {
 	@FXML
 	private ResourceBundle resources;
 
+	@FXML
+	private JFXButton btnPricnipal;
 
-    @FXML
-    private JFXButton btnPricnipal;
-
-	
 	@FXML
 	private URL location;
 
@@ -33,8 +33,29 @@ public class OpcionesAdministradorController {
 	private Button productos;
 
 	@FXML
+	private Text txtUsuario;
+
+	@FXML
+	private JFXButton btnInicio;
+
+	/**
+	 * Volvemos a la ventana principal
+	 * 
+	 * @param event
+	 */
+	@FXML
+	void cerrarSesion(ActionEvent event) {
+
+		manejador.getEscenarioAdmin().close();
+
+		Stage stage = new Stage();
+
+		new ManejadorEscenarios(stage);
+	}
+
+	@FXML
 	void cargarPrincipal(ActionEvent event) {
-		
+
 		manejador.cargarHomeDescuetos();
 
 	}
@@ -64,6 +85,7 @@ public class OpcionesAdministradorController {
 
 	@FXML
 	void initialize() {
+
 		assert btnUsuarios != null : "fx:id=\"btnUsuarios\" was not injected: check your FXML file 'prueba.fxml'.";
 		assert productos != null : "fx:id=\"productos\" was not injected: check your FXML file 'prueba.fxml'.";
 
