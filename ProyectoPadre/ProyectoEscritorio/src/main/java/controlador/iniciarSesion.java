@@ -46,6 +46,7 @@ public class iniciarSesion {
 
 			if (admin != null) {
 
+				manejadorPrincipal.setAdmin(admin);
 				manejadorPrincipal.cragarVentanaAdmin();
 
 			} else {
@@ -62,7 +63,7 @@ public class iniciarSesion {
 		}
 	}
 
-	//Dibuja el escenario de recuperacion de contrasenia
+	// Dibuja el escenario de recuperacion de contrasenia
 	@FXML
 	void recuperarContrasenia(ActionEvent event) {
 

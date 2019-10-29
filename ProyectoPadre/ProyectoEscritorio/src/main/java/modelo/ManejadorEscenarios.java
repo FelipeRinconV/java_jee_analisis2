@@ -6,7 +6,9 @@ import java.io.IOException;
 import com.sun.enterprise.module.bootstrap.Main;
 
 import UtilidadesAlert.Utilidades;
+import co.edu.uniquindio.grid.entidades.Administrador;
 import co.edu.uniquindio.grid.entidades.Categoria;
+import co.edu.uniquindio.grid.entidades.Descuento;
 import co.edu.uniquindio.grid.entidades.Persona;
 import co.edu.uniquindio.grid.entidades.Producto;
 import co.edu.uniquindio.grid.entidades.Usuario;
@@ -14,6 +16,7 @@ import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
 import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 import controlador.DescuentosController;
 import controlador.DetallesController;
+import controlador.EdicionDescuentoController;
 import controlador.EdicionUsuarioController;
 import controlador.ListaProdcutosController;
 import controlador.ListaUsuariosController;
@@ -41,6 +44,13 @@ import javafx.stage.Stage;
  */
 public class ManejadorEscenarios {
 
+	
+	
+	
+	//El administrados que se encuentra en sesion 
+	private Persona admin;
+	
+	
 	/*
 	 * Variable para guardar el ancho de pantalla donde se ejecute la aplicacion
 	 */
@@ -401,6 +411,42 @@ public class ManejadorEscenarios {
 	}
 
 	/**
+	 * Metodo que carga la escene de la creacion de nuevos usuarios
+	 */
+	public void cargarEscenaAgregarDeescuento() {
+		// TODO Auto-generated method stub
+
+		try {
+
+			// Se carga la interfaz para la ventana
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/agregarDescuento.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			// Creamos el escenario para la escena
+			Stage escenarioAgregar = new Stage();
+			escenarioAgregar.setResizable(false);
+			escenarioAgregar.setTitle("Crear descuento");
+
+			Scene escena = new Scene(page);
+			escenarioAgregar.setScene(escena);
+
+			EdicionDescuentoController descuentoController = loader.getController();
+			descuentoController.setManejador(this);
+			descuentoController.setStage(escenarioAgregar);
+
+			// Se muestra el escenario de edicion del nuevo usuario
+			escenarioAgregar.showAndWait();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
 	 * Muestra la ventana de recuperar contrasenia
 	 * 
 	 * @throws IOException
@@ -427,6 +473,16 @@ public class ManejadorEscenarios {
 		// Se muestra el escenario de recuperacion de contrasenia
 		escenarioRecuperarCuenta.showAndWait();
 
+	}
+	
+	
+
+	public Persona getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Persona admin) {
+		this.admin = admin;
 	}
 
 	public Stage getEscenario() {
@@ -637,4 +693,29 @@ public class ManejadorEscenarios {
 		return puntuacion;
 
 	}
+
+	// METODOS FUNCIONALIDAD UNICA
+
+	/**
+	 * Metodo para eliminar un descuento
+	 * 
+	 * @param descuento
+	 * @throws ElementoRepetidoException
+	 */
+	public void agregarDescuento(Descuento descuento) throws ElementoRepetidoException {
+
+		
+		//Agregamos el administrado que ingreso el descuento 
+		Administrador adminActual=(Administrador) admin;
+		descuento.setAdministrador(adminActual);
+		
+		
+		//Registramos el descuento
+		administradorDelegado.agregarDescuento(descuento);
+
+	}
+	
+	
+	
+
 }

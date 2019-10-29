@@ -59,10 +59,15 @@ public class DescuentosController {
 	@FXML
 	void agregarDescuencto(ActionEvent event) {
 
+		manejador.cargarEscenaAgregarDeescuento();
+
 	}
 
 	@FXML
 	void initialize() {
+		
+		addBotonEliminar();
+		addBotonModificar();
 		assert columnaId != null : "fx:id=\"columnaId\" was not injected: check your FXML file 'home.fxml'.";
 		assert columnaActivo != null : "fx:id=\"columnaActivo\" was not injected: check your FXML file 'home.fxml'.";
 		assert columnaCategoria != null : "fx:id=\"columnaCategoria\" was not injected: check your FXML file 'home.fxml'.";
@@ -89,43 +94,43 @@ public class DescuentosController {
 	private void addBotonEliminar() {
 
 		// Columna para añadir el boton a la tabla
-		TableColumn<UsuarioObservable, Void> colBtn = new <UsuarioObservable, Void>TableColumn("  Eliminar");
+		TableColumn<DescuentoObsevable, Void> colBtn = new <DescuentoObsevable, Void>TableColumn("  Eliminar");
 
-		Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>> cellFactory = new Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>>() {
+		Callback<TableColumn<DescuentoObsevable, Void>, TableCell<DescuentoObsevable, Void>> cellFactory = new Callback<TableColumn<DescuentoObsevable, Void>, TableCell<DescuentoObsevable, Void>>() {
 			@Override
-			public TableCell<UsuarioObservable, Void> call(final TableColumn<UsuarioObservable, Void> param) {
+			public TableCell<DescuentoObsevable, Void> call(final TableColumn<DescuentoObsevable, Void> param) {
 
-				final TableCell<UsuarioObservable, Void> cell = new TableCell<UsuarioObservable, Void>() {
+				final TableCell<DescuentoObsevable, Void> cell = new TableCell<DescuentoObsevable, Void>() {
 
 					// Boton que se va añadir a la tabala
 					private final Button btn = new Button("Eliminar");
 
 					{
 						btn.setOnAction((ActionEvent event) -> {
-
-							// Se obtiene los datos del indice seleccionado
-							UsuarioObservable data = getTableView().getItems().get(getIndex());
-
-							String cedula = data.getCedula().getValue();
-
-							boolean confirmacion = Utilidades.mostrarDialogo("Dialogo de confirmacion",
-									"Eliminara al usuario con cedula: " + cedula,
-									"Se Eliminaran todos los productos asociados" + "\n" + "a este usuario: ");
-
-							if (confirmacion) {
-
-								if (manejador.eliminarUsuario(cedula) != null) {
-
-									manejador.eliminarDeListaObservable(data);
-
-									Utilidades.mostrarMensaje("Operacion", "Eliminacion exitosa");
-									tablaDescuenos.refresh();
-								} else {
-
-									Utilidades.mostrarMensaje("Operacion", "La cedula no pertenece a una persona");
-								}
-
-							}
+//
+//							// Se obtiene los datos del indice seleccionado
+//							UsuarioObservable data = getTableView().getItems().get(getIndex());
+//
+//							String cedula = data.getCedula().getValue();
+//
+//							boolean confirmacion = Utilidades.mostrarDialogo("Dialogo de confirmacion",
+//									"Eliminara al usuario con cedula: " + cedula,
+//									"Se Eliminaran todos los productos asociados" + "\n" + "a este usuario: ");
+//
+//							if (confirmacion) {
+//
+//								if (manejador.eliminarUsuario(cedula) != null) {
+//
+//									manejador.eliminarDeListaObservable(data);
+//
+//									Utilidades.mostrarMensaje("Operacion", "Eliminacion exitosa");
+//									tablaDescuenos.refresh();
+//								} else {
+//
+//									Utilidades.mostrarMensaje("Operacion", "La cedula no pertenece a una persona");
+//								}
+//
+//							}
 						});
 
 					}
@@ -156,32 +161,32 @@ public class DescuentosController {
 	private void addBotonModificar() {
 
 		// Columna para añadir el boton a la tabla
-		TableColumn<UsuarioObservable, Void> colBtn = new <UsuarioObservable, Void>TableColumn("  Modificar");
+		TableColumn<DescuentoObsevable, Void> colBtn = new <DescuentoObsevable, Void>TableColumn("  Eliminar");
 
-		Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>> cellFactory = new Callback<TableColumn<UsuarioObservable, Void>, TableCell<UsuarioObservable, Void>>() {
+		Callback<TableColumn<DescuentoObsevable, Void>, TableCell<DescuentoObsevable, Void>> cellFactory = new Callback<TableColumn<DescuentoObsevable, Void>, TableCell<DescuentoObsevable, Void>>() {
 			@Override
-			public TableCell<UsuarioObservable, Void> call(final TableColumn<UsuarioObservable, Void> param) {
+			public TableCell<DescuentoObsevable, Void> call(final TableColumn<DescuentoObsevable, Void> param) {
 
-				final TableCell<UsuarioObservable, Void> cell = new TableCell<UsuarioObservable, Void>() {
+				final TableCell<DescuentoObsevable, Void> cell = new TableCell<DescuentoObsevable, Void>() {
 
 					// Boton que se va añadir a la tabala
 					private final Button btn = new Button("Modificar");
 
 					{
 						btn.setOnAction((ActionEvent event) -> {
-
-							// Se obtiene los datos del indice seleccionado
-							UsuarioObservable data = getTableView().getItems().get(getIndex());
-
-							// Se obtiene la cedula del usuario
-							String cedula = data.getCedula().getValue();
-
-							// Se carga la escena para modificar un usuario
-							manejador.cargarScenaModificar(cedula);
-
-							// Se actualizan los usaurios de la tabla
-							manejador.actualizarUsuariosObservables();
-							// tablaDescuenos.setItems(manejador.getUsuariosObservables());
+//
+//							// Se obtiene los datos del indice seleccionado
+//							UsuarioObservable data = getTableView().getItems().get(getIndex());
+//
+//							// Se obtiene la cedula del usuario
+//							String cedula = data.getCedula().getValue();
+//
+//							// Se carga la escena para modificar un usuario
+//							manejador.cargarScenaModificar(cedula);
+//
+//							// Se actualizan los usaurios de la tabla
+//							manejador.actualizarUsuariosObservables();
+//							// tablaDescuenos.setItems(manejador.getUsuariosObservables());
 
 						});
 					}
