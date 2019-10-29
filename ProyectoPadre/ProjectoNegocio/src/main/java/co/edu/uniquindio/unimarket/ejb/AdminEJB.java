@@ -528,5 +528,16 @@ public class AdminEJB implements adminEJBRemote {
 		return descuentos;
 
 	}
+	
+	/**
+	 * Elimina los prodcutos asociados a un usuario
+	 */
+	public void eliminarProductos() {
+		
+		
+		
+		
+		
+	}
 
 }
