@@ -14,9 +14,16 @@ import javax.validation.constraints.Min;
 @Table(name = "Calificaciones")
 @NamedQueries({
 
-		@NamedQuery(name = Calificacion.MEDIA_DE_CALIFICACION, query = "select avg(c.calificacion) from Calificacion c where c.producto.idProducto=:id") })
+		@NamedQuery(name = Calificacion.MEDIA_DE_CALIFICACION, query = "select avg(c.calificacion) from Calificacion c where c.producto.idProducto=:id"),
+		@NamedQuery(name = Calificacion.LISTAR_CALIFICACIONES_POR_USUARIO,query = "select c from Calificacion c where c.usuario.cedula=:cedula")
+      
+})
 public class Calificacion implements Serializable {
 
+	
+	
+	public static final String LISTAR_CALIFICACIONES_POR_USUARIO="dlistar_calificaciones_por_usuaio";
+	
 	public static final String MEDIA_DE_CALIFICACION = "media_por_calificaciones_por_producto";
 
 	@ManyToOne

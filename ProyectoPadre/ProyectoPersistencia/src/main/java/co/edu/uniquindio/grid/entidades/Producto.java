@@ -26,6 +26,7 @@ import javax.persistence.*;
 		@NamedQuery(name = Producto.PRODUCTO_POR_ID, query = "select p from Producto p where p.idProducto=:id"),
 		@NamedQuery(name = Producto.LISTAR_TODOS_LOS_PRODUCTOS, query = "select p from Producto p "),
 		@NamedQuery(name = Producto.PRODUCTOS_POR_CATEGORIA, query = "select p From Producto p where p.tipo=:tipo"),
+		@NamedQuery(name = Producto.LISTAR_PRODUCTOS_POR_CEDULA_DE_USUARIO,query = "select p from Producto p where p.usuario.cedula=:cedula")
 
 })
 public class Producto implements Serializable {
@@ -38,6 +39,8 @@ public class Producto implements Serializable {
 	 */
 
 	private int cantidadProducto;
+	
+	public static final String LISTAR_PRODUCTOS_POR_CEDULA_DE_USUARIO="eliminar_productos_por_usuario";
 
 	public static final String PRODUCTO_POR_ID = "producto_por_id";
 

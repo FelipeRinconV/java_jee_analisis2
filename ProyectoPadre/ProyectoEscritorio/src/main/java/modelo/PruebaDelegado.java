@@ -77,10 +77,6 @@ public class PruebaDelegado implements adminEJBRemote {
 		return adminEJB.equals(obj);
 	}
 
-	public Producto editarProducto(Producto p) {
-		return adminEJB.editarProducto(p);
-	}
-
 	public List<Producto> listarProductosDisponibles() {
 		return adminEJB.listarProductosDisponibles();
 	}
@@ -111,10 +107,11 @@ public class PruebaDelegado implements adminEJBRemote {
 		}
 		return usuariosObservables;
 	}
-	
+
 	/**
-	 * Metodo para llenar una lista observable de productos con la lista de productos que est aen la 
-	 * base de datos
+	 * Metodo para llenar una lista observable de productos con la lista de
+	 * productos que est aen la base de datos
+	 * 
 	 * @return
 	 */
 	public ObservableList<ProductoObservable> listarProductosObservables() {
@@ -125,17 +122,15 @@ public class PruebaDelegado implements adminEJBRemote {
 		}
 		return productosObservables;
 	}
-	
 
-	
-	
 	/**
-	 * Metodo para llenar una lista observable de productos con la lista de productos que est aen la 
-	 * base de datos
+	 * Metodo para llenar una lista observable de productos con la lista de
+	 * productos que est aen la base de datos
+	 * 
 	 * @return
 	 */
 	public ObservableList<ProductoObservable> listarProductosObservablesPorCategoria(Categoria categoria) {
-		
+
 		try {
 			List<Producto> productos;
 			productos = listarProductosPorCategoria(categoria);
@@ -146,13 +141,11 @@ public class PruebaDelegado implements adminEJBRemote {
 			return productosObservables;
 		} catch (NoExisteElementosException e) {
 			// TODO Auto-generated catch block
-		
-			 return null;
+
+			return null;
 		}
-		
-		
+
 	}
-	
 
 	@Override
 	public Persona darPersonaPorCedula(String cedula) {
@@ -183,17 +176,17 @@ public class PruebaDelegado implements adminEJBRemote {
 
 	@Override
 	public void recuperarCuenta(String correo) throws NoExisteElementosException {
-		
-	  adminEJB.recuperarCuenta(correo);
+
+		adminEJB.recuperarCuenta(correo);
 	}
 
 	@Override
 	public boolean modificarUsuario(Persona usuarioNuevo) throws NoExisteElementosException {
 		return adminEJB.modificarUsuario(usuarioNuevo);
 	}
-	
-	public List<Producto> listarProductosPorCategoria(Categoria categoria) throws NoExisteElementosException{
-		
+
+	public List<Producto> listarProductosPorCategoria(Categoria categoria) throws NoExisteElementosException {
+
 		return adminEJB.listarProductosPorCategoria(categoria);
 	}
 
@@ -207,7 +200,7 @@ public class PruebaDelegado implements adminEJBRemote {
 
 	@Override
 	public Producto darProductoPorId(int id) throws NoExisteElementosException {
-		
+
 		return adminEJB.darProductoPorId(id);
 	}
 
@@ -228,9 +221,12 @@ public class PruebaDelegado implements adminEJBRemote {
 		// TODO Auto-generated method stub
 		return adminEJB.aplicarDescuento(descuento);
 	}
+
 	/**
-	 * Metodo para llenar una lista observable de desceuntos con los descuentos de la base de datos
-	 * @return lista observable de descuentos 
+	 * Metodo para llenar una lista observable de desceuntos con los descuentos de
+	 * la base de datos
+	 * 
+	 * @return lista observable de descuentos
 	 */
 	public ObservableList<DescuentoObsevable> listarDescuentosObservables() {
 		List<Descuento> descuentos = listarDescuento();
@@ -245,6 +241,19 @@ public class PruebaDelegado implements adminEJBRemote {
 	public List<Descuento> listarDescuento() {
 		// TODO Auto-generated method stub
 		return adminEJB.listarDescuento();
+	}
+
+	@Override
+	public void eliminarProductosPorUsuario(String cedula) {
+		// TODO Auto-generated method stub
+
+		adminEJB.eliminarProductosPorUsuario(cedula);
+	}
+
+	@Override
+	public void eliminarCalificacionesAsociadas(String cedula) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

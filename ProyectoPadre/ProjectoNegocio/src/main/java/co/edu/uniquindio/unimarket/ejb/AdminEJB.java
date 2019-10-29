@@ -153,12 +153,6 @@ public class AdminEJB implements adminEJBRemote {
 
 	}
 
-	@Override
-	public Producto editarProducto(Producto p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	/**
 	 * Metodo que da los productos disponibles segun cantidad y fecha
 	 * 
@@ -230,6 +224,11 @@ public class AdminEJB implements adminEJBRemote {
 		if (p != null) {
 
 			try {
+
+				eliminarCalificacionesAsociadas(cedula);
+
+				eliminarProductosPorUsuario(cedula);
+
 				entytiManager.remove(p);
 
 				return p;
@@ -243,6 +242,54 @@ public class AdminEJB implements adminEJBRemote {
 		} else {
 
 			throw new NoExisteElementosException("No existe una persona con la cedula indicada");
+		}
+
+	}
+
+	/**
+	 * Elimina las calificaciones asociadas que tenga un usuario
+	 */
+	public void eliminarCalificacionesAsociadas(String cedula) {
+
+		TypedQuery<Calificacion> q = entytiManager.createNamedQuery(Calificacion.LISTAR_CALIFICACIONES_POR_USUARIO,
+				Calificacion.class);
+
+		q.setParameter("cedula", cedula);
+
+		List<Calificacion> calificacionesAsociadas = q.getResultList();
+
+		if (!calificacionesAsociadas.isEmpty()) {
+
+			for (Calificacion c : calificacionesAsociadas) {
+
+				entytiManager.remove(c);
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Elimina los prodcutos asociados a un usuario
+	 */
+	public void eliminarProductosPorUsuario(String cedula) {
+
+		TypedQuery<Producto> q = entytiManager.createNamedQuery(Producto.LISTAR_PRODUCTOS_POR_CEDULA_DE_USUARIO,
+				Producto.class);
+
+		q.setParameter("cedula", cedula);
+
+		List<Producto> productosAsociados = q.getResultList();
+
+		if (!productosAsociados.isEmpty()) {
+
+			for (Producto p : productosAsociados) {
+
+				entytiManager.remove(p);
+
+			}
+
 		}
 
 	}
@@ -445,10 +492,6 @@ public class AdminEJB implements adminEJBRemote {
 
 	}
 
-	public void elimnarAsociaciones(Usuario user) {
-
-	}
-
 	// ------------ FUNCIONALIDAD UNICA
 	@Override
 	public boolean agregarDescuento(Descuento descuento) throws ElementoRepetidoException {
@@ -516,7 +559,8 @@ public class AdminEJB implements adminEJBRemote {
 	}
 
 	/**
-	 *Metodo para devolver una lista con TODOS los descuentos que se encuentrene en la base de datos
+	 * Metodo para devolver una lista con TODOS los descuentos que se encuentrene en
+	 * la base de datos
 	 */
 	@Override
 	public List<Descuento> listarDescuento() {
@@ -527,17 +571,6 @@ public class AdminEJB implements adminEJBRemote {
 
 		return descuentos;
 
-	}
-	
-	/**
-	 * Elimina los prodcutos asociados a un usuario
-	 */
-	public void eliminarProductos() {
-		
-		
-		
-		
-		
 	}
 
 }
