@@ -22,6 +22,31 @@ import javax.persistence.*;
 @Table(name = "Usuarios")
 public class Usuario extends Persona implements Serializable {
 
+	
+	/**
+	 * Contructor del usuario dado todos sus parametros basicos
+	 * @param cedula
+	 * @param nombreCompleto
+	 * @param numeroTelefono
+	 * @param direccion
+	 * @param contrasenia
+	 * @param email
+	 */
+	public Usuario(String cedula,String nombreCompleto,String numeroTelefono,String direccion,String contrasenia,String email) {
+		
+	super.setCedula(cedula);
+	super.setContrasenia(contrasenia);
+	super.setDireccion(direccion);
+	super.setNumeroTelefono(numeroTelefono);
+	super.setEmail(email);
+	
+		
+		
+	}
+	
+	
+	
+	
 	/**
 	 * 
 	 */

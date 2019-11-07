@@ -140,6 +140,24 @@ public class Producto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	
+	
+	
+	
+	
+	
+	public Producto(Usuario usuario, String descripcion, double precio, boolean disponibilidad,
+			Date fechaLimite, String nombre, Categoria tipo) {
+		super();
+		this.usuario = usuario;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.disponibilidad = disponibilidad;
+		this.fechaLimite = fechaLimite;
+		this.nombre = nombre;
+		this.tipo = tipo;
+	}
+
 	public Producto() {
 		super();
 	}
