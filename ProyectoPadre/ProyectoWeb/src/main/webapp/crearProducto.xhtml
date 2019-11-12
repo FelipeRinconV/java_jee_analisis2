@@ -20,7 +20,11 @@
 		<h:panelGrid columns="3" cellpadding="10">
 
 			<p:outputLabel value="Nombre: " />
-			<p:inputText id="nombre"  label ="Nombre del producto" value="#{productoBean.nombre}" required="true" />
+			<p:inputText id="nombre"  label ="Nombre del producto" value="#{productoBean.nombre}" required="true" >
+
+			</p:inputText>
+			
+			 
 			<p:message for="nombre"/>
             
 
@@ -29,7 +33,10 @@
 			<p:message for="descripcion"/>
 
 			<p:outputLabel value="Precio " />
-			<p:inputText id="precio" value="#{productoBean.precio}"  required="true" />
+			<p:inputText id="precio" value="#{productoBean.precio}"  required="true" >
+			
+			<f:validateLength minimum="1"></f:validateLength>
+			</p:inputText>			
 			<p:message for="precio"/>
 
 			<p:outputLabel value="Fecha limite " for="fecha" />
