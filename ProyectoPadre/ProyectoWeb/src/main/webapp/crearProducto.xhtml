@@ -51,8 +51,15 @@
 		    <p:inputText id="disponibilidad" value="#{productoBean.disponibilidad}"  required="true" />
 			
 			
-			<p:outputLabel value="" />
-			<p:outputLabel value="" />
+			<p:outputLabel value="Categoria" />
+		 	<p:selectOneMenu id="tipo-producto" autoWidth="false" required="true">
+		 	
+		 	<f:selectItem noSelectionOption="true" itemLabel="Seleccione una categoria"></f:selectItem> 
+		 	<f:selectItems value="#{productoBean.categorias}"></f:selectItems>
+			
+			</p:selectOneMenu>
+			
+			
 			<p:commandButton action="#{productoBean.crearProducto}"	value="Crear prodducto" update="@form" />
 
 

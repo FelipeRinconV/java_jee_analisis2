@@ -1,8 +1,10 @@
 package co.uniquindio.beans;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.ManagedBean;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
@@ -10,7 +12,6 @@ import javax.faces.context.FacesContext;
 
 import co.edu.uniquindio.grid.entidades.Categoria;
 import co.edu.uniquindio.grid.entidades.Producto;
-import co.edu.uniquindio.grid.entidades.TipoPago;
 import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.ejb.AdminEJB;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
@@ -25,6 +26,14 @@ public class ProductoBean {
 	private String precio;
 	private Date fechaLimite;
 	private Categoria categoria;
+	private List<Categoria> listaCategorias;
+
+	@PostConstruct
+	public void inicializar() {
+
+		this.listaCategorias = adminEJB.listarCategorias();
+
+	}
 
 	@EJB
 	private AdminEJB adminEJB;
@@ -47,15 +56,16 @@ public class ProductoBean {
 
 			Usuario vendedor = (Usuario) adminEJB.darPersonaPorCedula("1040");
 
-			Producto p = new Producto(vendedor, descripcion, prec, dispo, fechaLimite, nombre, Categoria.DEPORTE);
+			Categoria cat = adminEJB.darCategoriaPorId(1);
+
+			Producto p = new Producto(vendedor, descripcion, prec, dispo, fechaLimite, nombre, cat);
 
 			adminEJB.crearPrducto(p);
-			
-			
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro exitoso", "Operacion exitosa");
+
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro exitoso", "Operacion exitosa");
 
 			FacesContext.getCurrentInstance().addMessage(null, m);
-			
+
 			return "nuevoProducto";
 
 		} catch (ElementoRepetidoException e) {
@@ -124,24 +134,20 @@ public class ProductoBean {
 		this.adminEJB = adminEJB;
 	}
 
-	
-	/**
-	 * Devuelve la lista de categorias
-	 * @return
-	 */
-	public Categoria[] getListaTipos() {
-		
-		return Categoria.values();
-		
-	}
-	
-	
 	public Categoria getCategoria() {
 		return categoria;
 	}
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public List<Categoria> getCategorias() {
+		return listaCategorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.listaCategorias = categorias;
 	}
 	
 	

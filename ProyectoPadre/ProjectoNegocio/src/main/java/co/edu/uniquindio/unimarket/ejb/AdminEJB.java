@@ -622,4 +622,29 @@ public class AdminEJB implements adminEJBRemote {
 
 	}
 
+	/**
+	 * Meotod que devuelve una categoria dado su id
+	 * 
+	 * @param idCategoria
+	 * @return
+	 */
+	public Categoria darCategoriaPorId(int idCategoria) {
+
+		return entytiManager.find(Categoria.class, idCategoria);
+
+	}
+
+	public List<Categoria> listarCategorias() {
+
+		TypedQuery<Categoria> query = entytiManager.createNamedQuery(Categoria.LISTAR_TIPOS, Categoria.class);
+
+		
+		List <Categoria> cat= query.getResultList();
+		
+		
+		
+		return cat;
+
+	}
+
 }

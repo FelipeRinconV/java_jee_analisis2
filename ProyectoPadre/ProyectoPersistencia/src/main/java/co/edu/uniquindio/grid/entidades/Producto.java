@@ -18,7 +18,6 @@ import javax.persistence.*;
 		@NamedQuery(name = Producto.CALIFICACIONES_POR_ID, query = "select p from Producto pr, IN (pr.calificaciones) p where pr.idProducto=:id"),
 		@NamedQuery(name = Producto.CANTIDAD_PRODUCTOS_POR_TIPO, query = "select count(p) from Producto p group by p.tipo"),
 		@NamedQuery(name = Producto.PRODUCTOS_SIN_COMENTARIOS, query = "select p from Producto p where p.comentarios is empty"),
-		@NamedQuery(name = Producto.TIPO_PRODUCTO_MAS_REGISTROS, query = "select  max(p.tipo) from Producto p "),
 		@NamedQuery(name = Producto.PECIO_PRODUCTO_MAS_CARO, query = "select p.nombre,max(p.precio) from Producto p "),
 		@NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSO, query = "select p From Producto p order by p.precio desc"),
 		@NamedQuery(name = Producto.PRODUCTO_MAS_COSTOSOS_POR_TIPO, query = "select P  from Producto p  where p.tipo=:tipo  order by p.precio desc"),
@@ -31,6 +30,13 @@ import javax.persistence.*;
 })
 public class Producto implements Serializable {
 
+	
+	//	@NamedQuery(name = Producto.TIPO_PRODUCTO_MAS_REGISTROS, query = "select  max(p.tipo) from Producto p "),
+
+	
+	@ManyToOne
+	private Categoria tipo;
+	
 	@ManyToOne
 	private Usuario usuario;
 
@@ -120,8 +126,6 @@ public class Producto implements Serializable {
 	@Column(nullable = false)
 	private String nombre;
 
-	@Enumerated(EnumType.STRING)
-	private Categoria tipo;
 
 	/**
 	 * La media de las califiaciones es su puntuacion

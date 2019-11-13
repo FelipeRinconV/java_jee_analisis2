@@ -142,12 +142,16 @@ public class SetupEJB {
 			Producto monitor = new Producto();
 			Producto a50 = new Producto();
 
+
+			Categoria cat= new Categoria("TECNOLOGIA");
+			
+			entityManager.persist(cat);
 			// Se crea el producto mac
 			mac.setNombre("Macbook Retina Touch Bar 15 Mod 2019");
 			mac.setUrlImagenes(imagenMac);
 			mac.setDisponibilidad(true);
 			mac.setFechaLimite(new Date());
-			mac.setTipo(Categoria.TECNOLOGIA);
+			mac.setTipo(cat);
 			mac.setCantidadProducto(5);
 			mac.setPrecio(5000000);
 			mac.setDescripcion("MacBook Pro retina touch bar 15,6 pulgadas Modelo 2019");
@@ -158,7 +162,7 @@ public class SetupEJB {
 			monitor.setUrlImagenes(monitorImagen);
 			monitor.setDisponibilidad(true);
 			monitor.setFechaLimite(new Date());
-			monitor.setTipo(Categoria.TECNOLOGIA);
+			monitor.setTipo(cat);
 			monitor.setCantidadProducto(150);
 			monitor.setPrecio(2500000);
 			monitor.setDescripcion("Nuevo monitor ultra delgado de lg ");
@@ -169,7 +173,7 @@ public class SetupEJB {
 			nike.setUrlImagenes(imagenNike);
 			nike.setDisponibilidad(true);
 			nike.setFechaLimite(new Date());
-			nike.setTipo(Categoria.MODA);
+			nike.setTipo(cat);
 			nike.setCantidadProducto(200);
 			nike.setPrecio(150000);
 			nike.setDescripcion("Nuevos nike air 2019 coleccion future");
@@ -180,10 +184,12 @@ public class SetupEJB {
 			a50.setUrlImagenes(imagenesA50);
 			a50.setDisponibilidad(true);
 			a50.setFechaLimite(new Date());
-			a50.setTipo(Categoria.TECNOLOGIA);
+			
+			a50.setTipo(cat);
 			a50.setCantidadProducto(180);
 			a50.setPrecio(750000);
 			a50.setDescripcion("Telefono samsung a 50 proccesador t30");
+			
 
 			// ----LISTAS DE PRODCUTOS
 			List<Producto> productosFelipe = new ArrayList<Producto>();
@@ -205,6 +211,12 @@ public class SetupEJB {
 
 			nike.setUsuario(UserDiana);
 			UserDiana.setProductos(productosDiana);
+
+			
+			//Persistimos la categoria
+			
+			
+			
 
 			// Persistimos los productos
 

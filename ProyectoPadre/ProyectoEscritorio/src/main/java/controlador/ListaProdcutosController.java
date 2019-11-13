@@ -70,52 +70,52 @@ public class ListaProdcutosController {
 
 		int index = cbxCategoria.getSelectionModel().getSelectedIndex();
 
-		if (index >= 0) {
-
-			String seleccion = cbxCategoria.getItems().get(index);
-
-			switch (seleccion) {
-			case "DEPORTE":
-
-				auxliarFiltrarPorCategoria(Categoria.DEPORTE);
-
-				break;
-
-			case "TECNOLOGIA":
-
-				auxliarFiltrarPorCategoria(Categoria.TECNOLOGIA);
-
-				break;
-			case "MODA":
-
-				auxliarFiltrarPorCategoria(Categoria.MODA);
-
-				break;
-
-			case "LIBROS":
-
-				auxliarFiltrarPorCategoria(Categoria.LIBROS);
-
-				break;
-			case "JOYAS":
-
-				auxliarFiltrarPorCategoria(Categoria.JOYAS);
-
-				break;
-
-			case "TODAS LAS CATEGORIAS":
-
-				// Si no se escoge ninguna categoria se muestran todos los productos
-				manejador.actualizarProductosObservables();
-				tablaProductos.setItems(manejador.getProductosObservables());
-				;
-				break;
-
-			}
-		} else {
-
-			Utilidades.mostrarMensaje("Elija una categoria", "Por favor elija una categoria");
-		}
+//		if (index >= 0) {
+//
+//			String seleccion = cbxCategoria.getItems().get(index);
+//
+//			switch (seleccion) {
+//			case "DEPORTE":
+//
+//				auxliarFiltrarPorCategoria(Categoria.DEPORTE);
+//
+//				break;
+//
+//			case "TECNOLOGIA":
+//
+//				auxliarFiltrarPorCategoria(Categoria.TECNOLOGIA);
+//
+//				break;
+//			case "MODA":
+//
+//				auxliarFiltrarPorCategoria(Categoria.MODA);
+//
+//				break;
+//
+//			case "LIBROS":
+//
+//				auxliarFiltrarPorCategoria(Categoria.LIBROS);
+//
+//				break;
+//			case "JOYAS":
+//
+//				auxliarFiltrarPorCategoria(Categoria.JOYAS);
+//
+//				break;
+//
+//			case "TODAS LAS CATEGORIAS":
+//
+//				// Si no se escoge ninguna categoria se muestran todos los productos
+//				manejador.actualizarProductosObservables();
+//				tablaProductos.setItems(manejador.getProductosObservables());
+//				;
+//				break;
+//
+//			}
+//		} else {
+//
+//			Utilidades.mostrarMensaje("Elija una categoria", "Por favor elija una categoria");
+//		}
 
 	}
 

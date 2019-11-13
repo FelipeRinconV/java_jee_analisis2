@@ -27,7 +27,7 @@ public class Descuento implements Serializable {
 	@Column(name = "ACTIVO")
 	private boolean activo;
 
-	@Column(name = "CATEGORIA")
+	
 	private Categoria categoria;
 
 	/**

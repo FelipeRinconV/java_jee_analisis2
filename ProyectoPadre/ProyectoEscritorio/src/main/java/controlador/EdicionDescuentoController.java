@@ -126,12 +126,12 @@ public class EdicionDescuentoController {
 
 		ObservableList<Categoria> categoariasObservables = FXCollections.observableArrayList();
 
-		categoariasObservables.add(Categoria.DEPORTE);
-		categoariasObservables.add(Categoria.JOYAS);
-		categoariasObservables.add(Categoria.LIBROS);
-		categoariasObservables.add(Categoria.MODA);
-		categoariasObservables.add(Categoria.TECNOLOGIA);
-		categoariasObservables.add(Categoria.TECNOLOGIA);
+//		categoariasObservables.add(Categoria.DEPORTE);
+//		categoariasObservables.add(Categoria.JOYAS);
+//		categoariasObservables.add(Categoria.LIBROS);
+//		categoariasObservables.add(Categoria.MODA);
+//		categoariasObservables.add(Categoria.TECNOLOGIA);
+//		categoariasObservables.add(Categoria.TECNOLOGIA);
 
 		cbxCategoria.setItems(categoariasObservables);
 		assert btnAgregar != null : "fx:id=\"btnAgregar\" was not injected: check your FXML file 'agregarUsuario.fxml'.";
