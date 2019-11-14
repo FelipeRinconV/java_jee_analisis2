@@ -66,7 +66,7 @@ public class ProductoBean {
 
 			FacesContext.getCurrentInstance().addMessage(null, m);
 
-			return "nuevoProducto";
+			return "nuevoUsuario";
 
 		} catch (ElementoRepetidoException e) {
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
@@ -142,14 +142,12 @@ public class ProductoBean {
 		this.categoria = categoria;
 	}
 
-	public List<Categoria> getCategorias() {
+	public List<Categoria> getListaCategorias() {
 		return listaCategorias;
 	}
 
-	public void setCategorias(List<Categoria> categorias) {
-		this.listaCategorias = categorias;
+	public void setListaCategorias(List<Categoria> listaCategorias) {
+		this.listaCategorias = listaCategorias;
 	}
-	
-	
 
 }
