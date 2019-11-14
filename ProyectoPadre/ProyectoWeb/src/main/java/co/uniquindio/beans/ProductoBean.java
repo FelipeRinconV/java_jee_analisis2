@@ -9,6 +9,8 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Positive;
 
 import co.edu.uniquindio.grid.entidades.Categoria;
 import co.edu.uniquindio.grid.entidades.Producto;
@@ -23,15 +25,23 @@ public class ProductoBean {
 	private String nombre;
 	private String descripcion;
 	private String disponibilidad;
+
+	@Positive
 	private String precio;
+
+	@Future
 	private Date fechaLimite;
 	private Categoria categoria;
 	private List<Categoria> listaCategorias;
+
+	private List<Producto> listaProductos;
 
 	@PostConstruct
 	public void inicializar() {
 
 		this.listaCategorias = adminEJB.listarCategorias();
+
+		this.listaProductos = adminEJB.listarTodosLosProductos();
 
 	}
 
@@ -56,9 +66,7 @@ public class ProductoBean {
 
 			Usuario vendedor = (Usuario) adminEJB.darPersonaPorCedula("1040");
 
-			Categoria cat = adminEJB.darCategoriaPorId(1);
-
-			Producto p = new Producto(vendedor, descripcion, prec, dispo, fechaLimite, nombre, cat);
+			Producto p = new Producto(vendedor, descripcion, prec, dispo, fechaLimite, nombre, categoria);
 
 			adminEJB.crearPrducto(p);
 
@@ -148,6 +156,14 @@ public class ProductoBean {
 
 	public void setListaCategorias(List<Categoria> listaCategorias) {
 		this.listaCategorias = listaCategorias;
+	}
+
+	public List<Producto> getListaProductos() {
+		return listaProductos;
+	}
+
+	public void setListaProductos(List<Producto> listaProductos) {
+		this.listaProductos = listaProductos;
 	}
 
 }

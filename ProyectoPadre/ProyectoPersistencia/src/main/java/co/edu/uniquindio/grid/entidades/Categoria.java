@@ -104,8 +104,9 @@ public class Categoria {
 
 	@Override
 	public String toString() {
-		return "tipo";
+		return "Categoria [productos=" + productos + ", id=" + id + ", tipo=" + tipo + "]";
 	}
+
 
 	
 	

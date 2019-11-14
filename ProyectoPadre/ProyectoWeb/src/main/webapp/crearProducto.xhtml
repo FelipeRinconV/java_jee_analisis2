@@ -5,71 +5,90 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Crear el producto</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Crear el producto</title>
 </h:head>
 <body>
 
 
-    <p:panel id="basic" header="crear nuevo producto" footer="Creacion de producto " style="margin-bottom:5px">
+	<p:panel id="basic" header="crear nuevo producto"
+		footer="Creacion de producto " style="margin-bottom:5px">
 
 
 
-	<h:form>
+		<h:form>
 
-		<h:panelGrid columns="3" cellpadding="10">
+			<h:panelGrid columns="1" cellpadding="2">
 
-			<p:outputLabel value="Nombre: " />
-			<p:inputText id="nombre"  label ="Nombre del producto" value="#{productoBean.nombre}" required="true" >
+				<p:outputLabel value="Nombre: " for="nombre" />
+				<p:inputText id="nombre" label="Nombre del producto"
+					value="#{productoBean.nombre}" required="true">
 
-			</p:inputText>
-			
-			 
-			<p:message for="nombre"/>
-            
-
-			<p:outputLabel value="Descripcion" />
-			<p:inputTextarea id="descripcion" value="#{productoBean.descripcion}" required="true" />
-			<p:message for="descripcion"/>
-
-			<p:outputLabel value="Precio " />
-			<p:inputText id="precio" value="#{productoBean.precio}"  required="true" >
-			
-			<f:validateLength minimum="1"></f:validateLength>
-			</p:inputText>			
-			<p:message for="precio"/>
-
-			<p:outputLabel value="Fecha limite " for="fecha" />
-			
-			<p:inputText id="fecha" value="#{productoBean.fechaLimite}" required="true" >
-				<f:convertDateTime pattern="yyyy-MM-dd" />
-			</p:inputText>
-			<p:message for="fecha"/>
-				
-			
-           	<p:outputLabel value="Disponibilidad " />
-		    <p:inputText id="disponibilidad" value="#{productoBean.disponibilidad}"  required="true" />
-			
-			
-			<p:outputLabel value="Categoria" />
-		 	<p:selectOneMenu id="tipo-producto" autoWidth="false" required="true">
-		 	
-		 	<f:selectItem noSelectionOption="true" itemLabel="Seleccione una categoria"></f:selectItem> 
-		 	<f:selectItems value="#{productoBean.listaCategorias}"></f:selectItems>
-			
-			</p:selectOneMenu>
-			
-			
-			<p:commandButton action="#{productoBean.crearProducto}"	value="Crear prodducto" update="@form" />
+				</p:inputText>
 
 
-		</h:panelGrid>
+				<p:message for="nombre" />
 
 
-        <p:growl id="growl"/>
+				<p:outputLabel value="Descripcion" />
+				<p:inputTextarea id="descripcion"
+					value="#{productoBean.descripcion}" required="true" />
+				<p:message for="descripcion" />
 
-	</h:form>
+				<p:outputLabel value="Precio " />
+				<p:inputText id="precio" value="#{productoBean.precio}"
+					required="true">
 
- </p:panel>
+					<f:validateLength minimum="1"></f:validateLength>
+				</p:inputText>
+				<p:message for="precio" />
+
+				<p:outputLabel value="Fecha limite " for="fecha" />
+
+				<p:inputText id="fecha" value="#{productoBean.fechaLimite}"
+					required="true">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</p:inputText>
+				<p:message for="fecha" />
+
+
+				<p:outputLabel value="Disponibilidad " for="disponibilidad" />
+				<p:inputText id="disponibilidad"
+					value="#{productoBean.disponibilidad}" required="true" />
+
+
+				<p:outputLabel value="Categoria" />
+				<p:selectOneMenu id="tipo-producto" autoWidth="false"
+					required="true" value="#{productoBean.categoria}"
+					converter="#{tipoProductoConverter}">
+
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Seleccione una categoria" itemValue="#{null}"></f:selectItem>
+					<f:selectItems value="#{productoBean.listaCategorias}" var="tipo"
+						itemLabel="#{tipo.tipo}" itemValue="#{tipo}" />
+
+				</p:selectOneMenu>
+
+
+				<p:outputLabel value="Imagenes: " for="imagenes" />
+				<p:fileUpload listener="#{fileUploadView.handleFileUpload}"
+					mode="advanced" dragDropSupport="false" multiple="true"
+					update="messages" sizeLimit="100000" fileLimit="3"
+					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="imagenes" />
+			    <p:message for="imagenes"/>
+
+
+				<p:commandButton action="#{productoBean.crearProducto}"
+					value="Crear prodducto" update="@form" />
+
+
+			</h:panelGrid>
+
+
+			<p:growl id="growl" />
+
+		</h:form>
+
+	</p:panel>
 </body>
 </html>

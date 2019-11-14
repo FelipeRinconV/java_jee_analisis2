@@ -22,11 +22,16 @@ public class TipoProductoConverter implements Converter<Categoria> {
 
 		if (value != null && value.length() > 0) {
 
-			int id = Integer.parseInt(value);
+			try {
 
-			Categoria cat = adminEJB.darCategoriaPorId(id);
+				Categoria cat = adminEJB.darCategoriaPorId(Integer.parseInt(value));
 
-			return cat;
+				return cat;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
 
 		}
 
