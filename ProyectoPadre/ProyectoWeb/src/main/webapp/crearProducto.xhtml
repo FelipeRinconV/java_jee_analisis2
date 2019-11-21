@@ -23,6 +23,9 @@
 				<p:outputLabel value="Nombre: " for="nombre" />
 				<p:inputText id="nombre" label="Nombre del producto"
 					value="#{productoBean.nombre}" required="true">
+			
+		      	<f:validateLength minimum="4" maximum="50" />
+			
 
 				</p:inputText>
 
@@ -39,7 +42,7 @@
 				<p:inputText id="precio" value="#{productoBean.precio}"
 					required="true">
 
-					<f:validateLength minimum="1"></f:validateLength>
+					<f:validateLongRange minimum="1" />
 				</p:inputText>
 				<p:message for="precio" />
 

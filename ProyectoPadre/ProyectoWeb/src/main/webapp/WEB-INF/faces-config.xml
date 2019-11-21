@@ -16,4 +16,9 @@ http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
 		<managed-bean-class>co.uniquindio.beans.ProductoBean</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>seguridadBean</managed-bean-name>
+		<managed-bean-class>co.uniquindio.beans.SeguridadBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 </faces-config>

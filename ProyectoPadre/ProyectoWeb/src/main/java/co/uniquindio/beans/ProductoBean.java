@@ -7,10 +7,13 @@ import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 import co.edu.uniquindio.grid.entidades.Categoria;
 import co.edu.uniquindio.grid.entidades.Producto;
@@ -22,9 +25,14 @@ import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
 @ApplicationScoped
 public class ProductoBean {
 
+	@Size(min = 4, max = 50, message = "Mensaje de validacion")
 	private String nombre;
 	private String descripcion;
 	private String disponibilidad;
+
+	@ManagedProperty(value = "#{seguridadBean.usuario}")
+	@Inject
+	private Usuario vendedor;
 
 	@Positive
 	private String precio;
@@ -63,8 +71,6 @@ public class ProductoBean {
 
 				dispo = false;
 			}
-
-			Usuario vendedor = (Usuario) adminEJB.darPersonaPorCedula("1040");
 
 			Producto p = new Producto(vendedor, descripcion, prec, dispo, fechaLimite, nombre, categoria);
 
