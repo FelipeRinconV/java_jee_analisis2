@@ -262,4 +262,10 @@ public class PruebaDelegado implements adminEJBRemote {
 		return adminEJB.quitarDescuento(descuento);
 	}
 
+	@Override
+	public Persona autenticarPersona(String email, String contrasenia) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

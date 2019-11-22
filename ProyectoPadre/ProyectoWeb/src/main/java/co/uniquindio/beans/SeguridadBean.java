@@ -8,9 +8,12 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
+import co.edu.uniquindio.grid.entidades.Persona;
 import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.ejb.AdminEJB;
 
@@ -29,6 +32,8 @@ public class SeguridadBean implements Serializable {
 
 	private String email;
 	private String contrasenia;
+	
+
 	private Usuario usuario;
 	private boolean autenticado;
 
@@ -46,24 +51,27 @@ public class SeguridadBean implements Serializable {
 
 		try {
 
-			Usuario u = (Usuario) adminEJB.autenticarUsuario(email, contrasenia);
+			Usuario u =adminEJB.autenticarUsuario(email, contrasenia);
 
 			if (u != null) {
+
 				this.usuario = u;
 
 				this.autenticado = true;
-				return "crearProducto?faces-redirect=true";
+				return "pag1?faces-redirect=true";
 			} else {
 
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"ERROR", "No se ah encontrado el usuario con las credenciales ingresadas"));
+						"ERROR no se encontraton las credenciales: "+ email +"-" +contrasenia, "No se ah encontrado el usuario con las credenciales ingresadas"));
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"ERROR", "Ah ocurrido un error"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR INESPERADO", "Ah ocurrido un error"));
 		}
+		
+		
 		return null;
 
 	}
@@ -92,7 +100,7 @@ public class SeguridadBean implements Serializable {
 		this.contrasenia = contrasenia;
 	}
 
-	public Usuario getUsuario() {
+	public Persona getUsuario() {
 		return usuario;
 	}
 

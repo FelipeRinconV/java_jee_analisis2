@@ -100,6 +100,8 @@ public class Usuario extends Persona implements Serializable {
 	public Usuario() {
 		super();
 	}
+	
+	
 
 	public List<Calificacion> getCalificaciones() {
 		return calificaciones;

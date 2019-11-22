@@ -158,7 +158,7 @@ public class ModificacionUsuarioController {
 			txtEmail.setText(personaModificable.getEmail());
 			txtCedula.setText(personaModificable.getCedula());
 			txtCedula.setDisable(true);
-			txtContrasenia.setText(personaModificable.getContraseña());
+			txtContrasenia.setText(personaModificable.getContrasenia());
 			txtDireccion.setText(personaModificable.getDireccion());
 			txtNombreCompleto.setText(personaModificable.getNombreCompleto());
 			txtTelefono.setText(personaModificable.getNumeroTelefono());

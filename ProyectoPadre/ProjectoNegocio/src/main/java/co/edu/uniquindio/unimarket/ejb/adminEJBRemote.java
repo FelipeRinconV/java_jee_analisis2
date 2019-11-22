@@ -59,4 +59,6 @@ public interface adminEJBRemote {
 	List<Descuento> listarDescuento();
 
 	boolean quitarDescuento(Descuento descuento);
+
+	Persona autenticarPersona(String email, String contrasenia);
 }

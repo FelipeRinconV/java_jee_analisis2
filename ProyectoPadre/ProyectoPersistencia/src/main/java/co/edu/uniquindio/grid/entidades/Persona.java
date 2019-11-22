@@ -126,7 +126,7 @@ public class Persona implements Serializable {
 		this.direccion = direccion;
 	}
 
-	public String getContraseña() {
+	public String getContrasenia() {
 		return contrasenia;
 	}
 

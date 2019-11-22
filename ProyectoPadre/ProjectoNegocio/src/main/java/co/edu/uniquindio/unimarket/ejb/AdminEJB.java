@@ -46,7 +46,7 @@ public class AdminEJB implements adminEJBRemote {
 	 * Metodo que eprmite autenticar un usuario
 	 */
 	@Override
-	public Persona autenticarUsuario(String email, String contrasenia) {
+	public Persona autenticarPersona(String email, String contrasenia) {
 
 		TypedQuery<Persona> q = entytiManager.createNamedQuery(Persona.BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA,
 				Persona.class);
@@ -63,6 +63,27 @@ public class AdminEJB implements adminEJBRemote {
 
 		Persona persona = lista.get(0);
 		return persona;
+
+	}
+	
+	@Override
+	public Usuario autenticarUsuario(String email, String contrasenia) {
+
+		TypedQuery<Usuario> q = entytiManager.createNamedQuery(Persona.BUSCAR_PERSONA_POR_EMAIL_Y_CONTRASENIA,
+				Usuario.class);
+
+		q.setParameter("email", email);
+
+		q.setParameter("contra", contrasenia);
+
+		List<Usuario> lista = q.getResultList();
+
+		if (lista.isEmpty()) {
+			return null;
+		}
+
+		Usuario user = lista.get(0);
+		return user;
 
 	}
 
@@ -391,7 +412,7 @@ public class AdminEJB implements adminEJBRemote {
 				// Se agrega el mensaje del correo
 				message.setText("Estimado usuario sus credenciales son las siguientes: " +
 
-						"Correo: " + persona.getEmail() + "| Contraseña: " + persona.getContraseña());
+						"Correo: " + persona.getEmail() + "| Contraseña: " + persona.getContrasenia());
 
 				// Envia el mensaje
 				Transport.send(message);

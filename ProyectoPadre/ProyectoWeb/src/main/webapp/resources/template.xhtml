@@ -6,78 +6,49 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title><ui:insert name="title">Default title</ui:insert></title>
+	<title><ui:insert name="title">Login</ui:insert></title>
 </h:head>
 
 <body>
-	<ui:debug hotkey="x"
-		rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}" />
+
+<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
+
 
 	<div id="header">
+		
 		<ui:insert name="header">
 
+              <h1 >Este es el header</h1>
 
-            <center>
-			<h:form rendered="true">
-
-				<p:commandButton value="Iniciar sesion"
-					oncomplete="PF('inicioSesion').show()" />
-			</h:form>
-
-
-			<p:dialog widgetVar="inicioSesion" modal="true"
-				header="Inicio de sesion" showEffect="fade">
-
-
-				<h:form>
-
-					<h:panelGrid columns="2">
-
-						<p:outputLabel value="Email:" for="email-sesion"></p:outputLabel>
-						<p:inputText id="email-sesion" required="true"
-							value="#{seguridadBean.email}">
-						</p:inputText>
-
-
-						<p:outputLabel value="Contraseña:" for="contra-sesion"></p:outputLabel>
-						<p:inputText id="contra-sesion" required="true"
-							value="#{seguridadBean.contrasenia}">
-						</p:inputText>
-
-					</h:panelGrid>
-
-					<h:messages></h:messages>
-
-					<p:commandButton value="Iniciar sesion"
-						action="#{seguridadBean.iniciarSesion}" update="@form" />
-				</h:form>
-
-
-			</p:dialog>
-
-			<h:form rendered="#{seguridadBean.autenticado}">
-
-				<p:commandButton value="Cerrar sesion">
-				</p:commandButton>
-
-			</h:form>
-			
-			</center>
-
-			<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
-			<!-- <ui:include src="header.xhtml"/> -->
 		</ui:insert>
 	</div>
 
 
 	<div id="content">
-		<ui:insert name="content">
-    	Content area.  See comments below this line in the source.
-    	<!--  include your content file or uncomment the include below and create content.xhtml in this directory -->
-			<!-- <div> -->
-			<!-- <ui:include src="content.xhtml"/> -->
-			<!-- </div> -->
-		</ui:insert>
+	<h:panelGroup rendered="#{!seguridadBean.autenticado}">	
+         <ui:insert name="login">
+            <h:form>
+               <h:panelGrid columns="2">
+                 <h:outputText value="Login"  />
+                 <h:inputText value="#{seguridadBean.email}"/>
+                 <h:outputText value="Clave" />
+                 <h:inputSecret value="#{seguridadBean.contrasenia}" />
+               </h:panelGrid>
+                <h:commandButton value="Aceptar" action="#{seguridadBean.iniciarSesion}"/>
+             </h:form>
+             <h:messages></h:messages>
+        </ui:insert>
+        
+        
+    </h:panelGroup>
+    
+    
+    <h:panelGroup rendered="#{seguridadBean.autenticado}">
+             <ui:insert name="content"> 
+             
+             </ui:insert>
+    </h:panelGroup>
+	
 	</div>
 
 	<div id="footer">
