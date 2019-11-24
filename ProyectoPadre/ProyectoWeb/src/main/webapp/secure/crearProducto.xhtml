@@ -20,6 +20,16 @@
 
 			<h:panelGrid columns="1" cellpadding="2">
 
+				<h:panelGrid columns="2">
+					<p:commandButton action="#{productoBean.crearProducto}"
+						value="Crear producto" update="@form" />
+
+
+					<h:button outcome="/pag1" value="Volver" />
+
+				</h:panelGrid>
+
+
 				<p:outputLabel value="Nombre: " for="nombre" />
 				<p:inputText id="nombre" label="Nombre del producto"
 					value="#{productoBean.nombre}" required="true">
@@ -81,17 +91,17 @@
 				<p:message for="imagenes" />
 
 
-				<p:commandButton action="#{productoBean.crearProducto}"
-					value="Crear prodducto" update="@form" />
 
 
 			</h:panelGrid>
 
 
-			<p:growl id="growl" />
-
 		</h:form>
 
 	</p:panel>
+
+
 </body>
+
+
 </html>

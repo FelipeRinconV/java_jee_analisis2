@@ -30,6 +30,13 @@ public class ProductoBean {
 	private String descripcion;
 	private String disponibilidad;
 
+
+	private Producto productoSeleccionado;
+	
+	
+	
+	
+	
 	@ManagedProperty(value = "#{seguridadBean.usuario}")
 	@Inject
 	private Usuario vendedor;
@@ -170,6 +177,22 @@ public class ProductoBean {
 
 	public void setListaProductos(List<Producto> listaProductos) {
 		this.listaProductos = listaProductos;
+	}
+
+	public Producto getProductoSeleccionado() {
+		return productoSeleccionado;
+	}
+
+	public void setProductoSeleccionado(Producto productoSeleccionado) {
+		this.productoSeleccionado = productoSeleccionado;
+	}
+
+	public Usuario getVendedor() {
+		return vendedor;
+	}
+
+	public void setVendedor(Usuario vendedor) {
+		this.vendedor = vendedor;
 	}
 
 }

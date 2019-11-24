@@ -20,4 +20,11 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
+
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>nova-light</param-value>
+	</context-param>
+
+
 </web-app>
