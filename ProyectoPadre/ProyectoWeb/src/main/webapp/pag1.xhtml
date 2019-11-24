@@ -32,7 +32,7 @@
  
         <p:panel header="#{producto.nombre}" style="text-align:center">
             <h:panelGrid columns="1" style="width:100%">
-                <img src="#{producto.urlImagenes.get(0)}"  width="250" height="200"/>
+                <p:graphicImage value="#{producto.urlImagenes.get(0)}"  width="250" height="200"/>
  
                 <h:outputText value="#{producto.precio}" />
  
@@ -51,8 +51,10 @@
 					<p:panelGrid columns="2"
 						rendered="#{not empty productoBean.productoSeleccionado}"
 						columnClasses="label,value">
+						
+						
 						<f:facet name="header">
-							<img src="#{producto.urlImagenes.get(0)}"  width="110" height="100"/>
+							     <p:graphicImage value="#{producto.urlImagenes.get(0)}"  width="100" height="100"/>
 						</f:facet>
 
 						<h:outputText value="Nombre:" />
