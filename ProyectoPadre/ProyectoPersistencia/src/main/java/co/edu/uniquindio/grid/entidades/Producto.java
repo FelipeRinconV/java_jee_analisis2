@@ -114,7 +114,7 @@ public class Producto implements Serializable {
 	@Column(nullable = false)
 	private double precio;
 
-	@Column(nullable = false)
+	
 	private boolean disponibilidad;
 
 	/**
@@ -150,13 +150,12 @@ public class Producto implements Serializable {
 	
 	
 	
-	public Producto(Usuario usuario, String descripcion, double precio, boolean disponibilidad,
+	public Producto(Usuario usuario, String descripcion, double precio,
 			Date fechaLimite, String nombre, Categoria tipo) {
 		super();
 		this.usuario = usuario;
 		this.descripcion = descripcion;
 		this.precio = precio;
-		this.disponibilidad = disponibilidad;
 		this.fechaLimite = fechaLimite;
 		this.nombre = nombre;
 		this.tipo = tipo;

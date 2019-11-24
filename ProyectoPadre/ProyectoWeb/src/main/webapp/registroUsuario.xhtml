@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Crear el producto</title>
+</h:head>
+<body>
+
+	<p:panel id="basic" header="crear nuevo producto"
+		footer="Creacion de producto ">
+
+
+
+		<h:form>
+
+			<h:panelGrid columns="1" style="text-align:center">
+
+
+				<p:outputLabel value="Nombre completo: " for="nombre" />
+				<p:inputText id="nombre" label="Nombre del producto"
+					value="#{registroUsuarioBean.nombre}" required="true">
+
+
+				</p:inputText>
+				<p:message for="nombre" />
+
+				<p:outputLabel value="Cedula: " for="nombre" />
+				<p:inputText id="cedula" label="Nombre del producto"
+					value="#{registroUsuarioBean.cedula}" required="true">
+
+
+
+				</p:inputText>
+				<p:message for="cedula" />
+
+
+				<p:outputLabel value="Direccion: " for="nombre" />
+				<p:inputText id="direccion" label="Nombre del producto"
+					value="#{registroUsuarioBean.direccion}" required="true">
+
+				</p:inputText>
+				<p:message for="direccion" />
+
+
+				<p:outputLabel value="Numero de telefono " for="nombre" />
+				<p:inputText id="telefono" label="Nombre del producto"
+					value="#{registroUsuarioBean.telefono}" required="true">
+
+				</p:inputText>
+				<p:message for="telefono" />
+
+
+
+				<p:outputLabel value="Email" for="nombre" />
+				<p:inputText id="email" label="Nombre del producto"
+					value="#{registroUsuarioBean.email}" required="true">
+				</p:inputText>
+				<p:message for="email" />
+
+
+				<p:outputLabel value="Contraseña" for="nombre" />
+				<p:inputText id="contra" label="Nombre del producto"
+					value="#{registroUsuarioBean.contra}" required="true">
+				</p:inputText>
+				<p:message for="contra" />
+
+
+
+
+
+			</h:panelGrid>
+			<p:messages />
+
+
+			<p:commandButton action="#{registroUsuarioBean.registrarUsuario}"
+				value="Registrarse" update="@form" />
+
+		</h:form>
+
+	</p:panel>
+
+
+
+
+</body>
+</html>

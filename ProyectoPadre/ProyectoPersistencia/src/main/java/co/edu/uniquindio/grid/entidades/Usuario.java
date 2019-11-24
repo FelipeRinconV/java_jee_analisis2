@@ -22,7 +22,6 @@ import javax.persistence.*;
 @Table(name = "Usuarios")
 public class Usuario extends Persona implements Serializable {
 
-	
 	/**
 	 * Contructor del usuario dado todos sus parametros basicos
 	 * @param cedula
@@ -34,13 +33,13 @@ public class Usuario extends Persona implements Serializable {
 	 */
 	public Usuario(String cedula,String nombreCompleto,String numeroTelefono,String direccion,String contrasenia,String email) {
 		
+	super.setNombreCompleto(nombreCompleto);
 	super.setCedula(cedula);
 	super.setContrasenia(contrasenia);
 	super.setDireccion(direccion);
 	super.setNumeroTelefono(numeroTelefono);
 	super.setEmail(email);
 	
-		
 		
 	}
 	
@@ -141,7 +140,7 @@ public class Usuario extends Persona implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [cedula=" + getCedula() +" nombre: " +getNombreCompleto()  + "]";
+		return "Usuario cedula=" + getCedula() +" nombre: " +getNombreCompleto()  + getDireccion() +getNumeroTelefono();
 	}
 
 	public List<Producto> getProductos() {

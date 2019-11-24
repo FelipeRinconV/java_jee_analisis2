@@ -12,13 +12,13 @@
 
 
 	<p:panel id="basic" header="crear nuevo producto"
-		footer="Creacion de producto " style="margin-bottom:5px">
+		footer="Creacion de producto ">
 
 
 
 		<h:form>
 
-			<h:panelGrid columns="1" cellpadding="2">
+			<h:panelGrid columns="1" style="text-align:center">
 
 				<h:panelGrid columns="2">
 					<p:commandButton action="#{productoBean.crearProducto}"
@@ -29,7 +29,7 @@
 
 				</h:panelGrid>
 
-
+				<p:outputLabel />
 				<p:outputLabel value="Nombre: " for="nombre" />
 				<p:inputText id="nombre" label="Nombre del producto"
 					value="#{productoBean.nombre}" required="true">
@@ -38,17 +38,16 @@
 
 
 				</p:inputText>
-
-
 				<p:message for="nombre" />
 
 
-				<p:outputLabel value="Descripcion" />
+				<p:outputLabel for="descripcion" value="Descripcion" />
 				<p:inputTextarea id="descripcion"
 					value="#{productoBean.descripcion}" required="true" />
 				<p:message for="descripcion" />
 
-				<p:outputLabel value="Precio " />
+
+				<p:outputLabel for="precio" value="Precio " />
 				<p:inputText id="precio" value="#{productoBean.precio}"
 					required="true">
 
@@ -56,19 +55,13 @@
 				</p:inputText>
 				<p:message for="precio" />
 
-				<p:outputLabel value="Fecha limite " for="fecha" />
 
-				<p:inputText id="fecha" value="#{productoBean.fechaLimite}"
-					required="true">
+				<p:outputLabel for="fecha" value="Fecha limite:" />
+				<p:datePicker id="fecha" value="#{productoBean.fechaLimite}"
+					showIcon="true" required="true">
 					<f:convertDateTime pattern="yyyy-MM-dd" />
-				</p:inputText>
+				</p:datePicker>
 				<p:message for="fecha" />
-
-
-				<p:outputLabel value="Disponibilidad " for="disponibilidad" />
-				<p:inputText id="disponibilidad"
-					value="#{productoBean.disponibilidad}" required="true" />
-
 
 				<p:outputLabel value="Categoria" />
 				<p:selectOneMenu id="tipo-producto" autoWidth="false"
@@ -83,18 +76,20 @@
 				</p:selectOneMenu>
 
 
-				<p:outputLabel value="Imagenes: " for="imagenes" />
-				<p:fileUpload listener="#{fileUploadView.handleFileUpload}"
+				<p:outputLabel value="Imágenes:" />
+				<p:fileUpload fileUploadListener="#{productoBean.subirImagen}"
 					mode="advanced" dragDropSupport="false" multiple="true"
-					update="messages" sizeLimit="100000" fileLimit="3"
-					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="imagenes" />
-				<p:message for="imagenes" />
+					update="messages" fileLimit="3"
+					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+				<p:growl id="messages" showDetail="true" />
+
 
 
 
 
 			</h:panelGrid>
-
+			<p:messages />
 
 		</h:form>
 

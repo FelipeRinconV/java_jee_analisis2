@@ -1,5 +1,9 @@
 package co.uniquindio.beans;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +16,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+
+import org.primefaces.event.FileUploadEvent;
 
 import co.edu.uniquindio.grid.entidades.Categoria;
 import co.edu.uniquindio.grid.entidades.Producto;
@@ -28,26 +33,22 @@ public class ProductoBean {
 	@Size(min = 4, max = 50, message = "Mensaje de validacion")
 	private String nombre;
 	private String descripcion;
-	private String disponibilidad;
-
 
 	private Producto productoSeleccionado;
-	
-	
-	
-	
+
 	
 	@ManagedProperty(value = "#{seguridadBean.usuario}")
 	@Inject
 	private Usuario vendedor;
 
-	@Positive
 	private String precio;
 
 	@Future
 	private Date fechaLimite;
 	private Categoria categoria;
 	private List<Categoria> listaCategorias;
+
+	private List<String> imagenes;
 
 	private List<Producto> listaProductos;
 
@@ -58,6 +59,7 @@ public class ProductoBean {
 
 		this.listaProductos = adminEJB.listarTodosLosProductos();
 
+		this.imagenes = new ArrayList<String>();
 	}
 
 	@EJB
@@ -69,25 +71,26 @@ public class ProductoBean {
 
 			double prec = Double.parseDouble(precio);
 
-			boolean dispo = true;
+			if (vendedor.getCedula().length()>2) {
 
-			if (disponibilidad.equals("1")) {
+				Producto p = new Producto(vendedor, descripcion, prec, fechaLimite, nombre, categoria);
+				// Le añadimos las imagenes
+				p.setUrlImagenes(imagenes);
+				adminEJB.crearPrducto(p);
 
-				dispo = true;
-			} else if (disponibilidad.equals("2")) {
+				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro exitoso", "Operacion exitosa");
 
-				dispo = false;
+				FacesContext.getCurrentInstance().addMessage(null, m);
+
+				return "pag1";
+			} else {
+
+				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "EL VENDEDOR ES NULO ",
+						"EL VENDEDOR ES NULO");
+
+				FacesContext.getCurrentInstance().addMessage(null, m);
+
 			}
-
-			Producto p = new Producto(vendedor, descripcion, prec, dispo, fechaLimite, nombre, categoria);
-
-			adminEJB.crearPrducto(p);
-
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro exitoso", "Operacion exitosa");
-
-			FacesContext.getCurrentInstance().addMessage(null, m);
-
-			return "nuevoUsuario";
 
 		} catch (ElementoRepetidoException e) {
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
@@ -101,6 +104,33 @@ public class ProductoBean {
 		}
 
 		return null;
+	}
+
+	public void subirImagen(FileUploadEvent file) {
+
+		try {
+			InputStream f = file.getFile().getInputstream();
+			FileOutputStream fo = new FileOutputStream(
+					new File("/home/felipe/Documentos/analisis_2/glassfish5/glassfish/domains/domain1/docroot/"
+							+ file.getFile().getFileName()));
+			String img = "http://localhost:8080/" + file.getFile().getFileName();
+
+			// Agregamos las imagenes al producto
+			imagenes.add(img);
+			byte[] buffer = new byte[1024];
+			int bytesRead = 0;
+			while ((bytesRead = f.read(buffer)) > 0) {
+				fo.write(buffer, 0, bytesRead);
+
+			}
+
+			fo.flush();
+			fo.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		FacesMessage msg = new FacesMessage("Successful", file.getFile().getFileName() + " is uploaded.");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 	public String getNombre() {
@@ -117,18 +147,6 @@ public class ProductoBean {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public String isDisponibilidad() {
-		return disponibilidad;
-	}
-
-	public String getDisponibilidad() {
-		return disponibilidad;
-	}
-
-	public void setDisponibilidad(String disponibilidad) {
-		this.disponibilidad = disponibilidad;
 	}
 
 	public String getPrecio() {
@@ -193,6 +211,14 @@ public class ProductoBean {
 
 	public void setVendedor(Usuario vendedor) {
 		this.vendedor = vendedor;
+	}
+
+	public List<String> getImagenes() {
+		return imagenes;
+	}
+
+	public void setImagenes(List<String> imagenes) {
+		this.imagenes = imagenes;
 	}
 
 }

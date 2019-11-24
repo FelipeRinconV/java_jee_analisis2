@@ -32,7 +32,6 @@ public class SeguridadBean implements Serializable {
 
 	private String email;
 	private String contrasenia;
-	
 
 	private Usuario usuario;
 	private boolean autenticado;
@@ -51,7 +50,7 @@ public class SeguridadBean implements Serializable {
 
 		try {
 
-			Usuario u =adminEJB.autenticarUsuario(email, contrasenia);
+			Usuario u = adminEJB.autenticarUsuario(email, contrasenia);
 
 			if (u != null) {
 
@@ -61,8 +60,10 @@ public class SeguridadBean implements Serializable {
 				return "pag1?faces-redirect=true";
 			} else {
 
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"ERROR no se encontraton las credenciales: "+ email +"-" +contrasenia, "No se ah encontrado el usuario con las credenciales ingresadas"));
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"ERROR no se encontraton las credenciales: " + email + "-" + contrasenia,
+								"No se ah encontrado el usuario con las credenciales ingresadas"));
 			}
 
 		} catch (Exception e) {
@@ -70,8 +71,7 @@ public class SeguridadBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR INESPERADO", "Ah ocurrido un error"));
 		}
-		
-		
+
 		return null;
 
 	}
@@ -100,7 +100,7 @@ public class SeguridadBean implements Serializable {
 		this.contrasenia = contrasenia;
 	}
 
-	public Persona getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
