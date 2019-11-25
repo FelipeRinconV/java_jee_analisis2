@@ -14,8 +14,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import co.edu.uniquindio.grid.entidades.Persona;
+import co.edu.uniquindio.grid.entidades.Producto;
 import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.ejb.AdminEJB;
+import co.edu.uniquindio.unimarket.excepciones.NoExisteElementosException;
 
 @FacesConfig(version = Version.JSF_2_3)
 @ManagedBean("seguridadBean")
@@ -30,17 +32,33 @@ public class SeguridadBean implements Serializable {
 	@EJB
 	private AdminEJB adminEJB;
 
+	// Para los detalles del producto
+	private Producto productoSeleccionado;
+
 	private String email;
 	private String contrasenia;
 
+	// Calificacion del producto seleccionado
+	private Double calificacion;
 	private Usuario usuario;
 	private boolean autenticado;
 
 	@PostConstruct
 	public void inicialiazar() {
 
+		this.productoSeleccionado = new Producto();
+
 		this.usuario = new Usuario();
 		this.autenticado = false;
+
+	}
+
+	public String seleccionarProducto(Producto p) {
+
+		System.out.println("ENTRA A SELECCIONAR EL PRODUCTO : " + p.getNombre());
+		this.productoSeleccionado = p;
+
+		return "detalles?faces-redirect=true";
 
 	}
 
@@ -114,6 +132,22 @@ public class SeguridadBean implements Serializable {
 
 	public void setAutenticado(boolean autenticado) {
 		this.autenticado = autenticado;
+	}
+
+	public Producto getProductoSeleccionado() {
+		return productoSeleccionado;
+	}
+
+	public void setProductoSeleccionado(Producto productoSeleccionado) {
+		this.productoSeleccionado = productoSeleccionado;
+	}
+
+	public Double getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(Double calificacion) {
+		this.calificacion = calificacion;
 	}
 
 }

@@ -28,6 +28,10 @@ public class RegistroUsuarioBean {
 
 	public String registrarUsuario() {
 
+		
+		System.out.println("NOMBRE EN BEAN: " + nombre);
+		
+		
 		if (nombre.length() > 1 && contra.length() > 1 && email.length() > 1) {
 
 			Usuario usuarioNuevo = new Usuario();
@@ -41,7 +45,11 @@ public class RegistroUsuarioBean {
 
 			try {
 				adminEJB.registrarUsuario(usuarioNuevo);
-				return "pag1";
+				
+				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Registro exitoso","Registro exitoso");
+
+				FacesContext.getCurrentInstance().addMessage(null, m);
+				return "pag1?faces-redirect=true";
 			} catch (ElementoRepetidoException e) {
 				// TODO Auto-generated catch block
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());

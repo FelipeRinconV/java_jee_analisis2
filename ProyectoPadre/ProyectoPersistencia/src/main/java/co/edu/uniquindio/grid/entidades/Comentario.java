@@ -1,5 +1,6 @@
 package co.edu.uniquindio.grid.entidades;
 
+
 import java.io.Serializable;
 import javax.persistence.*;
 

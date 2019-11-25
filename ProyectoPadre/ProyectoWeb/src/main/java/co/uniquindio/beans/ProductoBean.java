@@ -3,6 +3,7 @@ package co.uniquindio.beans;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +12,9 @@ import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.ManagedProperty;
+import javax.faces.annotation.FacesConfig.Version;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -25,11 +28,19 @@ import co.edu.uniquindio.grid.entidades.Producto;
 import co.edu.uniquindio.grid.entidades.Usuario;
 import co.edu.uniquindio.unimarket.ejb.AdminEJB;
 import co.edu.uniquindio.unimarket.excepciones.ElementoRepetidoException;
-
+@FacesConfig(version = Version.JSF_2_3)
 @ManagedBean("productoBean")
 @ApplicationScoped
-public class ProductoBean {
+public class ProductoBean  implements  Serializable{
 
+	/**
+	 * 
+	 */
+	
+	
+	
+	
+	private static final long serialVersionUID = 1L;
 	@Size(min = 4, max = 50, message = "Mensaje de validacion")
 	private String nombre;
 	private String descripcion;
@@ -68,11 +79,17 @@ public class ProductoBean {
 	public String crearProducto() {
 
 		try {
+			
+			 
+			
+			vendedor=(Usuario)adminEJB.darPersonaPorCedula("101213");
 
+			
 			double prec = Double.parseDouble(precio);
 
-			if (vendedor.getCedula().length()>2) {
+			if (vendedor!=null) {
 
+				System.out.println("VENDEDOR: " + vendedor.getNombreCompleto());
 				Producto p = new Producto(vendedor, descripcion, prec, fechaLimite, nombre, categoria);
 				// Le añadimos las imagenes
 				p.setUrlImagenes(imagenes);
@@ -106,14 +123,22 @@ public class ProductoBean {
 		return null;
 	}
 
+	/**
+	 * Metodo para subir una imagen
+	 * @param file
+	 */
 	public void subirImagen(FileUploadEvent file) {
 
 		try {
+			
+			
+			String fecha=new Date()+"";			
+			
 			InputStream f = file.getFile().getInputstream();
 			FileOutputStream fo = new FileOutputStream(
 					new File("/home/felipe/Documentos/analisis_2/glassfish5/glassfish/domains/domain1/docroot/"
-							+ file.getFile().getFileName()));
-			String img = "http://localhost:8080/" + file.getFile().getFileName();
+							+fecha + file.getFile().getFileName()));
+			String img = "http://localhost:8080/"+fecha+ file.getFile().getFileName();
 
 			// Agregamos las imagenes al producto
 			imagenes.add(img);
@@ -220,5 +245,10 @@ public class ProductoBean {
 	public void setImagenes(List<String> imagenes) {
 		this.imagenes = imagenes;
 	}
+
+
+	
+	
+	
 
 }

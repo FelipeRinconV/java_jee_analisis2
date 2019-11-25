@@ -65,7 +65,7 @@ public class AdminEJB implements adminEJBRemote {
 		return persona;
 
 	}
-	
+
 	@Override
 	public Usuario autenticarUsuario(String email, String contrasenia) {
 
@@ -659,11 +659,8 @@ public class AdminEJB implements adminEJBRemote {
 
 		TypedQuery<Categoria> query = entytiManager.createNamedQuery(Categoria.LISTAR_TIPOS, Categoria.class);
 
-		
-		List <Categoria> cat= query.getResultList();
-		
-		
-		
+		List<Categoria> cat = query.getResultList();
+
 		return cat;
 
 	}

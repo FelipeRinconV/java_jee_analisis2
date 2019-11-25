@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="resources/template.xhtml">
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-6">
+				<p:panel header="#{seguridadBean.productoSeleccionado.nombre}"
+					style="justify-content: center;">
+
+					<p:panelGrid columns="2">
+						<f:facet name="header">
+							<p:galleria
+								value="#{seguridadBean.productoSeleccionado.urlImagenes}"
+								var="image" showCaption="true" panelWidth="400"
+								panelHeight="300">
+								<p:graphicImage value="#{image}" width="50%" height="70%" />
+							</p:galleria>
+						</f:facet>
+
+						<h:outputText value="Descripcion:" />
+						<h:outputText
+							value="#{seguridadBean.productoSeleccionado.descripcion}" />
+
+						<h:outputText value="Tipo" />
+						<h:outputText value="#{seguridadBean.productoSeleccionado.nombre}" />
+
+						<h:outputText value="Precio" />
+						<h:outputText value="#{seguridadBean.productoSeleccionado.precio}" />
+					</p:panelGrid>
+				</p:panel>
+			</div>
+			<div class="ui-g-6">
+				<p:panel header="Comentarios">
+					<p:dataScroller
+						value="#{seguridadBean.productoSeleccionado.comentarios}"
+						var="comentario" chunkSize="10" mode="inline" scrollHeight="500">
+						<f:facet name="header">
+                                Comentarios
+                            </f:facet>
+
+						<h:panelGrid columns="2" style="width:100%"
+							columnClasses="logo,detail">
+							<p:graphicImage name="/a501.jpg" />
+
+							<p:outputPanel>
+								<h:panelGrid columns="2" cellpadding="5">
+									<h:outputText value="User:" />
+									<h:outputText value="#{comentario.usuario.nombre}"
+										style="font-weight: bold" />
+
+									<h:outputText value="Calificacion:" />
+									<p:rating value="#{comentario.calificacion}" readonly="true" />
+
+									<h:outputText value="Comentario:" />
+									<h:outputText value="#{comentario.comentario}"
+										style="font-weight: bold" />
+								</h:panelGrid>
+							</p:outputPanel>
+
+						</h:panelGrid>
+					</p:dataScroller>
+
+					<h:form rendered="#{seguridadBean.autenticado}">
+						<h:panelGrid columns="2" cellpadding="2">
+
+							<h:outputText value="Calificacion:" />
+							<p:rating value="#{seguridadBean.calificacion}" />
+
+
+
+						</h:panelGrid>
+
+					</h:form>
+				</p:panel>
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>
